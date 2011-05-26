@@ -1,0 +1,18 @@
+<oddjob>
+    <job>
+        <sequential>
+            <jobs>
+                <services>
+                    <registeredServices>
+                        <is>
+                            <service>
+                                <bean class="org.oddjob.devguide.ServicesJobExamplesTest$Cafe"/>
+                            </service>
+                        </is>
+                    </registeredServices>
+                </services>
+                <bean class="org.oddjob.devguide.ServicesJobExamplesTest$HungryJob"/>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<title>Dev Guide - Arooa Life</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>	
+	<body>
+	
+	<a name="top"></a>
+	<h1>Arooa Life</h1>
+
+	<p>Living the life of an Arooa Component.</p>
+		
+		<ul>
+			<li><a href="#aware">Being Session Aware</a></li>
+			<li><a href="#lifecycle">The Lifcycle of a Component</a></li>
+		</ul>
+	
+	<a name="aware"/></a>
+	<h4>Being Session Aware</h4>
+
+	<p>The easiest way to interact with the Arooa framework is to access
+	the ArooaSession. To do this during configuration from within a component
+	simply implement
+	<a href="@javadoc@/org/oddjob/arooa/life/ArooaSessionAware.html">ArooaSessionAware</a>.
+	</p>
+	
+	<p>Reasons for doing this might include:</p>
+	
+	<ul>
+		<li>So a component can take control of when it's configured.</li> 
+		<li>So a component can do things after it's been created.</li>
+		<li>So a component can do things after it's been configured.</li>
+		<li>So a component can do things before it's destroyed.</li>
+		<li>So a component can access other Components and Beans
+		in a Session.</li>
+		<li>So a component can change the way it's child
+		configuration is processed.</li>
+	</ul>
+
+	<p>For examples look at the Oddjob Jobs that are ArooaSessionAware and what they do
+	with the session.</p>
+
+		<a name="lifecycle"/></a>
+		<h4>The Lifecycle of a component.</h4>
+		
+		<p>This is a summary of what Arooa framework does with your job:</p>
+			
+		<p>At parse time:</p>
+		<ol>
+			<li><p>The component is created using a no argument
+				constructor either from a class name found 
+				by looking up the element.
+			</p></li>
+			<li><p>If the configuration element contains an id attribute
+				the component is registered so that it's properties can
+				be gotten at later with the ${} replacement syntax.
+			</p></li>
+			<li><p>If the component is an instance of ArooaContextAware or 
+			ArooaSessionAware the ArooaContext or ArooaSession will be
+			injected into your component.
+				Amongst other things the ArooaContext contains your components very own
+				RuntimeConfiguration object. This allows your component to 
+				configure itself. The framework will configure the component
+				for you so unless you want very special you don't need to implement
+				this method.
+			</p></li>
+			<li><p>constant properties (those which don't contain 
+			${} replacement syntax) are set via the components 
+			<code>setXXX()</code>.
+			</p></li>
+			<li><p>If the component implements ArooaLifeAware the 
+			<code>initialised()</code> method is called.
+			</p></li>
+			
+		</ol>
+			
+		<p>At run time:</p>
+			
+		<ol>
+			<li><p>Dynamic properties are set. The ${ } values are resolved and 
+				the resulting object is set via the <code>setXXX()</code> method
+				in the component and in all child elements and values.</p></li>
+			<li><p>If the component implements ArooaLifeAware the 
+			<code>configured()</code> method is called.
+			</p></li>
+		</ol>
+		
+		<p>At termination:</p>
+			
+		<ol>
+			<li><p>If the component implements ArooaLifeAware the 
+			<code>destroy()</code> method is called.
+			</p></li>
+			<li><p>All properties set from the configuration will be 
+			set to <code>null</code>.
+			</p></li>
+		</ol>
+					
+	
+	<hr/>
+
+	<a href="index.html">Index</a> <a href="#top">Top</a>
+	<a href="hitched.html">Next</a>
+		
+		
+	</body>
+	
+</html>		
+	

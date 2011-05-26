@@ -1,0 +1,145 @@
+<html>
+	<head>
+		<title>Dev Guide - Dependency Injection and JSR 330</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>	
+	<body>
+		<a name="top"></a>
+		<h1>Dependency Injection and JSR 330</h1>
+
+		<p>Automatic dependency injection.</p>
+		
+		<ul>
+			<li><a href="#introduction">Introduction</a></li>
+			<li><a href="#servicesjob">The Services Job</a></li>
+		</ul>
+	
+	<a name="introduction"/></a>
+	<h4>Introduction</h4>
+
+	<p>The Arooa framework also supports the automatic injection of 
+	properites by using the <code>@Inject</code> annotation specified
+	by JSR 330.
+	</p>
+
+	<p>Support for the standard is not complete within Oddjob. In particular only
+ 	the <code>@Named</code> qualifier is supported. Other <code>@Qualifier</code>s will
+ 	be ignored. 
+	</p>	
+	
+	<p>During Arooa's configuration cycle, when it finds a property
+	requiring automatic dependency injection, it interrogates all 
+	components in the configuration that implement the
+	<a href="@javadoc@/org/oddjob/arooa/registry/ServiceProvider.html">ServiceProvider</a>
+	interface for a matching Object to inject. If none is found Arooa moves
+	on without a warning. 
+	</p>
+	
+	<p>Now I hope that so far you're impressed by how much you can achieve
+	with Oddjob while keeping your code independent of Oddjob and we don't
+	want to spoil this by having your service beans implement some Oddjob interface.
+	Well we don't, because Oddjob has a job for that.</p> 
+	
+	<a name="servicesjob"/></a>
+	<h4>The Services Job</h4>
+
+	<p>The services job takes the objects registered with it, and provides
+	them to Arooa as potential canidates for automatic dependency injection.
+	This job is so named because within Oddjob the injected objects will 
+	typically be services that other jobs require to perform their tasks.
+	</p>
+	
+ 	<p>The easist way to learn about the service job is via example. Here's
+ 	a simple example - a hungry job requires a snack to do some work.
+ 	</p>
+ 		
+	<p>Here's the hungry job. Note the use of <code>@inject</code></p>
+	
+{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#HungryJob}
+   
+	<p>The hungry job uses a <code>SnackProvider</code> to retrieve it's snack.
+	</p>
+
+{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#SnackProvider}
+
+	<p>A snack is just:</p>
+
+{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#Snack}
+
+	<p>And here's our <code>SnackProvider</code>, A cafe.</p>
+	
+{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#Cafe}
+
+	<p>Here's the Oddjob configuration that ties it all together. Our cafe
+	is registered with the services job. When the hungry job is configured, 
+	our services job provides the cafe as the service for injection.</p>
+	
+{@oddjob.xml.file examples/devguide/ServicesExample.xml}
+
+	<p>Here's the output:</p>
+	
+<pre class="command">
+Snack eaten: Green Eggs and Ham.
+</pre>
+	
+ 	<p>For when a job requires a more specialised service there is the
+ 	<code>@Named</code> qualifier. Here our hungry Job is vegetarian.</p>
+
+{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#HungryVegetarianJob}
+
+	<p>But fortunately a vegetarian cafe is available.
+	</p>
+	 
+{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#VegetarianCafe}
+ 
+ 	<p>Here's the modified configuration with both types of hungry job, 
+ 	and the output.</p>
+ 	
+ {@oddjob.xml.file examples/devguide/ServicesQualifiedExample.xml}
+ 
+<pre class="command">
+Snack eaten: Green Eggs and Ham.
+Snack eaten: Salad.
+</pre>
+ 
+	<p>If there is no service that matches the qualifier, as here:</p>
+	 
+{@oddjob.xml.file examples/devguide/ServicesAnyExample.xml}
+  
+  <p>By default, if no service matching the qualifier can be provided, the
+  first service of the correct type is used. As in this example, this can 
+  result in our vegetarian being given something it shouldn't eat.</p>
+  
+<pre class="command">
+Snack eaten: Green Eggs and Ham.
+</pre>
+    
+   <p>The intransigent property can be used to ensure only an exact match
+   is chosen.</p>
+   
+{@oddjob.xml.file examples/devguide/ServicesIntransigentExample2.xml}
+  
+  <p>The default cafe is not automatically injected. Our Hungry vegetarian must
+  be prepared to not get a snack.</p>
+  
+{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#ResilientVegetarianJob}
+
+	<p>Our resilient hungry job handles the lack of a snack provider with only 
+	minimal fuss!</p>
+	
+<pre class="command">
+No Snack!
+</pre>
+  
+	<p>And that is how to get started with automatically 
+	injecting your services into your jobs.</p>
+	
+		<hr/>
+
+	<a href="index.html">Index</a> <a href="#top">Top</a>
+	<a href="oddballs.html">Next</a>
+		
+	</body>
+</html>

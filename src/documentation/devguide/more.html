@@ -1,0 +1,116 @@
+<html>
+	<head>
+		<title>Dev Guide - More on Jobs</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>	
+	<body>
+		<a name="top"></a>
+		<h1>More on Jobs</h1>
+
+		<ul>
+			<li><a href="#completion">Completion States</a></li>
+			<li><a href="#stopping">Stopping</a></li>
+			<li><a href="#logging">Logging</a></li>
+			<li><a href="#services">Services</a></li>
+			<li><a href="#serialization">Serialization</a></li>
+		</ul>
+
+		<a name="completion"></a>
+		<h4>Comletion States</h4>
+		
+		<p>So far we've written a nice job that run's without errors - but
+		what happens if something goes wrong?</p>
+		
+		<p>Oddjob will catch all Throwables during job execution and 
+		set the job state to Exception. Let see with an example.</p>
+		
+{@oddjob.java.file src/java/org/oddjob/devguide/NaughtyJob.java}
+
+		<p>And run it...</p>
+		
+		<a href="images/naughty.gif"><img src="images/naughty.gif"
+			height="200" width="300" alt="A Naughty Job"/></a>
+				
+		<p>You can try resetting the job and re-running it however 
+		this job will not start behaving! The import thing is that 
+		it's naughtiness is contained.</p>
+		
+		<p>Oddjob will also recognise the result property and use it
+		to either set a job complete or not complete. If the result
+		is 0 the job is state is complete, any other value and it's 
+		not complete.</p>
+		
+{@oddjob.java.file src/java/org/oddjob/devguide/NotCompleteJob.java}
+
+		<p>And run it...</p>
+		
+		<a href="images/notcomplete.gif"><img src="images/notcomplete.gif"
+			height="200" width="300" alt="A Naughty Job"/></a>
+						
+
+	<a name="stopping"></a>
+	<h4>Stopping a Job</h4>
+		
+		<p>To stop a job Oddjob will interrupt the thread it's running. 
+		Long running jobs should be written to cope with this.
+		</p>
+		
+		<p>Here's an example.</p>
+
+{@oddjob.java.file src/java/org/oddjob/devguide/StoppingJob.java}
+		
+		<a name="logging"></a>
+		<h4>Logging</h4>
+
+		<p>Oddjob uses <a href="http://logging.apache.org/log4j">log4j</a>. If
+		you also use Log4j, any logging in your job's <code>run()</code> method
+		will be captured by Oddjob and displayed in the log panel of Oddjob 
+		Explorer.
+
+
+		<a name="services"></a>
+		<h4>Services</h4>
+
+		<p>Sometimes you don't want a job to run and complete,
+		but to keep running in the background, probably providing some
+		kind of service, such as Scheduling.</p>
+		
+		<p>
+		Oddjob will recognise the method signature of 
+		<code>public void start()</code> and <code>public void stop()</code> and
+		treat that object as a service. When you run the job, the start
+		method will be called, but when it returns the state will still
+		be seen as executing. The service will be stopped when you
+		stop the job.
+		</p>
+		
+		<p>Here's an example.</p>
+		
+{@oddjob.java.file src/java/org/oddjob/devguide/SimpleService.java}
+
+		<p>A service has the advantage that when used in a sequential
+		job, jobs after the service will run once the
+		service has started, and can then use that service for something.</p>
+
+		<a name="serialization"></a>
+		<h4>Serialization</h4>
+
+		<p>If your job implements <code>java.io.Serializable</code> and Oddjob is
+		running with a persister then Oddjob will serialise the state of your
+		job when it completes. When Oddjob next runs, it re-creates the 
+		job from the serialised form.</p>
+		
+		<p>After your job is restored, Oddjob will continue to configure your
+		job from the configuration file. Thus any serialised properties that
+		appear in the configuration will be overwritten.</p>
+				
+		<hr/>
+	
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="arooa.html">Next</a>
+
+	
+	</body>
+</html>

@@ -1,0 +1,210 @@
+<html>
+	<head>
+		<title>Dev Guide - Introducing Arooa</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>	
+	<body>
+		<a name="top"></a>
+		<h1>Introducing Arooa</h1>
+
+		<p>The underlying framework.</p>
+		
+		<ul>
+			<li><a href="#introduction">Introduction</a></li>
+			<li><a href="#components">Components</a></li>
+			<li><a href="#properties">Property Injection</a></li>
+			<li><a href="#values">Values</a></li>
+		</ul>
+	
+	<a name="introduction"/></a>
+	<h4>Introduction</h4>
+
+		<p>Arooa should actually be A.R.O.O.A but that's ugly and quite slow
+		to type, so it's Arooa. I pronounce it like Aruba but without the 'b'.
+		</p>
+		
+		<p>A.R.O.O.A stands for <b>A</b> <b>R</b>ip <b>O</b>ff <b>O</b>f <b>A</b>nt,
+		and as it started life as a cut and paste of the Ant XML framework this
+		is quite appropriate. After the decision was made to go POJO the code base
+		changed quite a bit and it no longer resembles Ant much, but the name is
+		cool.</p> 
+		
+		<p>So what does Arooa do? It does all the underlying creation and 
+		configuration of jobs. It does the runtime property injection. It provides
+		the facility for component cut and paste.</p>
+
+		<p>Arooa is a self contained package within oddjob. If you wanted a
+		framework for your POJOs that provided drag and drop between 
+		configuration files - you could do worse than copy the 
+		<code>org.odddjob.arooa</code>
+		package and start hacking. You might wish to call it ArooArooa, but
+		then again you might not.</p>
+	
+		<a name="components"/></a>
+		<h4>Components</h4>
+		
+		<p>
+		Arooa, like many application frameworks, uses the idea of a component. There are
+		many definitions of a component, but in Arooa it is simply a Java Bean. So a component
+		is any <code>java.lang.Object</code> with a no argument constructor.</p>
+	
+		<p>Here is a really simple component.</p>
+		
+{@oddjob.java.file src/java/org/oddjob/devguide/FirstComponent.java}
+
+		<p>You can fire this up with oddjob
+		using the following configuration:
+		</p>
+		
+{@oddjob.xml.file examples/devguide/component.xml}
+	
+		<p>Because our component isn't Runnable, Oddjob isn't 
+		treating it as a job, so you get a boring icon and
+		you can see some properties - but not much else.</p>
+
+
+	<a href="images/arooa1.gif"><img src="images/arooa1.gif"
+				height="200" width="300" alt="First Component"/></a>
+	
+	<p>Despite Oddjob not being particularly interested in
+	our simple component we'll keep going with Oddjob as the
+	basis for our introduction of Arooa, as that's how we'll
+	most often use it. Let's look at configuration.</p>
+	
+	<a name="properties"/></a>
+	<h4>Property Injection</h4>
+	
+	<p>Properties of our Java Objects are injected using the standard
+	Java Bean setter methods.</p>
+	
+{@oddjob.java.file src/java/org/oddjob/devguide/SecondComponent.java}
+
+	<p>For the properties of primitive types, 
+	their Object counterparts, or String, the property is provided in
+	the XML configuration as an attribute. The attribute name corresponds to the
+	property name.</p>
+	
+{@oddjob.xml.file examples/devguide/component2.xml}
+
+	<p>When loaded in Oddjob we see our property has been set.</p>
+
+	<a href="images/arooa2.gif"><img src="images/arooa2.gif"
+				height="200" width="300" alt="First Component"/></a>
+	
+	<p>This attribute value is said to be constant because it doesn't
+	contain any runtime properties, i.e. no ${} expressions. Constant
+	attribute values are set when the configuration file is first loaded.
+	
+	Runtime properties are set only when the framework is asked to
+	<i>configure</i> a component. If we make our component Runnable, 
+	Oddjob will wrap it in a Proxy object that will ask Arooa to
+	configure our component just before the run method is called.</p>
+	
+	<p>Arooa also supports setting indexed properties with a <code>
+	setXXX(int index, Object value)</code> method and mapped properties
+	with a <code>setXXX(String key, Object value)</code> method.</p>
+	
+	<p>Here's an example which has all three property types:</p>
+	
+{@oddjob.java.file src/java/org/oddjob/devguide/DifferentPropertiesJob.java}
+
+	<p>In the XML configuration, the index is taken from the element order
+	for indexed properties, and the key is taken from a special 'key'
+	attribute for mapped properties.</p>
+	
+{@oddjob.xml.file examples/devguide/properties.xml}
+
+	<p>Here's the result:</p>
+	
+	<a href="images/arooa4.gif"><img src="images/arooa4.gif"
+				height="200" width="300" alt="Properties"/></a>
+	
+	<p>Now try resetting Oddjob. Do you see the nulls?</p>
+	
+	<a href="images/arooa5.gif"><img src="images/arooa5.gif"
+				height="200" width="300" alt="Properties Destroyed"/></a>
+
+	<p>What's happened? When Oddjob resets it destroys the Arooa configuration
+	that it created. During destruction the framework sets null values into 
+	all it's configured setters. This came as a by-product of cut and paste
+	but as it forces cleanup it seems like a good idea even for properties
+	that don't support cut and paste. When capturing
+	indexed and mapped properties we have to write the setters quite
+	carefully. Here's an example:</p>
+	
+{@oddjob.java.file src/java/org/oddjob/devguide/IndexedAndMappedJob.java}
+
+	<p>Now this does mean that we can't support a deliberate null in a list or a map
+	but as yet this hasn't been a problem.</p>
+
+	<a name="values"/></a>
+	<h4>Values</h4>
+	
+	<p>To define more complicated properties of a component, Arooa has
+	the idea of <i>values</i>. A value, like a component, is a Java Bean.
+	Here's one.</p>
+	
+{@oddjob.java.file src/java/org/oddjob/devguide/Person.java}
+
+	<p>And here's a component that uses it.</p>
+
+{@oddjob.java.file src/java/org/oddjob/devguide/ThirdComponent.java}
+
+	<p>Because our value is not one of the primitives or a String,
+	the property is defined
+	in the XML configuration as a child element where the element name corresponds to the 
+	property name.</p>
+		
+{@oddjob.xml.file examples/devguide/component3.xml}
+
+	<p>And here's what it looks like in Oddjob.</p>
+
+	<a href="images/arooa3.gif"><img src="images/arooa3.gif"
+				height="200" width="300" alt="Values"/></a>
+
+
+	<p>But our person hasn't been set! - Why not? All Values 
+	(even ones with constant properties) are only 
+	set during runtime configuration. And that's not
+	happening of course, because our component isn't Runnable.</p>
+	
+	<p>Here's a Runnable version. I've added a 'formal' property to 
+	change the style of greeting - because I was getting
+	bored (The main cause of feature creep!):</p>
+	
+{@oddjob.java.file src/java/org/oddjob/devguide/HelloPersonJob.java}
+
+	<p>The configuration is pretty much as is, except with formal set
+	to true.</p> 
+
+{@oddjob.xml.file examples/devguide/helloperson.xml}
+
+	<p>Ah! but note the <a href="@reference@/org/oddjob/arooa/types/IsType.html">&lt;is&gt;</a>
+	element. Because our property is a Java Bean type we can use this shorthand to
+	save typing the class. We can't use &lt;is&gt; for our component definition because
+	the job property of Oddjob is of type <code>java.lang.Object</code>, so &lt;is&gt; would
+	just create an Object - not much use.
+	</p>
+	
+	<p>Now when we open our configuration in Oddjob Explorer:</p>
+	
+	<a href="images/arooa6.gif"><img src="images/arooa6.gif"
+				height="200" width="300" alt="Hello Person Loaded"/></a>
+
+	<p>Our person property still isn't set (but the constant formal property
+	has been). However when we run the job, the property gets set.</p>
+	
+	<a href="images/arooa7.gif"><img src="images/arooa7.gif"
+				height="200" width="300" alt="Hello Person Run"/></a>
+
+	<p>And that is a very brief introduction into Arooa.</p>
+
+		<hr/>
+
+	<a href="index.html">Index</a> <a href="#top">Top</a>
+	<a href="jsr330.html">Next</a>
+		
+	</body>
+</html>

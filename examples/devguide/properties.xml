@@ -1,0 +1,18 @@
+<oddjob>
+    <job>
+        <bean class="org.oddjob.devguide.DifferentPropertiesJob">
+            <simple>
+                <value value="Cabbage"/>
+            </simple>
+            <indexed>
+                <value value="Beans"/>
+                <value value="Lentils"/>
+                <value value="Onions"/>
+            </indexed>
+            <mapped>
+                <value key="good" value="Apples"/>
+                <value key="bad" value="Crisps"/>
+            </mapped>
+        </bean>
+    </job>
+</oddjob>	

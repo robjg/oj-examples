@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <oddjob file="${this.dir}/helloperson2.xml">
+            <descriptorFactory>
+                <import file="${this.dir}/helloperson-arooa.xml"/>
+            </descriptorFactory>
+            <classLoader>
+                <url-class-loader>
+                    <files>
+                        <file file="${this.dir}/../classes"/>
+                    </files>
+                </url-class-loader>
+            </classLoader>
+        </oddjob>
+    </job>
+</oddjob>

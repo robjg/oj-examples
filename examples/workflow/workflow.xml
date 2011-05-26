@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <repeat name="Repeat">
+            <schedule>
+                <schedules:interval interval="00:00:20" xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"/>
+            </schedule>
+            <job>
+                <state:if name="A decision" xmlns:state="http://rgordon.co.uk/oddjob/state">
+                    <jobs>
+                        <random id="the-job" name="File Exists?"/>
+                        <sequential name="Then transfer the file">
+                            <jobs>
+                                <random name="FTP Balance File"/>
+                                <random name="Update Sequence Number"/>
+                            </jobs>
+                        </sequential>
+                        <state:if name="Else If" state="INCOMPLETE">
+                            <jobs>
+                                <state:mirror job="${the-job}"/>
+                                <random id="else" name="Send a mail to Customer Services"/>
+                                <random id="exception" name="Send a mail a mail to Technical Support"/>
+                            </jobs>
+                        </state:if>
+                    </jobs>
+                </state:if>
+            </job>
+        </repeat>
+    </job>
+</oddjob>

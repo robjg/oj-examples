@@ -1,0 +1,12 @@
+<oddjob xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+    <job>
+        <repeat>
+            <schedule>
+                <schedules:interval interval="00:00:10"/>
+            </schedule>
+            <job>
+                <echo text="Hello"/>
+            </job>
+        </repeat>
+    </job>
+</oddjob>

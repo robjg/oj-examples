@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title>Dev Guide - Embedding Oddjob</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>	
+	<body>
+		<a name="top"></a>
+		<h1>Embedding Oddjob</h1>
+
+		<p>Running Oddjob from Code.</p>
+		
+	<ul>
+		<li><a href="#simple">A Simple Example</a></li>
+		<li><a href="#lookup">Looking Up Beans</a></li>
+		<li><a href="#finally">Cleaning Up</a></li>
+	</ul>
+
+				
+	<a name="#simple"></a>
+	<h4>A Simple Example</h4>
+	
+	<p>It's Hello World of course:</p>
+
+	{@oddjob.java.file test/java/org/oddjob/devguide/EmbeddingTest.java#first}
+ 
+ 	<p>Which is:</p>
+ 	<ol>
+ 	 <li>Create an instance of Oddjob.</li>
+ 	 <li>Give Oddjob some configuration. In this case it's a string of xml,
+ 	 but it could be a file, or a class path resource.</li>
+ 	 <li>Run Oddjob.</li>
+ 	</ol>
+ 	
+ 	<p>And that's it.</p>
+ 	
+	<a name="lookup"></a>
+	<h4>Looking Up Beans</h4>
+	
+	<p>With three lines of code it's possible to get at all Objects that have
+	been registered within Oddjob with their id attribute. Because 
+	three lines of code seemed a bit much a utility class 
+	<a href="@javadoc@/org/oddjob/OddjobLookup">OddjobLookup</a> was created.</p>
+	
+	<p>We can now get there in one line thus:</p>
+	
+	{@oddjob.java.file test/java/org/oddjob/devguide/EmbeddingTest.java#second}
+
+	<p>By providing the property type, Oddjob will do the conversion for us. There is 
+	also a lookup method that doesn't take the second argument and returns
+	the raw Object</p>
+	
+	<a name="finally"></a>
+	<h4>Cleaning Up</h4>
+	
+	<p>And when you've finished with Oddjob we mustn't forget to clear those 
+	resources:</p>
+	
+	{@oddjob.java.file test/java/org/oddjob/devguide/EmbeddingTest.java#last}
+
+	<p>If you don't do this, it's possible that threads will be left running.</p>
+
+		<hr/>
+
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="first.html">Next</a>
+	
+	</body>
+</html>

@@ -1,0 +1,217 @@
+<html>
+	<head>
+		<title>User Guide - Runtime Configuration</title>
+	</head>
+	<body>
+		
+		<a name="top"></a>
+		<h1>Runtime Configuration</h1>
+
+		<p>Using Properties to configure jobs and passing information 
+		between jobs.</p>
+
+		<ul>
+			<li><a href="#introduction">Introduction</a></li>
+			<li><a href="#defining">Defining Properties</a></li>
+			<li><a href="#id">Job Identity</a></li>
+			<li><a href="#properties">Job Properties</a></li>
+			<li><a href="#variables">Variables</a></li>
+			<li><a href="#nested">Oddjobs Within Oddjobs</a></li>
+		</ul>		
+
+		<a name="introduction"></a>
+		<h4>Introduction</h4>
+
+		<p>Often we don't know the exact configuration values for jobs
+		when we set them up. But we will know these values when the jobs run.
+		A file name might contain a date, an ftp host name might change
+		depending on the environment we're running in, etc. Oddjob allows us
+		to specify configuration that is evaluated only when the job runs. The
+		configuration values are either Java properties, (key/value pairs) or
+		the properties of other jobs.</p>
+		
+		<p>To specify that a configuration value should be evaluated at runtime
+		we include syntax of the form ${<i>expression</i>} in the configuration.</p>
+		
+		<p>For instance echo job could be configured with the text property 
+		'Hello ${name}'</p>
+
+		<p>To evaluate name Oddjob first checks for a java property called
+		'name', and ten it attempts to evaluate it is a job property expression. 
+		The latter we will come to later. First we show you how to define a 
+		properties within Oddjob.</p>
+
+		<a name="defining"></a>
+		<h4>Defining Properties</h4>
+		
+		<p>Properties are defined within an Oddjob configuration using the 
+		<a href="@reference@/org/oddjob/values/properties/PropertiesJob.html">
+		properties job</a>. When the job runs, the properties it defines
+		become available to other jobs. When the property job is reset or
+		deleted, the property definitions are removed and are no longer 
+		available to configure other jobs.</p>
+
+		<p>Properties can also be defined outside of Oddjob and inherited. The
+		ways in which Oddjob can inherit properties are:</p>
+
+		<ul>
+			<li>Via Java System properties set in the usual way using the -D option 
+			on Java start up.</li>
+			<li>From properties defined in a file name oddjob.properties 
+			in the users home directory.</li>
+			<li>Any properties defined in an Oddjob that is running our Oddjob as
+			a nested Oddjob.</li>
+		</ul>
+
+		<p>If a property of the same name is defined twice the value of when
+		it was set first set is used instead of the value defined later. This
+		means that external properties take precedence over internal properties.
+		The order of precedence of external properties is they are listed
+		above.</p>
+
+		<a name="id"></a>
+		<h4>Job Identity</h4>
+		
+		<p>If a property is not defined as a name value pair, then Oddjob will
+		attempt to evaluate the configuration expression as a property 
+		of job.</p>
+		
+		<p>In order to identify a job so it may be referenced from another job
+		it is given an 'id'. An id must be unique and must not contain the 
+			characters <code>.()[].</code> or <code>/</code>.
+		</p>
+
+		<p>To demonstrate using a job's id we'll create a job
+		that mirrors the state of our ExecJob.</p>
+		
+		<p>We'll start with our Exec Job as the only child of a Sequential 
+		Job.<p>
+		
+		We need to give our Exec Job an id which is quite simple. Open it in
+		Designer and in the id field on the 
+		right enter 'my-job'.</p>
+		
+		<a href="images/runtime1.gif"><img src="images/runtime1.gif" 
+				height="200" width="300" alt="Setting the Job Id"/></a>
+		
+		<p>Next we need to add a mirror job. In the jobs list of
+		the Sequential Job, add a state:mirror job.</p>
+
+		<a href="images/runtime2.gif"><img src="images/runtime2.gif" 
+				height="200" width="300" alt="Create a Schedule"/></a>
+
+		<p>Select the new node and in the job field we need to tell it
+		the job to mirror. We do this
+		using the notation <i>${job-id}</i> in the configuration field. 
+		Oddjob will recognise a ${ }
+		character sequence and takes what is between the curly brackets to 
+		be the id of job we wish to reference. This happens every time the 
+		mirror job is run.</p>
+		
+		<p>So in the 'Job' field enter the text ${my-job}.</p>
+
+		<a href="images/runtime3.gif"><img src="images/runtime3.gif" 
+				height="200" width="300" alt="The Schedule Details Dialog"/></a>
+
+		<p>Run the sequence, and then reset and run just the Exec Job. You 
+		Should see that the mirror job mirrors its state.</p>
+
+		<a name="properties"></a>
+		<h4>Job Properties</h4>
+		
+		<p>The configuration settings made in Oddjob Designer set what are known
+		as the job's properties. The 'Command' field of the ExecJob
+		set a property called 'command'. </p>
+
+		<p>Just as you can reference a job in the configuration file, you can also
+		reference a property of a job. The notation for accessing a property is
+		<i>${job-id.job-property}</i>. </p>
+
+		<p>As an example let's create a new simple configuration. In Oddjob Explorer 
+		select <b>New</b> from the <b>File</b> menu.
+		Set a <b>sequential</b> job as Oddjob's only job, and then add
+		an <b>echo</b> job to it. Set the id of 
+		the job to something like "my-echo" and the 'Text' field (or 'text' property)
+		to "This will be displayed twice!".</p>
+		
+		<a href="images/runtime4.gif"><img src="images/runtime4.gif" 
+				height="200" width="300" alt="First Echo Job"/></a>
+				
+		<p>Add another echo job to the SequentialJob node but in this echo
+		jobs text property enter the value "${my-echo.text}".</p>
+		
+		<a href="images/runtime5.gif"><img src="images/runtime5.gif" 
+				height="200" width="300" alt="Second Echo Job"/></a>
+		
+		<p>Save the configuration and then open it in Oddjob Explorer. The jobs 
+		will run immediately and in the console you should see that the
+		text has been displayed twice.</p>
+		
+		<a href="images/runtime6.gif"><img src="images/runtime6.gif" 
+				height="200" width="300" alt="Running Two Echo Jobs"/></a>
+				
+		<p>When setting the text property of the second job, Oddjob looked 
+		up the job with the id of 'my-echo' and then looked
+		up the property 'text' of that job.</p>
+		
+		<p>This substitution is the
+		first thing that happens when a job is run. Altering the order of the jobs
+		in the example would be OK because the fixed text of the first job 
+		is set when the
+		job is loaded. Adding a third job to run before the other two which relied
+		on the second jobs text property wouldn't work because the second job
+		hadn't run and therefore hadn't had its text property set. Adding the 
+		third job after the first two would be OK.</p>
+		
+		<p>Oddjob supports more complicated property specifications but for most
+		simple situations ${<i>id.property</i>} is all that is needed.</p>
+		
+		<a name="variables"></a>
+		<h4>Variables</h4>
+		
+		<p>When discussing the properties of a job there is one job that deserves
+		special attention and that is the variables job. While most jobs have a
+		fixed properties with names that never change the variables job has properties
+		which are defined dynamically at runtime.</p>
+		
+		<p>As an example we'll replace our first echo job in the previous example 
+		with a variables job. Delete the first echo job. Select the 'SequentialJob' and add a new 
+		<b>variables</b> job Jobs table. The variables job appears
+		at the end of the list which isn't very useful because as its properties
+		are created when it runs so we need it to run first. Use the mouse
+		to drag the Variables job above the Echo job. 
+		Now configure the variables job
+		by giving it an 'Id', say 'vars' and in the Named Values section select
+		a type of 'value', and enter a name of 'greeting' and then enter 'Hello' in
+		the value cell.</p>
+		
+		<a href="images/runtime7.gif"><img src="images/runtime7.gif" 
+				height="200" width="300" alt="The Variables Job"/></a>
+				
+		<p>We have created a variables job that has property called 'greeting' that
+		will be available when the job runs. The type of the property depends on
+		where it is to be used. The value property is the most common type and
+		can be used for text, numbers etc. When a more complicated type is required
+		as the property of job then this will be documented in the reference.</p>
+		
+		<p>We need to change our runtime property in the echo job to match our new
+		variables configuration i.e. '${vars.greeting}'. We can then click OK to
+		take our new configuration back into 
+		Oddjob Explorer and when we run the Sequential job we will see in the
+		console output 'Hello'</p>
+		
+		<a name="nested"></a>
+		<h4>Oddjobs within Oddjobs</h4>
+
+		<p>As you saw in the examples, an Oddjob job can be <i>nested</i> within
+		another Oddjob job. It is possible to access a job within the 
+		using the notation <i>${oddjob-id/job-id.property}</i> but more on this in the 
+		next section...</i>.
+				
+		<hr/>
+		
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="behindgui.html">Next</a>
+		
+	</body>
+</html>

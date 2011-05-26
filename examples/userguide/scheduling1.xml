@@ -1,0 +1,33 @@
+<oddjob xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling"
+           xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+ <job>
+  <sequential>
+   <jobs>
+    <scheduling:timer name="Morning Timer">
+     <schedule>
+      <schedules:time to="12:00">
+       <refinement>
+        <schedules:interval interval="00:15"/>
+       </refinement>
+      </schedules:time>
+     </schedule>
+     <job>
+      <echo name="Morning Job" text="Good Morning."/>
+     </job>
+    </scheduling:timer>
+    <scheduling:timer name="Afternoon Timer">
+     <schedule>
+      <schedules:time from="12:00">
+       <refinement>
+        <schedules:interval interval="00:10"/>
+       </refinement>
+      </schedules:time>
+     </schedule>
+     <job>
+      <echo name="Afternoon Job" text="Good Afternoon."/>
+     </job>
+    </scheduling:timer>
+   </jobs>
+  </sequential>
+ </job>
+</oddjob>

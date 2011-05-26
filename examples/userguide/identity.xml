@@ -1,0 +1,11 @@
+<oddjob xmlns:state="http://rgordon.co.uk/oddjob/state">
+    <job>
+        <sequential>
+            <jobs>
+                <exec id="my-job"
+                      command="cmd /C examples\exec\bin\greeting.bat hello"/>
+                <state:mirror job="${my-job}"/>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

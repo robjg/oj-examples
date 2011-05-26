@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<title>User Guide - Scheduling</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>
+	<body>
+
+	<a name="top"></a>
+	<h1>Distributing Work</h1>
+
+	<p>Sharing the load.</p>
+	
+	<ul>
+		<li><a href="#introduction">Introduction</a></li>
+		<li><a href="#simple">A Simple Example</a></li>
+		<li><a href="#scheduling">Distributed Scheduling</a></li>
+	</ul>
+
+	<a name="introduction"></a>
+	<h4>Introduction</h4>
+	
+	<p>Oddjob can share work between any number of servers and
+	so long as one server remains operational, any of the others
+	can fail, and work will still be done.</p>
+
+	<p>Sharing work is achieved by having jobs grab for work. A
+	Keeper guards the work and ensures only one job does the guarded
+	bit of work.</p>
+	
+	<p>A instance of work that can be grabbed is identified by a 
+	key and an instance id. The key identifies the work such as
+	'Report-26' and the instance is the instance of execution of the
+	work such as the date it's running for.</p>
+	
+	<p>The grabbers also have an identifier. This allows the grabber
+	to keep track of who's won. The loosing grabbers display who's 
+	won so you know from any server where the work is being done.
+	The keeper also notifies the looses when the winner has finished
+	the job.</p>
+
+	<p>Now the Keeper must have some central thing on which to
+	coordinate work. Currently the only implemented Keeper is one
+	that uses a database, but the concept is simple and open to
+	clever developers to implement with distributed caching or 
+	JMS or any other technology that supports the distributed ordering
+	of things.</p>
+
+	<a name="simple"></a>
+	<h4>A Simple Example</h4>
+	
+	<p>Here's a simple example where two parallel processes compete
+	for work. This example uses a sequence number to differentiate
+	between work instances. The sequence number of parallel 
+	job must be manually re-run to grab again. Re-running the
+	parallel job or one of the grabbers demonstrates how the keeper
+	guards against work being re-done.</p>
+
+{@oddjob.xml.file examples/userguide/grabbing.xml}
+
+
+	<a name="scheduling"></a>
+	<h4>Distributed Scheduling</h4>
+	
+	<p>Grabbing for work and Oddjobs existing scheduling can be used together to
+	implement distributed scheduling.</p>
+	
+	<p>The Resiliance Example shows how three Oddjobs running the same timer
+	configuration compete for work and there-by distribute the scheduling
+	between them.
+	</p>
+	
+		<a href="images/grabbing1.gif"><img src="images/grabbing1.gif" 
+			height="200" width="300" alt="Distributing Work"/></a>
+		
+	<p>The work takes 15 seconds, and the schedule is every 10 seconds. To keep
+	up with the work at least 2 workers need to be running. With 3 workers
+	running, 1 worker is always idle. The Grab Job's <code>onLoosing</code>
+	property is set to INCOMPLETE so we can easily see which job this is.	
+	</p>
+
+		<hr/>
+
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="sharing.html">Next</a>
+	</body>
+</html>

@@ -1,0 +1,6 @@
+<schedules:dayofweek xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"
+        on="2">
+    <refinement>
+        <schedules:time from="10:00" to="13:00"/>
+    </refinement>
+</schedules:dayofweek>

@@ -1,0 +1,282 @@
+<html>
+	<head>
+		<title>User Guide - Sharing Jobs</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>
+	<body>
+	
+	<a name="top"></a>
+	<h1>Sharing Jobs on a Network</h1>
+
+	<p>Oddjob is the network.</p>
+	
+	<ul>
+		<li><a href="#introduction">Introduction</a></li>
+		<li><a href="#working">Working With Remote Jobs</a></li>
+		<li><a href="#configuring">Server Drag And Drop</a></li>
+		<li><a href="#multiple">Connecting Multiple Servers</a></li>
+		<li><a href="#server">The Server Side</a></li>
+	</ul>
+
+	<a name="introduction"></a>
+	<h4>Introduction</h4>
+		
+		<p>Oddjob makes working with jobs on a remote server virtually
+		transparent.</p> 
+		
+		<p>Here's a a world according to Oddjob:</p>
+		
+		<a href="images/sharing1.gif"><img src="images/sharing1.gif" 
+			height="200" width="300" alt="My Oddjob World"/></a>
+		
+		<p>It has local jobs but also has connections to three servers
+		running anywhere on the network.</p>
+				
+		<p>Setting up Oddjob for sharing is easy. Create an Oddjob for your
+		view of the world and add a 
+		<a href="@reference@/org/oddjob/jmx/JMXClientJob.html">client</a> 
+		job for each server you want to connect to. When the client runs 
+		all the server jobs magically appear. They aren't quite real though,
+		they are only reflections of the server jobs.</p>
+
+		<p>If we stop the client, the reflected server jobs disappear,
+		but they are still running on the server.</p>
+		
+		<a href="images/sharing2.gif"><img src="images/sharing2.gif" 
+			height="200" width="300" alt="Jobs Disappear"/></a>
+				
+		<p>Here, the client jobs named Server 1 and Server 2 have been stopped and
+		the client job named Server 3 is about to be stopped.</p>
+
+	<a name="working"></a>
+	<h4>Working With Remote Jobs</h4>		
+		
+		<p>Working with the local reflection of a remote job is no different
+ 		to working with a local job except that the action takes place on the 
+ 		server.</p>
+
+		<p>Lets work through some examples, but as I'm not going to explain
+		how to set up servers until you're completely persuaded by the magic of sharing
+		you might wish to work with one I created earlier. It's in the 
+		<code>examples/userguide</code> directory and it's called <code>sharingMain.xml</code>.
+		Open and run it in Oddjob explorer, and if you're on Windows you will 
+		something like this:</p>
+
+		<a href="images/sharing3.gif"><img src="images/sharing3.gif" 
+			height="200" width="300" alt="Starting Some Servers"/></a>
+				
+		<p>Three console windows will appear, which are the 3 server processes. If 
+		they don't appear then you might need to change the <code>runnOddjob</code>
+		property in the variables. If you are not on windows, you will also have to
+		change the three ExecJob configurations.</p>				
+
+		<p>Lets run a job on Server 1. Run the client called
+		Server 1 and expanded the job tree to see the jobs we've got on Server 1.
+		Ignore the Server 2 and Server 3 jobs (they are for later) but run 
+		the Job 'Echo To Console'.</p>
+
+		<a href="images/sharing4.gif"><img src="images/sharing4.gif" 
+			height="200" width="300" alt="Running A Job"/></a>
+
+		<p>Now take a look at the console window for Server 1.</p>
+				
+		<a href="images/sharing5.gif"><img src="images/sharing5.gif" 
+			height="200" width="300" alt="Console for Server 1"/></a>
+			
+		<p>Oddjob reflects the console of the server locally.</p>
+					
+		<a href="images/sharing6.gif"><img src="images/sharing6.gif" 
+			height="200" width="300" alt="Console in Explorer"/></a>
+				
+		<p>And also the Log output for the server job is reflected locally. 
+		These features make supporting
+		applications on remote servers much easier.</p>
+
+		<p>Resetting and Stopping jobs work just as transparently. So does setting
+		a property.</p>
+		
+		<a href="images/sharing7.gif"><img src="images/sharing7.gif" 
+			height="200" width="300" alt="Setting a Property"/></a>
+				
+		<p>And the proof...</p>
+		
+		<a href="images/sharing8.gif"><img src="images/sharing8.gif" 
+			height="200" width="300" alt="Console Again"/></a>
+				
+		<p>Setting a property is only temporary, if the server is restarted the
+		configured value is reused. If the configured value was a runtime property 
+		(in ${} form) the runtime property will be reset when the job is run. Fortunately
+		oddjob allows you to permanently change the remote configuration as well.</p>
+		
+	<a name="configuring"></a>
+	<h4>Server Drag And Drop</h4>		
+		
+		<p>Oddjob Makes configuring remote jobs wonderfully simple too. Lets start our client
+		to Server 2 and drag our Important Job 1 to Server 2.</p>
+		
+		<a href="images/sharing9.gif"><img src="images/sharing9.gif" 
+			height="200" width="300" alt="Dragging"/></a>
+	
+		<p>And run it.</p>
+					
+		<a href="images/sharing10.gif"><img src="images/sharing10.gif" 
+			height="200" width="300" alt="Running"/></a>
+				
+		<p>And configure it.</p>
+		
+		<a href="images/sharing11.gif"><img src="images/sharing11.gif" 
+			height="200" width="300" alt="Configuring"/></a>
+				
+		<p>And run it again.</p>
+		
+		<a href="images/sharing12.gif"><img src="images/sharing12.gif" 
+			height="200" width="300" alt="Run It Again"/></a>
+
+		<p>You Try...</p>
+		
+		<p>Now stop having fun and pay attention because this is really important.
+		What we are changing is an in memory copy of the configuration on the server.
+		If you restart the server then this configuration is lost. 
+		To save this back to the configuration file on the server you must have any job
+		in that configuration selected, and then select save from the menu.</p>
+				
+		<a href="images/sharing13.gif"><img src="images/sharing13.gif" 
+			height="200" width="300" alt="Saving"/></a>
+				
+		<p>Now the file <code>sharingJob2.xml</code> has the changes.</p>
+		
+<pre class="xml">
+&lt;oddjob xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"&gt;
+    &lt;job&gt;
+        &lt;folder name="Jobs On Server 2"&gt;
+            &lt;jobs&gt;
+                &lt;echo id="echo2" text="Important Job 2"/&gt;
+                &lt;echo id="echo1" text="Important Job 1 (Now On Server 2)"/&gt;
+                &lt;jmx:client id="server1" name="Server 1" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-1"/&gt;
+                &lt;jmx:client id="server3" name="Server 3" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-3"/&gt;
+            &lt;/jobs&gt;
+        &lt;/folder&gt;
+    &lt;/job&gt;
+&lt;/oddjob&gt;
+</pre>
+
+		<p>Now I admit that having Save associated with the file menu, not the job
+		menu, and having no warning that configuration has changed, and not knowing
+		if someone else has changed the configuration isn't great. But this will
+		be fixed soon. I promise.</p>
+		 
+		<p>Now just to counter those slight negative vibes you might be getting - 
+		let me point out one cool feature about nested Oddjobs. When you create 
+		new nested Oddjob, the nested Oddjob's configuration
+		file will be created on the server, 
+		(when you save that nested Oddjob)
+		No server access required! .</p>
+		
+
+	<a name="multiple"></a>
+	<h4>Connecting Multiple Servers</h4>		
+		
+		<p>Clients and Servers can be linked together to enable jobs to be
+		visible across several servers:</p>
+		
+		<p>This is achieved simply by adding a client job to the server configuration.
+		What we've got in our example is this:</p>
+		
+		<img src="images/sharing-dia1.jpg" alt="Linked Servers"/>
+	
+		<p>So we (Us) have access to all three servers directly, but each server
+		has access to the other two servers. Lets see how that looks in
+		Oddjob Explorer.</p>
+		
+		<a href="images/sharing14.gif"><img src="images/sharing14.gif" 
+			height="200" width="300" alt="More Servers"/></a>
+				
+		<p>We're now seeing Server 2 via Server 1, including it's 
+		console output. The same complete server transparency but 
+		across multiple servers.</p>
+		
+		<p>The server has built in loop back detection
+		to detect the situation when a client loops back to the originating 
+		server. The Server 1 client on Server 2 no longer shows any 
+		children when viewed from our original Server 1 client. If you're 
+		confused, I'm talking about the selected Job in the picture above.</p>
+		
+		<a name="accessing"></a>
+		<h4>Accessing Server Jobs</h4>		
+		
+		<p>Accessing a remote job
+		and it's properties from a configuration file is a virtually seamless
+		transition from working with a nested Oddjob job. A job is accessible
+		using the notation ${client-id/id-of-job-on-server}.
+		</p>
+		
+	<a name="server"></a>
+	<h4>The Server Side</h4>
+				
+		<p>Setting up Oddjob as a server is easy too. First the really easy way.</p>
+		
+		<p>Oddjob comes packaged with a server.xml and a client.xml file. Run 
+		the server.xml and you have a server.</p>
+		
+<pre class="command">
+java -jar run-oddjob.jar -f server.xml
+</pre>			
+
+		<p>Connect to server by opening client.xml in Oddjob Explorer and
+		start configuring...</p>
+		
+		<a href="images/sharing15.gif"><img src="images/sharing15.gif" 
+			height="200" width="300" alt="Editing The Default"/></a>
+
+		<p>To understand what's going on let's take a look at the 
+		server.xml.</p>
+
+{@oddjob.xml.file ../oddjob/server.xml}	
+
+		<p>The job that provides the sharing functionality is 
+		the <a href="@reference@/org/oddjob/jmx/JMXServerJob.html">server</a>
+		job. This job shares the local jobs from the given root job down.
+		In this case the root job is a nested Oddjob called Server Jobs.</p>
+		
+		<p>The server uses 
+		<a href="http://java.sun.com/jmx">JMX (Java Management Extensions)</a> 
+		which you don't need to know anything about except that 
+		the JMX protocol our server is using requires an RMI 
+		registry to be running somewhere, and we ensure this is the
+		case by running one ourselves via the preceding 
+		<a href="@reference@/org/oddjob/rmi/RMIRegistryJob.html">rmireg</a>
+		job. If an RMI server is already running on our machine, our Registry 
+		Job will 
+		silently complete. The URL is the only other confusing thing and 
+		that becomes less confusing when you know that all you need to worry
+		about is the last path element which is the name the server will be
+		registered by in the registry and must be unique for each server job
+		on each machine.</p>
+
+		<p>For those that would like to know more about JMX and the URL format
+		it's in
+		<a href="http://java.sun.com/javase/6/docs/technotes/guides/jmx/JMX_1_4_specification.pdf">
+		The JMX Specification</a>, but for those that aren't too bothered by
+		how it works - just cut and paste.
+		</p>
+		
+		<p>There is no limit to the number of server jobs you have in an
+		Oddjob configuration or which jobs they share. A server could share
+		a folder that contains itself allowing the client to shut it
+		down. A master or administrator server could share several child servers, perhaps
+		running jobs for different departments. In this respect the server job 
+		is very flexible.</p>
+		
+		<p>One caveat about remote configuration. Oddjob can share any job and it's children, 
+		but configuration will only work from an Oddjob node down. That is why the first
+		node to be shared will often be an Oddjob job.</p>
+		
+		<hr/>
+
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="saving.html">Next</a>
+		
+	</body>
+</html>

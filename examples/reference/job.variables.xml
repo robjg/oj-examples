@@ -1,0 +1,19 @@
+<oddjob>
+    <job>
+        <folder name=" ">
+            <jobs>
+                <sequential name="Simple Example">
+                    <jobs>
+                        <variables id="vars">
+                            <greeting>
+                                <value value="Hello World"/>
+                            </greeting>
+                        </variables>
+                        <echo name="Issue a greeting."
+                              text="${vars.greeting}"/>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

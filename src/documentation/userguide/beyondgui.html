@@ -1,0 +1,133 @@
+<html>
+	<head>
+		<title>User Guide - Beyond The GUI</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>
+	<body>
+	
+		<a name="top"></a>
+		<h1>Beyond The GUI</h1>
+		
+		<p>Using Oddjob without Oddjob Explorer.</p>
+
+		<ul>
+			<li><a href="#cl">The Command Line</a></li>
+			<li><a href="#bg">Stopping Oddjob</a></li>
+			<li><a href="#bg">In the Linux background</a></li>
+			<li><a href="#service">As an XP service</a></li>
+			<li><a href="#web">The Web Interface</a></li>
+			<li><a href="#wrong">When Things Go Wrong</a></li>
+		</ul>
+
+		<a name="cl"></a>
+		<h4>The Command Line</h4>
+
+		<p>Oddjob can be run from the command line using the following command:</p>
+		
+<pre class="command">
+java -jar run-oddjob.jar
+</pre>			
+
+		<p>For further options use:</p>
+		
+<pre class="command">
+java -jar run-oddjob.jar -h
+</pre>			
+
+		<p>Additional arguments are passed into Oddjob and are set as the args 
+		property of the top Oddjob. If the command line is</p>
+		
+<pre class="command">
+java -jar run-oddjob -f greeting.xml "Hello World!"
+</pre>
+
+		<p>and greeting.xml contained:
+
+<pre class="xml">
+&lt;oddjob id="this"&gt;
+ &lt;job&gt;
+  &lt;echo text="${this.args[0]}"/&gt;
+ &lt;/job&gt;
+&lt;/oddjob&gt;
+</pre>
+
+		<p>Then the result would be:
+
+<pre>
+Hello World!
+</pre>
+
+		<a name="bg"></a>
+		<h4>Stopping Oddjob</h4>
+
+		<p>Oddjob has a shutdown hook that attempts to stop Oddjob cleanly when the
+		virtual machine detects it is being asked to terminate. Usually this happens with 
+		Ctr-C or the kill signal, but the exact implementation is machine dependent.</p>
+		
+		<p>If a job is hanging and refuses stop Oddjob will forcibly exit after 5 seconds.</p>
+
+
+		<a name="bg"></a>
+		<h4>In the Linux Background</h4>
+
+		<p>Oddjob comes with a server.xml that will start a server for use on a 
+		remote machine.</p>
+
+		<p>The following command will run Oddjob as a Linux background process.</p>
+
+<pre class="command">
+nohup java -jar run-oddjob.jar -f server.xml &amp;
+</pre>
+		
+		<p>Opening the corresponding client.xml file from Oddjob Explorer will
+		allow jobs to be deployed to the server from the desktop using 
+		drag and drop or by changing the configuration directly on the server
+		using Designer.
+
+		<a name="service"></a>
+		<h4>As an XP Service</h4>
+		
+		<p>Oddjob can be run as a service with 
+		<a href="http://javaservice.objectweb.org/">JavaService</a>. This is an example
+		posted on the Oddjob forum of an install command:</p>
+		
+<pre class="command">
+SchedulerService -install SchedulerService "%JAVA_HOME%\bin\server\jvm.dll" -Djava.class.path=C:\PDI\Oddjob\run-oddjob.jar 
+-Doddjob.executors.default.poolsize=120 -start org.oddjob.launch.Launcher -params -f "%CD%\..\Oddjob\server.xml" 
+-description "Pentaho Oddjob Scheduler Service" 
+</pre>
+		
+		<p>Note that the double quotes are required to use the environment variables.</p>
+		
+		<p>Another option would be 		
+			<a href="http://wrapper.tanukisoftware.org/">Java Service Wrapper</a>.</p>
+		
+		<a name="web"></a>
+		<h4>The Web Front End</h4>
+		
+		<p>Oddjob comes with a web interface. To run the web interface
+		you need a Servlet Engine or application server like 
+		<a href="http://tomcat.apache.org/index.html">tomcat</a>.</p>
+		
+		<p>To install Oddjob on Tomcat simply copy the oddjob.war file supplied
+		with the binary distribution of Oddjob to the webapps directory of Tomcat
+		and then restart Tomcat.</p>
+
+		<a name="wrong"></a>
+		<h4>When Things Go Wrong</h4>
+
+		<p>By default Oddjob writes to a log file called oddjob.log which will be
+		in the same directory that Oddjob was started from.</p>
+		
+		<p>The logging configuration is in the log4j.properties file located in
+		<i>oddjob_dir</i><code>/opt/class</code>. Changing the logging level to 
+		debug may provide additional information.</p>
+		
+		<hr/>
+		
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		
+	</body>	
+</html>

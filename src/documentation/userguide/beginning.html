@@ -1,0 +1,161 @@
+<html>
+	<head>
+		<title>User Guide - First Clicks</title>
+	</head>	
+	<body>
+		<a name="top"></a>
+		<h1>First Clicks</h1>
+
+		<p>Getting started with Oddjob.</p>
+		
+		<ul>
+			<li><a href="#starting">Starting Oddjob</a></li>
+			<li><a href="#examples">Loading The Examples</a></li>
+			<li><a href="#state">Job State</a></li>
+			<li><a href="#resetting">Resetting and Rerunning A Job</a></li>
+		</ul>
+		
+		<a name="starting"></a>
+		<h4>Starting Oddjob</h4>
+		
+		<p>To start using Oddjob double-click the <code>run-oddjob.jar</code>
+		 file in the
+		top level oddjob-@version@ that was created when you installed Oddjob.
+		</p>
+		
+		<a href="images/ojfolder.gif"><img src="images/ojfolder.gif"
+				height="200" width="300" alt="The Oddjob Installation Folder"/></a>
+				
+		<p>
+		You will be presented with a rather uninspiring empty frame with a single
+		<b>File</b> menu item. This is Oddjob Explorer.</p>
+
+		<a href="images/beginning1.gif"><img src="images/beginning1.gif"
+				height="200" width="300" alt="Blank Explorer Window"/></a>
+		
+		<p>Oddjob Explorer is the primary method for monitoring and controlling
+		jobs in Oddjob. To get started with Oddjob Explorer, 
+		we must open a configuration
+		file containing the jobs we want Oddjob to run. Let's
+		take a look at the examples shipped with Oddjob.</p>
+
+		<a name="examples"></a>
+		<h4>Loading the Examples</h4>
+		
+		<p>Select <b>Open</b> from the <b>File</b> menu, open the <code>examples</code>
+		directory and select <code>oddjob.xml</code>. A Tree panel should appear on 
+		the left, with a green tick as the root node, and a panel with 
+		some tabbed panes should appear on the right.
+		Expand the tree and there will be a folder with some blue arrows in it.</p>
+
+		<a href="images/beginning2.gif"><img src="images/beginning2.gif"
+				height="200" width="300" alt="The Loaded Examples"/></a>
+				
+		<p>So we have a green tick, a folder, and some blue arrows. What's all
+		this about? When we opened the file, Oddjob Explorer used an 
+		<a href="@reference@/org/oddjob/Oddjob.html">Oddjob</a> job to
+		load the file and create the other jobs. This Oddjob job is the 
+		King (or Queen) of
+		jobs - Nothing happens in Oddjob without one. The topmost node in
+		our tree view is that
+		Oddjob job. The green tick showed it ran OK.</p>
+		
+		<p>Next is the folder. Using folders to group 
+		jobs in is analogous to using folders on your
+		hard drive for grouping files in. Folders can be nested in other folders 
+		allowing your jobs to be grouped and organised in any way you choose. A 
+		folder can be shared on a network allowing your jobs to be scheduled from
+		a server or run manually from another Oddjob Explorer on another
+		computer. Exciting stuff - but back to our simple folder of examples...</p>
+		
+		<p>Our folder contains a lot of blue arrows. These are jobs that are
+		ready to run. Since our folder is not shared on a network, the only way
+		these job are going to run is if we run them manually. Let's run the first
+		job 'Simple Example'. Select the node and then select the <b>Job</b> 
+		menu and select <b>Run</b>. The blue arrow changes to a green tick
+		but also the job now has a child, and that is 
+		also a green tick. What happened? The job we ran was another Oddjob job,
+		preconfigured with the name of the file containing our example job.
+		This Oddjob job loaded the example job and this time ran it (because it wasn't 
+		in a folder).</p>
+
+		<a href="images/beginning3.gif"><img src="images/beginning3.gif"
+				height="200" width="300" alt="The Loaded Examples"/></a>
+				
+		<p>The ability to nest Oddjob jobs within each other allows very
+		large scale complicated business processes to be defined in small
+		manageable chunks. Oddjob jobs can be scheduled just like other jobs
+		or they can be run automatically by not placing them in folders. If we
+		changed the folder to be a <i>parallel</i> job all examples would run 
+		at once, if we changed it to be a <i>sequential</i> job, all the jobs would 
+		run one after the other. Very flexible things are Oddjob jobs.</p>
+		
+		<a name="state"></a>
+		<h4>Job States</h4>
+		<p>The green tick and blue arrow indicate what <i>state</i> a job is in.
+		A job can be in one of five states. These are:</p>
+		
+		<table border="1">
+			<tr>
+				<td><img src="images/right_blue.gif" alt="Blue Arrow"/></td>
+				<td>Ready</td>
+				<td>The job is ready to be executed. A job will only execute
+				if it is 'Ready'</td>
+			</tr>
+			<tr>
+				<td><img src="images/triangle_green.gif" alt="Green Triangle"/></td>
+				<td>Executing</td>
+				<td>The job is executing.</td>
+			</tr>
+			<tr>
+				<td><img src="images/tick_green.gif" alt="Green Tick"/></td>
+				<td>Complete</td>
+				<td>The job has completed successfully.</td>
+			</tr>
+			<tr>
+				<td><img src="images/cross.gif" alt="Black Cross"/></td>
+				<td>Incomplete</td>
+				<td>The job ran but was not able to complete -
+				e.g. a file was not available.</td>
+			</tr>
+			<tr>
+				<td><img src="images/asterix_red.gif" alt="Red Splodge"/></td>
+				<td>Exception</td><td>Something unexpected happened during the running
+				of the job - e.g. a network connection failed.</td>	
+			</tr>
+		</table>		
+
+		<p>You may also see the icons <img src="images/triangle_red.gif" alt="Red Triangle"/>
+		to indicate that a job is stopping or 
+		<img src="images/dot_blue.gif" alt="Blue Dot"/> to indicate that it is
+		sleeping. For both these icons the actual <i>state</i> of the job is still
+		'Executing'.</p>
+		
+		<a name="resetting"></a>
+		<h4>Resetting and Rerunning A Job</h4>
+		
+		<p>Now we will try and run a job again. Select the 'Greeting' job
+		and then try and select <b>Run</b> from the <b>Job</b> menu. It isn't
+		available. A job must be reset to the ready state before it can be 
+		executed again. There are two different types of reset that can be 
+		applied to a job, known as a hard or a soft reset. The origins of 
+		this feature derive from the requirement that an automated retry need 
+		only rerun
+		the incomplete or failed jobs in a partially complete sequence of jobs.
+		A soft reset will reset an <i>InComplete</i> state job or an <i>Exception</i>
+		state job
+		but will not reset a <i>Complete</i> state job. A hard reset will reset any 
+		job that
+		has finished executing. </p>
+		
+		<p>As we would like to manually
+		reset a complete job we only have one option which is a 'hard reset'. Select
+		<b>Hard Reset</b> from the <b>Job</b> menu. The job should go back to the
+		ready state and we can run it again.</p>
+
+		<hr/>
+		
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="explorer.html">Next</a>
+	</body>
+</html>

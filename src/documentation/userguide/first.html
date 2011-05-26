@@ -1,0 +1,86 @@
+<html>
+	<head>
+		<title>User Guide - Your First Oddjob File</title>
+	</head>
+	<body>
+		<a name="top"></a>
+		<h1>Your First Oddjob File</h1>
+
+		<p>Creating your first job and scheduling it.</p>
+		
+		<ul>
+			<li><a href="#creating">Creating a Configuration File</a></li>
+			<li><a href="#ajob">Adding a Job</a></li>
+			<li><a href="#running">Running Your Job</a></li>
+		</ul>
+
+		<a name="creating"></a>
+		<h4>Creating a Configuration File</h4>
+		
+		<p>So you've downloaded and installed Oddjob. You've started Oddjob
+		Explorer and run through the examples. Now you want Oddjob to do 
+		something useful for you.</p>
+		
+		<p>In the first instance we'll assume this useful thing is in the form of
+		running a batch file and that you would like this useful thing done at 
+		regular intervals.</p>
+		
+		<p>To get Oddjob to do anything, it needs a configuration file which 
+		contains the 'jobs' that Oddjob will run. To create our first
+		configuration file we will use Oddjob's GUI Designer. From the <b>File</b> menu
+		of Oddjob Explorer choose <b>New</b>. Select the root 'Oddjob' node in the
+		tree view and right click - then choose <b>Designer</b>.</p>
+		
+		<a href="images/first1.gif"><img src="images/first1.gif" 
+			height="200" width="300" alt="New Oddjob"/></a>
+		
+		<a name="ajob"></a>
+		<h4>Adding a Job</h4>
+		
+		<p>To create a job for Oddjob to run we must select something from the Job 
+		property drop-down box. Here we choose 'exec' which is the job that
+		executes a system command.</p>
+		
+		<p>Now to specify the command to run. For this example we're going to
+		borrow the batch file from Oddjob's examples folder. Select the newly 
+		created ExecJob node in the Designer Job Tree and then in the detail
+		panel click on the 'Command' field 
+		and enter.</p>
+
+<pre>
+cmd /C examples\exec\bin\greeting.bat hello
+</pre>
+		
+		<p><i>Obviously this is command is only for Windows users but you users
+		on other platforms are bright enough to realize this and substitute an
+		equivalent command.</i></p>
+		
+		<a href="images/first2.gif"><img src="images/first2.gif" 
+			height="200" width="300" alt="Exec Command"/></a>
+		
+		<p>And that's it - We're done. Click OK on the design panel to return
+		to Oddjob Explorer where we can expand the tree to see our jobs.
+
+		<a name="running"></a>
+		<h4>Running Your Job</h4>
+		
+		<p>You can run the job just like any other job and see the 
+		results in the 'Console'
+		tab in the right hand detail panel.</p>
+		
+		<a href="images/first3.gif"><img src="images/first3.gif" 
+			height="200" width="300" alt="Schedule Menu"/></a>
+		
+		<p>When you close Oddjob this configuration will be lost. If you don't want to 
+		loose this precious work 
+		Select <b>Save</b> from the <b>File</b> menu and pick a file to save it too. The
+		file name and extension can be anything but the underlying configuration is in 
+		<a href="http://www.w3.org/XML/">XML</a> so it's probably sensible to call it 
+		<i>something</i>.xml</p>
+		
+		<hr/>
+		
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="children.html">Next</a>
+	</body>
+</html>

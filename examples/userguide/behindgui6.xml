@@ -1,0 +1,13 @@
+<oddjob xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"
+        id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <oddjob id="fred"
+                        name="Fred"
+                        file="${this.dir}/nested.xml"/>
+                <echo text="${fred/message.text}"/>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

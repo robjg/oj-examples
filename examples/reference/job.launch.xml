@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <folder name=" Examples">
+            <jobs>
+                <launch className="org.oddjob.Main">
+                    <args>
+                        <list>
+                            <values>
+                                <value value="-f"/>
+                                <value value="${oddjob.home}/explorer.xml"/>
+                            </values>
+                        </list>
+                    </args>
+                    <classLoader>
+                        <value value="${this.class.classLoader}"/>
+                    </classLoader>
+                </launch>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

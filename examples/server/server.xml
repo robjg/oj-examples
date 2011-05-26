@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!-- RMI server example -->		
+<oddjob id="oddjob">
+	<job>
+		<!-- =============================================
+		The start up in parallel.
+		============================================== -->
+		<sequential name="main" id="root">
+			<jobs>
+			
+				<!-- =============================================
+				The RMI registry.
+				============================================== -->
+				<rmireg name="RMI Registry" id="rmireg"/>
+								
+				<!-- =============================================
+				The server exposes this folder.
+				============================================== -->
+				<folder name="Server Processes" id="server-processes">
+					<jobs>
+								
+						<!-- =============================================
+						A nested which runs all the examples again!
+						============================================== -->
+						<oddjob name="All The Examples Within a Server" id="workflow-oddjob" 
+								file="${oddjob.dir}/../oddjob.xml">
+						</oddjob>
+						
+						<!-- =============================================
+						This job can be run by a client to stop the server.
+						It triggers the scheduler.
+						============================================== -->
+						<stop name="Shutdown server" 
+							job="${server}"/>
+
+					</jobs>		
+				</folder>
+				
+				<!-- =============================================
+				The server.
+				============================================== -->
+				<jmx:server xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"
+                    name="Oddjob Server" id="server" 
+					url="service:jmx:rmi://ignored/jndi/rmi://localhost/my-oddjob" 
+					root="${server-processes}"/>
+					
+			</jobs>
+		</sequential>
+	</job>
+</oddjob>

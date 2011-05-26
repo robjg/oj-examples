@@ -1,0 +1,14 @@
+<oddjob id="this">
+    <job>
+        <folder name=" ">
+            <jobs>
+                <delete name="Delete"
+                        force="true">
+                    <files>
+                        <file file="${this.dir}/work/*"/>
+                    </files>
+                </delete>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

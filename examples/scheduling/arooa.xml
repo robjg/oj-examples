@@ -1,0 +1,8 @@
+<arooa:descriptor xmlns:arooa="http://rgordon.co.uk/oddjob/arooa">
+    <components>
+        <arooa:bean-def element="exists"
+                        className="org.oddjob.dummy.DummyExistsJob"/>
+        <arooa:bean-def element="ant"
+                        className="org.oddjob.dummy.DummyAntJob"/>
+    </components>
+</arooa:descriptor>

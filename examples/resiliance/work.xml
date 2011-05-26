@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <sql-keeper-service id="keeper-service">
+                    <connection>
+                        <value value="${connection}"/>
+                    </connection>
+                </sql-keeper-service>
+                <scheduling:timer id="timer" xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling">
+                    <schedule>
+                        <schedules:time from="00:00" xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+                            <refinement>
+                                <schedules:interval interval="00:00:10"/>
+                            </refinement>
+                        </schedules:time>
+                    </schedule>
+                    <job>
+                        <grab identifier="${this.args[0]}" name="Grab for Work" onLoosing="INCOMPLETE">
+                            <instance>
+                                <format date="${timer.current.fromDate}" format="yyyyMMdd hhmmss"/>
+                            </instance>
+                            <job>
+                                <wait name="Long Running Work" pause="15000"/>
+                            </job>
+                            <keeper>
+                                <value value="${keeper-service.keeper(example1)}"/>
+                            </keeper>
+                        </grab>
+                    </job>
+                </scheduling:timer>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

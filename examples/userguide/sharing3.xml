@@ -1,0 +1,15 @@
+<oddjob xmlns:jmx="http://rgordon.co.uk/oddjob/jmx" 
+        id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <rmireg/>
+                <jmx:server name="Oddjob Server 3"
+                        root="${server-jobs}"
+                        url="service:jmx:rmi://ignored/jndi/rmi://localhost/oddjob-server-3"/>
+                <oddjob id="server-jobs"
+                        file="${this.dir}/sharingJobs3.xml"/>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

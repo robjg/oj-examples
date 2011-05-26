@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential name="My Oddjob World">
+            <jobs>
+                <sequential name="Local Jobs">
+                    <jobs>
+                        <exists file="${oddjob.run.jar}"/>
+                        <properties>
+                            <values>
+                                <file file="${this.dir}/../../work" key="work.dir"/>
+                                <file file="${this.dir}/sharing1.xml" key="server1.config.file"/>
+                                <file file="${work.dir}/server1" key="server1.work.dir"/>
+                                <file file="${this.dir}/sharing2.xml" key="server2.config.file"/>
+                                <file file="${work.dir}/server2" key="server2.work.dir"/>
+                                <file file="${this.dir}/sharing3.xml" key="server3.config.file"/>
+                                <file file="${work.dir}/server3" key="server3.work.dir"/>
+                            </values>
+                        </properties>
+                        <sequential name="Create Work Dirs">
+                            <jobs>
+                                <mkdir dir="${work.dir}"/>
+                                <mkdir dir="${server1.work.dir}"/>
+                                <mkdir dir="${server2.work.dir}"/>
+                                <mkdir dir="${server3.work.dir}"/>
+                            </jobs>
+                        </sequential>
+                        <parallel>
+                            <jobs>
+                                <exec dir="${vars.oddjobHome}/work/server1"><![CDATA[cmd.exe /C start "\"Server 1\""
+java -jar ${oddjob.run.jar} 
+-f ${server1.config.file}
+]]></exec>
+                                <exec dir="${vars.oddjobHome}/work/server2"><![CDATA[cmd.exe /C start "\"Server 2\"" 
+java -jar ${oddjob.run.jar} 
+-f ${server2.config.file}
+                                ]]></exec>
+                                <exec dir="${vars.oddjobHome}/work/server3"><![CDATA[cmd.exe /C start "\"Server 3\"" 
+java -jar ${oddjob.run.jar} 
+-f ${server3.config.file}
+                                ]]></exec>
+                            </jobs>
+                        </parallel>
+                    </jobs>
+                </sequential>
+                <jmx:client id="server1" name="Server 1" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-1" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                <jmx:client id="server2" name="Server 2" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-2" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                <jmx:client id="server3" name="Server 3" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-3" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

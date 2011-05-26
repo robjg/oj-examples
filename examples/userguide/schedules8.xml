@@ -1,0 +1,19 @@
+<schedules:list xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+    <schedules>
+        <schedules:dayofweek on="1">
+            <refinement>
+                <schedules:time at="08:00"/>
+            </refinement>
+        </schedules:dayofweek>
+        <schedules:dayofweek from="2" to="7">
+            <refinement>
+                <schedules:list>
+                    <schedules>
+                        <schedules:time at="09:00"/>
+                        <schedules:time at="15:00"/>
+                    </schedules>
+                </schedules:list>
+            </refinement>
+        </schedules:dayofweek>
+    </schedules>
+</schedules:list>

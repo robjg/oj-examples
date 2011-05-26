@@ -1,0 +1,17 @@
+<oddjob>
+    <job>
+        <folder name=" ">
+            <jobs>
+                <sequential id="trigger-on-me"
+                            name="A sequence of two jobs">
+                    <jobs>
+                        <echo name="Echo to Console"
+                              text="This runs first"/>
+                        <echo name="Echo to Console"
+                              text="This runs after"/>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

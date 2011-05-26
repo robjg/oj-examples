@@ -1,0 +1,108 @@
+<html>
+	<head>
+		<title>Dev Guide - Depending on Oddjob</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>	
+	<body>
+		<a name="top"></a>
+		<h1>Depending on Oddjob</h1>
+
+		<ul>
+			<li><a href="#introduction">Introduction</a></li>
+			<li><a href="#interfaces">The Interfaces</a></li>
+			<li><a href="#extends">Extension Points</a></li>
+		</ul>
+		
+		<h4>Introduction</h4>
+			
+		<p>So far all interaction to Oddjob has been quite casual. All the
+		jobs you've written could be moved to Spring or Expresso, and with 
+		a small amount of configuration changes - everything would work.</p>
+		
+		<p>
+		This section explains the interfaces and extension points that would
+		tie you to Oddjob, and what you get in exchange.
+		</p>
+		
+		
+		
+		<a name="interfaces"></a>
+	 	<h4>The Interfaces</h4>
+		
+		<p>Oddjob queries and manipulates it's component through five
+		main interfaces.</p>
+
+		<ul>
+			<li><p><a href="@javadoc@/org/oddjob/Stateful.html">Stateful</a></p>
+			<p>If you want to change how your jobs sate is controlled
+			implement this interface.</p>
+			</li>
+			<li><p><a href="@javadoc@/org/oddjob/Resetable.html">Resetable</a></p>
+			<p>If you want to have your own functionality for the hard/soft
+			reset actions then implment this interace.</li>
+			<li><p><a href="@javadoc@/org/oddjob/Structural.html">Structural</a></p>
+			<p>If you want to have child components that are visable to others, in 
+			Oddjob Explorer, for instance - then implement this interface.
+			</li>
+			<li><p><a href="@javadoc@/org/oddjob/Stoppable.html">Stoppable</a></p>
+			<p>Implementing this interface allows a custom stop method.</p>
+			</li>
+			<li><p><a href="@javadoc@/org/oddjob/Iconic.html">Iconic</a>
+			<p>Implementing this interface allows a job to provide it's own
+			changeable icon.
+			</li>
+		</ul>			
+
+		<p>Stateful is the interface that Oddjob checks before it attempts to
+		wrap your Runnable job or service. If your component is Runnable or 
+		has the service method signature then you must implement Stateful to
+		get custom control over your component.</p>
+		
+		<p>If your component isn't Runnable or has the service method 
+		signature then you can pretty much pick and choose which interfaces
+		to implement.</p>
+		
+		<p>A <a href="@javadoc@/org/oddjob/jobs/structural/JobFolder.html">
+		FolderJob</a> just implements <code>Structural</code>, <code>Stoppable</code>
+		and <code>Iconic</code>.
+		
+		<a name="extends"></a>
+		<h4>Extension Points</h4>
+		
+		<p>There are a few extension points to provide some help with
+		implementing all those interfaces.</p>
+		
+		<p> <a href="@javadoc@/org/oddjob/framework/SimpleJob.html">
+		SimpleJob</a> for simple things, and 
+		<a href="@javadoc@/org/oddjob/framework/StructuralJob.html">
+		StructuralJob</a> which helps with children.</p>
+		
+		<p>In both you
+		only need to implement an <code>execute()</code> 
+		method. Here's a quick example:
+		</p>
+	
+<pre class="code">
+package org.oddjob.devguide;
+
+import org.oddjob.framework.SimpleJob;
+
+public class ExtendedJob extends SimpleJob {
+
+	protected int execute() {
+		System.out.println("Hello World!");
+		return 0;
+	}
+}
+</pre>
+		
+		<hr/>
+
+		<a href="index.html">Index</a>
+		<a href="#top">Top</a>
+		<a href="odments.html">Next</a>		
+	
+	</body>
+</html>

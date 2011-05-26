@@ -1,0 +1,15 @@
+<oddjob xmlns:jmx="http://rgordon.co.uk/oddjob/jmx">
+    <job>
+         <folder name="Jobs On Server 2">
+             <jobs>
+                 <echo id="echo2" text="Important Job 2"/>
+                 <jmx:client id="server1"
+                         name="Server 1"
+                         url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-1"/>
+                 <jmx:client id="server3"
+                         name="Server 3"
+                         url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-3"/>
+             </jobs>
+         </folder>
+    </job>
+</oddjob>

@@ -1,0 +1,17 @@
+<oddjob id="this">
+    <job>
+        <folder name="A Folder of Jobs">
+            <jobs>
+                <echo name="Greeting Job"
+                      text="Hello World"/>
+                <sequential>
+                    <jobs>
+                        <echo id="first"
+                              text="Hello World Twice!"/>
+                        <echo text="${first.text}"/>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

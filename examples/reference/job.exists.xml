@@ -1,0 +1,58 @@
+<oddjob xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling"
+        xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"
+        xmlns:arooa="http://rgordon.co.uk/oddjob/arooa"
+        id="this">
+    <job>
+        <folder name=" ">
+            <jobs>
+                <sequential name="The Classic File Polling Example">
+                    <jobs>
+                        <scheduling:timer id="timer">
+                            <schedule>
+                                <schedules:time from="08:00"/>
+                            </schedule>
+                            <job>
+                                <scheduling:retry limits="${timer.current}">
+                                    <schedule>
+                                        <schedules:interval interval="00:00:05"/>
+                                    </schedule>
+                                    <job>
+                                        <sequential>
+                                            <jobs>
+                                                <exists id="check"
+                                                        name="Check File Exists"
+                                                        file="${this.dir}/work/*.foo"/>
+                                                <echo name="Echo to Console"
+                                                      text="Found ${check.exists[0]}"/>
+                                            </jobs>
+                                        </sequential>
+                                    </job>
+                                </scheduling:retry>
+                            </job>
+                        </scheduling:timer>
+                    </jobs>
+                </sequential>
+                <sequential name="Find Files">
+                    <jobs>
+                        <exists id="exists"
+                                file="${this.dir}/data/demo*.rep"/>
+                        <foreach id="found">
+                            <values>
+                                <value value="${exists.exists}"/>
+                            </values>
+                            <configuration>
+                            	<arooa:configuration>
+		                            <xml>
+		                                <xml>
+		                                    <echo text="found ${found.current}"/>
+		                                </xml>
+		                            </xml>
+                            	</arooa:configuration>
+                            </configuration>
+                        </foreach>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

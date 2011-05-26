@@ -1,0 +1,123 @@
+<html>
+	<head>
+		<title>User Guide - Children Of Oddjob</title>
+	</head>
+	<body>
+		
+		<a name="top"></a>
+		<h1>Children Of Oddjob</h1>
+
+		<ul>
+			<li><a href="#hierarchies">Job Hierarchies</a></li>
+			<li><a href="#sequential">A Sequential Example</a></li>
+			<li><a href="#nesting">Nesting Oddjob</a></li>
+		</ul>		
+
+		<a name="hierachies"></a>
+		<h4>Job Hierarchies</h4>
+		
+		<p>Oddjob jobs are arranged in a tree like hierarchy with an Oddjob job at the
+		root. Only some jobs can have children, and only some jobs can have more than
+		one child. Our root Oddjob job can only have one child.</p>
+
+		<p>Execution of jobs starts at the root and fans out down the tree like a
+		Domino Cascade. The three main ways of controlling this cascade are using the 
+		jobs:</p>
+		
+		<dl>
+		<dt><a href="@reference@/org/oddjob/jobs/structural/SequentialJob.html">sequential</a></dt>
+		<dd>Executes it's child jobs in sequence - only executing the next if it's 
+		predecessor completes.</dd>
+		<dt><a href="@reference@/org/oddjob/jobs/structural/ParallelJob.html">parallel</a>
+		<dd>Executes it's child jobs all at once.</dd>
+		<dt><a href="@reference@/org/oddjob/jobs/structural/JobFolder.html">folder</a>
+		<dd>Protects it's children from the execution cascade. It's children must be
+		executed in some other way.</dd>
+		</dl>
+				
+		<p>While execution cascades down the tree job, state reflects up the tree. 
+		Generally a parent reflects the worst state of any of it's children - so a parent
+		is in an Exception state if any of it's children are.</p>
+		
+		<a href="images/children1.gif"><img src="images/children1.gif" 
+				height="200" width="300" alt="Child State"/></a>
+		
+		<a name="sequential"></a>
+		<h4>A Sequential Example</h4>
+
+		<p>To demonstrate a sequential series of jobs lets change the Oddjob 
+		configuration we created in the previous section
+		so that our ExecJob is surrounded by some useful information jobs.</p>
+		
+		<p>Because our Oddjob root can only have one child we need to cut out
+		our ExecJob</p>
+		
+		<a href="images/children2.gif"><img src="images/children2.gif" 
+				height="200" width="300" alt="Cut out the ExecJob."/></a>
+		
+		<p>Next create a new <b>sequential</b> child of Oddjob, and create
+		two <b>echo</b> jobs. Echo jobs just echo some text to the console.</p>
+		
+		<a href="images/children3.gif"><img src="images/children3.gif" 
+				height="200" width="300" alt="Create two echo jobs."/></a>
+
+		<p>Configure the echo jobs to display something before the 
+		ExecJob has run.
+		</p>
+		
+		<a href="images/children4.gif"><img src="images/children4.gif" 
+				height="200" width="300" alt="Configure Before"/></a>
+		
+		<p>And after the ExecJob has run.</p>
+		
+		<a href="images/children5.gif"><img src="images/children5.gif" 
+				height="200" width="300" alt="Configure After"/></a>
+				
+		<p>Then click OK, to go back to Oddjob explorer and paste back our
+		ExecJob onto the sequential job.</p>
+		
+		<a href="images/children6.gif"><img src="images/children6.gif" 
+				height="200" width="300" alt="Paste back the ExecJob"/></a>
+
+		<p>Now the order is wrong, so use the mouse to drag the ExecJob to 
+		between the Before and After.</p>
+				
+		<a href="images/children7.gif"><img src="images/children7.gif" 
+				height="200" width="300" alt="Drag the ExecJob"/></a>
+				
+		<p>And finally save the configuration and run the sequence.</p>
+		
+		<a href="images/children8.gif"><img src="images/children8.gif" 
+				height="200" width="300" alt="Cut out the ExecJob"/></a>
+
+		<p>And thats how easy it is to create a Sequence of Jobs.</p>
+		
+		<a name="nesting"></a>
+		<h4>Nesting Oddjob</h4>
+		
+		<p>
+		Oddjob is just a job. It's job is to read a configuration, that is
+		normally a file, and create the jobs required by the configuration
+		and wire them together. It then runs the top most job in the 
+		hierarchy and reflects it's state.</p>
+		
+		<p>		
+		By choosing a child type that is Oddjob we create
+		a nested Oddjob. Nested Oddjobs allow large configurations to be
+		broken down into more manageable units and they also allow
+		repeated sections of configuration to be separated out so they
+		need only be written once.
+		</p>
+		
+		<p>
+		We don't need an example of nesting because you've aleady seen
+		one when loading the examples.
+		</p>
+		
+		<hr/>		
+		
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="runtime.html">Next</a>
+		
+	</body>
+</html>

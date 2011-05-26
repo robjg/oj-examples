@@ -1,0 +1,8 @@
+<anything>
+    <person>
+        <bean class="org.oddjob.devguide.Person" 
+              title="Mr"
+              firstname="John" 
+              surname="Smith"/>
+    </person>
+</anything>

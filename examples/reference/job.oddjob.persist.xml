@@ -1,0 +1,7 @@
+<oddjob>
+	<job>
+	    <echo text="Hello"
+	          name="Echo to Console"
+	          id="hello"/>
+	</job>
+</oddjob>

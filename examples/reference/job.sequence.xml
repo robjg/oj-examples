@@ -1,0 +1,40 @@
+<oddjob xmlns:s="http://rgordon.co.uk/oddjob/schedules"
+        id="this">
+    <job>
+        <folder name=" ">
+            <jobs>
+                <sequential name="Create Ten Files">
+                    <jobs>
+                        <sequence id="reset"
+                                  name="Reset for Inner Sequence"/>
+                        <repeat name="Repeat Ten Times">
+                            <schedule>
+                                <s:count count="10"/>
+                            </schedule>
+                            <job>
+                                <sequential name="Repeat Sequence">
+                                    <jobs>
+                                        <sequence id="seqnum"
+                                                  watch="${reset.current}"/>
+                                        <variables id="vars">
+                                            <seqnumFormatted>
+                                                <format format="0000"
+                                                        number="${seqnum.current}"/>
+                                            </seqnumFormatted>
+                                        </variables>
+                                        <copy name="Create file"
+                                              to="${this.dir}/work/sequence${vars.seqnumFormatted}.txt">
+                                            <input>
+                                                <value value="This text will be in every file."/>
+                                            </input>
+                                        </copy>
+                                    </jobs>
+                                </sequential>
+                            </job>
+                        </repeat>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

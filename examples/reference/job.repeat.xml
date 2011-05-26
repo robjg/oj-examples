@@ -1,0 +1,55 @@
+<oddjob xmlns:s="http://rgordon.co.uk/oddjob/schedules"
+        xmlns:state="http://rgordon.co.uk/oddjob/state">
+    <job>
+        <folder name=" ">
+            <jobs>
+                <repeat name="Repeat 10 times">
+                    <schedule>
+                        <s:count count="10"/>
+                    </schedule>
+                    <job>
+                        <sequential name="Run in Sequence">
+                            <jobs>
+                                <sequence id="seq"/>
+                                <echo name="Echo to Console"
+                                      text="Hello ${seq.current}"/>
+                            </jobs>
+                        </sequential>
+                    </job>
+                </repeat>
+                <repeat name="Repeat immediately until complete">
+                    <schedule>
+                        <s:count count="1"/>
+                    </schedule>
+                    <retry>
+                        <s:now/>
+                    </retry>
+                    <job>
+                        <bean class="org.oddjob.samples.RandomTask"/>
+                    </job>
+                </repeat>
+                <state:if not="true">
+                    <jobs>
+                        <repeat name="Try 10 times, 1 seconds apart, before alerting"
+                                exception="${exception}">
+                            <retry>
+                                <s:count count="10">
+                                    <refinement>
+                                        <s:interval interval="00:00:01"/>
+                                    </refinement>
+                                </s:count>
+                            </retry>
+                            <job>
+                                <exists name="Check Non Existant File"
+                                        file="dont.exist"/>
+                            </job>
+                        </repeat>
+                        <echo id="exception"
+                              name="Echo to Console"
+                              text="Help!"/>
+                    </jobs>
+                </state:if>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

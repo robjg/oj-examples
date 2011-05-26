@@ -1,0 +1,18 @@
+<oddjob>
+    <job>
+        <folder name=" ">
+            <jobs>
+                <sequential name="Waiting For a Property">
+                    <jobs>
+                        <variables id="waitvars"/>
+                        <wait name="Wait for Variable"
+                              pause="5000"
+                              for="${waitvars.text}"/>
+                        <echo name="Echo Text"
+                              text="${waitvars.text}"/>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

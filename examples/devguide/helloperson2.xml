@@ -1,0 +1,11 @@
+<oddjob>
+    <job>
+        <hello formal="true">
+            <person>
+                <person title="Mr" 
+                        firstname="John" 
+                        surname="Smith"/>
+            </person>
+        </hello>
+    </job>
+</oddjob>

@@ -1,0 +1,27 @@
+<oddjob xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling"
+           xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"
+           xmlns:state="http://rgordon.co.uk/oddjob/state">
+ <job>
+  <sequential>
+   <jobs>
+    <scheduling:timer id="timer">
+     <schedule>
+      <schedules:time from="07:00"
+                         to="14:00"/>
+     </schedule>
+     <job>
+      <scheduling:retry limits="${timer.current}">
+       <schedule >
+        <schedules:interval interval="00:15"/>
+       </schedule>
+       <job>
+        <state:flag name="Naughty Job"
+                       state="INCOMPLETE"/>
+       </job>
+      </scheduling:retry>
+     </job>
+    </scheduling:timer>
+   </jobs>
+  </sequential>
+ </job>
+</oddjob>

@@ -1,0 +1,21 @@
+
+.code {
+	padding: 1em;
+	margin: 1em;
+	background-color: #CCFFFF;
+	font-family: monospace;
+}
+
+.xml {
+	padding: 1em;
+	margin: 1em;
+	background-color: #FFFFAA;
+	font-family: monospace;
+}
+
+.command {
+	padding: 1em;
+	margin: 1em;
+	background-color: #FFAAFF;
+	font-family: monospace;
+}

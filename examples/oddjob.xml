@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="oddjob">
+    <job>
+        <folder id="all-examples" name="All Examples, select and run from the menu.">
+            <jobs>
+                <oddjob file="${oddjob.dir}/simple/oddjob.xml" id="simple" name="Simple Example"/>
+                <oddjob file="${oddjob.dir}/exec/exec.xml" name="Execute Batch File Example"/>
+                <oddjob file="${oddjob.dir}/workflow/workflow.xml" id="workflow" name="Workflow Example">
+                    <descriptorFactory>
+                        <import file="${oddjob.dir}/workflow/arooa.xml"/>
+                    </descriptorFactory>
+                    <classLoader>
+                        <url-class-loader>
+                            <files>
+                                <file file="${oddjob.dir}/classes"/>
+                            </files>
+                        </url-class-loader>
+                    </classLoader>
+                </oddjob>
+                <oddjob file="${oddjob.dir}/scheduling/persist.xml" id="scheduling" name="Scheduling Example"/>
+                <oddjob file="${oddjob.dir}/resiliance/resiliance.xml" name="Distributed Scheduling Example"/>
+                <oddjob file="${oddjob.dir}/server/server.xml" name="Server Example"/>
+                <oddjob file="${oddjob.dir}/client/client.xml" name="Client Example"/>
+                <oddjob file="${oddjob.dir}/reference/reference.xml" id="reference" name="The Reference Examples"/>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

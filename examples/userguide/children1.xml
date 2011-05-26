@@ -1,0 +1,15 @@
+<oddjob xmlns:state="http://rgordon.co.uk/oddjob/state">
+    <job>
+        <parallel>
+            <jobs>
+                <state:flag name="Good"/>
+                <state:flag name="Good"/>
+                <state:flag name="Not Great"
+                            state="INCOMPLETE"/>
+                <state:flag name="Bad"
+                            state="EXCEPTION"/>
+                <state:flag name="Good"/>
+            </jobs>
+        </parallel>
+    </job>
+</oddjob>

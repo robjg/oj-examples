@@ -1,0 +1,12 @@
+<oddjob>
+    <job>
+        <bean class="org.oddjob.devguide.HelloPersonJob" 
+              formal="true">
+            <person>
+                <is title="Mr" 
+                    firstname="John" 
+                    surname="Smith"/>
+            </person>
+        </bean>
+    </job>
+</oddjob>

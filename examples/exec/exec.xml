@@ -1,0 +1,39 @@
+<oddjob id="oddjob">
+    <job>
+
+		<!-- =============================================
+		Exec Sequence 
+		============================================== -->
+        <sequential name="Exec Demo">
+            <jobs>
+            
+				<!-- =============================================
+				Set some variables
+				============================================== -->
+                <variables id="vars">
+                    <greeting>
+	                    <value value="Hello World"/>
+                    </greeting>
+                </variables>
+                
+				<!-- =============================================
+				Run the batch file
+				============================================== -->
+                <exec name="Greeting Batch">
+                    <args>
+                    	<list>
+                    		<values>
+		                        <value value="cmd"/>
+		                        <value value="/C"/>
+		                        <file file="${oddjob.dir}\bin\greeting.bat"/>
+		                        <value value="${vars.greeting}"/>
+		                   </values>
+		               </list>
+                    </args>
+                </exec>
+                
+            </jobs>
+        </sequential>
+        
+    </job>
+</oddjob>

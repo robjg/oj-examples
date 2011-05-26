@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <hsql:hsqldb name="Database Server" xmlns:hsql="http://rgordon.co.uk/oddjob/hsql">
+                    <database>
+                        <value key="ojdb" value="${this.dir}/data/hsqldb/ojdb"/>
+                    </database>
+                    <properties>
+                        <properties>
+                            <values>
+                                <value key="server.port" value="11002"/>
+                                <value key="server.silent" value="false"/>
+                            </values>
+                        </properties>
+                    </properties>
+                </hsql:hsqldb>
+                <sql name="Create Table">
+                    <connection>
+                        <hsql:connection id="connection" url="jdbc:hsqldb:hsql://localhost:11002/ojdb" username="sa" xmlns:hsql="http://rgordon.co.uk/oddjob/hsql"/>
+                    </connection>
+                    <input>
+                        <buffer><![CDATA[DROP TABLE oddjob_grabbable IF EXISTS
+
+CREATE TABLE oddjob_grabbable(
+  key VARCHAR(128),
+  instance VARCHAR(32),
+  winner VARCHAR(32),
+  complete boolean,
+  CONSTRAINT oddjob_pk PRIMARY KEY (key, instance))]]></buffer>
+                    </input>
+                </sql>
+                <parallel>
+                    <jobs>
+                        <oddjob file="${this.dir}/work.xml" name="Worker 1">
+                            <args>
+                                <list>
+                                    <values>
+                                        <value value="Worker1"/>
+                                    </values>
+                                </list>
+                            </args>
+                            <export>
+                                <value key="connection" value="${connection}"/>
+                            </export>
+                        </oddjob>
+                        <oddjob file="${this.dir}/work.xml" name="Worker 2">
+                            <args>
+                                <list>
+                                    <values>
+                                        <value value="Worker2"/>
+                                    </values>
+                                </list>
+                            </args>
+                            <export>
+                                <value key="connection" value="${connection}"/>
+                            </export>
+                        </oddjob>
+                        <oddjob file="${this.dir}/work.xml" name="Worker 3">
+                            <args>
+                                <list>
+                                    <values>
+                                        <value value="Worker3"/>
+                                    </values>
+                                </list>
+                            </args>
+                            <export>
+                                <value key="connection" value="${connection}"/>
+                            </export>
+                        </oddjob>
+                    </jobs>
+                </parallel>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

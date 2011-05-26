@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <folder name=" ">
+            <jobs>
+                <oddjob file="${this.dir}/job.oddjob.nested.xml" name="A Nested Oddjob">
+                    <args>
+                        <value value="apples"/>
+                    </args>
+                </oddjob>
+                <oddjob file="${this.dir}/job.oddjob.persist.xml" id="file-persist-example" name="A File Persisted Oddjob">
+                    <persister>
+                        <file-persister dir="${this.dir}/work"/>
+                    </persister>
+                </oddjob>
+                <sequential name="Sql Persister Example">
+                    <jobs>
+                        <hsql:hsqldb name="Database Server" xmlns:hsql="http://rgordon.co.uk/oddjob/hsql">
+                            <database>
+                                <value key="ojdb" value="${this.dir}/data/hsqldb/ojdb"/>
+                            </database>
+                            <properties>
+                                <properties>
+                                    <values>
+                                        <value key="server.port" value="11002"/>
+                                        <value key="server.silent" value="false"/>
+                                    </values>
+                                </properties>
+                            </properties>
+                        </hsql:hsqldb>
+                        <sql name="Create table">
+                            <connection>
+                                <hsql:connection id="persister-connection" url="jdbc:hsqldb:hsql://localhost:11002/ojdb" username="sa" xmlns:hsql="http://rgordon.co.uk/oddjob/hsql"/>
+                            </connection>
+                            <input>
+                                <buffer><![CDATA[CREATE TABLE oddjob( path VARCHAR(20),
+id VARCHAR(20), job BLOB,
+CONSTRAINT oddjob_pk PRIMARY KEY (path, id))]]></buffer>
+                            </input>
+                        </sql>
+                        <sql-persister-service id="persister-service">
+                            <connection>
+                                <value value="${persister-connection}"/>
+                            </connection>
+                        </sql-persister-service>
+                        <oddjob file="${this.dir}/job.oddjob.persist.xml" id="database-persist-example" name="A Database Persisted Oddjob">
+                            <persister>
+                                <value value="${persister-service.persister(example)}"/>
+                            </persister>
+                        </oddjob>
+                        <folder name="Cleanup Sql">
+                            <jobs>
+                                <sql id="clean-up" name="Sql Job">
+                                    <connection>
+                                        <value value="${persister-connection}"/>
+                                    </connection>
+                                    <input>
+                                        <buffer><![CDATA[drop table oddjob]]></buffer>
+                                    </input>
+                                </sql>
+                            </jobs>
+                        </folder>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

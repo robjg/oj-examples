@@ -1,0 +1,27 @@
+<oddjob>
+    <job>
+        <sequential>
+            <jobs>
+                <services>
+                    <registeredServices>
+                        <is>
+                            <service>
+                                <bean class="org.oddjob.devguide.ServicesJobExamplesTest$Cafe"/>
+                            </service>
+                        </is>
+                        <is>
+                            <service>
+                                <bean class="org.oddjob.devguide.ServicesJobExamplesTest$VegetarianCafe"/>
+                            </service>
+                            <qualifier>
+                                <value value="Vegetarian"/>
+                            </qualifier>
+                        </is>
+                    </registeredServices>
+                </services>
+                <bean class="org.oddjob.devguide.ServicesJobExamplesTest$HungryJob"/>
+                <bean class="org.oddjob.devguide.ServicesJobExamplesTest$HungryVegetarianJob"/>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

@@ -1,0 +1,10 @@
+<oddjob>
+    <job>
+        <bean class="org.oddjob.devguide.ThirdComponent">
+            <person>
+                <bean class="org.oddjob.devguide.Person" title="Mr"
+                    firstname="John" surname="Smith"/>
+            </person>
+        </bean>
+    </job>
+</oddjob>

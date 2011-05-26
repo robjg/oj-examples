@@ -1,0 +1,10 @@
+<arooa:descriptor xmlns:arooa="http://rgordon.co.uk/oddjob/arooa">
+    <components>
+        <arooa:bean-def element="hello"
+                        className="org.oddjob.devguide.HelloPersonJob"/>
+    </components>
+    <values>
+        <arooa:bean-def element="person"
+                        className="org.oddjob.devguide.Person"/>
+    </values>
+</arooa:descriptor>

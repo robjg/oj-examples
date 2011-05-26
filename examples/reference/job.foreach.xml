@@ -1,0 +1,35 @@
+<oddjob xmlns:arooa="http://rgordon.co.uk/oddjob/arooa"
+		id="this">
+    <job>
+        <folder name=" ">
+            <jobs>
+                <foreach id="copy-reps"
+                         name="For Each File in a List">
+                    <values>
+                        <list>
+                            <values>
+                                <file file="${this.dir}/data/demo1.rep"/>
+                                <file file="${this.dir}/data/demo2.rep"/>
+                                <file file="${this.dir}/data/demo3.rep"/>
+                            </values>
+                        </list>
+                    </values>
+                    <configuration>
+                    	<arooa:configuration>
+		                    <xml>
+		                        <xml>
+		                            <copy name="Copy File"
+		                                  to="${this.dir}/work">
+		                                 <from>
+		                                 	<file file="${copy-reps.current}"/>
+		                                 </from>
+		                            </copy>
+		                        </xml>
+		                    </xml>
+                    	</arooa:configuration>
+                    </configuration>
+                </foreach>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

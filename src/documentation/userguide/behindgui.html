@@ -1,0 +1,181 @@
+<html>
+	<head>
+		<title>User Guide - Behind the GUI</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>
+	<body>
+
+		<a name="top"></a>
+		<h1>Behind the GUI</h1>
+
+		<p>Raw configuration.</p>
+
+		<ul>
+			<li><a href="#basics">The Basics</a></li>
+			<li><a href="#properties">Property Elements</a></li>
+			<li><a href="#runtime">Runtime Property Elements</a></li>
+			<li><a href="#advanced">Advanced Property Access</a></li>
+			<li><a href="#nested">Properties of Oddjob within Oddjobs</a></li>
+		</ul>
+
+		<a name="basics"></a>
+		<h4>The Basics</h4>
+		
+		<p>Oddjob Designer provides a user interface onto an Oddjob configuration
+		file but it has its limitations. At the moment it doesn't even validate
+		the configuration. At some point you will have to understand the raw 
+		configuration files and in this guide that point is now.</p>
+
+		<p>Oddjob configuration files are written in XML. If you don't know 
+		XML then Google for a tutorial - it will take about an
+		hour to pick up the basics.</p>
+		
+		<p>Each Oddjob file
+			contains an Oddjob and may contain 0 or 1 jobs for Oddjob to run.</p>
+
+		<p>A file with no job for oddjob to run is a complete waste
+			of time but perfectly legal. The document element must 
+			always be &lt;oddjob&gt;.</p>
+			
+	{@oddjob.xml.file examples/userguide/behindgui1.xml}
+				
+		<p>A file with one job would be something like:</p>
+		
+	{@oddjob.xml.file examples/userguide/behindgui2.xml}
+		
+		<p>Here we are defining a property called 'job'. The element name 'echo' is
+		used to create the type of job it is.</p>
+
+		<p>Note that the attribute text is used to set the 'text' property
+		of the echo job.</p>
+		
+		<p>Changing the root job to be 
+		<a href="@reference@/org/oddjob/jobs/structural/SequentialJob.html">sequential</a>
+		allows us to add more jobs.</p>
+		
+	{@oddjob.xml.file examples/userguide/behindgui3.xml}
+	
+		<a name="properties"></a>
+		<h4>Property Elements</h4>
+		
+		<p>We are already seeing that sometimes attributes are used to define properties
+		of a job (like the text property of the echo job), and sometimes
+		elements are (like job and jobs). By default text and numbers are set using 
+		attributes and more complicated properties are set using elements. This can
+		be changed on a job by job basis but should be documented in the reference 
+		guide when it is.</p>
+
+		<p>Here is a more complicated example - we see the &lt;repeat&gt; job being configured with 
+		both elements that declare a job property and a schedule property. Note that schedules are 
+		in a different XML namespace.</p>
+
+	{@oddjob.xml.file examples/userguide/behindgui4.xml}
+
+		<p>All this XML is probably looking a bit ungainly but there is a pattern to it
+		that makes understanding it a bit easier. Here's the pattern in the previous
+		example:</p>
+
+<pre class="xml"><i>
+&lt;oddjob&gt;
+ &lt;property&gt;
+  &lt;type&gt;
+   &lt;property&gt;
+    &lt;type/&gt;
+   &lt;/property&gt;
+   &lt;property&gt;
+    &lt;type/&gt;
+   &lt;/property&gt;
+  &lt;/type&gt;
+ &lt;/property&gt;
+&lt;/oddjob&gt;
+</i></pre>
+
+	<p>Do you See it? Elements Are either property elements,  which are the name of the property being set,
+	or type elements which are the type of property - be it a job property (copy, delete) or other 
+	value property (file, schedule).</p>
+
+	<a name="runtime"></a>
+	<h4>Runtime Property Elements</h4>
+	
+		<p>We saw in the last section that properties can be set from other job's
+		properties when the job runs. However we only saw how this worked in attribute
+		properties using
+		the <i>${id.property}</i> construct. When the property is defined by
+		an element
+		use the 'value' element type to define a reference.</p>
+		
+		<p>This file will have exactly the same effect as the previous example.</p>
+		
+	{@oddjob.xml.file examples/userguide/behindgui5.xml}
+		
+		<a name="advanced"></a>
+		<h4>Advanced Property Access</h4>
+		
+		<p>In addition to accessing the simple properties of a job using the 
+		notation <i>${job-id.property}</i> Oddjob also supports setting and 
+		getting <i>indexed</i> properties <i>mapped</i> properties and <i>nested</i>
+		properties.</p>
+		
+		<p>An indexed property is when a job provides a property which is a list
+		that contains a number of items and supports accessing those items 
+		individually using it position in the list which is the items index. Not
+		many jobs support indexed access to properties because it is seldom
+		required. The notable exception is the Oddjob job which itself which 
+		has the 'args' property which is a list of arguments that can be used
+		in the configuration file.</p>
+		
+		<p>The notation for an indexed property is <i>${job-id.property[index]}</i>.</p>
+		
+		<p>A mapped property is when a job provides a property which is a map of
+		keys to values and a particular value can be extracted using the key. Where
+		they are available their exact use is documented in the reference.</p> 
+		
+		<p>The notation for an indexed property is <i>${job-id.property(key)}</i>.</p>
+
+		<p>A nested property is where the job provides a property that itself
+		has properties. These are rare but the format should be noted.</p>
+		
+		<p>The notation for a mapped property is <i>${job-id.property.sub-property}</i>.</p>
+		
+		<a name="nested"></a>
+		<h4>Properties of Oddjobs within Oddjobs</h4>
+
+		<p>The jobs and properties of a nested Oddjob are available using the path
+		like notation <i>${nested-oddjob-id/job-id.property}</i></p>
+		
+		<p>Here is an Oddjob configuration that contains an Oddjob job. The nested
+		Oddjob runs the configuration nested.xml</p>.
+		
+	{@oddjob.xml.file examples/userguide/behindgui6.xml}
+
+ 		<p>If nested.xml contains</p>
+ 		
+	{@oddjob.xml.file examples/userguide/nested.xml}
+
+		<p>Running the outer Oddjob would result in the message being displayed
+		twice.</p>
+ 
+ 		<p>One interesting point is that the nested Oddjob has two sides. On the
+ 		outside it is is fred and on the inside it is jane. On the outside 
+ 		${fred/jane.name} is exactly the same as ${fred.name} which is Fred. On 
+ 		the inside it is only accessible as jane, it has no knowledge of being fred,
+ 		although ${jane.name} is still 'Fred'</p>
+ 
+ 		<p>There is theoretically no limit to the number of nested Oddjobs and the
+ 		property access notation just expands in the style <i>${a/b/c.property}</i> 
+ 		as might be expected.</p>
+ 
+ 		<p>The nested oddjob configuration was defined using '${this.dir}/nested.xml'
+ 		- Oddjob exposes the directory of it's configuration file using a read-only 
+ 		property called 'dir', and the parent Oddjob has been given the id 'this' so
+ 		our configuration file expression expands to 'The file nested.xml in the same 
+ 		directory as the configuration file of our parent Oddjob'.</p>
+ 
+		<hr/>
+
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="scheduling.html">Next</a>
+	</body>
+</html>

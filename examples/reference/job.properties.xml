@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <folder name="Examples">
+            <jobs>
+                <sequential>
+                    <jobs>
+                        <properties id="props">
+                            <values>
+                                <value key="fruit.favourite" value="apple"/>
+                                <value key="snack.favourite" value="${fruit.favourite}"/>
+                            </values>
+                        </properties>
+                        <echo text="$${snack.favourite} is ${snack.favourite}"/>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

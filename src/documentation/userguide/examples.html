@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<title>Oddjob - Examples</title>
+	</head>
+	<body>
+
+		<h1>Examples</h1>
+
+		<p>Let's see what Oddjob can do.</p>
+
+		<ul>
+			<li><a href="#simple">Hello World</a></li>
+			<li><a href="#exec">Execute a Batch File</a></li>
+			<li><a href="#workflow">Conditional Paths</a></li>
+			<li><a href="#scheduling">A Scheduler Example</a></li>
+			<li><a href="#sharing">Sharing Jobs on A Network</a></li>
+		</ul>
+
+		<p>In addition to these examples, there are also many examples
+		from the Reference, this User Guide, and the Developer Guide
+		in the <code>examples</code> directory</p>
+
+		<a name="simple"></a>
+		<h4>Hello World</h4>
+
+		<p>All examples should begin with the simplest example possible and
+		here it is!</p>
+		
+		<a href="images/examples1.gif"><img src="images/examples1.gif"
+				height="200" width="300" alt="Hello World"/></a>
+				
+		<a name="exec"></a>
+		<h4>Execute a batch file</h4>
+		
+		<p>This example demonstrates executing a batch file from Oddjob
+			and introduces us to using sequences of jobs
+			and variables.</p>
+
+		<p>The example consists of a sequence of two jobs. The 
+		first sets a variable, 
+		the second executes the batch file with the variable value
+		passed in as an argument.</p>
+
+		<a href="images/examples2.gif"><img src="images/examples2.gif"
+				height="200" width="300" alt="Exec Example"/></a>
+
+		<a name="workflow"/></a>
+		<h4>Conditional Paths</h4>
+		
+		<p>An 'if' job uses the return state of one job to decide
+			which of a number of alternate job branches to execute.</p>
+		
+		<p>This job uses a random task to simulate jobs executing 
+			with mixed results.
+			The example is run in a timer loop to
+			continually show the flow of events.</p>
+
+		<a href="images/examples4.gif"><img src="images/examples4.gif"
+				height="200" width="300" alt="Hello World"/></a>
+
+		<a name="scheduling"></a>
+		<h4>A Scheduling Example</h4>
+
+		<p>This is a demonstration of the flexible scheduling features of 
+			Oddjob. A file is downloaded via ftp daily. If the download
+			fails after a number of retries an email is sent.</p>
+
+		<a href="images/examples5.gif"><img src="images/examples5.gif"
+				height="200" width="300" alt="Scheduling"/></a>
+
+		
+		<p>The files are downloaded from the <a href="http://www.cme.com">CME</a>
+		ftp site. This is one of the real life scheduling examples that inspired
+		Oddjob. Points of interest include that the filename contains the date and
+		the files are sourced from different time zones.</p>
+		
+		<p>The example comes in two forms, a live example that will ftp the files
+		back, and an example that substitutes random dummy jobs so the demonstration 
+		can still be seen working off line.</p>
+
+		
+		<a name="sharing"></a>
+		<h4>Sharing Jobs on A Network</h4>
+
+		<p>This example shows how an 
+		Oddjob client can be used to monitor Oddjob running on a remote server.
+		</p>
+		
+		<a href="images/examples6.gif"><img src="images/examples6.gif"
+				height="200" width="300" alt="Sharing Oddjob"/></a>
+				
+		<p>Although here we have the client and server running in the same
+		folder.</p>
+		
+		<p>If this example doesn't work it might be because your machine 
+		doesn't recognise
+		<code>localhost</code>. When you've learnt about configuring Oddjob
+		come back and try changing the client and server configurations to contain
+		your network name or IP address.</p>
+		
+		<p>To see the examples really working across the network
+		change the client configuration from
+		<code>localhost</code> to the name or IP address of your server and run the
+		client example on a different machine.</p>
+
+		<hr/>
+		
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="first.html">Next</a>
+	</body>
+</html>

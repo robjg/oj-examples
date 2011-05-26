@@ -1,0 +1,6 @@
+<oddjob>
+    <job>
+        <bean class="org.oddjob.devguide.SecondComponent" 
+              message="I'm a simple property."/>
+    </job>
+</oddjob>	

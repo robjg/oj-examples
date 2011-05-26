@@ -1,0 +1,6 @@
+<arooa:descriptor xmlns:arooa="http://rgordon.co.uk/oddjob/arooa">
+    <components>
+        <arooa:bean-def element="random"
+                        className="org.oddjob.samples.RandomTask"/>
+    </components>
+</arooa:descriptor>

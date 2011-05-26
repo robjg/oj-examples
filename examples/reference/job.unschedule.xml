@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <folder name=" ">
+            <jobs>
+                <sequential name="Example of a job unschedules itself">
+                    <jobs>
+                        <scheduling:timer id="myschedule" name="My Timer" xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling">
+                            <schedule>
+                                <schedules:now xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"/>
+                            </schedule>
+                            <job>
+                                <sequential id="useful" name="Run in Sequence">
+                                    <jobs>
+                                        <echo name="Echo to Console" text="This could do something useful."/>
+                                        <stop async="true" job="${myschedule}" name="Stop Timer"/>
+                                    </jobs>
+                                </sequential>
+                            </job>
+                        </scheduling:timer>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

@@ -1,0 +1,23 @@
+<oddjob xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"
+        xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling"
+        id="this">
+    <job>
+        <folder name=" ">
+            <jobs>
+                <sequential name="Schedule Example">
+                    <jobs>
+                        <scheduling:timer name="Schedule lunch reminder">
+                            <job>
+                                <echo id="lunch"
+                                      text="Go to Lunch!"/>
+                            </job>
+                            <schedule>
+                                <schedules:time at="12:00"/>
+                            </schedule>
+                        </scheduling:timer>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

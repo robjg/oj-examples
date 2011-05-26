@@ -1,0 +1,13 @@
+<oddjob id="oddjob">
+	<job>
+		<!-- =============================================
+		A nested Oddjob job.
+		============================================== -->			
+		<oddjob name="Oddjob" id="dailyftp"
+			file="${oddjob.dir}/dailyftp.xml">
+			<persister>
+				<file-persister dir="${oddjob.dir}"/>
+			</persister>
+		</oddjob>
+	</job>				
+</oddjob>

@@ -1,0 +1,145 @@
+<html>
+	<head>
+		<title>User Guide - Saving Oddjob</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>
+	<body>
+		<a name="top"></a>
+		<h1>Saving Oddjob</h1>
+	
+		<p>So where were we?</p>
+		
+		<ul>
+			<li><a href="#introduction">Introduction</a></li>
+			<li><a href="#property">The Persister Property</a></li>
+			<li><a href="#ids">Persistence and Identity</a></li>
+			<li><a href="#deleting">Removing Persisted State</a></li>
+			<li><a href="#archiving">Archiving</a></li>
+		</ul>
+
+		<a name="introduction"></a>
+		<h4>Introduction</h4>
+		
+		<p>Whether it's a server crash or a deliberate restart, we want
+		our scheduled job sequences to know where they were. We want them
+		to recover. We want them to pick themselves up, dust themselves off 
+		and to carry on as if nothing had happened.</p>
+		
+		<p>Oddjob helps it's jobs to have this resilience by providing a
+		facility for jobs to save their state. Oddjob leaves it to each 
+		job to decide when to request it's state be saved, and then delegates
+		the request to a 
+		<i>persister</i>. The persister is a configured property of Oddjob. It is set
+		by the aptly named 'persister' property. By default Oddjob has no persister
+		configured and so all requests to save state are thrown away. When Oddjob 
+		restarts everything is created a fresh. Five hour reports are ready to run
+		again blissfully unaware that they only completed ten minutes ago and
+		scheduled jobs take an ill-informed decision based on their configuration alone 
+		whether to run immediately or miss today all together.</p>
+		
+		<p>Out of the box Oddjob provides two types of persister: A
+		<a href="@reference@/org/oddjob/persist/FilePersister.html">file-persister</a> 
+		that saves state to the local file system, and a 
+		<a href="@reference@/org/oddjob/sql/SQLPersisterService.html">sql-persister-service</a>
+		that saves state to a database. The reference pages explain each adequately,
+		however some extra background about Persisters might be be useful.</p>
+		
+		<a name="property"></a>
+		<h4>The Persister Property</h4>		
+		
+		<p>Now for those who've been paying attention there should be some
+		confusion because when we create a new Oddjob there is no persister 
+		property!</p> 	
+		
+		<a href="images/first1.gif"><img src="images/first1.gif" 
+			height="200" width="300" alt="New Oddjob"/></a>
+		
+		<p>So how do I explain... Oddjob is a job that loads a configuration, and 
+		what we are editing is that configuration, not the configuration for Oddjob
+		itself. There is a persister property on the Oddjob that Oddjob Explorer
+		has created, but Oddjob Explorer doesn't let us 
+		set that. The reasoning behind this is that most of the time Oddjob will
+		be running on a server and so Oddjob will need to be configured via some
+		kind of configuration file, and what's a great way of configuring things? 
+		Why Oddjob of course.</p>
+		
+		<p>To configure Oddjob, we use Oddjob. Think of it kind of like 
+		boot-strapping. lets set Oddjob to be our only job, and then we
+		can configure the persister:</p>
+			
+		<a href="images/saving1.gif"><img src="images/saving1.gif" 
+			height="200" width="300" alt="The Persister Property"/></a>
+		
+		<a name="ids"></a>
+		<h4>Persistence and Identity</h4>		
+			
+		<p>Both our file and SQL persisters use the id of a job. Job's are stored 
+		and restored by id. JOBS WITHOUT AN ID ARE NOT STORED.</p>
+		
+		<p>Once a persister has been configured on Oddjob it applies to all
+		nested Oddjobs until a nested Oddjob has a different persister configured.
+		It's not possible for two jobs within an Oddjob configuration to have 
+		the same id, but it is possible for two jobs within different nested Oddjob 
+		configurations to have the same id. The path to each is however different.
+		Our persister uses the paths to differentiate between the two. For there
+		to be a valid path to our jobs each Oddjob between the persister and
+		the job must have an id.
+		
+		Some jobs aren't persisted even with an id. They are termed Transient jobs.
+		Oddjob is an example of such a job. It's state is purely derived from it's 
+		child.
+				
+		<a name="deleting"></a>
+		<h4>Removing Persisted State</h4>		
+				
+		<p>Persisted state deletion isn't an exact science but it sort of makes sense
+		in most situations. Here's the rules:</p>
+		
+		<p>1. When a job is destroyed (deleted, dragged, cut or it's 
+		configuration is edited) it's persisted state is removed.</p>
+		
+		<p>
+		2. Except Oddjob - when Oddjob is destroyed (deleted, dragged, cut or it's
+		configuration is edited, or the oddjob instance is shutdown, via Explorer or 
+		using Ctrl-C) nothing is removed, not any of it's child jobs or any nested
+		Oddjobs.
+				
+		<p>The ambiguity arises because Oddjob doesn't know if it's being destroyed
+		as the result of shutdown or as the result of a configuration edit. This will
+		be fixed in future releases.</p>
+				
+		<a name="archiving"></a>
+		<h4>Archiving</h4>		
+		
+		<p>Oddjob is able record snapshot of the state of it's children. It 
+		achieves this using a 
+		<a href="@reference@/org/oddjob/persist/ArchiveJob.html">archive</a>
+		job. This will capture a 'silhouette' of it's child's state and
+		properties, and it's children's children, so long as the are in the
+		current Oddjob Session. It won't capture the state of remote jobs
+		or jobs in a nested Oddjob.
+		</p>
+		
+		<p>
+		An archive can be viewed with an
+		<a href="@reference@/org/oddjob/persist/ArchiveBrowserJob.html">archive-browser</a>
+		</p>
+		
+		<a href="images/saving2.gif"><img src="images/saving2.gif" 
+			height="200" width="300" alt="The Persister Property"/></a>
+
+		<p>Running the browser displays the available archived runs as child 
+		jobs. Running one of these instances shows the silhouettes 
+		captured by the archiver.</p>				
+		
+		<p>Archiving, and Oddjob persistence in general doesn't persist
+		logs. It is planned to add this at some point.</p>
+		<hr/>
+
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="beyondgui.html">Next</a>
+		
+	</body>
+</html>

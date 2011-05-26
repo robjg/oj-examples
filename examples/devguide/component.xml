@@ -1,0 +1,5 @@
+<oddjob>
+    <job>
+        <bean class="org.oddjob.devguide.FirstComponent"/>
+    </job>
+</oddjob>

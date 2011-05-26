@@ -1,0 +1,15 @@
+<oddjob>
+    <job>
+        <bean class="org.oddjob.devguide.HelloPeopleJob">
+            <who>
+                <list>
+                    <values>
+                        <value value="Rod"/>
+                        <value value="Jane"/>
+                        <value value="Freddy"/>
+                    </values>
+                </list>
+            </who>
+        </bean>
+    </job>
+</oddjob>

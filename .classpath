@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="src" path="test/java"/>
+	<classpathentry kind="src" path="tools/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/projects.oddjob"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/projects.oj-ant"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/projects.oj-hsql"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/projects.oj-mail"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/projects.oj-net"/>
+	<classpathentry kind="output" path="examples/classes"/>
+</classpath>

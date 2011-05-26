@@ -1,0 +1,166 @@
+<html>
+	<head>
+		<title>User Guide - Scheduling</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>
+	<body>
+
+	<a name="top"></a>
+	<h1>Scheduling</h1>
+
+	<p>Any time, any place, any where.</p>
+	
+	<ul>
+		<li><a href="#introduction">Introduction</a></li>
+		<li><a href="#timer">The Timer Job</a></li>
+		<li><a href="#retry">Retries</a></li>
+		<li><a href="#holidays">Holidays</a></li>
+		<li><a href="#timezones">Time Zones And Daylight Saving Time</a></li>
+		<li><a href="#trigger">Triggers</a></li>
+		<li><a href="#dependencies">Scheduling with Dependencies</a></li>
+	</ul>
+
+	<a name="introduction"></a>
+	<h4>Introduction</h4>
+	
+	<p>Scheduling in Oddjob is achieved by inserting a job into the job
+	tree that asks Oddjob to execute its child job later, but watches its
+	child's completion state. There are three scheduling jobs:</p>
+	
+	<dl>
+	<dt><a href="@reference@/org/oddjob/scheduling/Timer.html">timer</a></dt>
+	<dd>Execute the child at different according to the given schedule.</dd>
+	
+	<dt><a href="@reference@/org/oddjob/scheduling/Retry.html">retry</a></dt>
+	<dd>Execute the child according to the given schedule until the 
+	child completes.</dd>
+		
+	<dt><a href="@reference@/org/oddjob/scheduling/Trigger.html">trigger</a></dt>
+	<dd>Execute the child job when a job elsewhere enters a specific state.</dd>
+	</dl>
+	
+	<a name="timer"></a>
+	<h4>The Timer Job</h4>
+	
+	<p>The Timer is driven by a schedule, The detail of these schedules is
+	discussed in the <a href="schedules.html">next</a> section. Setting aside
+	the details of the schedules, we can focus on the mechanism of timers with 
+	an example:</p>
+		
+	{@oddjob.xml.file examples/userguide/scheduling1.xml}
+
+	<p>This creates two Timers, one that runs all morning, and one that runs 
+	all afternoon. Each Timer has a job that it will execute. The Timers are 
+	started using a Sequential Job. Starting a timer is quick operation, the 
+	second timer is started even though the
+	first Timer state is EXECUTING. The effect is as if the timers had been
+	started in Parallel.</p>
+
+	<p>If Oddjob is being run with a persister, the timer will save its last
+	completed time after each successful execution. If The timer is stopped
+	and restarted this time is used to calculate the next execution time.</p>
+
+	<p>
+	If the Timer is using persistence then the <b>skipMissedRuns</b>
+	property would be used to see if it should skip its missed slots. 
+	By default if this sequence was started at 13:00 and it had been 
+	stopped after the 11:00 job, the Morning Timer would immediately run the 
+	11:15 job followed by the 11:30 job followed by the 11:45 job -
+	and simultaneously the Afternoon Timer would run the 12:00 job, followed by
+	the 12:15 job etc.</p>		
+
+	<a name="retry"></a>
+	<h4>Retries</h4>
+	
+	<p>a Retry job can be used on its own to retry something or it can
+	be used within a Timer or Trigger schedule. Here's an example of it being
+	used as the child job of a Timer:</p>
+		
+	{@oddjob.xml.file examples/userguide/scheduling2.xml}
+
+	<p>In this example the retry schedule is limited by they schedule of its parent timer.
+	The Retry will keep trying the job every 15 minutes until the job completes or 2pm. At this
+	point the retry will terminate in an INCOMPLETE state. The main Timer will then reschedule
+	it at 7am the next day.
+	</p>
+	
+	<p>
+	Because the Retry terminates in an INCOMPLETE state, it's possible to use 
+	a <a href="@reference@/org/oddjob/scheduling/Trigger.html">trigger</a>
+	schedule to fire an alert if required.</p>
+						
+	<a name="holidays"></a>
+	<h4>Holidays</h4>
+	
+	<p>Holidays can be accounted for using a
+	<a href="@reference@/org/oddjob/schedules/schedules/BrokenSchedule.html">broken</a>
+	schedule. Here's an example.		
+	</p>
+
+	{@oddjob.xml.file examples/userguide/scheduling3.xml}
+
+	<a name="timezones"></a>
+	<h4>Time Zones</h4>
+	
+	<p>Both the Timer and Retry can be given a time zone. If this is the case, 
+	the schedule will be evaluated in that time zone, regardless of the time zone
+	of the server. </p>
+	
+	<p>Time zones can be particularly useful when scheduling a download from
+	a server in a different geographical location. By using their time zone the
+	schedule will automatically account for their daylight saving time and
+	will schedule holidays that span their day not your local day.</p>
+	
+	<p>Time zones can also be useful when using a server in a different
+	region as the backup server. By using time zones for schedules it is possible
+	to stop your local server, copy all your configuration files to the backup
+	server and start up Oddjob with no impact on scheduled times.</p>
+	
+	<p>Time Zones can also be used to provide Summer Time (or Daylight 
+	Saving Time) configuration. To schedule
+	without daylight saving time use a time zone that is fixed 
+	such as 'GMT+08'.</p>
+			
+	<a name="trigger"></a>
+	<h4>Triggers</h4>
+	
+		<p>The trigger is a schedule that is job, rather than time, dependent. The
+		trigger schedule will run a job when a second job enters a specified 
+		state. Triggers are particularly useful for firing alerts.</p>
+		
+		<p>A trigger schedule can also be used in conjunction with a 
+		<a href="@reference@/org/oddjob/jobs/structural/SequentialJob.html">
+		 sequential</a> job and a 
+		<a href="@reference@/org/oddjob/jobs/job/TriggerJob.html">trigger</a>
+		 job to provide a schedule that fires
+		only when several jobs have completed.</p>
+		
+		<p>The trigger schedule is relatively easy to configure. Please see the
+		reference documentation for more information.</p>
+
+		<a name="dependencies"></a>
+		<h4>Scheduling with Dependencies</h4>
+
+		<p>The natural cascading nature of job execution through the use of 
+		<a href="@reference@/org/oddjob/jobs/structural/SequentialJob.html">sequential</a>
+		and 
+		<a href="@reference@/org/oddjob/jobs/structural/ParallelJob.html">parallel</a>
+		jobs means that dependencies within scheduling aren't required as often as 
+		they would in other scheduling systems.</p> 
+		
+		<p>Here's an example that could have been constructed using a single
+		Retry but has been contrived to demonstrate using a Trigger to schedule
+		with dependences.</p>
+		
+	{@oddjob.xml.file examples/userguide/scheduling4.xml}
+		
+		<p>The trigger will fire when both files are available.</p>
+		
+		<hr/>
+
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="schedules.html">Next</a>
+	</body>
+</html>

@@ -1,0 +1,5 @@
+<oddjob>
+    <job>
+        <exec command="cmd /C examples\exec\bin\greeting.bat hello"/>
+    </job>
+</oddjob>

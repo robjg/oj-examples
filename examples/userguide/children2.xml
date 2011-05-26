@@ -1,0 +1,13 @@
+<oddjob>
+    <job>
+        <sequential>
+            <jobs>
+                <echo name="Before"
+                      text="About to do it..."/>
+                <exec command="cmd /C examples\exec\bin\greeting.bat hello"/>
+                <echo name="After"
+                      text="Did it!"/>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

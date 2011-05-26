@@ -1,0 +1,19 @@
+<oddjob>
+    <job>
+        <sequential>
+            <jobs>
+                <services>
+                    <registeredServices>
+                        <is intransigent="true">
+                            <service>
+                                <bean class="org.oddjob.devguide.ServicesJobExamplesTest$Cafe"/>
+                            </service>
+                        </is>
+                    </registeredServices>
+                </services>
+                <bean
+                    class="org.oddjob.devguide.ServicesJobExamplesTest$ResilientVegetarianJob"/>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

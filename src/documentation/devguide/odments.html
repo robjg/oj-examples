@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<title>Dev Guide - Odments</title>
+	</head>	
+	<body>
+		<a name="top"></a>
+		<h1>Odments</h1>
+
+		<p>A few odds and ends that don't belong any where else.</p>
+
+		<ul>
+			<li><a href="#transactions">Transactions</a></li>
+			<li><a href="#servlets">Servlets</a></li>
+		</ul>
+		
+		<a name="transactions"></a>
+		<h4>Transactions</h4>
+		
+		<p>Oddjob doesn't support transactions across several jobs. Given 
+		Oddjobs intended use of running batch files, copying files etc. 
+		transactions don't really apply. As the breadth of job coverage
+		increases to include EJB invocations and JMS support, then 
+		transaction support will probably be included.
+		</p>
+		
+		<p>In the mean time, if you want transactions within jobs 
+		maybe consider including
+		Spring or another transaction supporting framework within Oddjob.
+		Thus
+		getting the best of the control and monitoring from Oddjob and 
+		transactions and other features from the other framework.
+		</p>
+		
+		<a name="servlets"></a>
+		<h4>Servlets</h4>
+		
+		<p>Oddjob comes with a number of Servlets that allow Oddjob to
+		run in an application container and 
+		provide a Struts/JSP web front end to allow the jobs in the
+		Oddjob servlet container to be monitored and controlled.</p>
+		
+		<p>The OddjobServlet can be used without the web front end if just
+		job scheduling is required.</p>
+		
+		<hr/>
+
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+	
+	</body>
+</html>

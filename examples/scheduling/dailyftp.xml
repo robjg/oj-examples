@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<oddjob xmlns:state="http://rgordon.co.uk/oddjob/state"
+		xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"
+		xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling"
+		xmlns:net="http://rgordon.co.uk/oddjob/net"
+		xmlns:mail="http://rgordon.co.uk/oddjob/mail"
+		id="this">
+	<job>
+	
+		<!-- =============================================
+		FTP get a span file from the CME website.
+		============================================== -->
+		<sequential name="Scheduler Demo">		
+			<jobs>
+			
+				<!-- =============================================
+				Variables for the clock an holidays.
+				============================================== -->
+				<variables id="vars">
+					<holidays>
+						<schedules:list>
+							<schedules>
+								<schedules:dayofweek from="6" to="7"/>
+								<schedules:date on="2011-12-25"/>
+                                <schedules:date on="2011-12-26"/>
+							</schedules>
+						</schedules:list>
+					</holidays>
+				</variables>
+				
+				<!-- =============================================
+				Kansas Schedule.
+				============================================== -->
+				<scheduling:timer name="KCB Schedule"
+					id="kcb-sched"
+					timeZone="America/Chicago">					
+					<!-- The regular schedule allows for holidays -->
+					<schedule>
+						<schedules:broken>
+							<breaks>
+								<value value="${vars.holidays}"/>
+							</breaks>
+							<schedule>
+								<schedules:time from="19:00" to="17:00"/>
+							</schedule>
+						</schedules:broken>
+					</schedule>
+					<job>
+					
+						<archive archiveName="kcb-archive">
+							<archiveIdentifier>
+								<format date="${kcb-sched.current.fromDate}"
+									timeZone="America/Chicago"
+									format="yyyyMMdd"/>
+							</archiveIdentifier>
+							<job>
+							
+								<!-- If the download failed we try re running
+								every 15 minutes. -->
+								<scheduling:retry id="kcb-retry"
+												  limits="${kcb-sched.current}">
+									<schedule>
+										<schedules:interval interval="00:15"/>
+									</schedule>
+								
+									<job>							
+							
+										<!-- =============================================
+										The sequence that does the transfer.
+										============================================== -->
+										<sequential name="KCB Transfer Sequence" id="kcb-trans">
+											<jobs>
+										
+												<!-- =============================================
+												Format the date as it's required in the file name.
+												============================================== -->
+												<variables id="kcb-vars">
+													<filedate>
+														<format format="yyyyMMdd" 
+															timeZone="America/Chicago"
+															date="${kcb-sched.current.fromDate}"/>
+													</filedate>
+													<filename>
+														<value value="kcb.${kcb-vars.filedate}.s.pa2.zip"/>
+													</filename>
+												</variables>
+				
+												<!-- =============================================
+												FTP the file.
+												============================================== -->
+												
+												<net:ftp id="kcb-ant" name="FTP file back"
+														host="ftp.cme.com" username="anonymous" 
+																	password="anonymous" >
+													<commands>
+														<list>
+															<values>
+																<net:ftp-get remote="pub/span/data/kcb/${kcb-vars.filename}"/>
+															</values>
+														</list>
+													</commands>
+												</net:ftp>
+												
+											</jobs>
+										</sequential>
+										
+									</job>		
+								</scheduling:retry>
+										
+							</job>
+						</archive>
+					
+					</job>
+				</scheduling:timer>
+				
+				<!-- =============================================
+				Hong Kong Schedule
+				============================================== -->
+				<scheduling:timer name="HKF Schedule"
+					id="hkf-sched"
+					timeZone="Asia/Hong_Kong">
+					<!-- The regular schedule allows for holidays -->
+					<schedule>
+						<schedules:broken>
+							<breaks>
+								<value value="${vars.holidays}"/>
+							</breaks>
+							<schedule>
+								<schedules:time from="19:00" to="17:00"/>
+							</schedule>
+						</schedules:broken>
+					</schedule>
+					
+					<job>
+					
+						<archive archiveName="hkf-archive">
+							<archiveIdentifier>
+								<format date="${hkf-sched.current.fromDate}"
+									timeZone="Asia/Hong_Kong"
+									format="yyyyMMdd"/>
+							</archiveIdentifier>
+							<job>
+					
+								<scheduling:retry id="hkf-retry"
+								                  limits="${hkf-sched.current}">
+									<schedule>
+										<schedules:interval interval="00:15"/>
+									</schedule>
+									
+									<job>
+									
+										<!-- =============================================
+										The sequence that does the transfer.
+										============================================== -->
+										<sequential name="HKF Transfer Sequence" id="hkf-trans">
+											<jobs>
+											
+												<!-- =============================================
+												Format the date as it's required in the file name.
+												============================================== -->
+												<variables id="hkf-vars">
+													<filedate>
+														<format format="MMdd" 
+															timeZone="Asia/Hong_Kong"
+															date="${hkf-sched.current.fromDate}"/>
+													</filedate>
+													<filename>
+														<value value="hkex${hkf-vars.filedate}s.zip"/>
+													</filename>
+												</variables>
+												
+												<!-- =============================================
+												FTP the file.
+												============================================== -->
+												<net:ftp id='hkf-ant' name="FTP file back"
+														host="ftp.cme.com" username="anonymous" 
+																	password="anonymous">
+													<commands>
+														<list>
+															<values>
+																<net:ftp-get remote="pub/span/data/hkf/${hkf-vars.filename}"/>
+															</values>
+														</list>														
+													</commands>
+												</net:ftp>
+												
+											</jobs>
+										</sequential>
+										
+									</job>
+								</scheduling:retry>
+								
+							</job>
+						</archive>
+					
+					</job>
+				</scheduling:timer>
+				
+				<!-- =============================================
+				Resubmit our Exception watcher but wait an hour between
+				submition because we don't want loads of mails.
+				============================================== -->
+				<scheduling:timer name="Re-run The Trigger"
+						skipMissedRuns="true">
+			
+					<schedule>
+						<schedules:interval interval="01:00"/>
+					</schedule>
+
+					<job>
+						<scheduling:trigger on="${failure}" state="INCOMPLETE">
+							<job>
+						
+								<!-- =============================================
+								If a schedulable job throws an exception this job
+								will be executed which sends a mail. Our schedule
+								will throw an exception once the retries have run.  
+								============================================== -->
+								<mail:send id="exception" name="Send alert mail"
+										from="${my.alert.from}"
+										to="${my.alert.to}"
+										host="${my.mailhost}"
+										subject="FTP download failed">
+FTP Failed!													
+								</mail:send>
+								
+							</job>
+						</scheduling:trigger>
+					</job>
+				
+				</scheduling:timer>
+				
+				<!-- =============================================
+				Flag an exception if either job fails.
+				============================================== -->
+				<state:or id="failure">
+					<jobs>
+						<state:mirror job="${kcb-retry}"/>
+						<state:mirror job="${hkf-retry}"/>
+					</jobs>
+				</state:or>
+				
+				<archive-browser name="KCB Archive" archiveName="kcb-archive"/>
+				
+				<archive-browser name="HKF Archive" archiveName="hkf-archive"/>
+				
+			</jobs>
+		</sequential>
+	</job>
+</oddjob>

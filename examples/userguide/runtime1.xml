@@ -1,0 +1,11 @@
+<oddjob>
+    <job>
+        <sequential>
+            <jobs>
+                <echo id="my-echo"
+                      text="This will be displayed twice!"/>
+                <echo text="${my-echo.text}"/>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

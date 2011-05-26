@@ -1,0 +1,56 @@
+<oddjob xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling"
+           xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+ <job>
+  <sequential>
+   <jobs>
+    <variables id="global">
+     <ukHolidays>
+      <schedules:list>
+       <schedules>
+        <schedules:date on="2009-01-01"/>
+        <schedules:date on="2009-04-10"/>
+        <schedules:date on="2009-04-13"/>
+        <schedules:date on="2009-05-04"/>
+        <schedules:date on="2009-05-25"/>
+        <schedules:date on="2009-08-31"/>
+        <schedules:date on="2009-12-25"/>
+        <schedules:date on="2009-12-28"/>
+        <schedules:date on="2010-01-01"/>
+        <schedules:date on="2010-04-02"/>
+        <schedules:date on="2010-04-05"/>
+        <schedules:date on="2010-05-03"/>
+        <schedules:date on="2010-05-31"/>
+        <schedules:date on="2010-08-30"/>
+        <schedules:date on="2010-12-27"/>
+        <schedules:date on="2010-12-28"/>
+        <schedules:date on="2011-01-03"/>
+        <schedules:date on="2011-04-22"/>
+        <schedules:date on="2011-04-25"/>
+        <schedules:date on="2011-05-02"/>
+        <schedules:date on="2011-05-30"/>
+        <schedules:date on="2011-08-29"/>
+        <schedules:date on="2011-12-27"/>
+        <schedules:date on="2011-12-26"/>
+       </schedules>
+      </schedules:list>
+     </ukHolidays>
+    </variables>
+     <scheduling:timer id="timer">
+      <schedule>
+       <schedules:broken>
+         <schedule>
+          <schedules:time from="07:00"/>
+         </schedule>
+         <breaks>
+          <value value="${global.ukHolidays}"/>
+         </breaks>
+        </schedules:broken>
+       </schedule>
+       <job>
+        <echo text="Work Work Work!" id="a-job"/>
+       </job>
+      </scheduling:timer>
+   </jobs>
+  </sequential>
+ </job>
+</oddjob>

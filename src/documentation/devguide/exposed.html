@@ -1,0 +1,287 @@
+<html>
+	<head>
+		<title>Dev Guide - Arooa Exposed</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>	
+	<body>
+		<a name="top"></a>
+		<h1>Arooa Exposed</h1>
+
+		
+		<ul>
+			<li><a href="#introduction">Introduction</a></li>
+			<li><a href="#parsers">Parsers</a></li>
+			<li><a href="#beans">Beans</a></li>
+			<li><a href="#forms">Forms</a></li>
+			<li><a href="#xml">XML</a></li>
+		</ul>
+	
+	<a name="introduction"/></a>
+	<h4>Introduction</h4>
+	
+	<p>In this section we'll look at the Arooa Framework without Oddjob.
+	Arooa was written for the requirements of Oddjob and not to be
+	yet another Java Bean framework. These are the reasons for writing Arooa
+	over using an existing framework:</p>
+	
+	<ul>
+		<li><p><dl>
+		<dt>Cut And Paste:</dt>
+		<dd>Arooa allows a bean configuration to be cut out of
+		one file and pasted into another while Beans are active. The source
+		and destination 
+		Beans are dynamically reconfigured in the process.</dd>
+		</dl></p></li>
+		
+		<li><p><dl>
+		<dt>Runtime Configuration:</dt>
+		<dd>Arooa can re-evaluate and re-inject properties 
+		into a Bean at any time.</dd>
+		</dl></p></li>
+		
+		<li><p><dl>
+		<dt>Advanced Type Conversion:</dt>
+		<dd>Properties are exchanged between beans, not just set  
+		from text configuration. Arooa try's to find a 
+		conversion path between any both types whatever they might
+		be.</dd>
+		</dl></p></li>
+
+		<li><p><dl>
+		<dt>GUI Bean Configuration:</dt>
+		<dd>Arooa provides a Swing Component to change A Beans
+		configuration.</dd>
+		</dl></p></li>
+		
+	</ul>
+	
+	<p>If you share these requirements and want to use Arooa in your
+	own code thenn read on. If you don't then read on anyway - you might
+	find it interesting.</p>
+
+	<a name="parsers"/></a>
+	<h4>Parsers</h4>
+
+	<p>An <code><a href="@javadoc@/org/oddjob/arooa/ArooaParser.html">ArooaParser</a></code>
+	is the starting point for most things Arooa. An <code>ArooaParser</code> parses an
+	<code><a href="@javadoc@/org/oddjob/arooa/ArooaConfiguration.html">ArooaConfiguration</a></code>
+	</p>
+	
+	<p>When an <code>ArooaParser</code> parses an <code>ArooaConfiguration</code>
+	it generally creates something. That something 
+	is typically some Java Beans, but might be a GUI form, or some XML.
+	</p>
+	
+	<p>An <code>ArooaConfiguration</code> is generally something that can be parsed. That
+	something is typically some XML but it might be a GUI form, or some Java Beans.
+	</p>
+	
+	<p>So we can go from XML to Beans to Forms to Beans to XML, and this
+	is pretty much what we do.</p>
+		
+	<p>The three main <code>ArooaParser</code>s of interest are
+	<code><a href="@javadoc@/org/oddjob/arooa/standard/StanardArooaParser.html">StandardArooaParser</a></code>
+	for Beans, 
+	<code><a href="@javadoc@/org/oddjob/arooa/design/DesignParser.html">DesignParser</a></code>
+	for Forms, and
+	<code><a href="@javadoc@/org/oddjob/arooa/xml/XMLArooaParser.html">XMLArooaParser</a></code>
+	for XML.
+	</p>
+	
+	<p>
+	There's only one main <code>ArooaConfiguration</code> which is 
+	<code><a href="@javadoc@/org/oddjob/arooa/xml/XMLConfiguration.html">XMLConfiguration</a></code>.
+	For Beans and Forms the <code>ArooaConfiguration</code> is 
+	captured in their contexts. What's their contexts? It's their 
+	<code><a href="@javadoc@/org/oddjob/arooa/parsing/ArooaContext.html">ArooaContext</a></code>
+	but more on them later.
+	</p>
+	
+	<p>Let's take a closer look at our three somethings.</p>
+	
+	<a name="beans"/></a>
+	<h4>Beans</h4>
+
+	<p>Most of the time Arooa configures a single Bean, because you know what you want
+	to configure. The <code>StandardArooaParser</code> takes a root Object and
+	applies the configuration to it. A
+	<code><a href="@javadoc@/org/oddjob/standard/StandardFragmentParser.html">StandardFragmentParser</a></code>
+	can be used instead which will create the object if that's what you require. 
+	It's use is very similar to what will be described here.
+	</p>
+	
+	<p>
+	Let's start with the <code>ThirdComponent</code> we couldn't configure
+	in the <a href="arooa.html#values">previous section</a>. 
+	</p>
+	
+	<p>Here's the configuration for just our component:</p>
+	
+{@oddjob.xml.file examples/devguide/exposed1.xml}
+
+	<p>Note that the document element can be anything, as it's not
+	used for Object creation. Here's the code that will configure a 
+	our ThirdComponent:
+	</p>
+	
+{@oddjob.java.file src/java/org/oddjob/devguide/StandardAPExample.java}
+
+	<p>
+	The <code>StandardArooaParser</code> treats our root Object as a component.
+	Because of this we can configure it using the line
+	<code>session.getComponentPool().configure(component);</code>
+	Attempting to independently configure the components person would not 
+	be possible. 
+	<code>session.getComponentPool().configure(component.getPerson());</code>
+	would throw an Exception.	
+	</p>
+
+	</p>
+	When we run it we get:
+	<p>
+	
+<pre class="command">
+Person Set.
+</pre>
+
+	<p>
+	Now there's loads I need to explain.
+	
+	<ul>
+		<li>The <code><a href="@javadoc@/org/oddjob/arooa/ArooaSession.html">ArooaSession</a></code>
+		- What it is and how it's used.</li>
+		
+		<li>The <code><a href="@javadoc@/org/oddjob/arooa/ComponentPool.html">ComponentPool</a></code>
+		- What it is.</li>
+	
+		<li>How to use the <code>ArooaDescriptor</code> to define a Component Property
+		to allow begin building up a component tree.</li>
+		
+	</ul>
+		
+	But I'm just not going to get round to it just now. I'm sorry. 
+	Maybe next time.
+	</p>
+		
+	<a name="forms"/></a>
+	<h4>Forms</h4>
+
+	<p>Lets take a quick look at how to create a form.</p>
+				
+<pre class="code">
+package org.oddjob.devguide;
+
+import java.awt.Component;
+import java.io.File;
+
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+
+import org.oddjob.arooa.ArooaParseException;
+import org.oddjob.arooa.design.DesignFactory;
+import org.oddjob.arooa.design.DesignInstance;
+import org.oddjob.arooa.design.DesignParser;
+import org.oddjob.arooa.design.GenericInstanceFactory;
+import org.oddjob.arooa.design.view.SwingFormFactory;
+import org.oddjob.arooa.parsing.ArooaContext;
+import org.oddjob.arooa.parsing.ArooaElement;
+import org.oddjob.arooa.xml.XMLConfiguration;
+
+public class DesignParserExample {
+
+	public static void main(String[] args) throws ArooaParseException {
+	
+		XMLConfiguration configuration = 
+			new XMLConfiguration(new File("examples/devguide/exposed1.xml"));
+		
+		DesignParser parser = new DesignParser(
+				new DesignFactory() {
+					public DesignInstance createDesign(boolean component,
+							ArooaElement element, ArooaContext parentContext) {
+						return new GenericInstanceFactory().buildDesign(
+								component, 
+								element, 
+								ThirdComponent.class.getName(), 
+								parentContext);
+					}
+				});
+		parser.setComponent(true);
+		
+		parser.parse(configuration);
+		
+		DesignInstance design = parser.getDesign();
+		Component view = SwingFormFactory.create(design.detail()).dialog();
+		
+		JFrame frame = new JFrame();
+		frame.getContentPane().add(view);
+		frame.pack();
+		frame.setVisible(true);
+
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+	}	
+}
+</pre>
+
+	<p>Run it and we get a very simple form:</p>
+	
+	<img src="images/exposed1.gif"
+				alt="Simple Form"/>
+		
+	<p>
+	The id property is added because we told the parser our design
+	is for a component.
+	</p>
+	
+	<a name="xml"/></a>
+	<h4>XML</h4>
+
+	<p>Here's how to use 
+	<code><a href="@javadoc@/org/oddjob/arooa/xml/XMLArooaParser.html">XMLArooaParser</a></code>
+	to go from XML back to XML.
+	 
+<pre class="code">
+package org.oddjob.devguide;
+
+import java.io.File;
+
+import org.oddjob.arooa.ArooaParseException;
+import org.oddjob.arooa.xml.XMLArooaParser;
+import org.oddjob.arooa.xml.XMLConfiguration;
+
+public class XMLParserExample {
+
+	public static void main(String[] args) throws ArooaParseException {
+	
+		XMLConfiguration configuration = 
+			new XMLConfiguration(new File("examples/devguide/exposed1.xml"));
+		
+		XMLArooaParser parser = new XMLArooaParser();
+		
+		parser.parse(configuration);
+		
+		System.out.println(parser.getXml());
+	}
+}
+</pre>
+	 
+	 <p>Any when we run it:</p>
+	 
+<pre class="command">
+&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
+&lt;anything&gt;
+    &lt;person&gt;
+        &lt;class class="org.oddjob.devguide.Person" firstname="John" surname="Smith" title="Mr"/&gt;
+    &lt;/person&gt;
+&lt;/anything&gt;
+</pre>
+
+
+	<hr/>
+
+	<a href="index.html">Index</a> <a href="#top">Top</a>
+	<a href="life.html">Next</a>
+		
+	</body>
+</html>

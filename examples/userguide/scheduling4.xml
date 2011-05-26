@@ -1,0 +1,37 @@
+<oddjob xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling"
+           xmlns:schedules="http://rgordon.co.uk/oddjob/schedules" 
+           id="this">
+ <job>
+  <sequential>
+   <jobs>
+    <scheduling:trigger 
+                         on="${both-files-available}">
+     <job>
+      <echo id="a-job"
+               text="Finally I get to do some work."/>
+     </job>
+    </scheduling:trigger>
+    <parallel id="both-files-available">
+     <jobs>
+      <scheduling:retry>
+       <schedule>
+        <schedules:interval interval="00:00:05"/>
+       </schedule>
+       <job>
+        <exists file="${this.dir}/file1.txt"/>
+       </job>
+      </scheduling:retry>
+      <scheduling:retry>
+       <schedule>
+        <schedules:interval interval="00:00:05"/>
+       </schedule>
+       <job>
+        <exists file="${this.dir}/file2.txt"/>
+       </job>
+      </scheduling:retry>
+     </jobs>
+    </parallel>
+   </jobs>
+  </sequential>
+ </job>
+</oddjob>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <folder name=" ">
+            <jobs>
+                <sequential id="top" name="Run in Sequence">
+                    <jobs>
+                        <hsql:hsqldb name="Hsqldb Server" xmlns:hsql="http://rgordon.co.uk/oddjob/hsql">
+                            <database>
+                                <value key="mydb" value="${this.dir}/work/hsqldb/mydb"/>
+                            </database>
+                            <properties>
+                                <properties>
+                                    <values>
+                                        <value key="server.port" value="11001"/>
+                                        <value key="server.silent" value="false"/>
+                                    </values>
+                                </properties>
+                            </properties>
+                        </hsql:hsqldb>
+                        <variables id="vars">
+                            <connection>
+                                <hsql:connection url="jdbc:hsqldb:hsql://localhost:11001/mydb" username="sa" xmlns:hsql="http://rgordon.co.uk/oddjob/hsql"/>
+                            </connection>
+                        </variables>
+                        <folder name="Setup Sql">
+                            <jobs>
+                                <sequential id="setup" name="All">
+                                    <jobs>
+                                        <sql name="Create table">
+                                            <connection>
+                                                <value value="${vars.connection}"/>
+                                            </connection>
+                                            <input>
+                                                <buffer><![CDATA[create table greetings  (
+style varchar(20), greeting varchar(30),constraint greetings_pk primary key (style))]]></buffer>
+                                            </input>
+                                        </sql>
+                                        <sql name="Insert1">
+                                            <connection>
+                                                <value value="${vars.connection}"/>
+                                            </connection>
+                                            <input>
+                                                <buffer><![CDATA[insert into greetings values ('nice', 'hello')]]></buffer>
+                                            </input>
+                                        </sql>
+                                        <sql name="Insert1">
+                                            <connection>
+                                                <value value="${vars.connection}"/>
+                                            </connection>
+                                            <input>
+                                                <buffer><![CDATA[insert into greetings values ('grumpy', 'bah humbug')]]></buffer>
+                                            </input>
+                                        </sql>
+                                    </jobs>
+                                </sequential>
+                            </jobs>
+                        </folder>
+                        <folder name="Query Sql">
+                            <jobs>
+                                <sequential id="single-query" name="All">
+                                    <jobs>
+                                        <sql id="query" name="Query">
+                                            <connection>
+                                                <value value="${vars.connection}"/>
+                                            </connection>
+                                            <input>
+                                                <buffer><![CDATA[select greeting from greetings where style='nice']]></buffer>
+                                            </input>
+                                            <results>
+                                                <sql-results-bean id="query-result"/>
+                                            </results>
+                                        </sql>
+                                        <echo id="result" text="${query-result.row.GREETING}"/>
+                                        <echo id="resultindexed" text="${query-result.rows[0].GREETING}"/>
+                                    </jobs>
+                                </sequential>
+                            </jobs>
+                        </folder>
+                        <folder name="Query All">
+                            <jobs>
+                                <sequential id="all-query" name="All">
+                                    <jobs>
+                                        <sql id="queryall" name="Query">
+                                            <connection>
+                                                <value value="${vars.connection}"/>
+                                            </connection>
+                                            <input>
+                                                <buffer><![CDATA[select style, greeting from greetings]]></buffer>
+                                            </input>
+                                            <results>
+                                                <sql-results-bean id="queryall-result"/>
+                                            </results>
+                                        </sql>
+                                        <foreach id="for">
+                                            <values>
+                                                <value value="${queryall-result.rows}"/>
+                                            </values>
+                                            <configuration>
+                                                <arooa:configuration xmlns:arooa="http://rgordon.co.uk/oddjob/arooa">
+                                                    <xml>
+                                                        <xml>
+                                                            <echo text="${for.current.STYLE} is ${for.current.GREETING}"/>
+                                                        </xml>
+                                                    </xml>
+                                                </arooa:configuration>
+                                            </configuration>
+                                        </foreach>
+                                    </jobs>
+                                </sequential>
+                            </jobs>
+                        </folder>
+                        <folder name="Cleanup Sql">
+                            <jobs>
+                                <sql id="clean-up" name="Sql Job">
+                                    <connection>
+                                        <value value="${vars.connection}"/>
+                                    </connection>
+                                    <input>
+                                        <buffer><![CDATA[drop table greetings]]></buffer>
+                                    </input>
+                                </sql>
+                            </jobs>
+                        </folder>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>
