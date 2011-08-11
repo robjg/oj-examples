@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 import org.oddjob.Oddjob;
 import org.oddjob.OurDirs;
 import org.oddjob.Setup;
-import org.oddjob.state.JobState;
+import org.oddjob.state.ParentState;
 
 public class FirstJobsTest extends TestCase {
 
@@ -33,7 +33,7 @@ public class FirstJobsTest extends TestCase {
 		oj.setFile(new File(dir, "hello1.xml"));
 		oj.run();
 
-		assertEquals(JobState.COMPLETE, oj.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, oj.lastStateEvent().getState());
 		
 		oj.destroy();
 	}
@@ -45,7 +45,7 @@ public class FirstJobsTest extends TestCase {
 		oj.setFile(new File(dir, "hello2.xml"));
 		oj.run();
 
-		assertEquals(JobState.COMPLETE, oj.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, oj.lastStateEvent().getState());
 		
 		oj.destroy();
 	}

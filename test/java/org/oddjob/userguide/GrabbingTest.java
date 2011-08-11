@@ -1,11 +1,11 @@
 package org.oddjob.userguide;
 
+import junit.framework.TestCase;
+
 import org.oddjob.Oddjob;
 import org.oddjob.OurDirs;
 import org.oddjob.arooa.xml.XMLConfiguration;
-import org.oddjob.state.JobState;
-
-import junit.framework.TestCase;
+import org.oddjob.state.ParentState;
 
 public class GrabbingTest extends TestCase {
 
@@ -19,6 +19,6 @@ public class GrabbingTest extends TestCase {
 		
 		oddjob.load();
 		
-		assertEquals(JobState.READY, oddjob.lastJobStateEvent().getJobState());		
+		assertEquals(ParentState.READY, oddjob.lastStateEvent().getState());		
 	}
 }

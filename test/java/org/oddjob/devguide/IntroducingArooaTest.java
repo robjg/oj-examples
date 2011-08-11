@@ -2,11 +2,11 @@ package org.oddjob.devguide;
 
 import java.io.File;
 
+import junit.framework.TestCase;
+
 import org.oddjob.Oddjob;
 import org.oddjob.OurDirs;
-import org.oddjob.state.JobState;
-
-import junit.framework.TestCase;
+import org.oddjob.state.ParentState;
 
 public class IntroducingArooaTest extends TestCase {
 
@@ -27,7 +27,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.setFile(new File(dir, "component.xml"));
 		oj.run();
 
-		assertEquals(JobState.COMPLETE, oj.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, oj.lastStateEvent().getState());
 		
 		oj.destroy();
 	}
@@ -38,7 +38,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.setFile(new File(dir, "component2.xml"));
 		oj.run();
 
-		assertEquals(JobState.COMPLETE, oj.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, oj.lastStateEvent().getState());
 		
 		oj.destroy();
 	}
@@ -49,7 +49,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.setFile(new File(dir, "component3.xml"));
 		oj.run();
 
-		assertEquals(JobState.COMPLETE, oj.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, oj.lastStateEvent().getState());
 		
 		oj.destroy();
 	}
@@ -60,7 +60,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.setFile(new File(dir, "properties.xml"));
 		oj.run();
 
-		assertEquals(JobState.COMPLETE, oj.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, oj.lastStateEvent().getState());
 
 		oj.destroy();
 	}
@@ -71,7 +71,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.setFile(new File(dir, "properties2.xml"));
 		oj.run();
 
-		assertEquals(JobState.COMPLETE, oj.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, oj.lastStateEvent().getState());
 
 		oj.destroy();
 	}
@@ -82,7 +82,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.setFile(new File(dir, "helloperson.xml"));
 		oj.run();
 
-		assertEquals(JobState.COMPLETE, oj.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, oj.lastStateEvent().getState());
 
 		oj.destroy();
 	}
@@ -93,7 +93,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.setFile(new File(dir, "helloperson-main.xml"));
 		oj.run();
 
-		assertEquals(JobState.COMPLETE, oj.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, oj.lastStateEvent().getState());
 
 		oj.destroy();
 	}

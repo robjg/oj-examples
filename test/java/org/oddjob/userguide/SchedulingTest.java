@@ -14,7 +14,7 @@ import org.oddjob.arooa.utils.DateHelper;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.scheduling.ManualClock;
 import org.oddjob.scheduling.Timer;
-import org.oddjob.state.JobState;
+import org.oddjob.state.ParentState;
 import org.oddjob.util.Clock;
 
 public class SchedulingTest extends TestCase {
@@ -29,7 +29,7 @@ public class SchedulingTest extends TestCase {
 		
 		oddjob.load();
 		
-		assertEquals(JobState.READY, oddjob.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.READY, oddjob.lastStateEvent().getState());
 		
 		oddjob.destroy();
 	}
@@ -42,7 +42,7 @@ public class SchedulingTest extends TestCase {
 		
 		oddjob.load();
 		
-		assertEquals(JobState.READY, oddjob.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.READY, oddjob.lastStateEvent().getState());
 		
 		oddjob.destroy();
 	}
@@ -56,7 +56,7 @@ public class SchedulingTest extends TestCase {
 		
 		oddjob.load();
 		
-		assertEquals(JobState.READY, oddjob.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.READY, oddjob.lastStateEvent().getState());
 		
 		Timer timer = new OddjobLookup(oddjob).lookup("timer", Timer.class);
 		
@@ -66,8 +66,8 @@ public class SchedulingTest extends TestCase {
 		
 		oddjob.run();
 		
-		assertEquals(JobState.EXECUTING, 
-				oddjob.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.ACTIVE, 
+				oddjob.lastStateEvent().getState());
 		
 		assertEquals(
 				DateHelper.parseDateTime("2010-05-04 07:00"),
@@ -75,8 +75,8 @@ public class SchedulingTest extends TestCase {
 		
 		oddjob.stop();
 		
-		assertEquals(JobState.COMPLETE, 
-				oddjob.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, 
+				oddjob.lastStateEvent().getState());
 		
 		oddjob.destroy();
 	}
@@ -90,9 +90,8 @@ public class SchedulingTest extends TestCase {
 		
 		oddjob.load();
 		
-		assertEquals(JobState.READY, oddjob.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.READY, oddjob.lastStateEvent().getState());
 		
 		oddjob.destroy();
 	}
-	
 }

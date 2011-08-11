@@ -13,6 +13,8 @@ import org.oddjob.Stateful;
 import org.oddjob.Stoppable;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.JobState;
+import org.oddjob.state.ParentState;
+import org.oddjob.state.ServiceState;
 
 public class MoreJobsTest extends TestCase {
 	private static final Logger logger = Logger.getLogger(
@@ -28,12 +30,12 @@ public class MoreJobsTest extends TestCase {
 		
 		oddjob.run();
 		
-		assertEquals(JobState.EXCEPTION, 
-				oddjob.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.EXCEPTION, 
+				oddjob.lastStateEvent().getState());
 		
 		Stateful stateful = (Stateful) Helper.getChildren(oddjob)[0];
 
-		Throwable e = stateful.lastJobStateEvent().getException();
+		Throwable e = stateful.lastStateEvent().getException();
 		
 		assertEquals("I won't run. I won't!", e.getMessage());
 		
@@ -50,8 +52,8 @@ public class MoreJobsTest extends TestCase {
 				
 		oddjob.run();
 		
-		assertEquals(JobState.INCOMPLETE, 
-				oddjob.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.INCOMPLETE, 
+				oddjob.lastStateEvent().getState());
 		
 		oddjob.destroy();
 	}
@@ -82,8 +84,8 @@ public class MoreJobsTest extends TestCase {
 		
 		((Stoppable) stopping).stop();
 		
-		assertEquals(JobState.COMPLETE, 
-				oddjob.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, 
+				oddjob.lastStateEvent().getState());
 		
 		oddjob.destroy();
 	}
@@ -106,7 +108,8 @@ public class MoreJobsTest extends TestCase {
 		
 		StateSteps states = new StateSteps(service);
 				
-		states.startCheck(JobState.READY, JobState.EXECUTING);
+		states.startCheck(ServiceState.READY, ServiceState.STARTING,
+				ServiceState.STARTED);
 		
 		oddjob.run();
 		
@@ -116,8 +119,8 @@ public class MoreJobsTest extends TestCase {
 		
 		((Stoppable) service).stop();
 		
-		assertEquals(JobState.COMPLETE, 
-				oddjob.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.COMPLETE, 
+				oddjob.lastStateEvent().getState());
 		
 		console.close();
 		console.dump(logger);

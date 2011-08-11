@@ -12,7 +12,7 @@ import org.oddjob.Setup;
 import org.oddjob.arooa.convert.ArooaConversionException;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.oddballs.OddballsDirDescriptorFactory;
-import org.oddjob.state.JobState;
+import org.oddjob.state.ParentState;
 
 
 public class ExamplesTest extends TestCase {
@@ -35,7 +35,7 @@ public class ExamplesTest extends TestCase {
 		
 		test.run();
 		
-		assertEquals(JobState.COMPLETE, Helper.getJobState(test));
+		assertEquals(ParentState.COMPLETE, Helper.getJobState(test));
 		
 		test.destroy();
 	}
@@ -49,12 +49,12 @@ public class ExamplesTest extends TestCase {
 				new OddballsDirDescriptorFactory(oddballs));
 		test.run();
 		
-		assertEquals(JobState.COMPLETE, Helper.getJobState(test));
+		assertEquals(ParentState.COMPLETE, test.lastStateEvent().getState());
 		
 		Object reference = new OddjobLookup(test).lookup(
 				"examples/reference");
 		
-		assertEquals(JobState.COMPLETE, Helper.getJobState(
+		assertEquals(ParentState.COMPLETE, Helper.getJobState(
 				reference));
 		
 		test.destroy();
@@ -94,14 +94,14 @@ public class ExamplesTest extends TestCase {
 		test.setFile(new File(dirs.base(), "examples/oddjob.xml"));
 		test.run();
 		
-		assertEquals(JobState.COMPLETE, Helper.getJobState(test));
+		assertEquals(ParentState.COMPLETE, Helper.getJobState(test));
 		
 		Oddjob scheduling = new OddjobLookup(test).lookup(
 				"scheduling", Oddjob.class); 
 		
 		scheduling.load();
 		
-		assertEquals(JobState.READY, Helper.getJobState(
+		assertEquals(ParentState.READY, Helper.getJobState(
 				scheduling));
 
 		Oddjob dailyftp = new OddjobLookup(scheduling).lookup(
@@ -109,7 +109,7 @@ public class ExamplesTest extends TestCase {
 		
 		dailyftp.load();
 
-		assertEquals(JobState.READY, Helper.getJobState(dailyftp));
+		assertEquals(ParentState.READY, Helper.getJobState(dailyftp));
 		
 		test.destroy();
 	}
@@ -123,13 +123,13 @@ public class ExamplesTest extends TestCase {
 		test.setFile(new File(dirs.base(), "examples/oddjob.xml"));
 		test.run();
 		
-		assertEquals(JobState.COMPLETE, Helper.getJobState(test));
+		assertEquals(ParentState.COMPLETE, Helper.getJobState(test));
 		
 		Oddjob workflow = (Oddjob) new OddjobLookup(test).lookup("workflow");
 		
 		workflow.load();
 				
-		assertEquals(JobState.READY, Helper.getJobState(
+		assertEquals(ParentState.READY, Helper.getJobState(
 				workflow));
 		
 		test.destroy();

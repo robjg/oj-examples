@@ -9,7 +9,8 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.oddjob.jobs.ExecJob;
 import org.oddjob.state.JobState;
-import org.oddjob.state.JobStateEvent;
+import org.oddjob.state.ParentState;
+import org.oddjob.state.StateEvent;
 
 public class OddjobCommandLineTest extends TestCase {
 	private static final Logger logger = Logger.getLogger(
@@ -61,7 +62,7 @@ public class OddjobCommandLineTest extends TestCase {
 		
 		// File created but Oddjob ready, not complete so exit status
 		// is incomplete.
-		assertEquals(JobState.INCOMPLETE, exec.lastJobStateEvent().getJobState());
+		assertEquals(JobState.INCOMPLETE, exec.lastStateEvent().getState());
 
 		String[] lines = console.getLines();
 		assertTrue(lines[0].startsWith("Exception"));
@@ -87,7 +88,7 @@ public class OddjobCommandLineTest extends TestCase {
 		Oddjob oddjob = new Oddjob();
 		oddjob.setFile(new File(relative("client.xml")));
 
-		JobStateEvent event = null;
+		StateEvent event = null;
 		do {
 			if (event != null) {
 				Thread.sleep(2000);
@@ -95,13 +96,13 @@ public class OddjobCommandLineTest extends TestCase {
 			console.dump();
 			oddjob.softReset();
 			oddjob.run();
-			event = oddjob.lastJobStateEvent(); 
+			event = oddjob.lastStateEvent(); 
 			logger.info(event.getException(), event.getException());
-		} while (event.getJobState() 
-				== JobState.EXCEPTION);
+		} while (event.getState() 
+				== ParentState.EXCEPTION);
 
-		assertEquals(JobState.EXECUTING, 
-				oddjob.lastJobStateEvent().getJobState());
+		assertEquals(ParentState.ACTIVE, 
+				oddjob.lastStateEvent().getState());
 		
 		Object client = new OddjobLookup(oddjob).lookup("client");
 		
