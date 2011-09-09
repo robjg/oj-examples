@@ -317,6 +317,10 @@
           depends="init, prepare-docs"
           description="Builds the documentation">
 
+		<copy todir="${build.docs}" filtering="off">
+			<fileset file="${stylesheets.dir}/oddjob.css"/>
+		</copy>
+			
 		<xslt basedir="${build.xdocs}" destdir="${build.docs}"
              extension=".html" style="${stylesheets.dir}/site.xsl">
 			<param name="header" expression="header.html"/>

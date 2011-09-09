@@ -1,0 +1,164 @@
+
+body {
+	font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+}
+
+body a {
+	color: #FF4000;
+	text-decoration: none;
+}
+
+body a:hover {
+	color: #6E6E6E;
+	text-decoration: none;
+}
+
+h1 {
+	color: black;
+	font-size: 2.5em;
+	font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+	padding: 0.15em;
+	margin: 0.8em 0 0.4em 0;
+	font-weight: bold;
+}
+
+h2 {
+	color: black;
+	font-size: 1.5em;
+	font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+	padding: 0.15em, 0.3em, 0.15em, 0.3em;
+	margin: 0.6em 0 0.3em 0;
+	font-weight: bold;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-bottom: solid 2px #A5DF00;
+}
+
+h3 {
+	color: black;
+	font-size: 1.3em;
+	font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+	padding: 0.15em 0.5em 0.15em 0.5em;
+	margin: 0.6em 0 0.3em 0;
+	font-weight: bold;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-bottom: solid 2px #A5DF00;
+}
+
+#wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	width: 60em;
+}
+
+#topbar {
+	font-family: 'Courier New', Courier, monospace;
+	color: white;
+	background: #000000;
+	height: 7em;
+	position: relative;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+}
+
+#title {
+	color: white;
+	font-size: 4em;
+	font-weight: bold;
+	padding: 0.1em 0 0 0.5em;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#strapline {
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0 0 1em 4em;
+	color: white;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+
+#homelink {
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	position: absolute;
+	color: white;
+	bottom: 0;
+	right: 0;
+	margin: 0 1em 1em 0;
+}
+
+
+/* sidebar */
+#sidebar {
+	float: left;
+	width: 10em;
+	margin-bottom: 2em;
+	font-size: 0.8em;
+}
+
+#sidebar ul {
+	margin: 0;
+	padding: 0;	
+}
+
+#sidebar li {
+	list-style-type: none;
+	display: block;
+	border: solid 2px #A5DF00;
+	margin-top: 0.8em;
+	border-radius: 0.8em;
+	-moz-border-radius: 0.8em;
+}
+
+#sidebar li li {
+	border: none;	
+	padding: 0.2em 0 0.2em 0.8em;
+	margin: 0;
+}
+
+#sidebar h3 {
+	padding: 0.2em 0.2em 0.2em 0.2em;
+	margin: 0;
+	font-size : 1.1em;
+	font-weight: bold;
+}
+
+#sidebar .selected {
+	color: #000000;
+}
+
+
+/* main */
+#main {
+	float: right;
+	width: 60em;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 0.8em;
+	margin: 1em 2em 2em 0;
+}
+
+#main h1 {
+	text-align: center;
+}
+
+#footer {
+	padding: 0.5em;
+	border: solid 1px #6E6E6E;
+	color: #6E6E6E;
+	clear: both;
+	text-align: center;
+	font-size: 0.7em;
+	margin: 3em 5em 2em 5em;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+}
+
+.news-date {
+	color: #A5DF00;
+	font-weight: normal;
+}

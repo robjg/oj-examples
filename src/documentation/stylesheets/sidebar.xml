@@ -1,12 +1,22 @@
 <index>
-	<group group-title="For All"/>
-    <page page-title="Oddjob - Documentation" index-title="Introduction" index-href="index.html"/>
-    <page page-title="Oddjob - Licence" index-title="Licence" index-href="../LICENSE.txt"/>
-	<group group-title="For Users"/>
-    <page page-title="Oddjob - User Guider" index-title="User Guide" index-href="userguide/index.html"/>
-	<page page-title="Oddjob - Reference" index-title="Reference" index-href="reference/index.html"/>
-	<group group-title="For Developers"/>
-    <page page-title="Oddjob - Release Notes" index-title="Release Notes" index-href="../RELEASE-NOTES.txt"/>
-    <page page-title="Oddjob - Developer Guide" index-title="Dev Guide" index-href="devguide/index.html"/>
-	<page page-title="Oddjob - API docs" index-title="API docs" index-href="api/index.html"/>
+    <group group-title="For All">
+        <page page-title="Oddjob - Documentation" index-title="Introduction"
+            index-href="index.html"/>
+        <page page-title="Oddjob - Licence" index-title="Licence"
+            index-href="../LICENSE.txt"/>
+    </group>
+    <group group-title="For Users">
+        <page page-title="Oddjob - User Guider" index-title="User Guide"
+            index-href="userguide/index.html"/>
+        <page page-title="Oddjob - Reference" index-title="Reference"
+            index-href="reference/index.html"/>
+    </group>
+    <group group-title="For Developers">
+        <page page-title="Oddjob - Release Notes" index-title="Release Notes"
+            index-href="../RELEASE-NOTES.txt"/>
+        <page page-title="Oddjob - Developer Guide" index-title="Dev Guide"
+            index-href="devguide/index.html"/>
+        <page page-title="Oddjob - API docs" index-title="API docs"
+            index-href="api/index.html"/>
+    </group>
 </index>
