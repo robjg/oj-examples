@@ -20,9 +20,9 @@
 					<holidays>
 						<schedules:list>
 							<schedules>
-								<schedules:dayofweek from="6" to="7"/>
-								<schedules:date on="2011-12-25"/>
-                                <schedules:date on="2011-12-26"/>
+								<schedules:weekly from="Saturday" to="Sunday"/>
+								<schedules:date on="2011-12-26"/>
+                                <schedules:date on="2011-12-27"/>
 							</schedules>
 						</schedules:list>
 					</holidays>

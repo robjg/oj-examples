@@ -1,11 +1,11 @@
 <schedules:list xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
     <schedules>
-        <schedules:dayofweek on="3">
+        <schedules:weekly on="Wednesday">
             <refinement>
                 <schedules:time at="12:00"/>
             </refinement>
-        </schedules:dayofweek>
-        <schedules:dayofmonth on="5"/>
+        </schedules:weekly>
+        <schedules:monthly onDay="5"/>
         <schedules:time at="14:00"/>
     </schedules>
 </schedules:list>

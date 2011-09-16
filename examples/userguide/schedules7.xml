@@ -1,5 +1,5 @@
-<schedules:dayofweek xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"
-        on="2">
+<schedules:weekly xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"
+        on="Tuesday">
     <refinement>
         <schedules:time from="22:00" to="01:05">
             <refinement>
@@ -7,4 +7,4 @@
             </refinement>
         </schedules:time>
     </refinement>
-</schedules:dayofweek>
+</schedules:weekly>

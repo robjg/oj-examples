@@ -1,3 +1,3 @@
-<schedules:month xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"
-        from="10" 
-        to="4"/>
+<schedules:yearly xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"
+        fromMonth="October" 
+        toMonth="April"/>
