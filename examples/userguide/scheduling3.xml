@@ -39,7 +39,7 @@
       <schedule>
        <schedules:broken>
          <schedule>
-          <schedules:time from="07:00"/>
+          <schedules:daily from="07:00"/>
          </schedule>
          <breaks>
           <value value="${global.ukHolidays}"/>

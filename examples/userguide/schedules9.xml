@@ -6,6 +6,6 @@
             </refinement>
         </schedules:weekly>
         <schedules:monthly onDay="5"/>
-        <schedules:time at="14:00"/>
+        <schedules:daily at="14:00"/>
     </schedules>
 </schedules:list>

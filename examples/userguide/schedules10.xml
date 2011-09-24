@@ -5,7 +5,7 @@
             <refinement>
                 <schedules:broken>
                     <schedule>
-                        <schedules:time from="22:00"/>
+                        <schedules:daily from="22:00"/>
                     </schedule>
                     <breaks>
                         <schedules:list>

@@ -41,7 +41,7 @@
 								<value value="${vars.holidays}"/>
 							</breaks>
 							<schedule>
-								<schedules:time from="19:00" to="17:00"/>
+								<schedules:daily from="19:00" to="17:00"/>
 							</schedule>
 						</schedules:broken>
 					</schedule>
@@ -126,7 +126,7 @@
 								<value value="${vars.holidays}"/>
 							</breaks>
 							<schedule>
-								<schedules:time from="19:00" to="17:00"/>
+								<schedules:daily from="19:00" to="17:00"/>
 							</schedule>
 						</schedules:broken>
 					</schedule>

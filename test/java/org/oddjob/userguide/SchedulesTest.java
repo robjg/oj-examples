@@ -15,6 +15,7 @@ import org.oddjob.schedules.IntervalTo;
 import org.oddjob.schedules.Schedule;
 import org.oddjob.schedules.ScheduleContext;
 import org.oddjob.schedules.ScheduleResult;
+import org.oddjob.schedules.SimpleScheduleResult;
 
 public class SchedulesTest extends TestCase {
 
@@ -121,46 +122,58 @@ public class SchedulesTest extends TestCase {
 		
 		Schedule test = create("schedules4.xml");
 		
-		ScheduleResult result = test.nextDue(
+		ScheduleResult expected, result;
+		
+		result = test.nextDue(
 				new ScheduleContext(
 						DateHelper.parseDateTime("2010-03-15 12:00")));
 		
-		assertEquals(new IntervalTo(
-				DateHelper.parseDateTime("2010-03-16 10:00"),
-				DateHelper.parseDateTime("2010-03-16 13:00")),
-			result);
+		expected = new SimpleScheduleResult(
+				new IntervalTo(
+						DateHelper.parseDateTime("2010-03-16 10:00"),
+						DateHelper.parseDateTime("2010-03-16 13:00")));
+		
+		assertEquals(expected, result);
 		
 		result = test.nextDue(
 				new ScheduleContext(
 						DateHelper.parseDateTime("2010-03-17 09:00")));
 		
-		assertEquals(new IntervalTo(
-				DateHelper.parseDateTime("2010-03-23 10:00"),
-				DateHelper.parseDateTime("2010-03-23 13:00")),
-			result);
+		expected = new SimpleScheduleResult(
+				new IntervalTo(
+						DateHelper.parseDateTime("2010-03-23 10:00"),
+						DateHelper.parseDateTime("2010-03-23 13:00")));
+		
+		assertEquals(expected, result);
 	}
 	
 	public void testSchedules5() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules5.xml");
 		
-		ScheduleResult result = test.nextDue(
+		ScheduleResult expected, result;
+		
+		result = test.nextDue(
 				new ScheduleContext(
 						DateHelper.parseDateTime("2010-03-17 00:59")));
 		
-		assertEquals(new IntervalTo(
-				DateHelper.parseDateTime("2010-03-16 22:00"),
-				DateHelper.parseDateTime("2010-03-17 01:00")),
-			result);
+		expected = new SimpleScheduleResult(
+				new IntervalTo(
+						DateHelper.parseDateTime("2010-03-16 22:00"),
+						DateHelper.parseDateTime("2010-03-17 01:00")));
+		
+		assertEquals(expected, result);
 		
 		result = test.nextDue(
 				new ScheduleContext(
 						DateHelper.parseDateTime("2010-03-17 01:00")));
+
+		expected = new SimpleScheduleResult(
+				new IntervalTo(
+						DateHelper.parseDateTime("2010-03-23 22:00"),
+						DateHelper.parseDateTime("2010-03-24 01:00")));
 		
-		assertEquals(new IntervalTo(
-				DateHelper.parseDateTime("2010-03-23 22:00"),
-				DateHelper.parseDateTime("2010-03-24 01:00")),
-			result);
+		assertEquals(expected, result);
 	}
 	
 	public void testSchedules6() throws ArooaParseException, ParseException {
@@ -190,24 +203,30 @@ public class SchedulesTest extends TestCase {
 		
 		Schedule test = create("schedules7.xml");
 		
-		ScheduleResult result = test.nextDue(
+		ScheduleResult expected, result;
+		
+		// 17th March 2010 was a wednesday.
+		result = test.nextDue(
 				new ScheduleContext(
 						DateHelper.parseDateTime("2010-03-17 01:03")));
 		
-		assertEquals(new IntervalTo(
-				DateHelper.parseDateTime("2010-03-17 01:00"),
-				DateHelper.parseDateTime("2010-03-17 01:30")),
-			result);
+		expected = new SimpleScheduleResult(
+				new IntervalTo(
+						DateHelper.parseDateTime("2010-03-17 01:00"),
+						DateHelper.parseDateTime("2010-03-17 01:30")));
+		
+		assertEquals(expected, result);
 		
 		result = test.nextDue(
 				new ScheduleContext(
-						DateHelper.parseDateTime("2010-03-17 01:05")));
+						DateHelper.parseDateTime("2010-03-17 00:05")));
 		
-		// TODO: Not sure this is correct.
-		assertEquals(new IntervalTo(
-				DateHelper.parseDateTime("2010-03-23 22:00"),
-				DateHelper.parseDateTime("2010-03-23 22:30")),
-			result);
+		expected = new SimpleScheduleResult(
+				new IntervalTo(
+						DateHelper.parseDateTime("2010-03-17 00:00"),
+						DateHelper.parseDateTime("2010-03-17 00:30")));
+		
+		assertEquals(expected, result);
 	}
 	
 	public void testSchedules8() throws ArooaParseException, ParseException {

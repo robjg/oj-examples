@@ -9,8 +9,8 @@
             <refinement>
                 <schedules:list>
                     <schedules>
-                        <schedules:time at="09:00"/>
-                        <schedules:time at="15:00"/>
+                        <schedules:daily at="09:00"/>
+                        <schedules:daily at="15:00"/>
                     </schedules>
                 </schedules:list>
             </refinement>
