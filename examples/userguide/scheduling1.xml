@@ -3,25 +3,25 @@
  <job>
   <sequential>
    <jobs>
-    <scheduling:timer name="Morning Timer">
+    <scheduling:timer id="timer1" name="Morning Timer">
      <schedule>
-      <schedules:time to="12:00">
+      <schedules:daily to="12:00">
        <refinement>
         <schedules:interval interval="00:15"/>
        </refinement>
-      </schedules:time>
+      </schedules:daily>
      </schedule>
      <job>
       <echo name="Morning Job" text="Good Morning."/>
      </job>
     </scheduling:timer>
-    <scheduling:timer name="Afternoon Timer">
+    <scheduling:timer  id="timer2" name="Afternoon Timer">
      <schedule>
-      <schedules:time from="12:00">
+      <schedules:daily from="12:00">
        <refinement>
         <schedules:interval interval="00:10"/>
        </refinement>
-      </schedules:time>
+      </schedules:daily>
      </schedule>
      <job>
       <echo name="Afternoon Job" text="Good Afternoon."/>

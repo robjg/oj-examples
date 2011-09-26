@@ -14,13 +14,12 @@
 		
 		<ul>
 			<li><a href="#introduction">Introduction</a></li>
-			<li><a href="#moving">Moving Intervals</a></li>
-			<li><a href="#constrained">Constrained Schedules</a></li>
+			<li><a href="#moving">Recurring Schedules</a></li>
+			<li><a href="#constrained">Constraining Schedules</a></li>
 			<li><a href="#refining">Refining Schedules</a></li>
 			<li><a href="#fixed">Fixed Intervals</a></li>
 			<li><a href="#lists">Schedule Lists</a></li>
-			<li><a href="#broken">Broken Schedules</a></li>
-			<li><a href="#last">Last Intervals</a></li>
+			<li><a href="#broken">Holiday Schedules</a></li>
 		</ul>
 
 	<a name="introduction"></a>
@@ -45,7 +44,7 @@
 		before midnight that night.</p>
 
 	<a name="moving"></a>
-	<h4>Moving Intervals</h4>
+	<h4>Recurring Schedules</h4>
 		
 		<p>More commonly an interval is not specified between fixed points
 		in time. This schedule returns the interval
@@ -69,9 +68,9 @@
 		<img src="images/schedules4.jpg" alt="Repeating Intervals"/>
 		
 	<a name="constrained"></a>
-	<h4>Constrained Schedules</h4>
+	<h4>Constraining Schedules</h4>
 		
-		<p>The dayofweek schedule allows an interval to be defined from the
+		<p>The weekly schedule allows an interval to be defined from the
 		start of one day of the week to the end of another day of the week.
 		This has exactly the same effect as the above:</p>
 		
@@ -80,18 +79,18 @@
 		<p>Note that this is an interval of 1 day, not 7 days. If the 'on' 
 		attribute is given, from and to are ignored.</p>
 
-		<p>Regular schedules that are specified with a 'from' and a 'to' are
-		are called Constrained Schedules. They are:</p>
+		<p>Many schedules can be constrained with 'from' and a 'to' 
+		properties. They are:</p>
 		
 		<ul>
-			<li><a href="@reference@/org/oddjob/schedules/schedules/MonthSchedule.html">
+			<li><a href="@reference@/org/oddjob/schedules/schedules/YearlySchedule.html">
 			month</a></li>
-			<li><a href="@reference@/org/oddjob/schedules/schedules/DayOfYearSchedule.html">
-			dayofyear</a></li>
-			<li><a href="@reference@/org/oddjob/schedules/schedules/DayOfMonthSchedule.html">
+			<li><a href="@reference@/org/oddjob/schedules/schedules/MonthlySchedule.html">
 			dayofmonth</a></li>
-			<li><a href="@reference@/org/oddjob/schedules/schedules/DayOfWeekSchedule.html">
+			<li><a href="@reference@/org/oddjob/schedules/schedules/WeeklySchedule.html">
 			dayofweek</a></li>
+			<li><a href="@reference@/org/oddjob/schedules/schedules/DailySchedule.html">
+			time</a></li>
 			<li><a href="@reference@/org/oddjob/schedules/schedules/TimeSchedule.html">
 			time</a></li>
 		</ul>			
@@ -117,7 +116,7 @@
 
        <p>This would schedule a job at 10am every Tuesday. In this instance the 
        <code>time</code>
-       schedule has refined the <code>dayofweek</code> schedule. The day of week
+       schedule has refined the <code>weekly</code> schedule. The day of week
        schedule has also 'limited' the time schedule. It no longer returns an
        interval that is every day from 10am to 1pm. The time now only applies 
        to Tuesdays. This limiting effect applies to the beginning of the interval,
@@ -176,7 +175,7 @@
   		</ul>
 		
 		<a name="broken"></a>
-		<h4>Broken Schedules</h4>
+		<h4>Holiday Schedules</h4>
 
 		<p>We already saw in <a href="scheduling.html">scheduling</a> how
 		<a href="@reference@/org/oddjob/schedules/schedules/BrokenSchedule.html">broken schedules</a>
@@ -187,23 +186,14 @@
 		<p>The intervals defined by the breaks mask those defined by the
 		regular schedule. As with other schedules, the break only masks 
 		a interval where its start is in the break interval.</p>
-		
-		<a name="last"></a>
-		<h4>Last Intervals</h4>
-		
-		<p>Last days of the month can achieved easily using the &lt;dayofmonth on="0"&gt;
-		schedule. The last working day of the month is a bit harder, but can be achieved using
-		the 
-		<a href="@reference@/org/oddjob/schedules/schedules/LastSchedule.html">last schedule</a>. 
-		The last schedule takes the last result of its refinement, so
-		it calculates the month end by moving through all the days before the month end and 
-		seeing if it's a working day or not.</p>
-		
-		<p>Here's an example that will run the job at 10pm on the last working day of 
-		every month.</p>
-		
-{@oddjob.xml.file examples/userguide/schedules10.xml}
 
+		<p>Schedules can moved around breaks. For more information
+		see the examples with the 
+		<a href="@reference@/org/oddjob/schedules/schedules/DayAfterSchedule.html">day-after</a>
+		and
+		<a href="@reference@/org/oddjob/schedules/schedules/DayBeforeSchedule.html">day-before</a>
+		schedules.
+		
 		<hr/>	
 
 		<a href="index.html">Index</a> <a href="#top">Top</a>

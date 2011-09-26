@@ -53,10 +53,11 @@
 
 	<p>This creates two Timers, one that runs all morning, and one that runs 
 	all afternoon. Each Timer has a job that it will execute. The Timers are 
-	started using a Sequential Job. Starting a timer is quick operation, the 
-	second timer is started even though the
-	first Timer state is EXECUTING. The effect is as if the timers had been
-	started in Parallel.</p>
+	started using a Sequential Job. Starting a timer is quick operation. The timer
+	calculates the next scheduled time and then submits the child job to a 
+	background execution service for later or immediate execution. It then enters
+	an ACTIVE state and displays a sleeping icon. The sequential job
+	will then start the second timer.</p>
 
 	<p>If Oddjob is being run with a persister, the timer will save its last
 	completed time after each successful execution. If The timer is stopped
