@@ -28,9 +28,14 @@
                                 </properties>
                             </properties>
                         </hsql:hsqldb>
+                        <variables id="vars">
+                            <persisterConnection>
+                                <hsql:connection url="jdbc:hsqldb:hsql://localhost:11002/ojdb" username="sa" xmlns:hsql="http://rgordon.co.uk/oddjob/hsql"/>
+                            </persisterConnection>
+                        </variables>
                         <sql name="Create table">
                             <connection>
-                                <hsql:connection id="persister-connection" url="jdbc:hsqldb:hsql://localhost:11002/ojdb" username="sa" xmlns:hsql="http://rgordon.co.uk/oddjob/hsql"/>
+                                <value value="${vars.persisterConnection}"/>
                             </connection>
                             <input>
                                 <buffer><![CDATA[CREATE TABLE oddjob( path VARCHAR(20),
@@ -40,7 +45,7 @@ CONSTRAINT oddjob_pk PRIMARY KEY (path, id))]]></buffer>
                         </sql>
                         <sql-persister-service id="persister-service">
                             <connection>
-                                <value value="${persister-connection}"/>
+                                <value value="${vars.persisterConnection}"/>
                             </connection>
                         </sql-persister-service>
                         <oddjob file="${this.dir}/job.oddjob.persist.xml" id="database-persist-example" name="A Database Persisted Oddjob">
@@ -52,7 +57,7 @@ CONSTRAINT oddjob_pk PRIMARY KEY (path, id))]]></buffer>
                             <jobs>
                                 <sql id="clean-up" name="Sql Job">
                                     <connection>
-                                        <value value="${persister-connection}"/>
+                                        <value value="${vars.persisterConnection}"/>
                                     </connection>
                                     <input>
                                         <buffer><![CDATA[drop table oddjob]]></buffer>

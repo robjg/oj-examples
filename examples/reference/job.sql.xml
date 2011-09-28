@@ -68,11 +68,11 @@ style varchar(20), greeting varchar(30),constraint greetings_pk primary key (sty
                                                 <buffer><![CDATA[select greeting from greetings where style='nice']]></buffer>
                                             </input>
                                             <results>
-                                                <sql-results-bean id="query-result"/>
+                                                <sql-results-bean/>
                                             </results>
                                         </sql>
-                                        <echo id="result" text="${query-result.row.GREETING}"/>
-                                        <echo id="resultindexed" text="${query-result.rows[0].GREETING}"/>
+                                        <echo id="result" text="${query.results.row.GREETING}"/>
+                                        <echo id="resultindexed" text="${query.results.rows[0].GREETING}"/>
                                     </jobs>
                                 </sequential>
                             </jobs>
@@ -89,12 +89,12 @@ style varchar(20), greeting varchar(30),constraint greetings_pk primary key (sty
                                                 <buffer><![CDATA[select style, greeting from greetings]]></buffer>
                                             </input>
                                             <results>
-                                                <sql-results-bean id="queryall-result"/>
+                                                <sql-results-bean/>
                                             </results>
                                         </sql>
                                         <foreach id="for">
                                             <values>
-                                                <value value="${queryall-result.rows}"/>
+                                                <value value="${queryall.results.rows}"/>
                                             </values>
                                             <configuration>
                                                 <arooa:configuration xmlns:arooa="http://rgordon.co.uk/oddjob/arooa">

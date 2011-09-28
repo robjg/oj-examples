@@ -10,8 +10,8 @@ import org.oddjob.OddjobLookup;
 import org.oddjob.OurDirs;
 import org.oddjob.Setup;
 import org.oddjob.arooa.convert.ArooaConversionException;
+import org.oddjob.arooa.deploy.ArooaDescriptorFactory;
 import org.oddjob.arooa.xml.XMLConfiguration;
-import org.oddjob.oddballs.OddballsDirDescriptorFactory;
 import org.oddjob.state.ParentState;
 
 
@@ -19,7 +19,7 @@ public class ExamplesTest extends TestCase {
 
 	ClassLoader classLoader;
 	
-	File oddballs;
+	ArooaDescriptorFactory oddballs;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -45,8 +45,7 @@ public class ExamplesTest extends TestCase {
 		Oddjob test = createOddjob("reference");
 		
 		test.setClassLoader(classLoader);
-		test.setDescriptorFactory(
-				new OddballsDirDescriptorFactory(oddballs));
+		test.setDescriptorFactory(oddballs);
 		test.run();
 		
 		assertEquals(ParentState.COMPLETE, test.lastStateEvent().getState());
@@ -89,8 +88,7 @@ public class ExamplesTest extends TestCase {
 		OurDirs dirs = new OurDirs();
 		
 		Oddjob test = new Oddjob();
-		test.setDescriptorFactory(
-				new OddballsDirDescriptorFactory(oddballs));
+		test.setDescriptorFactory(oddballs);
 		test.setFile(new File(dirs.base(), "examples/oddjob.xml"));
 		test.run();
 		

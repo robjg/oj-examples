@@ -7,7 +7,8 @@ import junit.framework.TestCase;
 import org.oddjob.Oddjob;
 import org.oddjob.OurDirs;
 import org.oddjob.Setup;
-import org.oddjob.oddballs.OddballsDirDescriptorFactory;
+import org.oddjob.arooa.deploy.ArooaDescriptorFactory;
+import org.oddjob.state.ParentState;
 
 public class ReferenceSqlTest extends TestCase {
 
@@ -15,7 +16,7 @@ public class ReferenceSqlTest extends TestCase {
 
 	ClassLoader classLoader;
 	
-	File oddballs;
+	ArooaDescriptorFactory oddballs;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -28,19 +29,20 @@ public class ReferenceSqlTest extends TestCase {
 		Setup setup = new Setup();
 		this.oddballs = setup.getOddballs();
 		this.classLoader = setup.getClassLoader();
-
 	}
 	
 	public void testSqlExample() throws Exception {
 		
 		Oddjob oddjob = new Oddjob();
-		oddjob.setDescriptorFactory(
-				new OddballsDirDescriptorFactory(oddballs));
+		oddjob.setDescriptorFactory(oddballs);
 		oddjob.setClassLoader(classLoader);
 		oddjob.setFile(new File(dir, "job.sql.xml"));
 		
 		oddjob.run();
 
+		assertEquals(ParentState.COMPLETE, 
+				oddjob.lastStateEvent().getState());
+		
 /*		
 		OddjobLookup lookup = new OddjobLookup(oddjob);
 		
@@ -67,6 +69,5 @@ public class ReferenceSqlTest extends TestCase {
 		((Stoppable) top).stop();
 */		
 		oddjob.destroy();
-	}
-	
+	}	
 }
