@@ -60,7 +60,7 @@ public class SchedulingTest extends TestCase {
 		
 		oddjob.stop();
 		
-		assertEquals(ParentState.COMPLETE, oddjob.lastStateEvent().getState());
+		assertEquals(ParentState.READY, oddjob.lastStateEvent().getState());
 		
 		oddjob.destroy();
 	}
@@ -146,7 +146,7 @@ public class SchedulingTest extends TestCase {
 		
 		oddjob.stop();
 		
-		assertEquals(ParentState.COMPLETE, 
+		assertEquals(ParentState.READY, 
 				oddjob.lastStateEvent().getState());
 		
 		oddjob.destroy();
