@@ -15,7 +15,7 @@
                                         <exists file="${this.dir}/work/hsqldb/mydb.lck"/>
                                     </job>
                                 </state:equals>
-                                <echo text="Backing up the Database..."/>
+                                <echo>Backing up the Database...</echo>
                             </jobs>
                         </sequential>
                     </job>

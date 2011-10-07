@@ -12,7 +12,7 @@
       </schedules:daily>
      </schedule>
      <job>
-      <echo name="Morning Job" text="Good Morning."/>
+      <echo name="Morning Job">Good Morning.</echo>
      </job>
     </scheduling:timer>
     <scheduling:timer  id="timer2" name="Afternoon Timer">
@@ -24,7 +24,7 @@
       </schedules:daily>
      </schedule>
      <job>
-      <echo name="Afternoon Job" text="Good Afternoon."/>
+      <echo name="Afternoon Job">Good Afternoon.</echo>
      </job>
     </scheduling:timer>
    </jobs>

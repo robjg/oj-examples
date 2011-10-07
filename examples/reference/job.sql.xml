@@ -71,8 +71,8 @@ style varchar(20), greeting varchar(30),constraint greetings_pk primary key (sty
                                                 <sql-results-bean/>
                                             </results>
                                         </sql>
-                                        <echo id="result" text="${query.results.row.GREETING}"/>
-                                        <echo id="resultindexed" text="${query.results.rows[0].GREETING}"/>
+                                        <echo id="result">${query.results.row.GREETING}</echo>
+                                        <echo id="resultindexed">${query.results.rows[0].GREETING}</echo>
                                     </jobs>
                                 </sequential>
                             </jobs>
@@ -100,7 +100,7 @@ style varchar(20), greeting varchar(30),constraint greetings_pk primary key (sty
                                                 <arooa:configuration xmlns:arooa="http://rgordon.co.uk/oddjob/arooa">
                                                     <xml>
                                                         <xml>
-                                                            <echo text="${for.current.STYLE} is ${for.current.GREETING}"/>
+                                                            <echo>${for.current.STYLE} is ${for.current.GREETING}</echo>
                                                         </xml>
                                                     </xml>
                                                 </arooa:configuration>

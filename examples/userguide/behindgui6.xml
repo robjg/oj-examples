@@ -6,7 +6,7 @@
                 <oddjob id="fred"
                         name="Fred"
                         file="${this.dir}/nested.xml"/>
-                <echo text="${fred/message.text}"/>
+                <echo>${fred/message.text}</echo>
             </jobs>
         </sequential>
     </job>

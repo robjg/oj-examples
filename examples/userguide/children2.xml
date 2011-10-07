@@ -2,11 +2,9 @@
     <job>
         <sequential>
             <jobs>
-                <echo name="Before"
-                      text="About to do it..."/>
+                <echo name="Before">About to do it...</echo>
                 <exec command="cmd /C examples\exec\bin\greeting.bat hello"/>
-                <echo name="After"
-                      text="Did it!"/>
+                <echo name="After">Did it!</echo>
             </jobs>
         </sequential>
     </job>

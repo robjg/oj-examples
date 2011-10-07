@@ -5,10 +5,8 @@
                 <sequential id="trigger-on-me"
                             name="A sequence of two jobs">
                     <jobs>
-                        <echo name="Echo to Console"
-                              text="This runs first"/>
-                        <echo name="Echo to Console"
-                              text="This runs after"/>
+                        <echo name="Echo to Console">This runs first</echo>
+                        <echo name="Echo to Console">This runs after</echo>
                     </jobs>
                 </sequential>
             </jobs>

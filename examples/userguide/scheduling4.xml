@@ -7,8 +7,7 @@
     <scheduling:trigger 
                          on="${both-files-available}">
      <job>
-      <echo id="a-job"
-               text="Finally I get to do some work."/>
+      <echo id="a-job">Finally I get to do some work.</echo>
      </job>
     </scheduling:trigger>
     <parallel id="both-files-available">

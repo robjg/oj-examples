@@ -5,7 +5,7 @@
             <jobs>
                 <scheduling:timer id="alarm-clock" name="An Alarm Clock" xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling">
                     <job>
-                        <echo id="alarm" name="The Alarm" text="Wake Up! - it's ${alarm-clock.current.fromDate}"/>
+                        <echo id="alarm" name="The Alarm">Wake Up! - it's ${alarm-clock.current.fromDate}</echo>
                     </job>
                     <schedule>
                         <schedules:time at="07:00" xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"/>
@@ -15,12 +15,12 @@
                     <jobs>
                         <scheduling:trigger name="Alert Trigger" on="${important}" xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling">
                             <job>
-                                <echo name="Alert" text="Important job has completed!"/>
+                                <echo name="Alert">Important job has completed!</echo>
                             </job>
                         </scheduling:trigger>
                         <folder name="A Folder of Jobs">
                             <jobs>
-                                <echo id="important" name="Run Me" text="I'm important"/>
+                                <echo id="important" name="Run Me">I'm important</echo>
                             </jobs>
                         </folder>
                     </jobs>
@@ -30,7 +30,7 @@
                         <sequential id="look" name="Look for files">
                             <jobs>
                                 <exists file="${this.dir}/work/*.foo" id="check" name="Check File Exists"/>
-                                <echo name="Echo to Console" text="Found ${check.exists[0]}"/>
+                                <echo name="Echo to Console">Found ${check.exists[0]}</echo>
                             </jobs>
                         </sequential>
                     </job>

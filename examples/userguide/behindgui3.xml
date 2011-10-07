@@ -2,8 +2,8 @@
     <job>
         <sequential>
             <jobs>
-                <echo text="This is followed..."/>
-                <echo text="...By this"/>
+                <echo>This is followed...</echo>
+                <echo>...By this</echo>
             </jobs>
         </sequential>
     </job>

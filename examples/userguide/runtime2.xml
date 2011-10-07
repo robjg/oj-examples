@@ -7,7 +7,7 @@
                         <value value="Hello"/>
                     </greeting>
                 </variables>
-                <echo text="${vars.greeting}"/>
+                <echo>${vars.greeting}</echo>
             </jobs>
         </sequential>
     </job>

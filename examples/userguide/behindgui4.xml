@@ -5,7 +5,7 @@
                 <schedules:interval interval="00:00:10"/>
             </schedule>
             <job>
-                <echo text="Hello"/>
+                <echo>Hello</echo>
             </job>
         </repeat>
     </job>

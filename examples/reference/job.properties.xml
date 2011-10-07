@@ -11,7 +11,7 @@
                                 <value key="snack.favourite" value="${fruit.favourite}"/>
                             </values>
                         </properties>
-                        <echo text="$${snack.favourite} is ${snack.favourite}"/>
+                        <echo>$${snack.favourite} is ${snack.favourite}</echo>
                     </jobs>
                 </sequential>
             </jobs>

@@ -12,7 +12,7 @@
                         <value value="${shared-schedules.regular}"/>
                     </schedule>
                     <job>
-                        <echo text="Hello"/>
+                        <echo>Hello</echo>
                     </job>
                 </repeat>
             </jobs>

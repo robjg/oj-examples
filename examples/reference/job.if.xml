@@ -10,11 +10,9 @@
                                 <exists name="Check File Exists"
                                         file="${this.dir}/data/some.txt"/>
                                 <echo id="then"
-                                      name="Echo to Console"
-                                      text="File Exists"/>
+                                      name="Echo to Console">File Exists</echo>
                                 <echo id="else"
-                                      name="Echo to Console"
-                                      text="File Doesn't Exist"/>
+                                      name="Echo to Console">File Doesn't Exist</echo>
                             </jobs>
                         </state:if>
                     </jobs>

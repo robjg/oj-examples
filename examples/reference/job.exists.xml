@@ -22,8 +22,7 @@
                                                 <exists id="check"
                                                         name="Check File Exists"
                                                         file="${this.dir}/work/*.foo"/>
-                                                <echo name="Echo to Console"
-                                                      text="Found ${check.exists[0]}"/>
+                                                <echo name="Echo to Console">Found ${check.exists[0]}</echo>
                                             </jobs>
                                         </sequential>
                                     </job>
@@ -44,7 +43,7 @@
                             	<arooa:configuration>
 		                            <xml>
 		                                <xml>
-		                                    <echo text="found ${found.current}"/>
+		                                    <echo>found ${found.current}</echo>
 		                                </xml>
 		                            </xml>
                             	</arooa:configuration>

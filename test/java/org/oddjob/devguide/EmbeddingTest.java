@@ -18,7 +18,7 @@ public class EmbeddingTest extends TestCase {
 		String xml = 
 			"<oddjob>" +
 			" <job>" +
-			"  <echo id='hello-job' text='Hello World'/>" +
+			"  <echo id='hello-job'>Hello World</echo>" +
 			" </job>" +
 			"</oddjob>";
 		

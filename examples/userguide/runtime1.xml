@@ -2,9 +2,8 @@
     <job>
         <sequential>
             <jobs>
-                <echo id="my-echo"
-                      text="This will be displayed twice!"/>
-                <echo text="${my-echo.text}"/>
+                <echo id="my-echo">This will be displayed twice!</echo>
+                <echo>${my-echo.text}</echo>
             </jobs>
         </sequential>
     </job>

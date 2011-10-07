@@ -12,7 +12,7 @@
                             <job>
                                 <sequential id="useful" name="Run in Sequence">
                                     <jobs>
-                                        <echo name="Echo to Console" text="This could do something useful."/>
+                                        <echo name="Echo to Console">This could do something useful.</echo>
                                         <stop async="true" job="${myschedule}" name="Stop Timer"/>
                                     </jobs>
                                 </sequential>

@@ -9,8 +9,7 @@
                                 <value value="Hello World"/>
                             </greeting>
                         </variables>
-                        <echo name="Issue a greeting."
-                              text="${vars.greeting}"/>
+                        <echo name="Issue a greeting.">${vars.greeting}"</echo>
                     </jobs>
                 </sequential>
             </jobs>

@@ -8,8 +8,7 @@
                     <jobs>
                         <scheduling:timer name="Schedule lunch reminder">
                             <job>
-                                <echo id="lunch"
-                                      text="Go to Lunch!"/>
+                                <echo id="lunch">Go to Lunch!</echo>
                             </job>
                             <schedule>
                                 <schedules:time at="12:00"/>

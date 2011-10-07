@@ -47,7 +47,7 @@
         </schedules:broken>
        </schedule>
        <job>
-        <echo text="Work Work Work!" id="a-job"/>
+        <echo id="a-job">Work Work Work!</echo>
        </job>
       </scheduling:timer>
    </jobs>

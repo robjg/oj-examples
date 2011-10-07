@@ -3,8 +3,8 @@
     <job>
         <parallel id="PAR1" name="PAR1">
             <jobs>
-                <echo text="a"/>
-                <echo text="b"/>
+                <echo>a</echo>
+                <echo>b</echo>
             </jobs>
         </parallel>
     </job>

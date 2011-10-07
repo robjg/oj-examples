@@ -30,8 +30,7 @@
                                 <value value="${v.buff}"/>
                             </output>
                         </copy>
-                        <echo name="What's in the file?"
-                              text="${v.buff}"/>
+                        <echo name="What's in the file?">"${v.buff}</echo>
                     </jobs>
                 </sequential>
             </jobs>

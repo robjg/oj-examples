@@ -1,5 +1,5 @@
 <oddjob>
     <job>
-        <echo text="Hello World!"/>
+        <echo>Hello World!</echo>
     </job>
 </oddjob>

@@ -2,7 +2,7 @@
     <job>
          <folder name="Jobs On Server 3">
              <jobs>
-                 <echo id="echo3" text="Important Job 3"/>
+                 <echo id="echo3">Important Job 3</echo>
                  <jmx:client id="server1"
                          name="Server 1"
                          url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-1"/>

@@ -11,7 +11,7 @@
                         <sequential name="Run in Sequence">
                             <jobs>
                                 <sequence id="seq"/>
-                                <echo name="Echo to Console" text="Hello ${seq.current}"/>
+                                <echo name="Echo to Console">Hello ${seq.current}</echo>
                             </jobs>
                         </sequential>
                     </job>
@@ -41,7 +41,7 @@
                                 <exists file="dont.exist" name="Check Non Existant File"/>
                             </job>
                         </repeat>
-                        <echo id="exception" name="Echo to Console" text="Help!"/>
+                        <echo id="exception" name="Echo to Console">Help!</echo>
                     </jobs>
                 </state:if>
             </jobs>
