@@ -94,7 +94,7 @@ nohup java -jar run-oddjob.jar -f server.xml &amp;
 		posted on the Oddjob forum of an install command:</p>
 		
 <pre class="command">
-SchedulerService -install SchedulerService "%JAVA_HOME%\bin\server\jvm.dll" -Djava.class.path=C:\PDI\Oddjob\run-oddjob.jar 
+JavaService -install SchedulerService "%JAVA_HOME%\bin\server\jvm.dll" -Djava.class.path=C:\PDI\Oddjob\run-oddjob.jar 
 -Doddjob.executors.default.poolsize=120 -start org.oddjob.launch.Launcher -params -f "%CD%\..\Oddjob\server.xml" 
 -description "Pentaho Oddjob Scheduler Service" 
 </pre>

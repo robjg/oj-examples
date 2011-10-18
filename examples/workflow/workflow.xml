@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <oddjob>
     <job>
-        <repeat name="Repeat">
+        <scheduling:timer name="Repeat" xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling">
             <schedule>
                 <schedules:interval interval="00:00:20" xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"/>
             </schedule>
@@ -25,6 +25,6 @@
                     </jobs>
                 </state:if>
             </job>
-        </repeat>
+        </scheduling:timer>
     </job>
 </oddjob>
