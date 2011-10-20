@@ -196,54 +196,76 @@
 					</job>
 				</scheduling:timer>
 				
-				<!-- =============================================
-				Resubmit our Exception watcher but wait an hour between
-				submition because we don't want loads of mails.
-				============================================== -->
-				<scheduling:timer name="Re-run The Trigger"
-						skipMissedRuns="true">
-			
-					<schedule>
-						<schedules:interval interval="01:00"/>
-					</schedule>
-
-					<job>
-						<scheduling:trigger on="${failure}" state="INCOMPLETE">
-							<job>
-						
-								<!-- =============================================
-								If a schedulable job throws an exception this job
-								will be executed which sends a mail. Our schedule
-								will throw an exception once the retries have run.  
-								============================================== -->
-								<mail:send id="exception" name="Send alert mail"
-										from="${my.alert.from}"
-										to="${my.alert.to}"
-										host="${my.mailhost}"
-										subject="FTP download failed">
-FTP Failed!													
-								</mail:send>
-								
-							</job>
-						</scheduling:trigger>
-					</job>
-				
-				</scheduling:timer>
-				
-				<!-- =============================================
-				Flag an exception if either job fails.
-				============================================== -->
-				<state:or id="failure">
-					<jobs>
-						<state:mirror job="${kcb-retry}"/>
-						<state:mirror job="${hkf-retry}"/>
-					</jobs>
-				</state:or>
-				
-				<archive-browser name="KCB Archive" archiveName="kcb-archive"/>
-				
-				<archive-browser name="HKF Archive" archiveName="hkf-archive"/>
-				
+                <!-- =============================================
+                These jobs are used for the alerting mechanism.
+                ============================================== -->                
+                <sequential name="Alerting Funtionality">
+                    <jobs>
+                    
+                        <!-- =============================================
+                        Resubmit our Exception watcher but wait an hour between
+                        submition because we don't want loads of mails.
+                        ============================================== -->                
+                        <scheduling:timer name="Re-run The Trigger"
+                                skipMissedRuns="true">
+                    
+                            <schedule>
+                                <schedules:interval interval="01:00"/>
+                            </schedule>
+        
+                            <job>
+                                <scheduling:trigger on="${failure}" state="INCOMPLETE">
+                                    <job>
+                                
+                                        <!-- =============================================
+                                        If a schedulable job throws an exception this job
+                                        will be executed which sends a mail. Our schedule
+                                        will throw an exception once the retries have run.  
+                                        ============================================== -->
+                                        <mail:send id="exception" name="Send alert mail"
+                                                from="${my.alert.from}"
+                                                to="${my.alert.to}"
+                                                host="${my.mailhost}"
+                                                subject="FTP download failed">
+                                           <![CDATA[FTP Failed!]]>                                                 
+                                        </mail:send>
+                                        
+                                    </job>
+                                </scheduling:trigger>
+                            </job>
+                        
+                        </scheduling:timer>
+                        
+                        <!-- =============================================
+                        Reset the Mirror because it's state will have been
+                        persisted.
+                        ============================================== -->
+                        
+                        <reset level="HARD" job="${failure}"/>
+                        
+                        <!-- =============================================
+                        Flag an exception if either job fails.
+                        ============================================== -->
+                        <state:or id="failure">
+                            <jobs>
+                                <state:mirror job="${kcb-retry}"/>
+                                <state:mirror job="${hkf-retry}"/>
+                            </jobs>
+                        </state:or>                        
+                    
+                    </jobs>                
+                </sequential>
+                                
+                <!-- =============================================
+                Archive Browsers.
+                ============================================== -->
+                <folder name="Archive Browsers">
+                    <jobs>
+                        <archive-browser name="KCB Archive" archiveName="kcb-archive"/>
+                        
+                        <archive-browser name="HKF Archive" archiveName="hkf-archive"/>                
+                    </jobs>
+                </folder>
 			</jobs>
 		</sequential>
 	</job>

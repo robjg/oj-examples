@@ -18,7 +18,11 @@
                 </hsql:hsqldb>
                 <sql name="Create Table">
                     <connection>
-                        <hsql:connection id="connection" url="jdbc:hsqldb:hsql://localhost:11002/ojdb" username="sa" xmlns:hsql="http://rgordon.co.uk/oddjob/hsql"/>
+                        <identify id="connection">
+                            <value>
+                                <hsql:connection url="jdbc:hsqldb:hsql://localhost:11002/ojdb" username="sa" xmlns:hsql="http://rgordon.co.uk/oddjob/hsql"/>
+                            </value>
+                        </identify>
                     </connection>
                     <input>
                         <buffer><![CDATA[DROP TABLE oddjob_grabbable IF EXISTS
