@@ -27,15 +27,15 @@
                         </sequential>
                         <parallel>
                             <jobs>
-                                <exec dir="${vars.oddjobHome}/work/server1"><![CDATA[cmd.exe /C start "\"Server 1\""
+                                <exec dir="${server1.work.dir}"><![CDATA[cmd.exe /C start "\"Server 1\""
 java -jar ${oddjob.run.jar} 
 -f ${server1.config.file}
 ]]></exec>
-                                <exec dir="${vars.oddjobHome}/work/server2"><![CDATA[cmd.exe /C start "\"Server 2\"" 
+                                <exec dir="${server2.work.dir}"><![CDATA[cmd.exe /C start "\"Server 2\"" 
 java -jar ${oddjob.run.jar} 
 -f ${server2.config.file}
                                 ]]></exec>
-                                <exec dir="${vars.oddjobHome}/work/server3"><![CDATA[cmd.exe /C start "\"Server 3\"" 
+                                <exec dir="${server3.work.dir}"><![CDATA[cmd.exe /C start "\"Server 3\"" 
 java -jar ${oddjob.run.jar} 
 -f ${server3.config.file}
                                 ]]></exec>
@@ -43,9 +43,13 @@ java -jar ${oddjob.run.jar}
                         </parallel>
                     </jobs>
                 </sequential>
-                <jmx:client id="server1" name="Server 1" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-1" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
-                <jmx:client id="server2" name="Server 2" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-2" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
-                <jmx:client id="server3" name="Server 3" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-3" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                <folder name="Servers">
+                    <jobs>
+                        <jmx:client id="server1" name="Server 1" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-1" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                        <jmx:client id="server2" name="Server 2" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-2" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                        <jmx:client id="server3" name="Server 3" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-3" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                    </jobs>
+                </folder>
             </jobs>
         </sequential>
     </job>
