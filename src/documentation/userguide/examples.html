@@ -13,6 +13,7 @@
 			<li><a href="#exec">Execute a Batch File</a></li>
 			<li><a href="#workflow">Conditional Paths</a></li>
 			<li><a href="#scheduling">A Scheduler Example</a></li>
+			<li><a href="#distributed">Distributed Scheduling</a></li>
 			<li><a href="#sharing">Sharing Jobs on A Network</a></li>
 		</ul>
 
@@ -74,10 +75,22 @@
 		Oddjob. Points of interest include that the filename contains the date and
 		the files are sourced from different time zones.</p>
 		
-		<p>The example comes in two forms, a live example that will ftp the files
-		back, and an example that substitutes random dummy jobs so the demonstration 
-		can still be seen working off line.</p>
+		<p>An <a href="@reference@/org/oddjob/persist/ArchiveJob.html">Archive</a>
+		job captures the results of each run. A folder contains
+		<a href="@reference@/org/oddjob/persist/ArchiveBrowserJob.html">
+		Archive Browser</a> jobs that allow the results of previous runs to be
+		viewed.</p>
+		 
+		<a name="distributed"></a>
+		<h4>Distributed Scheduling</h4>
 
+		<p>Demonstrates how Oddjob could be used to schedule jobs over different
+		servers. The three nested Oddjobs - Worker 1, 2 and 3 would be identical
+		job configurations on three different servers. They use a central 
+		database to coordinate grabbing for work.</p>
+
+		<p>The <a href="grabbing.html">Distributing Work</a> section of this
+		user guide has another simple example of this.
 		
 		<a name="sharing"></a>
 		<h4>Sharing Jobs on A Network</h4>

@@ -1,5 +1,0 @@
-<oddjob id="this">
-	<job>
-		<echo>${this.args[0]}</echo>
-	</job>
-</oddjob>

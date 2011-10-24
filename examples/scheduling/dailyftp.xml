@@ -199,7 +199,7 @@
                 <!-- =============================================
                 These jobs are used for the alerting mechanism.
                 ============================================== -->                
-                <sequential name="Alerting Funtionality">
+                <sequential name="Alerting">
                     <jobs>
                     
                         <!-- =============================================

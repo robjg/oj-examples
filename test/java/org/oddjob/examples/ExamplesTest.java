@@ -39,26 +39,7 @@ public class ExamplesTest extends TestCase {
 		
 		test.destroy();
 	}
-	
-	public void testReference() {
-
-		Oddjob test = createOddjob("reference");
 		
-		test.setClassLoader(classLoader);
-		test.setDescriptorFactory(oddballs);
-		test.run();
-		
-		assertEquals(ParentState.COMPLETE, test.lastStateEvent().getState());
-		
-		Object reference = new OddjobLookup(test).lookup(
-				"examples/reference");
-		
-		assertEquals(ParentState.COMPLETE, Helper.getJobState(
-				reference));
-		
-		test.destroy();
-	}
-	
 	Oddjob createOddjob(String example) {
 		
 		OurDirs dirs = new OurDirs();

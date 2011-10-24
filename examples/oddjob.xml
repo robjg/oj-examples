@@ -21,7 +21,6 @@
                 <oddjob file="${oddjob.dir}/resiliance/resiliance.xml" name="Distributed Scheduling Example"/>
                 <oddjob file="${oddjob.dir}/server/server.xml" name="Server Example"/>
                 <oddjob file="${oddjob.dir}/client/client.xml" name="Client Example"/>
-                <oddjob file="${oddjob.dir}/reference/reference.xml" id="reference" name="The Reference Examples"/>
             </jobs>
         </folder>
     </job>
