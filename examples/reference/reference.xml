@@ -9,7 +9,6 @@
                 <oddjob file="${this.dir}/job.delete.xml" name="delete"/>
                 <oddjob file="${this.dir}/job.exec.xml" name="exec"/>
                 <oddjob file="${this.dir}/job.exists.xml" name="exists"/>
-                <oddjob file="${this.dir}/job.equals.xml" name="equals"/>
                 <oddjob file="${this.dir}/job.foreach.xml" name="foreach"/>
                 <oddjob file="${this.dir}/job.if.xml" name="if"/>
                 <oddjob file="${this.dir}/job.launch.xml" name="launch"/>
@@ -30,11 +29,6 @@
                 <oddjob file="${this.dir}/job.scheduler.xml" name="scheduler"/>
                 <oddjob file="${this.dir}/job.sequence.xml" name="sequence"/>
                 <oddjob file="${this.dir}/job.sequential.xml" name="sequential"/>
-                <oddjob file="${this.dir}/job.sql.xml" name="sql"/>
-                <oddjob file="${this.dir}/job.trigger.xml" name="trigger"/>
-                <oddjob file="${this.dir}/job.unschedule.xml" name="unschedule"/>
-                <oddjob file="${this.dir}/job.variables.xml" name="variables"/>
-                <oddjob file="${this.dir}/job.wait.xml" name="wait"/>
             </jobs>
         </sequential>
     </job>
