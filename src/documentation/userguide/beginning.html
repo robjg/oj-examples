@@ -95,41 +95,68 @@
 		<p>The green tick and blue arrow indicate what <i>state</i> a job is in.
 		A job can be in one of five states. These are:</p>
 		
-		<table border="1">
+		<table border="1" width="60%">
 			<tr>
-				<td><img src="images/right_blue.gif" alt="Blue Arrow"/></td>
-				<td>Ready</td>
+				<td width="5%"><img src="images/right_blue.gif" alt="Blue Arrow"/></td>
+				<td width="20%">READY</td>
 				<td>The job is ready to be executed. A job will only execute
 				if it is 'Ready'</td>
 			</tr>
 			<tr>
 				<td><img src="images/triangle_green.gif" alt="Green Triangle"/></td>
-				<td>Executing</td>
+				<td>EXECUTING</td>
 				<td>The job is executing.</td>
 			</tr>
 			<tr>
 				<td><img src="images/tick_green.gif" alt="Green Tick"/></td>
-				<td>Complete</td>
+				<td>COMPLETE</td>
 				<td>The job has completed successfully.</td>
 			</tr>
 			<tr>
 				<td><img src="images/cross.gif" alt="Black Cross"/></td>
-				<td>Incomplete</td>
+				<td>INCOMPLETE</td>
 				<td>The job ran but was not able to complete -
 				e.g. a file was not available.</td>
 			</tr>
 			<tr>
 				<td><img src="images/asterix_red.gif" alt="Red Splodge"/></td>
-				<td>Exception</td><td>Something unexpected happened during the running
+				<td>EXCEPTION</td><td>Something unexpected happened during the running
 				of the job - e.g. a network connection failed.</td>	
 			</tr>
 		</table>		
 
+		<p>Job's that can have children can also be in another state.</p>
+
+		<table border="1" width="60%">
+			<tr>
+				<td width="5%"><img src="images/right_green.gif" alt="Green Arrow"/></td>
+				<td width="20%">ACTIVE</td>
+				<td>The job has finished executing itself but one of it's child
+				jobs is still executing.</td>
+			</tr>
+		</table>
+		
+		<p>Oddjob also includes services, which you won't need to know about
+		until much later, but instead of executing they have:</p>
+
+		<table border="1" width="60%">
+			<tr>
+				<td width="5%"><img src="images/triangle_green.gif" alt="Green Triangle"/></td>
+				<td width="20%">STARTING</td>
+				<td>The service is started.</td>
+			</tr>
+			<tr>
+				<td><img src="images/dot_green.gif" alt="Green Dot"/></td>
+				<td>STARTED</td>
+				<td>The service has started.</td>
+			</tr>
+		</table>
+		
 		<p>You may also see the icons <img src="images/triangle_red.gif" alt="Red Triangle"/>
 		to indicate that a job is stopping or 
 		<img src="images/dot_blue.gif" alt="Blue Dot"/> to indicate that it is
 		sleeping. For both these icons the actual <i>state</i> of the job is still
-		'Executing'.</p>
+		'EXECUTING', 'ACTIVE' or 'STARTED'.</p>
 		
 		<a name="resetting"></a>
 		<h4>Resetting and Rerunning A Job</h4>

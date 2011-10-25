@@ -9,9 +9,13 @@
 		<a name="top"></a>
 		<h1>Modularity And Oddballs</h1>
 
-		<p>Oddjob's extension points. In this section we take a look at 
-		the many options for making our classes available to Oddjob
-	understand how Oddjob uses nice short element names like &lt;copy&gt;</p>
+		<p>Oddjob's extension points.</p>
+		
+		<p>In this section we take a look at 
+		the many options for making our classes available to Oddjob. We'll
+	 learn how to tell Oddjob to use nice short element names like 
+	 <code>&lt;copy&gt;</code>
+	 and we'll learn how to write an Oddball which is an Oddjob plugin.</p>
 		
 	<ul>
 		<li><a href="#class">The Class System</a></li>
@@ -44,12 +48,11 @@ $ java -jar run-oddjob.jar -f examples/devguide/hello1.xml
 Hello World!
 </pre>
 	
-	<p>But I'm sure you believed me.</p>
-
 	<a name="factory"></a>
 	<h4>The Descriptor Factory</h4>
 
-	<p>How can we use our own XML elements instead of boring old &lt;class&gt; elements? 
+	<p>How can we use our own XML elements instead of boring old <code>
+	&lt;bean&gt;</code> elements? 
 	Provide an implementation of an
 	<a href="@javadoc@/org/oddjob/arooa/deploy/ArooaDescriptorFactory.html">ArooaDescriptorFactory</a>.
 	</p>
@@ -129,6 +132,8 @@ Hello Mr Smith.
 	<a name="oddballs"></a>
 	<h4>Oddballs</h4>
 
+	<p>Oddballs are Oddjob's plugin architecture.</p>
+	
 	<p>Oddballs extends the above features of Oddjob modularity by 
 	defining a 
 	recognised directory structure for deploying a set of job classes and
@@ -143,13 +148,14 @@ Hello Mr Smith.
 	</ul>
 	
 	<p>(Familiar to those who know Servlets. But there's no 
-	<code>web.xml</code> instead...)</p>
+	<code>web.xml</code>, instead...)</p>
 	
 	<p>When the Oddball loads it scans this classpath
 	for any number of <code>META-INF/arooa.xml</code> XML file from which it 
 	creates it's ArooaDescriptorFactory.</p>
 	
-	<p>Oddjob comes pre-installed with some Oddballs, 
+	<p>Oddjob comes pre-installed with some Oddballs for Ant tasks, mail, 
+	FTP, an HSQL database server, 
 	and an optional Oddball, <code>oj-spring</code>
 	 which is in the <code>/opt/oddballs</code> directory. To install an 
 	 Oddball simply move this to Oddjob's <code>oddballs</code> directory.</p>
