@@ -1,4 +1,5 @@
-<oddjob xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+<oddjob xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling"
+        xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
     <job>
         <sequential>
             <jobs>
@@ -7,14 +8,14 @@
                         <schedules:interval interval="00:00:10"/>
                     </regular>
                 </variables>
-                <repeat>
+                <scheduling:timer>
                     <schedule>
                         <value value="${shared-schedules.regular}"/>
                     </schedule>
                     <job>
                         <echo>Hello</echo>
                     </job>
-                </repeat>
+                </scheduling:timer>
             </jobs>
         </sequential>
     </job>

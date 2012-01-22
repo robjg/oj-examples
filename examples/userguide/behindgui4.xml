@@ -1,12 +1,13 @@
-<oddjob xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+<oddjob xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling"
+        xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
     <job>
-        <repeat>
+        <scheduling:timer>
             <schedule>
                 <schedules:interval interval="00:00:10"/>
             </schedule>
             <job>
                 <echo>Hello</echo>
             </job>
-        </repeat>
+        </scheduling:timer>
     </job>
 </oddjob>
