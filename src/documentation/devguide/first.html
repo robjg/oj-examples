@@ -25,7 +25,12 @@
 
 {@oddjob.java.file src/java/org/oddjob/devguide/HelloWorldJob.java}
  
- 	<p>To get Oddjob to run our job we need to create configuration file:</p>
+ 	<p>Oddjob will run any <code>java.lang.Runnable</code> or 
+ 	<code>java.util.concurrent.Callable</code> as is. No need to learn a
+ 	new API!
+ 	</p>
+ 
+ 	<p>To get Oddjob to run our job we need to create a configuration file:</p>
  	
 {@oddjob.xml.file examples/devguide/hello1.xml}
  	
@@ -41,7 +46,8 @@ Hello World!
 	any classpath option.
 	</p>
 
-	<p>We can now also load it in Oddjob Explorer - but we need the classpath.</p>
+	<p>We can now also load it in Oddjob Explorer (but we need still need 
+	the classpath).</p>
 	
 <pre class="command">
 $ java -jar run-oddjob.jar -cp examples/classes <br/>

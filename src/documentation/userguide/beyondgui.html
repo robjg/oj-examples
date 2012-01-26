@@ -16,8 +16,7 @@
 			<li><a href="#cl">The Command Line</a></li>
 			<li><a href="#bg">Stopping Oddjob</a></li>
 			<li><a href="#bg">In the Linux background</a></li>
-			<li><a href="#service">As an XP service</a></li>
-			<li><a href="#web">The Web Interface</a></li>
+			<li><a href="#service">As a Windows Service</a></li>
 			<li><a href="#wrong">When Things Go Wrong</a></li>
 		</ul>
 
@@ -48,7 +47,7 @@ java -jar run-oddjob -f greeting.xml "Hello World!"
 <pre class="xml">
 &lt;oddjob id="this"&gt;
  &lt;job&gt;
-  &lt;echo text="${this.args[0]}"/&gt;
+  &lt;echo&gt;${this.args[0]}&lt;/echo&gt;
  &lt;/job&gt;
 &lt;/oddjob&gt;
 </pre>
@@ -87,7 +86,7 @@ nohup java -jar run-oddjob.jar -f server.xml &amp;
 		using Designer.
 
 		<a name="service"></a>
-		<h4>As an XP Service</h4>
+		<h4>As a Windows Service</h4>
 		
 		<p>Oddjob can be run as a service with 
 		<a href="http://javaservice.objectweb.org/">JavaService</a>. This is an example
@@ -104,17 +103,6 @@ JavaService -install SchedulerService "%JAVA_HOME%\bin\server\jvm.dll" -Djava.cl
 		<p>Another option would be 		
 			<a href="http://wrapper.tanukisoftware.org/">Java Service Wrapper</a>.</p>
 		
-		<a name="web"></a>
-		<h4>The Web Front End</h4>
-		
-		<p>Oddjob comes with a web interface. To run the web interface
-		you need a Servlet Engine or application server like 
-		<a href="http://tomcat.apache.org/index.html">tomcat</a>.</p>
-		
-		<p>To install Oddjob on Tomcat simply copy the oddjob.war file supplied
-		with the binary distribution of Oddjob to the webapps directory of Tomcat
-		and then restart Tomcat.</p>
-
 		<a name="wrong"></a>
 		<h4>When Things Go Wrong</h4>
 
@@ -128,6 +116,7 @@ JavaService -install SchedulerService "%JAVA_HOME%\bin\server\jvm.dll" -Djava.cl
 		<hr/>
 		
 		<a href="index.html">Index</a> <a href="#top">Top</a>
+		<a href="browser.html">Next</a>
 		
 	</body>	
 </html>

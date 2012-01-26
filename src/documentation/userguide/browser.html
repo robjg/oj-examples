@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<title>User Guide - Browser Interface</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>
+	<body>
+	
+		<a name="top"></a>
+		<h1>Oddjob's Browser Interface</h1>
+		
+		<p>Oddjob's Servlet and Browser Interface.</p>
+
+		<ul>
+			<li><a href="#installing">Installing</a></li>
+			<li><a href="#configuring">Configuring</a></li>
+			<li><a href="#limitations">Limitations</a></li>
+		</ul>
+
+		<a name="installing"></a>
+		<h4>Installing</h4>
+
+		<p>Oddjob comes with a web interface. To run the web interface
+		you need a Servlet Engine or application server like 
+		<a href="http://tomcat.apache.org/index.html">tomcat</a>.</p>
+		
+		<p>Oddjob uses a Servlet 3.0 deployement descriptor and so Tomcat 
+		Version 7 or above is required.</p>
+				
+		<p>To install Oddjob on Tomcat simply copy the oddjob.war file supplied
+		with the binary distribution of Oddjob to the webapps directory of Tomcat
+		and then restart Tomcat.</p>
+
+		<p>With the default Tomcat setup the URL 
+		<a href="http://localhost:8080/oddjob" target="_top">
+		http://localhost:8080/oddjob</a> will open Oddjob's browser view
+		and it will look something like this:</p>
+		
+		<a href="images/browserview.jpg"><img src="images/browserview.jpg" 
+		height="200" width="300" alt="Oddjob Browser Screenshot"/></a>
+
+		<p>When re-running structural jobs, the browser view of the job tree
+		lags what's Oddjob is doing so it is necessary to press refresh 
+		(sometimes several times) until it catches up.</p>
+		
+		<p>An automatic refresh in can be entered in seconds, this will have
+		the same effect as pressing the refresh button every that number of
+		seconds. To cancel the automatic refresh delete simply clear this 
+		field.
+		</p>
+		
+		 
+		<a name="configuring"></a>
+		<h4>Configuring</h4>
+
+		<p>The Webapp starts an instance of Oddjob. This will load an Oddjob
+		XML configuration file as specified in the web.xml web application
+		deployment descriptor.</p>
+		
+		<p>The web.xml contains lots of comments with further information on 
+		the supported properties.</p>
+						
+		<p>Log levels are controlled by the log4j.properties file in the
+		<code>WEB-INF/classes</code> directory. By default log level is set
+		to INFO for all loggers.</p>
+		
+		<a name="limitations"></a>
+		<h4>Limitations</h4>
+		
+		<dl>
+			<dt>Security</dt>
+			<dd><p>There isn't any. Browser based authentication
+			including a read-only role will be added soon.</p></dd>
+		
+			<dt>Threads</dt>
+			<dd><p>The Oddjob Webapp currently creates threads. This
+			isn't allowed by the J2EE specification and many Servlet containers
+			don't allow it including Googles App Engine.</p>
+			
+			<p>In theory the Executions Servlet could be replace with an 
+			instance of one that provided OddjobExecutors that didn't user
+			ThreadPools - but this is still theory.</p>
+			</dd>
+		</dl>
+		
+		<hr/>
+		
+		<a href="index.html">Index</a> <a href="#top">Top</a>
+		
+	</body>	
+</html>
