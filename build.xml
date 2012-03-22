@@ -427,8 +427,25 @@
 	</target>
 	
 	<!-- =================================================================== -->
+	<!-- Maven Targets			                                     -->
+	<!-- =================================================================== -->
+		
+	<target name="maven-install"
+			description="Not yet implemented">
+	</target>
+	
+    <target name="maven-deploy" 
+    	description="Not yet implemented">
+    </target>
+	
+	<target name="maven-stage" 
+		description="Not yet implemented">
+	</target>
+	
+	<!-- =================================================================== -->
 	<!-- Clean targets                                                       -->
 	<!-- =================================================================== -->
+	
 	<target name="clean" depends="init" description="Cleans the build directories">
 		<delete dir="${build.dir}"/>
 	</target>
