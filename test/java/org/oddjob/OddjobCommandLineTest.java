@@ -88,18 +88,21 @@ public class OddjobCommandLineTest extends TestCase {
 		Oddjob oddjob = new Oddjob();
 		oddjob.setFile(new File(relative("client.xml")));
 
-		StateEvent event = null;
-		do {
-			if (event != null) {
-				Thread.sleep(2000);
-			}
+		for (int i = 0; i < 10; ++i) {
 			console.dump();
 			oddjob.softReset();
 			oddjob.run();
-			event = oddjob.lastStateEvent(); 
-			logger.info(event.getException(), event.getException());
-		} while (event.getState() 
-				== ParentState.EXCEPTION);
+			StateEvent event = oddjob.lastStateEvent(); 
+			if (event.getState() 
+					== ParentState.EXCEPTION) {
+				logger.info("Client Oddjob Exception", event.getException());
+				Thread.sleep(2000);
+			}
+			else {
+				logger.info("Client state " + event.getState());
+				break;
+			}
+		} 
 
 		assertEquals(ParentState.ACTIVE, 
 				oddjob.lastStateEvent().getState());
