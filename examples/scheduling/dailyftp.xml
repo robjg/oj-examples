@@ -91,7 +91,7 @@
 												
 												<net:ftp id="kcb-ant" name="FTP file back"
 														host="ftp.cme.com" username="anonymous" 
-																	password="anonymous" >
+														password="anonymous" passive="true">
 													<commands>
 														<list>
 															<values>
@@ -174,7 +174,7 @@
 												============================================== -->
 												<net:ftp id='hkf-ant' name="FTP file back"
 														host="ftp.cme.com" username="anonymous" 
-																	password="anonymous">
+														password="anonymous" passive="true">
 													<commands>
 														<list>
 															<values>
