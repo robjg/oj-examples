@@ -6,7 +6,12 @@
 		</style>
 	</head>
 	<body>
-		<a name="top"></a>
+
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="sharing.html">Previous</a>]
+		[<a href="beyondgui.html">Next</a>]
+		
 		<h1>Saving Oddjob</h1>
 	
 		<p>So where were we?</p>
@@ -19,8 +24,7 @@
 			<li><a href="#archiving">Archiving</a></li>
 		</ul>
 
-		<a name="introduction"></a>
-		<h4>Introduction</h4>
+		<h4 id="introduction">Introduction</h4>
 		
 		<p>Whether it's a server crash or a deliberate restart, we want
 		our scheduled job sequences to know where they were. We want them
@@ -46,8 +50,7 @@
 		that saves state to a database. The reference pages explain each adequately,
 		however some extra background about Persisters might be be useful.</p>
 		
-		<a name="property"></a>
-		<h4>The Persister Property</h4>		
+		<h4 id="property">The Persister Property</h4>		
 		
 		<p>Now for those who've been paying attention there should be some
 		confusion because when we create a new Oddjob there is no persister 
@@ -72,8 +75,7 @@
 		<a href="images/saving1.gif"><img src="images/saving1.gif" 
 			height="200" width="300" alt="The Persister Property"/></a>
 		
-		<a name="ids"></a>
-		<h4>Persistence and Identity</h4>		
+		<h4 id="ids">Persistence and Identity</h4>		
 			
 		<p>Both our file and SQL persisters use the id of a job. Job's are stored 
 		and restored by id. JOBS WITHOUT AN ID ARE NOT STORED.</p>
@@ -91,8 +93,7 @@
 		Oddjob is an example of such a job. It's state is purely derived from it's 
 		child.
 				
-		<a name="deleting"></a>
-		<h4>Removing Persisted State</h4>		
+		<h4 id="deleting">Removing Persisted State</h4>		
 				
 		<p>Persisted state deletion isn't an exact science but it sort of makes sense
 		in most situations. Here's the rules:</p>
@@ -110,8 +111,7 @@
 		as the result of shutdown or as the result of a configuration edit. This will
 		be fixed in future releases.</p>
 				
-		<a name="archiving"></a>
-		<h4>Archiving</h4>		
+		<h4 id="archiving">Archiving</h4>		
 		
 		<p>Oddjob is able record snapshot of the state of it's children. It 
 		achieves this using a 
@@ -138,8 +138,10 @@
 		logs. It is planned to add this at some point.</p>
 		<hr/>
 
-		<a href="index.html">Index</a> <a href="#top">Top</a>
-		<a href="beyondgui.html">Next</a>
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="sharing.html">Previous</a>]
+		[<a href="beyondgui.html">Next</a>]
 		
 	</body>
 </html>

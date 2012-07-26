@@ -7,7 +7,11 @@
 	</head>
 	<body>
 
-	<a name="top"></a>
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="behindgui.html">Previous</a>]
+		[<a href="schedules.html">Next</a>]
+		
 	<h1>Scheduling</h1>
 
 	<p>Any time, any place, any where.</p>
@@ -22,8 +26,7 @@
 		<li><a href="#dependencies">Scheduling with Dependencies</a></li>
 	</ul>
 
-	<a name="introduction"></a>
-	<h4>Introduction</h4>
+	<h4 id="introduction">Introduction</h4>
 	
 	<p>Scheduling in Oddjob is achieved by inserting a job into the job
 	tree that asks Oddjob to execute its child job later, but watches its
@@ -41,8 +44,7 @@
 	<dd>Execute the child job when a job elsewhere enters a specific state.</dd>
 	</dl>
 	
-	<a name="timer"></a>
-	<h4>The Timer Job</h4>
+	<h4 id="timer">The Timer Job</h4>
 	
 	<p>The Timer is driven by a schedule, The detail of these schedules is
 	discussed in the <a href="schedules.html">next</a> section. Setting aside
@@ -72,8 +74,7 @@
 	and simultaneously the Afternoon Timer would run the 12:00 job, followed by
 	the 12:15 job etc.</p>		
 
-	<a name="retry"></a>
-	<h4>Retries</h4>
+	<h4 id="retry">Retries</h4>
 	
 	<p>a Retry job can be used on its own to retry something or it can
 	be used within a Timer or Trigger schedule. Here's an example of it being
@@ -92,8 +93,7 @@
 	a <a href="@reference@/org/oddjob/scheduling/Trigger.html">trigger</a>
 	schedule to fire an alert if required.</p>
 						
-	<a name="holidays"></a>
-	<h4>Holidays</h4>
+	<h4 id="holidays">Holidays</h4>
 	
 	<p>Holidays can be accounted for using a
 	<a href="@reference@/org/oddjob/schedules/schedules/BrokenSchedule.html">broken</a>
@@ -102,8 +102,7 @@
 
 	{@oddjob.xml.file examples/userguide/scheduling3.xml}
 
-	<a name="timezones"></a>
-	<h4>Time Zones</h4>
+	<h4 id="timezones">Time Zones</h4>
 	
 	<p>Both the Timer and Retry can be given a time zone. If this is the case, 
 	the schedule will be evaluated in that time zone, regardless of the time zone
@@ -124,8 +123,7 @@
 	without daylight saving time use a time zone that is fixed 
 	such as 'GMT+08'.</p>
 			
-	<a name="trigger"></a>
-	<h4>Triggers</h4>
+	<h4 id="trigger">Triggers</h4>
 	
 		<p>The trigger is a schedule that is job, rather than time, dependent. The
 		trigger schedule will run a job when a second job enters a specified 
@@ -141,8 +139,7 @@
 		<p>The trigger schedule is relatively easy to configure. Please see the
 		reference documentation for more information.</p>
 
-		<a name="dependencies"></a>
-		<h4>Scheduling with Dependencies</h4>
+	<h4 id="dependencies">Scheduling with Dependencies</h4>
 
 		<p>The natural cascading nature of job execution through the use of 
 		<a href="@reference@/org/oddjob/jobs/structural/SequentialJob.html">sequential</a>
@@ -161,7 +158,10 @@
 		
 		<hr/>
 
-		<a href="index.html">Index</a> <a href="#top">Top</a>
-		<a href="schedules.html">Next</a>
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="behindgui.html">Previous</a>]
+		[<a href="schedules.html">Next</a>]
+		
 	</body>
 </html>

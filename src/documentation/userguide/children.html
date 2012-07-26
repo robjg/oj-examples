@@ -4,7 +4,11 @@
 	</head>
 	<body>
 		
-		<a name="top"></a>
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="first.html">Previous</a>]
+		[<a href="runtime.html">Next</a>]		
+		
 		<h1>Children Of Oddjob</h1>
 
 		<ul>
@@ -13,8 +17,7 @@
 			<li><a href="#nesting">Nesting Oddjob</a></li>
 		</ul>		
 
-		<a name="hierachies"></a>
-		<h4>Job Hierarchies</h4>
+		<h4 id="hierachies">Job Hierarchies</h4>
 		
 		<p>Oddjob jobs are arranged in a tree like hierarchy with an Oddjob job at the
 		root. Only some jobs can have children, and only some jobs can have more than
@@ -42,8 +45,7 @@
 		<a href="images/children1.gif"><img src="images/children1.gif" 
 				height="200" width="300" alt="Child State"/></a>
 		
-		<a name="sequential"></a>
-		<h4>A Sequential Example</h4>
+		<h4 id="sequential">A Sequential Example</h4>
 
 		<p>To demonstrate a sequential series of jobs lets change the Oddjob 
 		configuration we created in the previous section
@@ -92,8 +94,7 @@
 
 		<p>And thats how easy it is to create a Sequence of Jobs.</p>
 		
-		<a name="nesting"></a>
-		<h4>Nesting Oddjob</h4>
+		<h4 id="nesting">Nesting Oddjob</h4>
 		
 		<p>
 		Oddjob is just a job. It's job is to read a configuration, that is
@@ -110,14 +111,29 @@
 		</p>
 		
 		<p>
-		We don't need an example of nesting because you've aleady seen
-		one when loading the examples.
+		The examples are an example of nesting Oddjobs. Each example is
+		a separate nested Oddjob. Take a look at <code>examples.xml</code>
+		to see how it works.
 		</p>
 		
+		<p>Configuration values can be passed into a nested Oddjob using 
+		either the
+		<code>args</code>, <code>export</code> and <code>properties</code>
+		properties. The <code>export</code> property allows any type to
+		be passed, such as a connection definition or even a reference
+		to a job. The other two properties only pass text.	The
+		Reference Guide for Oddjob has more information on these properties.
+		</p> 
+		
+		<p>A nested Oddjob can also have it's own job definitions. See
+		the Developer Guide for more information on this.
+			
 		<hr/>		
 		
-		<a href="index.html">Index</a> <a href="#top">Top</a>
-		<a href="runtime.html">Next</a>
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="first.html">Previous</a>]
+		[<a href="runtime.html">Next</a>]		
 		
 	</body>
 </html>

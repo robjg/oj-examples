@@ -13,7 +13,7 @@
     </group>
     <group group-title="For Developers">
         <page page-title="Oddjob - Release Notes" index-title="Release Notes"
-            index-href="../RELEASE-NOTES.txt"/>
+            index-href="../README.txt"/>
         <page page-title="Oddjob - Developer Guide" index-title="Dev Guide"
             index-href="devguide/index.html"/>
         <page page-title="Oddjob - API docs" index-title="API docs"

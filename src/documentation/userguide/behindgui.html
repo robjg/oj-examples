@@ -7,10 +7,14 @@
 	</head>
 	<body>
 
-		<a name="top"></a>
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="runtime.html">Previous</a>]
+		[<a href="scheduling.html">Next</a>]
+		
 		<h1>Behind the GUI</h1>
 
-		<p>Raw configuration.</p>
+		<p>XML configuration.</p>
 
 		<ul>
 			<li><a href="#basics">The Basics</a></li>
@@ -20,8 +24,7 @@
 			<li><a href="#nested">Properties of Oddjob within Oddjobs</a></li>
 		</ul>
 
-		<a name="basics"></a>
-		<h4>The Basics</h4>
+		<h4 id="basics">The Basics</h4>
 		
 		<p>Oddjob Designer provides a user interface onto an Oddjob configuration
 		file but it has its limitations. At the moment it doesn't even validate
@@ -57,8 +60,7 @@
 		
 	{@oddjob.xml.file examples/userguide/behindgui3.xml}
 	
-		<a name="properties"></a>
-		<h4>Property Elements</h4>
+		<h4 id="properties">Property Elements</h4>
 		
 		<p>We are already seeing that sometimes attributes are used to define properties
 		of a job (like the text property of the echo job), and sometimes
@@ -97,8 +99,7 @@
 	or type elements which are the type of property - be it a job property (copy, delete) or other 
 	value property (file, schedule).</p>
 
-	<a name="runtime"></a>
-	<h4>Runtime Property Elements</h4>
+	<h4 id="runtime">Runtime Property Elements</h4>
 	
 		<p>We saw in the last section that properties can be set from other job's
 		properties when the job runs. However we only saw how this worked in attribute
@@ -111,8 +112,7 @@
 		
 	{@oddjob.xml.file examples/userguide/behindgui5.xml}
 		
-		<a name="advanced"></a>
-		<h4>Advanced Property Access</h4>
+	<h4 id="advanced">Advanced Property Access</h4>
 		
 		<p>In addition to accessing the simple properties of a job using the 
 		notation <i>${job-id.property}</i> Oddjob also supports setting and 
@@ -140,8 +140,7 @@
 		
 		<p>The notation for a mapped property is <i>${job-id.property.sub-property}</i>.</p>
 		
-		<a name="nested"></a>
-		<h4>Properties of Oddjobs within Oddjobs</h4>
+	<h4 id="nested">Properties of Oddjobs within Oddjobs</h4>
 
 		<p>The jobs and properties of a nested Oddjob are available using the path
 		like notation <i>${nested-oddjob-id/job-id.property}</i></p>
@@ -176,7 +175,10 @@
  
 		<hr/>
 
-		<a href="index.html">Index</a> <a href="#top">Top</a>
-		<a href="scheduling.html">Next</a>
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="runtime.html">Previous</a>]
+		[<a href="scheduling.html">Next</a>]
+		
 	</body>
 </html>

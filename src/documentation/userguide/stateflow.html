@@ -1,0 +1,152 @@
+<html>
+<head>
+<title>User Guide - State and Flow</title>
+</head>
+<body>
+
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="schedules.html">Previous</a>]
+		[<a href="grabbing.html">Next</a>]
+		
+	<h1>State and Flow</h1>
+
+	<p>Changing direction.</p>
+
+	<ul>
+		<li><a href="#overview">Overview</a></li>
+		<li><a href="#ifandtrigger">If and Trigger</a></li>
+		<li><a href="#waitandjoin">Wait and Join</a></li>
+		<li><a href="#statecondition">State Conditions</a></li>
+	</ul>
+
+	<h4 id="overview">Overview</h4>
+
+	<p>Deciding whether something needs to be done or not is often a
+	job in itself, and Oddjob takes this view too. Rather than have
+	a job that runs if a property is set or a file available, Oddjob has 
+	jobs that checks if a property is set 
+	(<a href="@reference@/org/oddjob/jobs/CheckJob.html">check</a>)
+	 or a file is available
+	(<a href="@reference@/org/oddjob/io/ExistsJob.html">exists</a>)	and
+	jobs that execute depending on the state of the jobs that did the
+	checking.
+
+	<h4 id="ifandtrigger">If and Trigger</h4>
+
+	<p>There are two main jobs that can be used to do something depending on
+	the outcome of a job. They are:</p>
+
+	<dl>
+	<dt><a href="@reference@/org/oddjob/state/IfJob.html">if</a></dt>
+	<dd>Checks the state of it's first child job to decide
+	what to do.</dd>
+	
+	<dt><a href="@reference@/org/oddjob/scheduling/Trigger.html">trigger</a></dt>
+	<dd>Execute the child job when a job elsewhere enters a specific state.</dd>
+	</dl>
+	
+	<p>Trigger was introduced in the scheduling section of this manual,
+	because it was developed sharing a lot of functionality with timer
+	and retry and so was placed in the scheduling namespace. Conceptionally
+	though it is more related to the state jobs and so is included here too.
+	</p>
+	 
+	<p>
+	The big difference between them is that the <code>if</code> job is synchronous
+	and state is evaluated after the child job runs, where as the <code>trigger</code>
+	job is asynchronous. Oddjob activates the trigger then moves on to 
+	execute the next job. The trigger will then fire (or cancel itself)
+	at some point in the future depending on the state of the job it depends
+	on.
+	</p>
+
+	<h4 id="waitandjoin">Wait and Join</h4>
+	
+	<p>There are also two jobs that will stop Oddjob from executing 
+	anything else until another job is in a certain state. They are:</p>
+
+	<dl>
+	<dt><a href="@reference@/org/oddjob/state/JoinJob.html">join</a></dt>
+	<dd>Executes it's child and waits for the child to finish
+	executing before continuing.</dd>
+	
+	<dt><a href="@reference@/org/oddjob/scheduling/Trigger.html">wait</a></dt>
+	<dd>Waits for a job elsewhere to be in a specific state before
+	allowing Oddjob to continue. Wait will also wait for a period of
+	time or for a job to have a property before continuing.</dd>
+	</dl>
+
+	<p>Both these jobs block Oddjob, which is OK in small configurations
+	but could leave too many threads blocked and thus hog resources in
+	larger deployments. It's
+	nearly always possible to come up with an alternative configuration
+	using other jobs listed on this page.	
+	<p>
+
+	<h4 id="statecondition">State Conditions</h4>
+
+	<p>The <code>join</code> job will only continue it's child job has
+	finished running. The <code>if</code>, <code>trigger</code> and 
+	<code>wait</code> jobs take a property that is a <i>State Condition</i>
+	that tests states to see if the condition is met. This provides
+	more flexibility than just checking a job is in a single state. Oddjob
+	provides a number of useful State Conditions with a conversion from
+	a text constant (you can set the property with a single word).
+	</p>
+	
+	<p>The provided State Conditions are:</p>
+	
+	<dl>
+	<dt>READY</dt>
+	<dd>Is a job ready?</dd>
+
+	<dt>RUNNING<dt>
+	<dd>Is a job executing or otherwise active?</dd>
+
+	<dt>INCOMPLETE<dt>
+	<dd>Is a job incomplete?</dd>
+		
+	<dt>COMPLETE</dt>
+	<dd>Is a job complete?</dd>
+	
+	<dt>EXCEPTION</dt>
+	<dd>Is a job in an exception state?</dd>
+	
+	<dt>DESTROYED</dt>
+	<dd>The job has been destroyed. It can no longer be used. Note that
+	 many Jobs that use state conditions will enter an EXCEPTION state
+	 if the job they trigger on is destroyed, and so this state
+	 condition will not be met.</dd>	
+	
+	<dt>FAILURE</dt>
+	<dd>The state is either INCOMPLETE or EXCEPTION.</dd>
+	
+	<dt>FINISHED</dt>
+	<dd>The state is either COMPLETE, INCOMPLETE or EXCEPTION.</dd>
+	
+	<dt>EXECUTING</dt>
+	<dd>A job state is either EXECUTING or the state of a 
+	service is STARTING.</dd>
+	
+	<dt>STARTED</dt>
+	<dd>A service has STARTED.</dd>
+
+	</dl>
+	
+	<p>An '!' can also be place in front of any of these state
+	conditions to negate them.</p>
+	
+	<p>As stated previously, the <code>join</code> has it's state condition
+	hard coded. That value is equivalent to !RUNNING. Note that this is 
+	different to FINISHED because finished does not include the READY state.
+	</p>
+	
+	<hr />
+
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="schedules.html">Previous</a>]
+		[<a href="grabbing.html">Next</a>]
+		
+</html>

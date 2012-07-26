@@ -4,8 +4,12 @@
 	</head>
 	<body>
 		
-		<a name="top"></a>
-		<h1>Runtime Configuration</h1>
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="children.html">Previous</a>]
+		[<a href="behindgui.html">Next</a>]
+		
+		<h1 id="top">Runtime Configuration</h1>
 
 		<p>Using Properties to configure jobs and passing information 
 		between jobs.</p>
@@ -19,8 +23,7 @@
 			<li><a href="#nested">Oddjobs Within Oddjobs</a></li>
 		</ul>		
 
-		<a name="introduction"></a>
-		<h4>Introduction</h4>
+		<h4 id="introduction">Introduction</h4>
 
 		<p>Often we don't know the exact configuration values for jobs
 		when we set them up. But we will know these values when the jobs run.
@@ -41,8 +44,7 @@
 		The latter we will come to later. First we show you how to define a 
 		properties within Oddjob.</p>
 
-		<a name="defining"></a>
-		<h4>Defining Properties</h4>
+		<h4 id="defining">Defining Properties</h4>
 		
 		<p>Properties are defined within an Oddjob configuration using the 
 		<a href="@reference@/org/oddjob/values/properties/PropertiesJob.html">
@@ -69,8 +71,7 @@
 		The order of precedence of external properties is they are listed
 		above.</p>
 
-		<a name="id"></a>
-		<h4>Job Identity</h4>
+		<h4 id="id">Job Identity</h4>
 		
 		<p>If a property is not defined as a name value pair, then Oddjob will
 		attempt to evaluate the configuration expression as a property 
@@ -116,8 +117,7 @@
 		<p>Run the sequence, and then reset and run just the Exec Job. You 
 		Should see that the mirror job mirrors its state.</p>
 
-		<a name="properties"></a>
-		<h4>Job Properties</h4>
+		<h4 id="properties">Job Properties</h4>
 		
 		<p>The configuration settings made in Oddjob Designer set what are known
 		as the job's properties. The 'Command' field of the ExecJob
@@ -166,8 +166,7 @@
 		<p>Oddjob supports more complicated property specifications but for most
 		simple situations ${<i>id.property</i>} is all that is needed.</p>
 		
-		<a name="variables"></a>
-		<h4>Variables</h4>
+		<h4 id="variables">Variables</h4>
 		
 		<p>When discussing the properties of a job there is one job that deserves
 		special attention and that is the variables job. While most jobs have a
@@ -200,18 +199,19 @@
 		Oddjob Explorer and when we run the Sequential job we will see in the
 		console output 'Hello'</p>
 		
-		<a name="nested"></a>
-		<h4>Oddjobs within Oddjobs</h4>
+		<h4 id="nested">Oddjobs within Oddjobs</h4>
 
 		<p>As you saw in the examples, an Oddjob job can be <i>nested</i> within
 		another Oddjob job. It is possible to access a job within the 
 		using the notation <i>${oddjob-id/job-id.property}</i> but more on this in the 
-		next section...</i>.
+		next section...</p>.
 				
 		<hr/>
 		
-		<a href="index.html">Index</a> <a href="#top">Top</a>
-		<a href="behindgui.html">Next</a>
+		[<a href="../../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="children.html">Previous</a>]
+		[<a href="behindgui.html">Next</a>]
 		
 	</body>
 </html>
