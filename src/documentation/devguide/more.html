@@ -6,7 +6,12 @@
 		</style>
 	</head>	
 	<body>
-		<a name="top"></a>
+	
+		[<a href="../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="background.html">Previous</a>]
+		[<a href="arooa.html">Next</a>]
+	
 		<h1>More on Jobs</h1>
 
 		<ul>
@@ -17,8 +22,7 @@
 			<li><a href="#serialization">Serialization</a></li>
 		</ul>
 
-		<a name="completion"></a>
-		<h4>Comletion States</h4>
+		<h4 id="completion">Comletion States</h4>
 		
 		<p>So far we've written a nice job that run's without errors - but
 		what happens if something goes wrong?</p>
@@ -50,8 +54,7 @@
 			height="200" width="300" alt="A Naughty Job"/></a>
 						
 
-	<a name="stopping"></a>
-	<h4>Stopping a Job</h4>
+	<h4 id="stopping">Stopping a Job</h4>
 		
 		<p>To stop a job Oddjob will interrupt the thread it's running. 
 		Long running jobs should be written to cope with this.
@@ -61,17 +64,14 @@
 
 {@oddjob.java.file src/java/org/oddjob/devguide/StoppingJob.java}
 		
-		<a name="logging"></a>
-		<h4>Logging</h4>
+		<h4 id="logging">Logging</h4>
 
 		<p>Oddjob uses <a href="http://logging.apache.org/log4j">log4j</a>. If
 		you also use Log4j, any logging in your job's <code>run()</code> method
 		will be captured by Oddjob and displayed in the log panel of Oddjob 
 		Explorer.
 
-
-		<a name="services"></a>
-		<h4>Services</h4>
+		<h4 id="services">Services</h4>
 
 		<p>Sometimes you don't want a job to run and complete,
 		but to keep running in the background, probably providing some
@@ -94,8 +94,7 @@
 		job, jobs after the service will run once the
 		service has started, and can then use that service for something.</p>
 
-		<a name="serialization"></a>
-		<h4>Serialization</h4>
+		<h4 id="serialization">Serialization</h4>
 
 		<p>If your job implements <code>java.io.Serializable</code> and Oddjob is
 		running with a persister then Oddjob will serialise the state of your
@@ -108,9 +107,10 @@
 				
 		<hr/>
 	
-		<a href="index.html">Index</a> <a href="#top">Top</a>
-		<a href="arooa.html">Next</a>
-
+		[<a href="../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="background.html">Previous</a>]
+		[<a href="arooa.html">Next</a>]
 	
 	</body>
 </html>

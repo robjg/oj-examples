@@ -6,7 +6,12 @@
 		</style>
 	</head>	
 	<body>
-		<a name="top"></a>
+	
+		[<a href="../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="oddballs.html">Previous</a>]
+		[<a href="life.html">Next</a>]
+		
 		<h1>Arooa Exposed</h1>
 
 		
@@ -18,51 +23,41 @@
 			<li><a href="#xml">XML</a></li>
 		</ul>
 	
-	<a name="introduction"/></a>
-	<h4>Introduction</h4>
+	<h4 id="introduction">Introduction</h4>
 	
 	<p>In this section we'll look at the Arooa Framework without Oddjob.
 	Arooa was written for the requirements of Oddjob and not to be
 	yet another Java Bean framework. These are the reasons for writing Arooa
 	over using an existing framework:</p>
 	
-	<ul>
-		<li><p><dl>
+	<dl>
 		<dt>Cut And Paste:</dt>
 		<dd>Arooa allows a bean configuration to be cut out of
 		one file and pasted into another while Beans are active. The source
 		and destination 
 		Beans are dynamically reconfigured in the process.</dd>
-		</dl></p></li>
 		
-		<li><p><dl>
-		<dt>Runtime Configuration:</dt>
+		<dt>Runtime Configuration</dt>
 		<dd>Arooa can re-evaluate and re-inject properties 
 		into a Bean at any time.</dd>
-		</dl></p></li>
 		
-		<li><p><dl>
 		<dt>Advanced Type Conversion:</dt>
 		<dd>Properties are exchanged between beans, not just set  
 		from text configuration. Arooa try's to find a 
 		conversion path between any both types whatever they might
 		be.</dd>
-		</dl></p></li>
 
-		<li><p><dl>
 		<dt>GUI Bean Configuration:</dt>
 		<dd>Arooa provides a Swing Component to change A Beans
 		configuration.</dd>
-		</dl></p></li>
 		
-	</ul>
+	</dl>
 	
 	<p>If you share these requirements and want to use Arooa in your
 	own code thenn read on. If you don't then read on anyway - you might
 	find it interesting.</p>
 
-	<a name="parsers"/></a>
-	<h4>Parsers</h4>
+	<h4 id="parsers">Parsers</h4>
 
 	<p>An <code><a href="@javadoc@/org/oddjob/arooa/ArooaParser.html">ArooaParser</a></code>
 	is the starting point for most things Arooa. An <code>ArooaParser</code> parses an
@@ -101,8 +96,7 @@
 	
 	<p>Let's take a closer look at our three somethings.</p>
 	
-	<a name="beans"/></a>
-	<h4>Beans</h4>
+	<h4 id="beans">Beans</h4>
 
 	<p>Most of the time Arooa configures a single Bean, because you know what you want
 	to configure. The <code>StandardArooaParser</code> takes a root Object and
@@ -138,9 +132,9 @@
 	would throw an Exception.	
 	</p>
 
-	</p>
-	When we run it we get:
 	<p>
+	When we run it we get:
+	</p>
 	
 <pre class="command">
 Person Set.
@@ -161,12 +155,12 @@ Person Set.
 		
 	</ul>
 		
+	<p>
 	But I'm just not going to get round to it just now. I'm sorry. 
 	Maybe next time.
 	</p>
 		
-	<a name="forms"/></a>
-	<h4>Forms</h4>
+	<h4 id="forms">Forms</h4>
 
 	<p>Lets take a quick look at how to create a form.</p>
 				
@@ -234,8 +228,7 @@ public class DesignParserExample {
 	is for a component.
 	</p>
 	
-	<a name="xml"/></a>
-	<h4>XML</h4>
+	<h4 id="xml">XML</h4>
 
 	<p>Here's how to use 
 	<code><a href="@javadoc@/org/oddjob/arooa/xml/XMLArooaParser.html">XMLArooaParser</a></code>
@@ -280,8 +273,10 @@ public class XMLParserExample {
 
 	<hr/>
 
-	<a href="index.html">Index</a> <a href="#top">Top</a>
-	<a href="life.html">Next</a>
+		[<a href="../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="oddballs.html">Previous</a>]
+		[<a href="life.html">Next</a>]
 		
 	</body>
 </html>

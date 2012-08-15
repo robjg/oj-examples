@@ -6,7 +6,12 @@
 		</style>
 	</head>	
 	<body>
-		<a name="top"></a>
+	
+		[<a href="../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="jsr330.html">Previous</a>]
+		[<a href="exposed.html">Next</a>]
+		
 		<h1>Modularity And Oddballs</h1>
 
 		<p>Oddjob's extension points.</p>
@@ -25,8 +30,7 @@
 		<li><a href="#oddballs">Oddballs</a></li>
 	</ul>
 
-	<a name="class"></a>
-	<h4>The Class System</h4>
+	<h4 id="class">The Class System</h4>
 	
 	<p>In the first instance Oddjob finds its classes...</p>
 
@@ -48,8 +52,7 @@ $ java -jar run-oddjob.jar -f examples/devguide/hello1.xml
 Hello World!
 </pre>
 	
-	<a name="factory"></a>
-	<h4>The Descriptor Factory</h4>
+	<h4 id="factory">The Descriptor Factory</h4>
 
 	<p>How can we use our own XML elements instead of boring old <code>
 	&lt;bean&gt;</code> elements? 
@@ -94,8 +97,7 @@ $ java -jar run-oddjob.jar -cp examples/classes -f examples/devguide/helloperson
 Hello Mr Smith.
 </pre>
 	
-	<a name="design"></a>
-	<h4>Dynamic Design</h4>
+	<h4 id="design">Dynamic Design</h4>
 	
 	<p>Once a component has been given an element to
 	class mapping, Oddjob Designer will automatically create a form for it:
@@ -111,8 +113,7 @@ Hello Mr Smith.
 
 	<p>Ok, not pretty - but it can make a pleasant change from XML.</p>
 
-	<a name="oddjob"></a>
-	<h4>Per Oddjob Modularity</h4>
+	<h4 id="oddjob">Per Oddjob Modularity</h4>
 	
 	<p>A nested Oddjob job within Oddjob can also be configured with it's own class 
 	loader and descriptor factory.</p>
@@ -129,8 +130,7 @@ Hello Mr Smith.
 	<p>The difference is that a new class loader is created and used to
 	load the <code>HelloPersonJob</code> class.</p>
 	
-	<a name="oddballs"></a>
-	<h4>Oddballs</h4>
+	<h4 id="oddballs">Oddballs</h4>
 
 	<p>Oddballs are Oddjob's plugin architecture.</p>
 	
@@ -169,6 +169,10 @@ $ mv opt/oddballs/oj-spring oddballs
 	
 		<hr/>
 
-	<a href="index.html">Index</a> <a href="#top">Top</a>
-	<a href="exposed.html">Next</a>
+		[<a href="../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="jsr330.html">Previous</a>]
+		[<a href="exposed.html">Next</a>]
 		
+	</body>
+</html>
