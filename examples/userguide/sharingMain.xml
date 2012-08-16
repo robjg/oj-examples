@@ -45,9 +45,9 @@ java -jar ${oddjob.run.jar}
                 </sequential>
                 <folder name="Servers">
                     <jobs>
-                        <jmx:client id="server1" name="Server 1" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-1" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
-                        <jmx:client id="server2" name="Server 2" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-2" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
-                        <jmx:client id="server3" name="Server 3" url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-3" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                        <jmx:client id="server1" name="Server 1" connection="localhost/oddjob-server-1" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                        <jmx:client id="server2" name="Server 2" connection="localhost/oddjob-server-2" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                        <jmx:client id="server3" name="Server 3" connection="localhost/oddjob-server-3" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
                     </jobs>
                 </folder>
             </jobs>

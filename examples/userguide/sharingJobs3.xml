@@ -5,10 +5,10 @@
                  <echo id="echo3">Important Job 3</echo>
                  <jmx:client id="server1"
                          name="Server 1"
-                         url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-1"/>
+                         url="localhost/oddjob-server-1"/>
                  <jmx:client id="server2"
                          name="Server 2"
-                         url="service:jmx:rmi:///jndi/rmi://localhost/oddjob-server-2"/>
+                         url="localhost/oddjob-server-2"/>
              </jobs>
          </folder>
     </job>
