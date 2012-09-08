@@ -20,8 +20,9 @@ public class OddjobCommandLineTest extends TestCase {
 	
 	final static String EOL = System.getProperty("line.separator");
 	
+	/** The oddjob project dir */
 	File oddjobHome;
-	
+		
 	@Override
 	protected void setUp() throws Exception {
 		logger.info("---------------- " + getName() + " -----------------");
@@ -178,6 +179,60 @@ public class OddjobCommandLineTest extends TestCase {
 		assertEquals(1, lines.length);
 
 		assertEquals("This will always run.", lines[0].trim());		
+	}
+	
+	
+	public void testMBeanClientServer() 
+	throws FailedToStopException, InterruptedException {
+		
+		File testDir = new File(oddjobHome, "test/java/org/oddjob/jmx");
+		
+		ConsoleCapture serverConsole = new ConsoleCapture();
+		
+		ExecJob serverExec = new ExecJob();
+		serverExec.setCommand("java " +
+				"-Dcom.sun.management.jmxremote.port=13013 " +
+				"-Dcom.sun.management.jmxremote.ssl=false " +
+				"-Dcom.sun.management.jmxremote.authenticate=false " +
+				"-jar " + relative(RUN_JAR) +  
+				" -f " + new File(testDir, "PlatformMBeanServerExample.xml"));
+		serverConsole.capture(serverExec.consoleLog());
+		
+		Thread t = new Thread(serverExec);
+		t.start();
+		
+		for (int i = 0; i < 10; ++i) {
+			serverConsole.dump();
+			if (serverConsole.size() == 1) {
+				continue;
+			}
+			Thread.sleep(1000);
+		} 
+
+		String[] lines = serverConsole.getLines();
+		
+		assertEquals("Hello from an Oddjob Server!", lines[0].trim());
+		assertEquals(1, lines.length);
+
+		ConsoleCapture clientConsole = new ConsoleCapture();
+		
+		ExecJob clientExec = new ExecJob();
+		clientExec.setCommand("java -jar " + relative(RUN_JAR) +  
+				" -f " + new File(testDir, "PlatformMBeanClientExample.xml localhost:13013"));
+		clientConsole.capture(clientExec.consoleLog());
+		
+		clientExec.run();
+		
+		clientConsole.close();		
+		clientConsole.dump(logger);
+		
+		lines = clientConsole.getLines();
+		
+		assertEquals("Hello from an Oddjob Server!", lines[0].trim());
+		assertEquals(1, lines.length);
+		
+		serverExec.stop();
+		serverConsole.close();
 	}
 	
 }
