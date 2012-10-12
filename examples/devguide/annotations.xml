@@ -1,0 +1,10 @@
+<oddjob>
+  <job>
+    <sequential>
+      <jobs>
+        <bean class="org.oddjob.devguide.DestroyByAnnotation" />
+        <bean class="org.oddjob.devguide.DestroyByMagic" />
+      </jobs>
+    </sequential>
+  </job>
+</oddjob>

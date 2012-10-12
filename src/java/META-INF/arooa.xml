@@ -1,0 +1,11 @@
+<arooa:descriptor xmlns:arooa="http://rgordon.co.uk/oddjob/arooa">
+  <components>
+    <arooa:bean-def element="my-component"
+      className="org.oddjob.devguide.DestroyByMagic">
+      <annotations>
+        <arooa:annotation name="org.oddjob.arooa.life.Destroy"
+          method="goodbye" />
+      </annotations>
+    </arooa:bean-def>
+  </components>
+</arooa:descriptor>
