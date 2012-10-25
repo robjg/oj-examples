@@ -1,5 +1,12 @@
 <oddjob>
     <job>
-        <bean class="org.oddjob.devguide.SimpleService"/>
+      <sequential>
+      <jobs>
+        <bean id="service" class="org.oddjob.devguide.SimpleService"/>
+        <echo>Service Has Started.</echo>
+        <stop job="${service}"/>
+        <echo>Service Has Stopped.</echo>
+      </jobs>
+      </sequential>
     </job>
 </oddjob>

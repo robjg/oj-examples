@@ -87,14 +87,4 @@ public class IntroducingArooaTest extends TestCase {
 		oj.destroy();
 	}
 	
-	public void testHelloPerson2() {
-		
-		Oddjob oj = new Oddjob();
-		oj.setFile(new File(dir, "helloperson-main.xml"));
-		oj.run();
-
-		assertEquals(ParentState.COMPLETE, oj.lastStateEvent().getState());
-
-		oj.destroy();
-	}
 }

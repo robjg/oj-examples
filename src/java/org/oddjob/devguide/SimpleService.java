@@ -1,29 +1,44 @@
 package org.oddjob.devguide;
 
+import java.util.concurrent.CountDownLatch;
+
 public class SimpleService {
 
-	private Thread t;
+	private volatile boolean stop;
 
-	public void start() {
+	private volatile Thread thread;
+	
+	public void start() throws InterruptedException {
 		
-		t = new Thread(new Runnable() {
+		final CountDownLatch serviceStarted = new CountDownLatch(1);
+		
+		thread = new Thread(new Runnable() {
 			public void run() {
-				while (true) {
+				while (!stop) {
 					System.out.println("I could be useful.");
-					synchronized (this) {
+					serviceStarted.countDown();
+					synchronized (SimpleService.this) {
 						try {
-							wait(5000);
+							SimpleService.this.wait();
 						} catch (InterruptedException e) {
-							System.out.println("OK - I'll stop.");
 							break;
 						}
 					}
 				}
+				System.out.println("Service Stopping.");
 			}});
-		t.start();
+		thread.start();
+		
+		serviceStarted.await();
 	}
 
-	public void stop() {
-		t.interrupt();
+	public void stop() throws InterruptedException {
+		synchronized(this) {
+			stop = true;
+			notifyAll();
+		}
+		if (thread != null) {
+			thread.join();
+		}
 	}
 }

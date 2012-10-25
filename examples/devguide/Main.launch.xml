@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/projects.oddjob/src/java/org/oddjob/Main.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.oddjob.Main"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-op ${workspace_loc:projects.oj-ant};${workspace_loc:projects.oj-examples};${workspace_loc:projects.oj-hsql};${workspace_loc:projects.oj-mail};${workspace_loc:projects.oj-net};${workspace_loc:projects.oj-spring}/target;"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="projects.oddjob"/>
+</launchConfiguration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+  <job>
+    <ant id="my-ant" baseDir="${this.dir}">
+      <tasks>
+        <xml>
+          <tasks>
+            <whichresource resource="/org/oddjob/devguide/MyAntTask.class" property="my-task.url"/>
+            <echo message="${my-task.url}" />
+          </tasks>
+        </xml>
+      </tasks>
+      <output>
+        <stdout />
+      </output>
+      <classLoader>
+        <url-class-loader>
+          <files>
+            <file file="${this.dir}/../classes" />
+          </files>
+          <parent>
+            <value value="${my-ant.class.classLoader}" />
+          </parent>
+        </url-class-loader>
+      </classLoader>
+    </ant>
+  </job>
+</oddjob>

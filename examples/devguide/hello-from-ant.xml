@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <ant>
+            <tasks>
+                <xml>
+                    <tasks>
+                        <echo message="Hello From Ant"/>
+                    </tasks>
+                </xml>
+            </tasks>
+            <output>
+                <stdout/>
+            </output>
+        </ant>
+    </job>
+</oddjob>

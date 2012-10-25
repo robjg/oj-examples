@@ -3,7 +3,7 @@
     version="1.0">
 
     <xsl:output method="html" indent="yes"
-        omit-xml-declaration="true"
+        omit-xml-declaration="yes"
         encoding="utf-8"
         doctype-system="about:legacy-compat"
         />
@@ -72,7 +72,7 @@
                 </div>
 
                 <div id="footer">
-                    (c) Rob Gordon 2011
+                    (c) Rob Gordon 2005-2012
                 </div>
 
             </div>

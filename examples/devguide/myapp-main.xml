@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <oddjob file="${this.dir}/hello-from-ant.xml">
+            <descriptorFactory>
+                <bean class="org.oddjob.arooa.deploy.ClassPathDescriptorFactory" excludeParent="true"/>
+            </descriptorFactory>
+            <classLoader>
+                <url-class-loader>
+                    <files>
+                        <files>
+                            <list>
+                                <file file="${my-app.dir}/classes"/>
+                                <files files="${my-app.dir}/lib/*.jar"/>
+                            </list>
+                        </files>
+                    </files>
+                </url-class-loader>
+            </classLoader>
+        </oddjob>
+    </job>
+</oddjob>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <oddjob file="${this.dir}/echo-ant-classpath.xml">
+            <descriptorFactory>
+                <oddballs>
+                    <files>
+                        <file file="${my-app.dir}"/>
+                    </files>
+                </oddballs>
+            </descriptorFactory>
+        </oddjob>
+    </job>
+</oddjob>

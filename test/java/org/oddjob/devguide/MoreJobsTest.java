@@ -14,7 +14,6 @@ import org.oddjob.Stoppable;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.JobState;
 import org.oddjob.state.ParentState;
-import org.oddjob.state.ServiceState;
 
 public class MoreJobsTest extends TestCase {
 	private static final Logger logger = Logger.getLogger(
@@ -101,23 +100,7 @@ public class MoreJobsTest extends TestCase {
 		ConsoleCapture console = new ConsoleCapture();
 		console.capture(Oddjob.CONSOLE);
 				
-		oddjob.load();
-		
-		Stateful service = (Stateful) Helper.getChildren(oddjob)[0];
-
-		
-		StateSteps states = new StateSteps(service);
-				
-		states.startCheck(ServiceState.READY, ServiceState.STARTING,
-				ServiceState.STARTED);
-		
 		oddjob.run();
-		
-		states.checkWait();
-		
-		Thread.sleep(1000);
-		
-		((Stoppable) service).stop();
 		
 		assertEquals(ParentState.COMPLETE, 
 				oddjob.lastStateEvent().getState());
@@ -128,9 +111,11 @@ public class MoreJobsTest extends TestCase {
 		String[] lines = console.getLines();
 		
 		assertEquals("I could be useful.", lines[0].trim());
-		assertEquals("OK - I'll stop.", lines[1].trim());
+		assertEquals("Service Has Started.", lines[1].trim());
+		assertEquals("Service Stopping.", lines[2].trim());
+		assertEquals("Service Has Stopped.", lines[3].trim());
 		
-		assertEquals(2, lines.length);
+		assertEquals(4, lines.length);
 		
 		oddjob.destroy();
 	}

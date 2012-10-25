@@ -35,7 +35,7 @@
 		<p>And run it...</p>
 		
 		<a href="images/naughty.gif"><img src="images/naughty.gif"
-			height="200" width="300" alt="A Naughty Job"/></a>
+			height="320" width="500" alt="A Naughty Job"/></a>
 				
 		<p>You can try resetting the job and re-running it however 
 		this job will not start behaving! The import thing is that 
@@ -51,7 +51,7 @@
 		<p>And run it...</p>
 		
 		<a href="images/notcomplete.gif"><img src="images/notcomplete.gif"
-			height="200" width="300" alt="A Naughty Job"/></a>
+			height="320" width="500" alt="A Naughty Job"/></a>
 						
 
 	<h4 id="stopping">Stopping a Job</h4>
@@ -93,6 +93,55 @@
 		<p>A service has the advantage that when used in a sequential
 		job, jobs after the service will run once the
 		service has started, and can then use that service for something.</p>
+		
+		<p>Because the job that runs immediately after the service may
+		consume that service, the writer of the service we must ensure
+		that the service is guaranteed to be available once the 
+		<code>start</code> method
+		completes (or an Exception is thrown). In our example we ensure 
+		this is case by using a 
+		<code>CountDownLatch</code>.
+		
+		<p>The observant reader may be wondering what happens if the thread
+		executing start has been interrupted? Won't the service be started
+		but an Exception also thrown? Oddjob will ensure that the interrupted
+		flag is cleared before it enters the start method so you don't need
+		to check.</p>
+
+		<p>Ensuring that a service is stopped before the <code>stop</code>
+		method completes isn't as important. It depends on the nature of
+		the service. What happens if a service is stopped and started 
+		quickly for instance? In our example it could be argued that it 
+		wouldn't matter that a new thread was created before the previous 
+		one had completed - however if we wished to write a unit test that
+		relied on the order of output (which you can find in the source 
+		distribution) we need to guarantee the behaviour of stop which we 
+		do by using
+		<code>thread.join()</code>.
+		 </p>
+		 
+		<p>Here's a configuration that uses this service.</p>
+		
+{@oddjob.xml.file examples/devguide/service.xml}
+
+	<p>First the service is started, next an echo tells us the service has
+	started, then the service is stopped, and finally another echo tells us
+	the service has stopped. Here's the result of running this configuration 
+	with Oddjob.</p>
+	
+<pre class="command">
+I could be useful.
+Service Has Started.
+Service Stopping.
+Service Has Stopped.
+ </pre>
+
+	<p>Because of the way we wrote our service this order is guaranteed.
+	To summarise: You need to guarantee a service is started in 
+	<code>start()</code> but you can
+	use your discretion as to whether it's really stopped by 
+	<code>stop()</code>.</p>
+
 
 		<h4 id="serialization">Serialization</h4>
 
