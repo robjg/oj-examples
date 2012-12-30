@@ -136,7 +136,7 @@ public class SchedulingTest extends TestCase {
 				DateHelper.parseDateTime("2010-05-04 07:00"),
 				timer.getNextDue());
 		
-		clock.setDate("2010-05-04 07:00");
+		clock.setDateText("2010-05-04 07:00");
 		
 		executor.run();
 		
