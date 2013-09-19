@@ -43,7 +43,8 @@ public class Setup {
 			URLClassLoaderType classLoader = new URLClassLoaderType();
 			classLoader.setFiles(classPath(binary.base()));
 			classLoader.setParent(getClass().getClassLoader());
-		
+			classLoader.configured();
+			
 			this.classLoader = classLoader.toValue();
 		}
 	}
