@@ -72,7 +72,7 @@
                 </div>
 
                 <div id="footer">
-                    (c) Rob Gordon 2005-2012
+                    (c) Rob Gordon 2005-2013
                 </div>
 
             </div>
