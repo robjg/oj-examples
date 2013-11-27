@@ -110,7 +110,7 @@ public class OddjobCommandLineTest extends TestCase {
 		
 		Object client = new OddjobLookup(oddjob).lookup("client");
 		
-		Object[] serverJobs = Helper.getChildren((Structural) client); 
+		Object[] serverJobs = OddjobTestHelper.getChildren((Structural) client); 
 		
 		assertEquals(1, serverJobs.length);
 		

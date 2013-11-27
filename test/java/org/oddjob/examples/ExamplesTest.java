@@ -4,7 +4,7 @@ import java.io.File;
 
 import junit.framework.TestCase;
 
-import org.oddjob.Helper;
+import org.oddjob.OddjobTestHelper;
 import org.oddjob.Oddjob;
 import org.oddjob.OddjobLookup;
 import org.oddjob.OurDirs;
@@ -35,7 +35,7 @@ public class ExamplesTest extends TestCase {
 		
 		test.run();
 		
-		assertEquals(ParentState.COMPLETE, Helper.getJobState(test));
+		assertEquals(ParentState.COMPLETE, OddjobTestHelper.getJobState(test));
 		
 		test.destroy();
 	}
@@ -73,14 +73,14 @@ public class ExamplesTest extends TestCase {
 		test.setFile(new File(dirs.base(), "examples/oddjob.xml"));
 		test.run();
 		
-		assertEquals(ParentState.COMPLETE, Helper.getJobState(test));
+		assertEquals(ParentState.COMPLETE, OddjobTestHelper.getJobState(test));
 		
 		Oddjob scheduling = new OddjobLookup(test).lookup(
 				"scheduling", Oddjob.class); 
 		
 		scheduling.load();
 		
-		assertEquals(ParentState.READY, Helper.getJobState(
+		assertEquals(ParentState.READY, OddjobTestHelper.getJobState(
 				scheduling));
 
 		Oddjob dailyftp = new OddjobLookup(scheduling).lookup(
@@ -88,7 +88,7 @@ public class ExamplesTest extends TestCase {
 		
 		dailyftp.load();
 
-		assertEquals(ParentState.READY, Helper.getJobState(dailyftp));
+		assertEquals(ParentState.READY, OddjobTestHelper.getJobState(dailyftp));
 		
 		test.destroy();
 	}
@@ -102,13 +102,13 @@ public class ExamplesTest extends TestCase {
 		test.setFile(new File(dirs.base(), "examples/oddjob.xml"));
 		test.run();
 		
-		assertEquals(ParentState.COMPLETE, Helper.getJobState(test));
+		assertEquals(ParentState.COMPLETE, OddjobTestHelper.getJobState(test));
 		
 		Oddjob workflow = (Oddjob) new OddjobLookup(test).lookup("workflow");
 		
 		workflow.load();
 				
-		assertEquals(ParentState.READY, Helper.getJobState(
+		assertEquals(ParentState.READY, OddjobTestHelper.getJobState(
 				workflow));
 		
 		test.destroy();

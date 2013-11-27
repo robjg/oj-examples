@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.oddjob.ConsoleCapture;
 import org.oddjob.FailedToStopException;
-import org.oddjob.Helper;
+import org.oddjob.OddjobTestHelper;
 import org.oddjob.Oddjob;
 import org.oddjob.OurDirs;
 import org.oddjob.StateSteps;
@@ -32,7 +32,7 @@ public class MoreJobsTest extends TestCase {
 		assertEquals(ParentState.EXCEPTION, 
 				oddjob.lastStateEvent().getState());
 		
-		Stateful stateful = (Stateful) Helper.getChildren(oddjob)[0];
+		Stateful stateful = (Stateful) OddjobTestHelper.getChildren(oddjob)[0];
 
 		Throwable e = stateful.lastStateEvent().getException();
 		
@@ -67,7 +67,7 @@ public class MoreJobsTest extends TestCase {
 		
 		oddjob.load();
 		
-		Stateful stopping = (Stateful) Helper.getChildren(oddjob)[0];
+		Stateful stopping = (Stateful) OddjobTestHelper.getChildren(oddjob)[0];
 
 		
 		StateSteps states = new StateSteps(stopping);
