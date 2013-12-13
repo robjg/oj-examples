@@ -5,10 +5,10 @@ import java.io.File;
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
-import org.oddjob.ConsoleCapture;
 import org.oddjob.Oddjob;
-import org.oddjob.OurDirs;
 import org.oddjob.arooa.ArooaParseException;
+import org.oddjob.tools.ConsoleCapture;
+import org.oddjob.tools.OurDirs;
 
 public class ArooaExposedTest extends TestCase {
 	private static final Logger logger = Logger.getLogger(ArooaExposedTest.class);

@@ -9,19 +9,16 @@ import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase;
 
 import org.oddjob.FailedToStopException;
-import org.oddjob.MockOddjobExecutors;
 import org.oddjob.Oddjob;
 import org.oddjob.OddjobLookup;
-import org.oddjob.OurDirs;
 import org.oddjob.arooa.convert.ArooaConversionException;
 import org.oddjob.arooa.reflect.ArooaPropertyException;
 import org.oddjob.arooa.utils.DateHelper;
 import org.oddjob.arooa.xml.XMLConfiguration;
-import org.oddjob.scheduling.ManualClock;
-import org.oddjob.scheduling.MockScheduledExecutorService;
-import org.oddjob.scheduling.MockScheduledFuture;
 import org.oddjob.scheduling.Timer;
 import org.oddjob.state.ParentState;
+import org.oddjob.tools.ManualClock;
+import org.oddjob.tools.OurDirs;
 
 public class SchedulingTest extends TestCase {
 

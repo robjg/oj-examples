@@ -3,13 +3,13 @@ package org.oddjob.devguide;
 import java.io.File;
 
 import org.apache.log4j.Logger;
-import org.oddjob.ConsoleCapture;
 import org.oddjob.Oddjob;
 import org.oddjob.OddjobSessionFactory;
-import org.oddjob.OurDirs;
 import org.oddjob.arooa.ArooaSession;
 import org.oddjob.arooa.life.ArooaLifeAware;
 import org.oddjob.arooa.life.LifecycleInterfaceFactory;
+import org.oddjob.tools.ConsoleCapture;
+import org.oddjob.tools.OurDirs;
 
 import junit.framework.TestCase;
 

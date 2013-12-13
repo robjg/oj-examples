@@ -3,9 +3,9 @@ package org.oddjob.userguide;
 import junit.framework.TestCase;
 
 import org.oddjob.Oddjob;
-import org.oddjob.OurDirs;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.ParentState;
+import org.oddjob.tools.OurDirs;
 
 public class GrabbingTest extends TestCase {
 

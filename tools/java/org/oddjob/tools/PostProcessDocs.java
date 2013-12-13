@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 import org.apache.log4j.Logger;
-import org.oddjob.OurDirs;
 import org.oddjob.io.FilesType;
 
 public class PostProcessDocs {

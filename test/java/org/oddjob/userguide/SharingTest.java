@@ -4,11 +4,11 @@ import junit.framework.TestCase;
 
 import org.oddjob.FailedToStopException;
 import org.oddjob.Oddjob;
-import org.oddjob.OurDirs;
 import org.oddjob.arooa.convert.ArooaConversionException;
 import org.oddjob.arooa.reflect.ArooaPropertyException;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.ParentState;
+import org.oddjob.tools.OurDirs;
 
 public class SharingTest extends TestCase {
 

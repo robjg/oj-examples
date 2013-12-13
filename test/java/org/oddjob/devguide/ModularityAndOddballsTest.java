@@ -6,8 +6,8 @@ import java.util.Properties;
 import junit.framework.TestCase;
 
 import org.oddjob.Oddjob;
-import org.oddjob.OurDirs;
 import org.oddjob.state.ParentState;
+import org.oddjob.tools.OurDirs;
 
 public class ModularityAndOddballsTest extends TestCase {
 

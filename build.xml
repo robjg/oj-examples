@@ -92,7 +92,7 @@
 
 		<path id="tools-classpath">
 			<path refid="classpath"/>
-			<pathelement path="${oddjob.src}/build/tools" />
+			<pathelement path="${oddjob.src}/build/tools/classes" />
 			<fileset dir="${oddjob.src}/test/lib">
 				<include name="*.jar"/>
 				<exclude name="hsqldb*.jar"/>
@@ -100,10 +100,8 @@
 		</path>
 		
 		<path id="test-classpath">
-			<path refid="classpath"/>
+			<path refid="tools-classpath"/>
 			<pathelement path="${build.classes}" />
-			<pathelement path="${oddjob.src}/build/tools" />
-			<pathelement path="${oddjob.src}/build/test" />
 			<fileset dir="${oddjob.src}/test/lib">
 				<include name="*.jar"/>
 				<exclude name="hsqldb*.jar"/>

@@ -5,7 +5,6 @@ import java.text.ParseException;
 import junit.framework.TestCase;
 
 import org.oddjob.OddjobDescriptorFactory;
-import org.oddjob.OurDirs;
 import org.oddjob.arooa.ArooaDescriptor;
 import org.oddjob.arooa.ArooaParseException;
 import org.oddjob.arooa.standard.StandardFragmentParser;
@@ -16,6 +15,7 @@ import org.oddjob.schedules.Schedule;
 import org.oddjob.schedules.ScheduleContext;
 import org.oddjob.schedules.ScheduleResult;
 import org.oddjob.schedules.SimpleScheduleResult;
+import org.oddjob.tools.OurDirs;
 
 public class SchedulesTest extends TestCase {
 

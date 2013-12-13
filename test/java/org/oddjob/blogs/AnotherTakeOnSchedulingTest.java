@@ -7,7 +7,6 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import junit.framework.TestCase;
 
-import org.oddjob.ConsoleCapture;
 import org.oddjob.Oddjob;
 import org.oddjob.arooa.utils.DateHelper;
 import org.oddjob.schedules.Schedule;
@@ -19,6 +18,7 @@ import org.oddjob.schedules.schedules.DailySchedule;
 import org.oddjob.schedules.schedules.DateSchedule;
 import org.oddjob.schedules.schedules.WeeklySchedule;
 import org.oddjob.schedules.units.DayOfWeek;
+import org.oddjob.tools.ConsoleCapture;
 
 public class AnotherTakeOnSchedulingTest extends TestCase {
 

@@ -5,8 +5,8 @@ import java.io.File;
 import junit.framework.TestCase;
 
 import org.oddjob.Oddjob;
-import org.oddjob.OurDirs;
 import org.oddjob.state.ParentState;
+import org.oddjob.tools.OurDirs;
 
 public class IntroducingArooaTest extends TestCase {
 

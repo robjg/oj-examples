@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.oddjob.arooa.deploy.ArooaDescriptorFactory;
 import org.oddjob.io.FilesType;
 import org.oddjob.oddballs.OddballsDirDescriptorFactory;
+import org.oddjob.tools.OurDirs;
 import org.oddjob.util.URLClassLoaderType;
 
 /**

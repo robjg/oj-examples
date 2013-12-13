@@ -11,6 +11,10 @@ import org.oddjob.jobs.ExecJob;
 import org.oddjob.state.JobState;
 import org.oddjob.state.ParentState;
 import org.oddjob.state.StateEvent;
+import org.oddjob.tools.ConsoleCapture;
+import org.oddjob.tools.OddjobSrc;
+import org.oddjob.tools.OddjobTestHelper;
+import org.oddjob.tools.OurDirs;
 
 public class OddjobCommandLineTest extends TestCase {
 	private static final Logger logger = Logger.getLogger(
