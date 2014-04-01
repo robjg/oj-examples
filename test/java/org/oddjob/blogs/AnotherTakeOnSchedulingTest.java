@@ -1,12 +1,10 @@
 package org.oddjob.blogs;
 
 import java.text.ParseException;
-import java.util.Date;
-import java.util.Timer;
-import java.util.concurrent.ScheduledExecutorService;
 
 import junit.framework.TestCase;
 
+import org.apache.log4j.Logger;
 import org.oddjob.Oddjob;
 import org.oddjob.arooa.utils.DateHelper;
 import org.oddjob.schedules.Schedule;
@@ -22,6 +20,15 @@ import org.oddjob.tools.ConsoleCapture;
 
 public class AnotherTakeOnSchedulingTest extends TestCase {
 
+	private static final Logger logger = Logger.getLogger(
+			AnotherTakeOnSchedulingTest.class);
+	
+	@Override
+	protected void setUp() throws Exception {
+		logger.info("--------------------------  " + getName() + 
+				"  --------------------------------");
+	}
+	
 	public void testSimpleDailyExample() throws ParseException {
 
 		final long time = DateHelper.parseDateTime("2012-03-28 20:15")
@@ -249,7 +256,6 @@ public class AnotherTakeOnSchedulingTest extends TestCase {
 				System.out.println("Hello");
 			}
 		});
-		Timer timer = scheduler.timer;
 
 		String[] lines = null;
 		for (int i = 0; i < 10; ++i) {
@@ -273,8 +279,8 @@ public class AnotherTakeOnSchedulingTest extends TestCase {
 				"Scheduled at "
 						+ DateHelper.parseDateTime("2012-03-30 08:00")
 								.toString(), lines[2].trim());
-
-		timer.cancel();
+		
+		scheduler.stop();
 	}
 
 	public void testExecutorScheduler() throws ParseException,
@@ -301,7 +307,6 @@ public class AnotherTakeOnSchedulingTest extends TestCase {
 				System.out.println("Hello");
 			}
 		});
-		ScheduledExecutorService executor = scheduler.executor;
 
 		String[] lines = null;
 		for (int i = 0; i < 10; ++i) {
@@ -326,6 +331,6 @@ public class AnotherTakeOnSchedulingTest extends TestCase {
 						+ DateHelper.parseDateTime("2012-03-30 08:00")
 								.toString(), lines[2].trim());
 
-		executor.shutdown();
+		scheduler.stop();
 	}
 }

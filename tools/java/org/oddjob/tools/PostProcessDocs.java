@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import org.apache.log4j.Logger;
 import org.oddjob.io.FilesType;
@@ -18,21 +19,21 @@ public class PostProcessDocs {
 		dirs = new OurDirs();		
 	}
 	
-	public void postProcessUserGuideDocs() throws FileNotFoundException {
+	public void postProcessUserGuideDocs() throws IOException {
 		
 		File dir = dirs.relative("build/docs/userguide");
 		
 		postProcess(dir);		
 	}
 	
-	public void postProcessDevGuideDocs() throws FileNotFoundException {
+	public void postProcessDevGuideDocs() throws IOException {
 		
 		File dir = dirs.relative("build/docs/devguide");
 		
 		postProcess(dir);		
 	}
 	
-	void postProcess(File dir) throws FileNotFoundException {
+	void postProcess(File dir) throws IOException {
 		
 		if (!dir.exists()) {
 			throw new FileNotFoundException(dir.getAbsolutePath());
@@ -62,7 +63,7 @@ public class PostProcessDocs {
 		}
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 		PostProcessDocs processor = new PostProcessDocs();
 		
 		processor.postProcessUserGuideDocs();

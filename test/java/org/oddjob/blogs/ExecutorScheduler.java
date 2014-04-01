@@ -15,12 +15,13 @@ public class ExecutorScheduler {
 			Executors.newScheduledThreadPool(3);
 	
 	ScheduleContext context;	
+	boolean stop;
 	
 	public ExecutorScheduler(Date date) {
 		this.context = new ScheduleContext(date);
 	}
 	
-	void schedule(final Runnable job) {
+	synchronized void schedule(final Runnable job) {
 				
 		DailySchedule schedule = new DailySchedule();
 		schedule.setAt("08:00");
@@ -31,13 +32,22 @@ public class ExecutorScheduler {
 		long delay = next.getFromDate().getTime() - 
 				System.currentTimeMillis();  
 		
+		if (stop) {
+			return;
+		}
+		
 		executor.schedule(new Runnable() {
 			@Override
-			public void run() {
+			public synchronized void run() {
 				job.run();
 				context = context.move(next.getUseNext());
 				schedule(job);
 			}
 		}, delay, TimeUnit.MILLISECONDS);		
+	}
+	
+	synchronized void stop() {
+		stop = true;
+		executor.shutdownNow();
 	}
 }

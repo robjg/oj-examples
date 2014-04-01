@@ -12,13 +12,14 @@ public class TimerScheduler {
 
 	final Timer timer = new Timer();
 	
-	ScheduleContext context;
+	ScheduleContext context;	
+	boolean stop;
 	
 	public TimerScheduler(Date fromDate) {
 		this.context = new ScheduleContext(fromDate);
 	}
 	
-	void schedule(final Runnable job) {
+	synchronized void schedule(final Runnable job) {
 
 		DailySchedule schedule = new DailySchedule();
 		schedule.setAt("08:00");
@@ -26,13 +27,21 @@ public class TimerScheduler {
 						
 		System.out.println("Scheduled at " + next.getFromDate());
 		
+		if (stop) {
+			return;
+		}
 		timer.schedule(new TimerTask() {
 			@Override
-			public void run() {
+			public synchronized void run() {
 				job.run();
 				context = context.move(next.getUseNext());
 				schedule(job);
 			}
 		}, next.getFromDate());		
+	}
+	
+	synchronized void stop() {
+		stop = true;
+		timer.cancel();
 	}
 }

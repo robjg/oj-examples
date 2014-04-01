@@ -1,6 +1,7 @@
 package org.oddjob;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.log4j.Logger;
 import org.oddjob.arooa.deploy.ArooaDescriptorFactory;
@@ -25,7 +26,7 @@ public class Setup {
 	
 	private final ArooaDescriptorFactory oddballs;
 	
-	public Setup() {
+	public Setup() throws IOException {
 		
 		if (System.getProperty("ant.file") == null) {
 			logger.info("Not running from ant - assume running from eclipse and that classpath is setup.");
@@ -50,7 +51,7 @@ public class Setup {
 		}
 	}
 	
-	File[] classPath(File base) {
+	File[] classPath(File base) throws IOException {
 		
 		FilesType lib = new FilesType();
 		lib.setFiles(base + "/lib/*.jar");
