@@ -109,7 +109,7 @@ public class OddjobCommandLineTest extends TestCase {
 			}
 		} 
 
-		assertEquals(ParentState.STARTED, 
+		assertEquals(ParentState.ACTIVE, 
 				oddjob.lastStateEvent().getState());
 		
 		Object client = new OddjobLookup(oddjob).lookup("client");
