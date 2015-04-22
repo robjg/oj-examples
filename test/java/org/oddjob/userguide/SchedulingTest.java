@@ -34,7 +34,7 @@ public class SchedulingTest extends TestCase {
 		
 		oddjob.run();
 		
-		assertEquals(ParentState.ACTIVE, oddjob.lastStateEvent().getState());
+		assertEquals(ParentState.STARTED, oddjob.lastStateEvent().getState());
 		
 		while (true) {
 			
@@ -126,7 +126,7 @@ public class SchedulingTest extends TestCase {
 		
 		oddjob.run();
 		
-		assertEquals(ParentState.ACTIVE, 
+		assertEquals(ParentState.STARTED, 
 				oddjob.lastStateEvent().getState());
 		
 		assertEquals(
