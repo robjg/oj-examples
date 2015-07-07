@@ -34,7 +34,8 @@ public class SchedulingTest extends TestCase {
 		
 		oddjob.run();
 		
-		assertEquals(ParentState.ACTIVE, oddjob.lastStateEvent().getState());
+		// Could be active or started depending on the speed of execution.
+		assertTrue(oddjob.lastStateEvent().getState().isStoppable());
 		
 		while (true) {
 			
