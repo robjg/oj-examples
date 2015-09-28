@@ -5,7 +5,6 @@ import java.text.ParseException;
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
-import org.oddjob.Oddjob;
 import org.oddjob.arooa.utils.DateHelper;
 import org.oddjob.schedules.Schedule;
 import org.oddjob.schedules.ScheduleContext;
@@ -247,7 +246,7 @@ public class AnotherTakeOnSchedulingTest extends TestCase {
 		}
 
 		ConsoleCapture capture = new ConsoleCapture();
-		capture.capture(Oddjob.CONSOLE);
+		capture.captureConsole();
 
 		TimerScheduler scheduler = new TimerScheduler(new Date());
 		scheduler.schedule(new Runnable() {
@@ -298,7 +297,7 @@ public class AnotherTakeOnSchedulingTest extends TestCase {
 		}
 
 		ConsoleCapture capture = new ConsoleCapture();
-		capture.capture(Oddjob.CONSOLE);
+		capture.captureConsole();
 
 		ExecutorScheduler scheduler = new ExecutorScheduler(new Date());
 		scheduler.schedule(new Runnable() {

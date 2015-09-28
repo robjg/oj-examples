@@ -5,7 +5,6 @@ import java.io.File;
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
-import org.oddjob.Oddjob;
 import org.oddjob.arooa.ArooaParseException;
 import org.oddjob.tools.ConsoleCapture;
 import org.oddjob.tools.OurDirs;
@@ -21,7 +20,7 @@ public class ArooaExposedTest extends TestCase {
 		File config = dirs.relative("examples/devguide/exposed1.xml");
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.capture(Oddjob.CONSOLE);
+		console.captureConsole();
 			
 		StandardAPExample.main(config.toString());		
 		

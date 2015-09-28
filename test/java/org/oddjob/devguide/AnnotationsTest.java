@@ -52,7 +52,7 @@ public class AnnotationsTest extends TestCase {
 		File config = dirs.relative("examples/devguide/annotations.xml");
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.capture(Oddjob.CONSOLE);
+		console.captureConsole();
 			
 		Oddjob oddjob = new Oddjob();
 		oddjob.setFile(config);

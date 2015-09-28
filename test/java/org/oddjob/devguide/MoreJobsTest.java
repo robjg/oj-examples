@@ -98,7 +98,7 @@ public class MoreJobsTest extends TestCase {
 				dirs.relative("examples/devguide/service.xml")));
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.capture(Oddjob.CONSOLE);
+		console.captureConsole();
 				
 		oddjob.run();
 		

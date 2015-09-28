@@ -90,7 +90,7 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.setConfiguration(new XMLConfiguration(config));
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.capture(Oddjob.CONSOLE);
+		console.captureConsole();
 				
 		oddjob.run();
 		
@@ -138,7 +138,7 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.setConfiguration(new XMLConfiguration(config));
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.capture(Oddjob.CONSOLE);
+		console.captureConsole();
 				
 		oddjob.run();
 		
@@ -168,7 +168,7 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.setConfiguration(new XMLConfiguration(config));
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.capture(Oddjob.CONSOLE);
+		console.captureConsole();
 				
 		oddjob.run();
 		
@@ -197,7 +197,7 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.setConfiguration(new XMLConfiguration(config));
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.capture(Oddjob.CONSOLE);
+		console.captureConsole();
 				
 		oddjob.run();
 		
@@ -249,7 +249,7 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.setConfiguration(new XMLConfiguration(config));
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.capture(Oddjob.CONSOLE);
+		console.captureConsole();
 				
 		oddjob.run();
 		
