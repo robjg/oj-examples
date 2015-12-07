@@ -49,8 +49,6 @@ public class OddjobCommandLineTest extends TestCase {
 	
 	public void testOddjobFailsNoFile() throws InterruptedException {
 		
-		ConsoleCapture console = new ConsoleCapture();
-		
 		String fileName = "Idontexist.xml";
 		
 		File file = new File(fileName);
@@ -59,10 +57,13 @@ public class OddjobCommandLineTest extends TestCase {
 		ExecJob exec = new ExecJob();
 		exec.setCommand("java -jar " + relative(RUN_JAR) + 
 				" -f " + fileName);
-		console.capture(exec.consoleLog());
 		
-		exec.run();
-
+		ConsoleCapture console = new ConsoleCapture();
+		try (ConsoleCapture.Close close = console.capture(exec.consoleLog())) {
+			
+			exec.run();
+		}
+		
 		console.dump();
 		
 		// File created but Oddjob ready, not complete so exit status
@@ -79,50 +80,51 @@ public class OddjobCommandLineTest extends TestCase {
 		
 		OurDirs dirs = new OurDirs();
 		
-		ConsoleCapture console = new ConsoleCapture();
-		
 		ExecJob exec = new ExecJob();
 		exec.setCommand("java -jar " + relative(RUN_JAR) +  
 				" -f " + relative("server.xml") +
 				" -l " + dirs.relative("../arooa/test/java/log4j.properties"));
-		console.capture(exec.consoleLog());
 		
-		Thread t = new Thread(exec);
-		t.start();
+		ConsoleCapture console = new ConsoleCapture();
+		try (ConsoleCapture.Close close = console.capture(exec.consoleLog())) {
 		
-		Oddjob oddjob = new Oddjob();
-		oddjob.setFile(new File(relative("client.xml")));
+			Thread t = new Thread(exec);
+			t.start();
+			
+			Oddjob oddjob = new Oddjob();
+			oddjob.setFile(new File(relative("client.xml")));
+	
+			for (int i = 0; i < 10; ++i) {
+				console.dump();
+				oddjob.softReset();
+				oddjob.run();
+				StateEvent event = oddjob.lastStateEvent(); 
+				if (event.getState() 
+						== ParentState.EXCEPTION) {
+					logger.info("Client Oddjob Exception", event.getException());
+					Thread.sleep(2000);
+				}
+				else {
+					logger.info("Client state " + event.getState());
+					break;
+				}
+			} 
 
-		for (int i = 0; i < 10; ++i) {
-			console.dump();
-			oddjob.softReset();
-			oddjob.run();
-			StateEvent event = oddjob.lastStateEvent(); 
-			if (event.getState() 
-					== ParentState.EXCEPTION) {
-				logger.info("Client Oddjob Exception", event.getException());
-				Thread.sleep(2000);
-			}
-			else {
-				logger.info("Client state " + event.getState());
-				break;
-			}
-		} 
-
-		assertEquals(ParentState.STARTED, 
-				oddjob.lastStateEvent().getState());
-		
-		Object client = new OddjobLookup(oddjob).lookup("client");
-		
-		Object[] serverJobs = OddjobTestHelper.getChildren((Structural) client); 
-		
-		assertEquals(1, serverJobs.length);
-		
-		assertEquals("Server Jobs", serverJobs[0].toString());
-		
-		oddjob.onDestroy();
-		
-		exec.stop();
+			assertEquals(ParentState.STARTED, 
+					oddjob.lastStateEvent().getState());
+			
+			Object client = new OddjobLookup(oddjob).lookup("client");
+			
+			Object[] serverJobs = OddjobTestHelper.getChildren((Structural) client); 
+			
+			assertEquals(1, serverJobs.length);
+			
+			assertEquals("Server Jobs", serverJobs[0].toString());
+			
+			oddjob.onDestroy();
+			
+			exec.stop();
+		}
 		
 		console.dump();
 	}
@@ -130,14 +132,15 @@ public class OddjobCommandLineTest extends TestCase {
 
 	public void testVenkyParallel() throws InterruptedException {
 		
-		ConsoleCapture console = new ConsoleCapture();
-		
 		ExecJob exec = new ExecJob();
 		exec.setCommand("java -jar " + relative(RUN_JAR) + 
 				" -f " + new OurDirs().relative("test/config/testflow2.xml"));
-		console.capture(exec.consoleLog());
 		
-		exec.run();
+		ConsoleCapture console = new ConsoleCapture();
+		try (ConsoleCapture.Close close = console.capture(exec.consoleLog())) {
+			
+			exec.run();
+		}
 		
 		assertEquals(0, exec.getExitValue());
 		
@@ -166,14 +169,15 @@ public class OddjobCommandLineTest extends TestCase {
 	 */
 	public void testDestroyNoErrors() throws InterruptedException {
 		
-		ConsoleCapture console = new ConsoleCapture();
-		
 		ExecJob exec = new ExecJob();
 		exec.setCommand("java -jar " + relative(RUN_JAR) + 
 				" -f " + new OurDirs().relative("test/config/sequential-with-mirror.xml"));
-		console.capture(exec.consoleLog());
 		
-		exec.run();
+		ConsoleCapture console = new ConsoleCapture();
+		try (ConsoleCapture.Close close = console.capture(exec.consoleLog())) {
+			
+			exec.run();
+		}
 		
 		console.dump();
 		
@@ -191,8 +195,6 @@ public class OddjobCommandLineTest extends TestCase {
 		
 		File testDir = new File(oddjobHome, "test/java/org/oddjob/jmx");
 		
-		ConsoleCapture serverConsole = new ConsoleCapture();
-		
 		ExecJob serverExec = new ExecJob();
 		serverExec.setCommand("java " +
 				"-Dcom.sun.management.jmxremote.port=13013 " +
@@ -200,43 +202,46 @@ public class OddjobCommandLineTest extends TestCase {
 				"-Dcom.sun.management.jmxremote.authenticate=false " +
 				"-jar " + relative(RUN_JAR) +  
 				" -f " + new File(testDir, "PlatformMBeanServerExample.xml"));
-		serverConsole.capture(serverExec.consoleLog());
-		
-		Thread t = new Thread(serverExec);
-		t.start();
-		
-		for (int i = 0; i < 10; ++i) {
-			serverConsole.dump();
-			if (serverConsole.size() == 1) {
-				continue;
+
+		ConsoleCapture serverConsole = new ConsoleCapture();
+		try (ConsoleCapture.Close close = serverConsole.capture(serverExec.consoleLog())) {
+
+			Thread t = new Thread(serverExec);
+			t.start();
+
+			for (int i = 0; i < 10; ++i) {
+				serverConsole.dump();
+				if (serverConsole.size() == 1) {
+					continue;
+				}
+				Thread.sleep(1000);
+			} 
+
+			String[] lines = serverConsole.getLines();
+
+			assertEquals("Hello from an Oddjob Server!", lines[0].trim());
+			assertEquals(1, lines.length);
+
+			ExecJob clientExec = new ExecJob();
+			clientExec.setCommand("java -jar " + relative(RUN_JAR) +  
+					" -f " + new File(testDir, "PlatformMBeanClientExample.xml localhost:13013"));
+
+			ConsoleCapture clientConsole = new ConsoleCapture();
+			try (ConsoleCapture.Close close2 = clientConsole.capture(clientExec.consoleLog())) {
+
+				clientExec.run();
 			}
-			Thread.sleep(1000);
-		} 
 
-		String[] lines = serverConsole.getLines();
-		
-		assertEquals("Hello from an Oddjob Server!", lines[0].trim());
-		assertEquals(1, lines.length);
+			clientConsole.dump(logger);
 
-		ConsoleCapture clientConsole = new ConsoleCapture();
+			lines = clientConsole.getLines();
+
+			assertEquals("Hello from an Oddjob Server!", lines[0].trim());
+			assertEquals(1, lines.length);
 		
-		ExecJob clientExec = new ExecJob();
-		clientExec.setCommand("java -jar " + relative(RUN_JAR) +  
-				" -f " + new File(testDir, "PlatformMBeanClientExample.xml localhost:13013"));
-		clientConsole.capture(clientExec.consoleLog());
-		
-		clientExec.run();
-		
-		clientConsole.close();		
-		clientConsole.dump(logger);
-		
-		lines = clientConsole.getLines();
-		
-		assertEquals("Hello from an Oddjob Server!", lines[0].trim());
-		assertEquals(1, lines.length);
+		}
 		
 		serverExec.stop();
-		serverConsole.close();
 	}
 	
 }

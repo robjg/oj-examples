@@ -90,14 +90,14 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.setConfiguration(new XMLConfiguration(config));
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.captureConsole();
-				
-		oddjob.run();
+		try (ConsoleCapture.Close close = console.captureConsole()) {
+			
+			oddjob.run();
+		}
 		
 		assertEquals(ParentState.COMPLETE, 
 				oddjob.lastStateEvent().getState());
 		
-		console.close();
 		console.dump(logger);
 		
 		String[] lines = console.getLines();
@@ -138,14 +138,14 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.setConfiguration(new XMLConfiguration(config));
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.captureConsole();
-				
-		oddjob.run();
+		try (ConsoleCapture.Close close = console.captureConsole()) {
+			
+			oddjob.run();
+		}
 		
 		assertEquals(ParentState.COMPLETE, 
 				oddjob.lastStateEvent().getState());
 		
-		console.close();
 		console.dump(logger);
 		
 		String[] lines = console.getLines();
@@ -168,14 +168,14 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.setConfiguration(new XMLConfiguration(config));
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.captureConsole();
-				
-		oddjob.run();
+		try (ConsoleCapture.Close close = console.captureConsole()) {
+			
+			oddjob.run();
+		}
 		
 		assertEquals(ParentState.COMPLETE, 
 				oddjob.lastStateEvent().getState());
 		
-		console.close();
 		console.dump(logger);
 		
 		String[] lines = console.getLines();
@@ -197,14 +197,14 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.setConfiguration(new XMLConfiguration(config));
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.captureConsole();
-				
-		oddjob.run();
+		try (ConsoleCapture.Close close = console.captureConsole()) {
+			
+			oddjob.run();
+		}
 		
 		assertEquals(ParentState.COMPLETE, 
 				oddjob.lastStateEvent().getState());
 		
-		console.close();
 		console.dump(logger);
 		
 		String[] lines = console.getLines();
@@ -249,14 +249,14 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.setConfiguration(new XMLConfiguration(config));
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.captureConsole();
-				
-		oddjob.run();
+		try (ConsoleCapture.Close close = console.captureConsole()) {
+			
+			oddjob.run();
+		}
 		
 		assertEquals(ParentState.COMPLETE, 
 				oddjob.lastStateEvent().getState());
 		
-		console.close();
 		console.dump(logger);
 		
 		String[] lines = console.getLines();

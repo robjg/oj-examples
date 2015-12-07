@@ -18,6 +18,12 @@ public class AnnotationsTest extends TestCase {
 	
 	private static final Logger logger = Logger.getLogger(AnnotationsTest.class);
 
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		
+		logger.info("---------------------  " + getName() + "  -------------------------");
+	}
 	
 	public void testArooaLifecycle() {
 		
@@ -52,21 +58,18 @@ public class AnnotationsTest extends TestCase {
 		File config = dirs.relative("examples/devguide/annotations.xml");
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.captureConsole();
+		try (ConsoleCapture.Close close = console.captureConsole()) {
 			
-		Oddjob oddjob = new Oddjob();
-		oddjob.setFile(config);
-		
-		oddjob.run();
-
-		
-		
-		assertEquals(0, console.size());
-		
-		oddjob.destroy();
-		
-		console.close();
-		
+			Oddjob oddjob = new Oddjob();
+			oddjob.setFile(config);
+			
+			oddjob.run();
+	
+			assertEquals(0, console.size());
+			
+			oddjob.destroy();
+		}	
+			
 		console.dump(logger);
 		
 		String[] lines = console.getLines();

@@ -245,27 +245,28 @@ public class AnotherTakeOnSchedulingTest extends TestCase {
 			}
 		}
 
-		ConsoleCapture capture = new ConsoleCapture();
-		capture.captureConsole();
-
-		TimerScheduler scheduler = new TimerScheduler(new Date());
-		scheduler.schedule(new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("Hello");
-			}
-		});
-
 		String[] lines = null;
-		for (int i = 0; i < 10; ++i) {
-			lines = capture.getLines();
-			if (lines.length > 2) {
-				break;
-			}
-			Thread.sleep(500);
-		}
+		
+		TimerScheduler scheduler = new TimerScheduler(new Date());
+		
+		ConsoleCapture capture = new ConsoleCapture();
+		try (ConsoleCapture.Close close = capture.captureConsole()) {
 
-		capture.close();
+			scheduler.schedule(new Runnable() {
+				@Override
+				public void run() {
+					System.out.println("Hello");
+				}
+			});
+
+			for (int i = 0; i < 10; ++i) {
+				lines = capture.getLines();
+				if (lines.length > 2) {
+					break;
+				}
+				Thread.sleep(500);
+			}
+		}	
 
 		assertTrue(lines != null && lines.length > 2);
 
@@ -296,27 +297,28 @@ public class AnotherTakeOnSchedulingTest extends TestCase {
 			}
 		}
 
-		ConsoleCapture capture = new ConsoleCapture();
-		capture.captureConsole();
-
 		ExecutorScheduler scheduler = new ExecutorScheduler(new Date());
-		scheduler.schedule(new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("Hello");
-			}
-		});
-
+		
 		String[] lines = null;
-		for (int i = 0; i < 10; ++i) {
-			lines = capture.getLines();
-			if (lines.length > 2) {
-				break;
-			}
-			Thread.sleep(500);
-		}
+		
+		ConsoleCapture capture = new ConsoleCapture();
+		try (ConsoleCapture.Close close = capture.captureConsole()) {
 
-		capture.close();
+			scheduler.schedule(new Runnable() {
+				@Override
+				public void run() {
+					System.out.println("Hello");
+				}
+			});
+	
+			for (int i = 0; i < 10; ++i) {
+				lines = capture.getLines();
+				if (lines.length > 2) {
+					break;
+				}
+				Thread.sleep(500);
+			}
+		}
 
 		assertTrue(lines != null && lines.length > 2);
 

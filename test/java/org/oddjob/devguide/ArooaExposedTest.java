@@ -20,11 +20,11 @@ public class ArooaExposedTest extends TestCase {
 		File config = dirs.relative("examples/devguide/exposed1.xml");
 		
 		ConsoleCapture console = new ConsoleCapture();
-		console.captureConsole();
+		try (ConsoleCapture.Close close = console.captureConsole()) {
 			
-		StandardAPExample.main(config.toString());		
-		
-		console.close();
+			StandardAPExample.main(config.toString());		
+		}
+			
 		console.dump(logger);
 		
 		String[] lines = console.getLines();
