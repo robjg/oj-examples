@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/projects.oj-hsql"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/projects.oj-mail"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/projects.oj-net"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=projects.oj-examples&amp;ivyXmlPath=ivy.xml&amp;confs=*&amp;ivySettingsPath=ivysettings.xml&amp;loadSettingsOnDemand=false&amp;ivyUserDir=&amp;propertyFiles="/>
 	<classpathentry kind="output" path="examples/classes"/>
 </classpath>

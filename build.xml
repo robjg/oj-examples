@@ -106,12 +106,11 @@
 		</path>
 
 		<path id="tools-classpath">
-			<path refid="classpath"/>
+			<pathelement path="${build.classes}" />
 			<path refid="tools-cachepath"/>
 		</path>
 		
 		<path id="test-classpath">
-			<path refid="tools-classpath"/>
 			<pathelement path="${build.classes}" />
 			<path refid="test-cachepath"/>
 		</path>
