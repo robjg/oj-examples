@@ -182,6 +182,8 @@
 			<classpath>
 				<path refid="tools-classpath"/>
 				<pathelement path="${build.tools}" />
+				<!-- For log4j config -->
+				<path refid="test-cachepath"/>
 			</classpath>
 		</java>
 			
@@ -227,7 +229,8 @@
 		<mkdir dir="${test.reports}"/>
 		
 		<junit printsummary="yes" haltonfailure="no" 
-				failureproperty="junit.failure" fork="yes">
+				failureproperty="junit.failure" 
+				fork="yes" forkmode="once">
 			<classpath>
 				<pathelement location="${build.test}" />
 			</classpath>
