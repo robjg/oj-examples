@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <sequential name="Client Jobs" stateOperator="SERVICES">
+            <jobs>
+                <jmx:client id="client" connection="${server.address}" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                <input>
+                    <requests>
+                        <input-text prompt="Greeting" property="some.greeting"/>
+                    </requests>
+                </input>
+                <set>
+                    <values>
+                        <value key="client/vars.greeting" value="${some.greeting}"/>
+                    </values>
+                </set>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

@@ -84,7 +84,7 @@ public class ExamplesTest extends TestCase {
 				scheduling));
 
 		Oddjob dailyftp = new OddjobLookup(scheduling).lookup(
-				"dailyftp", Oddjob.class); 
+				"scheduling", Oddjob.class); 
 		
 		dailyftp.load();
 

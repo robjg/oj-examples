@@ -1,7 +1,5 @@
 package org.oddjob.userguide;
 
-import junit.framework.TestCase;
-
 import org.oddjob.FailedToStopException;
 import org.oddjob.Oddjob;
 import org.oddjob.arooa.convert.ArooaConversionException;
@@ -9,6 +7,8 @@ import org.oddjob.arooa.reflect.ArooaPropertyException;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.ParentState;
 import org.oddjob.tools.OurDirs;
+
+import junit.framework.TestCase;
 
 public class SharingTest extends TestCase {
 
@@ -24,9 +24,11 @@ public class SharingTest extends TestCase {
 		
 		assertEquals(ParentState.READY, oddjob.lastStateEvent().getState());
 		
-		/* Can't do this yet because we can't kill jobs.
+		oddjob.run();
 		
-		assertEquals(JobState.EXECUTING, oddjob.lastJobStateEvent().getJobState());
+		/* Can't do this yet because we can't kill exec jobs on windows.
+		
+		assertEquals(ParentState.EXECUTING, oddjob.lastStateEvent().getState());
 		
 		OddjobLookup lookup = new OddjobLookup(oddjob);
 		
@@ -37,7 +39,7 @@ public class SharingTest extends TestCase {
 		
 		oddjob.stop();
 		
-		assertEquals(JobState.COMPLETE, oddjob.lastJobStateEvent().getJobState());
+		assertEquals(JobState.COMPLETE, oddjob.lastStateEvent().getState());
 		
 		*/
 		

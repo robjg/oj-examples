@@ -1,0 +1,21 @@
+<oddjob>
+  <job>
+    <sequential>
+      <jobs>
+        <jmx:server root="${server-jobs}" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx" />
+        <sequential id="server-jobs" name="Server Jobs">
+          <jobs>
+            <task-service id="greeting-service">
+              <requests>
+                <input-text prompt="Name" property="some.greeting" />
+              </requests>
+              <job>
+                <echo id="echo"><![CDATA[${some.greeting}]]></echo>
+              </job>
+            </task-service>
+          </jobs>
+        </sequential>
+      </jobs>
+    </sequential>
+  </job>
+</oddjob>

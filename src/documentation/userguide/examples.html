@@ -64,20 +64,28 @@
 		<h4 id="scheduling">A Scheduling Example</h4>
 
 		<p>This is a demonstration of the flexible scheduling features of 
-			Oddjob. A file is downloaded via ftp daily. If the download
-			fails after a number of retries an email is sent.</p>
+			Oddjob.</p>
+			
+		<p>A file Producer creates a file with a unique sequence number every 5 minutes. The example is run with
+		a persister so that the producer state will be saved after each run. This means that if the producer is
+		stopped or crashes, it will pick up where it left off. The producer also runs with a nested Archiver job 
+		which records the state and properties of each run.</p>
+		
+		<p>The Consumer Repeat is a timer that continually schedules a another timer, Retry, that looks for 
+		files to process every 2 minutes. It also starts a third timer, Alert Timer, which after 10 minutes will send a mail 
+		warning of missing files. If files are found Alert Timer is stopped and reset, and Retry completes.
+		When its two child Timers complete, Consumer Repeat will reschedule the sequence to start again in 30 seconds.
+		Nesting timers like this in Oddjob allows large number of scheduling scenarios to be met.</p>
+			
+		<p>Note that to actually send a mail the mail server properties will need to be set via System properties on the
+			command line or in an <code>oddjob.properties</code> file in the users home directory.</p>
 
 		<a href="images/examples5.gif"><img src="images/examples5.gif"
 				height="320" width="500" alt="Scheduling"/></a>
 
-		
-		<p>The files are downloaded from the <a href="http://www.cme.com">CME</a>
-		ftp site. This is one of the real life scheduling examples that inspired
-		Oddjob. Points of interest include that the filename contains the date and
-		the files are sourced from different time zones.</p>
-		
+				
 		<p>An <a href="@reference@/org/oddjob/persist/ArchiveJob.html">Archive</a>
-		job captures the results of each run. A folder contains
+		job captures the results of producer each run. A folder contains
 		<a href="@reference@/org/oddjob/persist/ArchiveBrowserJob.html">
 		Archive Browser</a> jobs that allow the results of previous runs to be
 		viewed.</p>

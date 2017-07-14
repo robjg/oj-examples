@@ -3,8 +3,8 @@
 		<!-- =============================================
 		A nested Oddjob job.
 		============================================== -->			
-		<oddjob name="Oddjob" id="dailyftp"
-			file="${oddjob.dir}/dailyftp.xml">
+		<oddjob name="Oddjob" id="scheduling"
+			file="${oddjob.dir}/scheduling.xml">
 			<persister>
 				<file-persister dir="${oddjob.dir}"/>
 			</persister>

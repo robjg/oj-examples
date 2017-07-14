@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <sequential>
+            <jobs>
+                <jmx:server root="${server-jobs}" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                <repeat>
+                    <job>
+                        <sequential id="server-jobs">
+                            <jobs>
+                                <variables id="vars"/>
+                                <wait id="wait" for="${vars.greeting}"/>
+                                <echo id="echo"><![CDATA[${vars.greeting}]]></echo>
+                            </jobs>
+                        </sequential>
+                    </job>
+                </repeat>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

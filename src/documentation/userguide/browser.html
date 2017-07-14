@@ -13,7 +13,7 @@
 		
 		<h1>Oddjob's Browser Interface</h1>
 		
-		<p>Oddjob's Servlet and Browser Interface.</p>
+		<p>Oddjob's Embedded Web Server and Browser Interface.</p>
 
 		<ul>
 			<li><a href="#installing">Installing</a></li>
@@ -23,64 +23,55 @@
 
 		<h4 id="installing">Installing</h4>
 
-		<p>Oddjob comes with a web interface. To run the web interface
-		you need a Servlet Engine or application server like 
-		<a href="http://tomcat.apache.org/index.html">tomcat</a>.</p>
-		
-		<p>Oddjob uses a Servlet 3.0 deployement descriptor and so Tomcat 
-		Version 7 or above is required.</p>
-				
-		<p>To install Oddjob on Tomcat simply copy the oddjob.war file supplied
-		with the binary distribution of Oddjob to the webapps directory of Tomcat
-		and then restart Tomcat.</p>
-
-		<p>With the default Tomcat setup the URL 
-		<a href="http://localhost:8080/oddjob" target="_top">
-		http://localhost:8080/oddjob</a> will open Oddjob's browser view
+		<p>Oddjob comes with a service to run an embedded web server (Jetty) pre-configured to provide 
+		a Web Service and Browser Application. To quickly see the Web App at work, open the 
+	    <code>examples/oddjob-web.xml</code> Oddjob file and start the top job. 	
+		Then point your browser at <a href="http://localhost:8080" target="_top">http://localhost:8080</a>
 		and it will look something like this:</p>
 		
 		<a href="images/browserview.jpg"><img src="images/browserview.jpg" 
 		height="320" width="500" alt="Oddjob Browser Screenshot"/></a>
 
-		<p>When re-running structural jobs, the browser view of the job tree
-		lags what's Oddjob is doing so it is necessary to press refresh 
-		(sometimes several times) until it catches up.</p>
-		
-		<p>An automatic refresh in can be entered in seconds, this will have
-		the same effect as pressing the refresh button every that number of
-		seconds. To cancel the automatic refresh delete simply clear this 
-		field.
-		</p>
+        <p>Oddjob 1.5 replaces the previous JSF version with one written as a server
+        side Web Service and a Typescript and JQuery client. It is very much a 
+        work in progress.</p> 
+        
+        <p>Unlike previous versions, the Web App is not pre-packaged 
+        as a War, although it would be possible to build one from artifacts in
+        the <code>oj-web</code> project if required.</p>
 		
 		<h4 id="configuring">Configuring</h4>
 
-		<p>The Webapp starts an instance of Oddjob. This will load an Oddjob
-		XML configuration file as specified in the web.xml web application
-		deployment descriptor.</p>
+		<p>Oddjob provides a very thin wrapper around Jetty and follows Jetty's pattern of
+		allowing pluggable handlers. Oddjob currently exposes a very limited subset of Jetty's
+		configuration options. See the <a href="@reference@/org/oddjob/jetty/JettyHttpServer.html">web:server</a>
+		documentation for more details.</p>
 		
-		<p>The web.xml contains lots of comments with further information on 
-		the supported properties.</p>
-						
-		<p>Log levels are controlled by the log4j.properties file in the
-		<code>WEB-INF/classes</code> directory. By default log level is set
-		to INFO for all loggers.</p>
+		<p>The <a href="@reference@/org/oddjob/jetty/OddjobWebHandler.html">web:oddjob-web</a> Handler provides
+		the handler for the Oddjob web service and the single page web application client. It provides a very 
+		quick way of exposing an Oddjob tree of jobs via the <code>root</code> property.
+		
+        <p>It is possible to use Oddjob's web server as a general purpose web server with the 
+        <a href="@reference@/org/oddjob/jetty/ResourceHandlerType.html">web:resource</a> hander. Further
+        details will be saved for future releases when Oddjob's web offering becomes more stable.
 		
 		<h4 id="limitations">Limitations</h4>
+        
+        <p>As already mentioned, Oddjob's web interface is very much a work in progress, and it will certainly 
+        be the focus for improvement in coming releases. Here are some of its more notable limitations</p>
 		
 		<dl>
 			<dt>Security</dt>
-			<dd><p>There isn't any. Browser based authentication
-			including a read-only role will be added soon.</p></dd>
-		
-			<dt>Threads</dt>
-			<dd><p>The Oddjob Webapp currently creates threads. This
-			isn't allowed by the J2EE specification and many Servlet containers
-			don't allow it including Googles App Engine.</p>
-			
-			<p>In theory the Executions Servlet could be replace with an 
-			instance of one that provided OddjobExecutors that didn't user
-			ThreadPools - but this is still theory.</p>
-			</dd>
+			<dd><p>There isn't any. Browser based authentication including a read-only role will be added soon.</p></dd>
+
+            <dt>Web Service Documentation</dt>
+            <dd><p>There isn't any. It is now possible to start, stop and monitor jobs all via Oddjob's web 
+            service. But I'm afraid you will currently have to plough through the code to understand how to do this.
+            </p></dd>
+            
+            <dt>Web Sockets</dt>
+            <dd>They isn't any. The asynchronous AJAX bit is done via polling. This will be reworked with web sockets
+            in coming releases.</dd>           
 		</dl>
 		
 		<hr/>

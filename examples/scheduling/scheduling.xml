@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential name="Scheduler Demo">
+            <jobs>
+                <scheduling:timer id="producer-timer" name="Producer Timer" xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling">
+                    <schedule>
+                        <schedules:daily xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+                            <refinement>
+                                <schedules:interval interval="00:05"/>
+                            </refinement>
+                        </schedules:daily>
+                    </schedule>
+                    <job>
+                        <archive archiveName="producer-archive" id="archive-job">
+                            <archiveIdentifier>
+                                <format date="${producer-timer.current.fromDate}" format="yyyyMMdd-HHmm"/>
+                            </archiveIdentifier>
+                            <job>
+                                <sequential name="File Produce Sequence">
+                                    <jobs>
+                                        <variables id="filedate-vars">
+                                            <filedate>
+                                                <format date="${producer-timer.current.fromDate}" format="yyyyMMdd"/>
+                                            </filedate>
+                                        </variables>
+                                        <sequence id="producer-sequence" name="Sequence Number" watch="${filedate-vars.fileDate}"/>
+                                        <variables id="filename-vars">
+                                            <sequenceFormatted>
+                                                <format format="0000" number="${producer-sequence.current}"/>
+                                            </sequenceFormatted>
+                                            <filename>
+                                                <value value="UsefulData.${filedate-vars.filedate}-${filename-vars.sequenceFormatted}.dat"/>
+                                            </filename>
+                                        </variables>
+                                        <echo>
+                                            <output>
+                                                <file file="${filename-vars.filename}"/>
+                                            </output><![CDATA[Created some useful data at ${producer-timer.clock.date}]]></echo>
+                                    </jobs>
+                                </sequential>
+                            </job>
+                        </archive>
+                    </job>
+                </scheduling:timer>
+                <scheduling:timer id="Consumer Repeat" name="Consumer Repeat" skipMissedRuns="true" xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling">
+                    <schedule>
+                        <schedules:after xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+                            <schedule>
+                                <schedules:interval interval="00:00:30"/>
+                            </schedule>
+                        </schedules:after>
+                    </schedule>
+                    <job>
+                        <sequential>
+                            <jobs>
+                                <scheduling:timer id="alert-timer" name="Alert Timer">
+                                    <schedule>
+                                        <schedules:after xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+                                            <schedule>
+                                                <schedules:interval interval="00:10"/>
+                                            </schedule>
+                                        </schedules:after>
+                                    </schedule>
+                                    <job>
+                                        <mail:send from="${my.alert.from}" host="${my.mailhost}" id="exception" name="Send alert mail" subject="No Files!" to="${my.alert.to}" xmlns:mail="http://rgordon.co.uk/oddjob/mail"><![CDATA[No file found at ${alert-timer.clock.date}.]]></mail:send>
+                                    </job>
+                                </scheduling:timer>
+                                <scheduling:retry>
+                                    <schedule>
+                                        <schedules:interval interval="00:02" xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"/>
+                                    </schedule>
+                                    <job>
+                                        <sequential>
+                                            <jobs>
+                                                <repeat id="repeat-over-files" name="Repeat Over Files">
+                                                    <values>
+                                                        <files files="UsefulData*.dat"/>
+                                                    </values>
+                                                    <job>
+                                                        <sequential>
+                                                            <jobs>
+                                                                <echo><![CDATA[Processing ${repeat-over-files.current}...
+]]></echo>
+                                                                <delete>
+                                                                    <files>
+                                                                        <value value="${repeat-over-files.current}"/>
+                                                                    </files>
+                                                                </delete>
+                                                            </jobs>
+                                                        </sequential>
+                                                    </job>
+                                                </repeat>
+                                                <check gt="0" value="${repeat-over-files.count}"/>
+                                                <stop job="${alert-timer}" name="Stop Alert Timer"/>
+                                                <reset job="${alert-timer}" level="FORCE" name="Reset Alert Timer"/>
+                                            </jobs>
+                                        </sequential>
+                                    </job>
+                                </scheduling:retry>
+                            </jobs>
+                        </sequential>
+                    </job>
+                </scheduling:timer>
+                <folder name="Archive Browsers">
+                    <jobs>
+                        <archive-browser archiveName="producer-archive" name="Producer Archiver">
+                            <archiver>
+                                <value value="${archive-job.archiver}"/>
+                            </archiver>
+                        </archive-browser>
+                    </jobs>
+                </folder>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>
