@@ -1,6 +1,8 @@
 package org.oddjob.devguide;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
+import org.junit.Assert;
 
 import org.apache.log4j.Logger;
 import org.oddjob.FailedToStopException;
@@ -15,10 +17,11 @@ import org.oddjob.tools.OddjobTestHelper;
 import org.oddjob.tools.OurDirs;
 import org.oddjob.tools.StateSteps;
 
-public class MoreJobsTest extends TestCase {
+public class MoreJobsTest extends Assert {
 	private static final Logger logger = Logger.getLogger(
 			MoreJobsTest.class);
 	
+    @Test
 	public void testNaughtyJob() {
 		
 		OurDirs dirs = new OurDirs();
@@ -41,6 +44,7 @@ public class MoreJobsTest extends TestCase {
 		oddjob.destroy();
 	}
 	
+    @Test
 	public void testNotCompleteJob() {
 		
 		OurDirs dirs = new OurDirs();
@@ -57,6 +61,7 @@ public class MoreJobsTest extends TestCase {
 		oddjob.destroy();
 	}
 	
+    @Test
 	public void testStopingJob() throws InterruptedException, FailedToStopException {
 		
 		OurDirs dirs = new OurDirs();
@@ -89,6 +94,7 @@ public class MoreJobsTest extends TestCase {
 		oddjob.destroy();
 	}
 	
+    @Test
 	public void testService() throws InterruptedException, FailedToStopException {
 		
 		OurDirs dirs = new OurDirs();

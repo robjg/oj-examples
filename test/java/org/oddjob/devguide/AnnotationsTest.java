@@ -1,4 +1,8 @@
 package org.oddjob.devguide;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TestName;
 
 import java.io.File;
 
@@ -11,20 +15,23 @@ import org.oddjob.arooa.life.LifecycleInterfaceFactory;
 import org.oddjob.tools.ConsoleCapture;
 import org.oddjob.tools.OurDirs;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
-public class AnnotationsTest extends TestCase {
+public class AnnotationsTest extends Assert {
 
 	
 	private static final Logger logger = Logger.getLogger(AnnotationsTest.class);
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Rule public TestName name = new TestName();
+
+    @Before
+    public void setUp() throws Exception {
+
 		
-		logger.info("---------------------  " + getName() + "  -------------------------");
+		logger.info("---------------------  " + name.getMethodName()  + "  -------------------------");
 	}
 	
+    @Test
 	public void testArooaLifecycle() {
 		
 		ArooaSession session = new OddjobSessionFactory().createSession();
@@ -51,6 +58,7 @@ public class AnnotationsTest extends TestCase {
 		lifecycle.destroy();
 	}
 	
+    @Test
 	public void testDestroyExample() {
 		
 		OurDirs dirs = new OurDirs();

@@ -1,22 +1,25 @@
 package org.oddjob.devguide;
+import org.junit.Before;
+
+import org.junit.Test;
 
 import java.io.File;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
 import org.oddjob.Oddjob;
 import org.oddjob.Setup;
 import org.oddjob.state.ParentState;
 import org.oddjob.tools.OurDirs;
 
-public class FirstJobsTest extends TestCase {
+public class FirstJobsTest extends Assert {
 
 	File dir;
 
 	ClassLoader classLoader;
 	
-	@Override
-	protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
 		OurDirs dirs = new OurDirs();
 		
 		dir = new File(dirs.base(), "examples/devguide");
@@ -26,6 +29,7 @@ public class FirstJobsTest extends TestCase {
 		classLoader = new Setup().getClassLoader();
 	}
 		
+    @Test
 	public void testFirst1() {
 		
 		Oddjob oj = new Oddjob();
@@ -38,6 +42,7 @@ public class FirstJobsTest extends TestCase {
 		oj.destroy();
 	}
 	
+    @Test
 	public void testFirst2() {
 		
 		Oddjob oj = new Oddjob();

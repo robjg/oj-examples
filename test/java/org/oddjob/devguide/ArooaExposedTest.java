@@ -1,18 +1,21 @@
 package org.oddjob.devguide;
 
+import org.junit.Test;
+
 import java.io.File;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
 import org.apache.log4j.Logger;
 import org.oddjob.arooa.ArooaParseException;
 import org.oddjob.tools.ConsoleCapture;
 import org.oddjob.tools.OurDirs;
 
-public class ArooaExposedTest extends TestCase {
+public class ArooaExposedTest extends Assert {
 	private static final Logger logger = Logger.getLogger(ArooaExposedTest.class);
 
 	
+    @Test
 	public void testStandardAPExample() throws ArooaParseException {
 		
 		OurDirs dirs = new OurDirs();

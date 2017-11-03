@@ -1,16 +1,19 @@
 package org.oddjob.userguide;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
+import org.junit.Assert;
 
 import org.oddjob.Oddjob;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.ParentState;
 import org.oddjob.tools.OurDirs;
 
-public class BehindGuiTest extends TestCase {
+public class BehindGuiTest extends Assert {
 
 	OurDirs dirs = new OurDirs();
 		
+    @Test
 	public void testExample1() {
 		
 		Oddjob oddjob = new Oddjob();
@@ -24,6 +27,7 @@ public class BehindGuiTest extends TestCase {
 		oddjob.destroy();
 	}
 	
+    @Test
 	public void testExample2() {
 		
 		Oddjob oddjob = new Oddjob();
@@ -38,6 +42,7 @@ public class BehindGuiTest extends TestCase {
 	}
 	
 	
+    @Test
 	public void testExample3() {
 		
 		Oddjob oddjob = new Oddjob();
@@ -52,6 +57,7 @@ public class BehindGuiTest extends TestCase {
 	}
 	
 	
+    @Test
 	public void testExample4() {
 		
 		Oddjob oddjob = new Oddjob();
@@ -66,6 +72,7 @@ public class BehindGuiTest extends TestCase {
 	}
 
 	
+    @Test
 	public void testExample5() {
 		
 		Oddjob oddjob = new Oddjob();
@@ -80,6 +87,7 @@ public class BehindGuiTest extends TestCase {
 	}
 
 	
+    @Test
 	public void testExample6() {
 		
 		Oddjob oddjob = new Oddjob();

@@ -1,12 +1,14 @@
 package org.oddjob.userguide;
 
+import org.junit.Test;
+
 import java.text.ParseException;
 import java.util.Date;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
 import org.oddjob.FailedToStopException;
 import org.oddjob.Oddjob;
@@ -20,10 +22,11 @@ import org.oddjob.state.ParentState;
 import org.oddjob.tools.ManualClock;
 import org.oddjob.tools.OurDirs;
 
-public class SchedulingTest extends TestCase {
+public class SchedulingTest extends Assert {
 
 	OurDirs dirs = new OurDirs();
 		
+    @Test
 	public void testExample1() throws ArooaPropertyException, ArooaConversionException, FailedToStopException {
 		
 		Oddjob oddjob = new Oddjob();
@@ -63,6 +66,7 @@ public class SchedulingTest extends TestCase {
 		oddjob.destroy();
 	}
 	
+    @Test
 	public void testExample2() {
 		
 		Oddjob oddjob = new Oddjob();
@@ -99,6 +103,7 @@ public class SchedulingTest extends TestCase {
 	}
 	
 	
+    @Test
 	public void testExample3() throws ParseException, FailedToStopException, ArooaPropertyException, ArooaConversionException {
 		
 		final OurExecutor executor = new OurExecutor();
@@ -151,6 +156,7 @@ public class SchedulingTest extends TestCase {
 	}
 	
 	
+    @Test
 	public void testExample4() {
 		
 		Oddjob oddjob = new Oddjob();

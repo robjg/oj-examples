@@ -1,10 +1,13 @@
 package org.oddjob.examples;
+import org.junit.Before;
+
+import org.junit.Test;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
 import org.oddjob.OddjobConsole;
 import org.oddjob.devguide.StandardAPExample;
@@ -14,12 +17,12 @@ import org.oddjob.logging.LogLevel;
 import org.oddjob.logging.LogListener;
 import org.oddjob.tools.OurDirs;
 
-public class DevGuideExposedTest extends TestCase {
+public class DevGuideExposedTest extends Assert {
 
 	File dir;
 	
-	@Override
-	protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
 		
 		dir = new File(new OurDirs().base(), "examples/devguide");
 		
@@ -37,6 +40,7 @@ public class DevGuideExposedTest extends TestCase {
 	
 	String EOL = System.getProperty("line.separator");
 	
+    @Test
 	public void testStandardAPExample() throws Exception {
 
 		LL ll = new LL();

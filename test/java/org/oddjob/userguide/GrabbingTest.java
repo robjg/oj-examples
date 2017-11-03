@@ -1,14 +1,17 @@
 package org.oddjob.userguide;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
+import org.junit.Assert;
 
 import org.oddjob.Oddjob;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.ParentState;
 import org.oddjob.tools.OurDirs;
 
-public class GrabbingTest extends TestCase {
+public class GrabbingTest extends Assert {
 
+    @Test
 	public void testGrabbing() {
 		
 		OurDirs dirs = new OurDirs();

@@ -1,8 +1,11 @@
 package org.oddjob.examples;
+import org.junit.Before;
+
+import org.junit.Test;
 
 import java.io.File;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
 import org.oddjob.Oddjob;
 import org.oddjob.OddjobLookup;
@@ -15,20 +18,21 @@ import org.oddjob.tools.OddjobTestHelper;
 import org.oddjob.tools.OurDirs;
 
 
-public class ExamplesTest extends TestCase {
+public class ExamplesTest extends Assert {
 
 	ClassLoader classLoader;
 	
 	ArooaDescriptorFactory oddballs;
 	
-	@Override
-	protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
 		
 		Setup setup = new Setup();
 		this.oddballs = setup.getOddballs();
 		this.classLoader = setup.getClassLoader();
 	}
 	
+    @Test
 	public void testSimple() {
 
 		Oddjob test = createOddjob("simple");
@@ -64,6 +68,7 @@ public class ExamplesTest extends TestCase {
 	}
 	
 	
+    @Test
 	public void testSchedule() throws ArooaConversionException {
 
 		OurDirs dirs = new OurDirs();
@@ -93,6 +98,7 @@ public class ExamplesTest extends TestCase {
 		test.destroy();
 	}
 		
+    @Test
 	public void testWorkflow() {
 
 		OurDirs dirs = new OurDirs();

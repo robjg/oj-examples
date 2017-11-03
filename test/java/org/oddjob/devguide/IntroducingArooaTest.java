@@ -1,19 +1,22 @@
 package org.oddjob.devguide;
+import org.junit.Before;
+
+import org.junit.Test;
 
 import java.io.File;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
 import org.oddjob.Oddjob;
 import org.oddjob.state.ParentState;
 import org.oddjob.tools.OurDirs;
 
-public class IntroducingArooaTest extends TestCase {
+public class IntroducingArooaTest extends Assert {
 
 	File dir;
 	
-	@Override
-	protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
 		
 		dir = new File(
 				new OurDirs().base(), "examples/devguide");
@@ -21,6 +24,7 @@ public class IntroducingArooaTest extends TestCase {
 		assertTrue(dir.exists());
 	}
 	
+    @Test
 	public void testArooa1() {
 		
 		Oddjob oj = new Oddjob();
@@ -32,6 +36,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.destroy();
 	}
 	
+    @Test
 	public void testArooa2() {
 		
 		Oddjob oj = new Oddjob();
@@ -43,6 +48,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.destroy();
 	}
 	
+    @Test
 	public void testArooa3() {
 		
 		Oddjob oj = new Oddjob();
@@ -54,6 +60,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.destroy();
 	}
 	
+    @Test
 	public void testArooa4() {
 		
 		Oddjob oj = new Oddjob();
@@ -65,6 +72,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.destroy();
 	}
 	
+    @Test
 	public void testArooa5() {
 		
 		Oddjob oj = new Oddjob();
@@ -76,6 +84,7 @@ public class IntroducingArooaTest extends TestCase {
 		oj.destroy();
 	}
 
+    @Test
 	public void testHelloPerson() {
 		
 		Oddjob oj = new Oddjob();

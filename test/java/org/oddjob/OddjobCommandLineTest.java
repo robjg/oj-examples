@@ -1,10 +1,14 @@
 package org.oddjob;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TestName;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
 import org.apache.log4j.Logger;
 import org.oddjob.jobs.ExecJob;
@@ -16,7 +20,7 @@ import org.oddjob.tools.OddjobSrc;
 import org.oddjob.tools.OddjobTestHelper;
 import org.oddjob.tools.OurDirs;
 
-public class OddjobCommandLineTest extends TestCase {
+public class OddjobCommandLineTest extends Assert {
 	private static final Logger logger = Logger.getLogger(
 			OddjobCommandLineTest.class);
 	
@@ -24,12 +28,14 @@ public class OddjobCommandLineTest extends TestCase {
 	
 	final static String EOL = System.getProperty("line.separator");
 	
+	@Rule public TestName name = new TestName();
+
 	/** The oddjob project dir */
 	File oddjobHome;
 		
-	@Override
-	protected void setUp() throws Exception {
-		logger.info("---------------- " + getName() + " -----------------");
+    @Before
+    public void setUp() throws Exception {
+		logger.info("---------------- " + name.getMethodName() + " -----------------");
 		
 		this.oddjobHome = new OddjobSrc().oddjobSrcBase();		
 		File runJar = new File(this.oddjobHome, RUN_JAR);
@@ -47,6 +53,7 @@ public class OddjobCommandLineTest extends TestCase {
 	}
 	
 	
+    @Test
 	public void testOddjobFailsNoFile() throws InterruptedException {
 		
 		String fileName = "Idontexist.xml";
@@ -76,6 +83,7 @@ public class OddjobCommandLineTest extends TestCase {
 		exec.destroy();
 	}
 	
+    @Test
 	public void testClientServer() throws InterruptedException, FailedToStopException {
 		
 		OurDirs dirs = new OurDirs();
@@ -130,6 +138,7 @@ public class OddjobCommandLineTest extends TestCase {
 	}
 	
 
+    @Test
 	public void testVenkyParallel() throws InterruptedException {
 		
 		ExecJob exec = new ExecJob();
@@ -167,6 +176,7 @@ public class OddjobCommandLineTest extends TestCase {
 	 * 
 	 * @throws InterruptedException
 	 */
+    @Test
 	public void testDestroyNoErrors() throws InterruptedException {
 		
 		ExecJob exec = new ExecJob();
@@ -190,6 +200,7 @@ public class OddjobCommandLineTest extends TestCase {
 	}
 	
 	
+    @Test
 	public void testMBeanClientServer() 
 	throws FailedToStopException, InterruptedException {
 		

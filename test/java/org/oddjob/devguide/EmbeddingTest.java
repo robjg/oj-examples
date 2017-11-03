@@ -1,6 +1,8 @@
 package org.oddjob.devguide;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
+import org.junit.Assert;
 
 import org.oddjob.Oddjob;
 import org.oddjob.OddjobLookup;
@@ -9,8 +11,9 @@ import org.oddjob.arooa.reflect.ArooaPropertyException;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.ParentState;
 
-public class EmbeddingTest extends TestCase {
+public class EmbeddingTest extends Assert {
 
+    @Test
 	public void testSimple() throws ArooaPropertyException, ArooaConversionException {
 
 		// #first{

@@ -1,11 +1,13 @@
 package org.oddjob.devguide;
 
+import org.junit.Test;
+
 import java.io.File;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
 import org.apache.log4j.Logger;
 import org.oddjob.Oddjob;
@@ -14,7 +16,7 @@ import org.oddjob.state.ParentState;
 import org.oddjob.tools.ConsoleCapture;
 import org.oddjob.tools.OurDirs;
 
-public class ServicesJobExamplesTest extends TestCase {
+public class ServicesJobExamplesTest extends Assert {
 	
 	private static final Logger logger = Logger.getLogger(
 			ServicesJobExamplesTest.class);
@@ -80,6 +82,7 @@ public class ServicesJobExamplesTest extends TestCase {
 	}
 	// } #HungryJob
 	
+    @Test
 	public void testSimpleExample() {
 		
 		OurDirs dirs = new OurDirs();
@@ -128,6 +131,7 @@ public class ServicesJobExamplesTest extends TestCase {
 	}
 	// } #HungryVegetarianJob
 	
+    @Test
 	public void testQualifiedExample() {
 		
 		OurDirs dirs = new OurDirs();
@@ -158,6 +162,7 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.destroy();
 	}
 	
+    @Test
 	public void testAnyExample() {
 		
 		OurDirs dirs = new OurDirs();
@@ -187,6 +192,7 @@ public class ServicesJobExamplesTest extends TestCase {
 		oddjob.destroy();
 	}
 	
+    @Test
 	public void testIntransigentExample() {
 		
 		OurDirs dirs = new OurDirs();
@@ -239,6 +245,7 @@ public class ServicesJobExamplesTest extends TestCase {
 	}
 	// } #ResilientVegetarianJob
 	
+    @Test
 	public void testIntransigentExample2() {
 		
 		OurDirs dirs = new OurDirs();

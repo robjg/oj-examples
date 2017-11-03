@@ -1,5 +1,7 @@
 package org.oddjob.userguide;
 
+import org.junit.Test;
+
 import org.oddjob.FailedToStopException;
 import org.oddjob.Oddjob;
 import org.oddjob.arooa.convert.ArooaConversionException;
@@ -8,10 +10,11 @@ import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.ParentState;
 import org.oddjob.tools.OurDirs;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
-public class SharingTest extends TestCase {
+public class SharingTest extends Assert {
 
+    @Test
 	public void testMain() throws ArooaPropertyException, ArooaConversionException, FailedToStopException {
 				
 		OurDirs dirs = new OurDirs();

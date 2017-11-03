@@ -1,5 +1,7 @@
 package org.oddjob.userguide;
 
+import org.junit.Test;
+
 import java.util.Properties;
 
 import org.oddjob.Oddjob;
@@ -17,9 +19,9 @@ import org.oddjob.tools.ConsoleCapture;
 import org.oddjob.tools.OurDirs;
 import org.oddjob.tools.StateSteps;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
-public class TasksTest extends TestCase {
+public class TasksTest extends Assert {
 
 	private class OurInputHandler implements InputHandler {
 		
@@ -34,6 +36,7 @@ public class TasksTest extends TestCase {
 		}
 	}
 	
+    @Test
 	public void testInputWaitExample() throws InterruptedException, ArooaPropertyException, ArooaConversionException {
 		
 		OurDirs dirs = new OurDirs();
@@ -86,6 +89,7 @@ public class TasksTest extends TestCase {
 		
 	}
 	
+    @Test
 	public void testTaskExample() throws InterruptedException, ArooaPropertyException, ArooaConversionException {
 		
 		OurDirs dirs = new OurDirs();

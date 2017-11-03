@@ -1,8 +1,10 @@
 package org.oddjob.userguide;
 
+import org.junit.Test;
+
 import java.text.ParseException;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
 
 import org.oddjob.OddjobDescriptorFactory;
 import org.oddjob.arooa.ArooaDescriptor;
@@ -17,7 +19,7 @@ import org.oddjob.schedules.ScheduleResult;
 import org.oddjob.schedules.SimpleScheduleResult;
 import org.oddjob.tools.OurDirs;
 
-public class SchedulesTest extends TestCase {
+public class SchedulesTest extends Assert {
 
 	Schedule create(String resource) throws ArooaParseException {
 		
@@ -36,6 +38,7 @@ public class SchedulesTest extends TestCase {
     	return (Schedule) parser.getRoot();
 	}
 	
+    @Test
 	public void testSchedules1() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules1.xml");
@@ -49,6 +52,7 @@ public class SchedulesTest extends TestCase {
 				result);
 	}
 
+    @Test
 	public void testSchedules2() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules2.xml");
@@ -72,6 +76,7 @@ public class SchedulesTest extends TestCase {
 			result);
 	}
 	
+    @Test
 	public void testSchedules2a() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules2a.xml");
@@ -95,6 +100,7 @@ public class SchedulesTest extends TestCase {
 			result);
 	}
 	
+    @Test
 	public void testSchedules3() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules3.xml");
@@ -118,6 +124,7 @@ public class SchedulesTest extends TestCase {
 			result);
 	}
 	
+    @Test
 	public void testSchedules4() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules4.xml");
@@ -147,6 +154,7 @@ public class SchedulesTest extends TestCase {
 		assertEquals(expected, result);
 	}
 	
+    @Test
 	public void testSchedules5() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules5.xml");
@@ -176,6 +184,7 @@ public class SchedulesTest extends TestCase {
 		assertEquals(expected, result);
 	}
 	
+    @Test
 	public void testSchedules6() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules6.xml");
@@ -199,6 +208,7 @@ public class SchedulesTest extends TestCase {
 			result);
 	}
 	
+    @Test
 	public void testSchedules7() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules7.xml");
@@ -229,6 +239,7 @@ public class SchedulesTest extends TestCase {
 		assertEquals(expected, result);
 	}
 	
+    @Test
 	public void testSchedules8() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules8.xml");
@@ -258,6 +269,7 @@ public class SchedulesTest extends TestCase {
 			result);
 	}
 	
+    @Test
 	public void testSchedules9() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules9.xml");
@@ -288,6 +300,7 @@ public class SchedulesTest extends TestCase {
 			result);
 	}
 	
+    @Test
 	public void testSchedules10() throws ArooaParseException, ParseException {
 		
 		Schedule test = create("schedules10.xml");
