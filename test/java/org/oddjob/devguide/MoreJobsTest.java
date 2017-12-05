@@ -4,7 +4,8 @@ import org.junit.Test;
 
 import org.junit.Assert;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.oddjob.FailedToStopException;
 import org.oddjob.Oddjob;
 import org.oddjob.Stateful;
@@ -18,7 +19,7 @@ import org.oddjob.tools.OurDirs;
 import org.oddjob.tools.StateSteps;
 
 public class MoreJobsTest extends Assert {
-	private static final Logger logger = Logger.getLogger(
+	private static final Logger logger = LoggerFactory.getLogger(
 			MoreJobsTest.class);
 	
     @Test

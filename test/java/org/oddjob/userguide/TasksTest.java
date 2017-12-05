@@ -126,12 +126,12 @@ public class TasksTest extends Assert {
 		try (ConsoleCapture.Close close = console.captureConsole()) {
 			
 	        client.run();
-		
-	        assertEquals(ParentState.COMPLETE, client.lastStateEvent().getState());
-		
-	        echoState.checkWait();
-		
 		}
+        
+		assertEquals(ParentState.COMPLETE, client.lastStateEvent().getState());
+        
+        echoState.checkWait();
+	
 
 		String[] lines = console.getLines();
 

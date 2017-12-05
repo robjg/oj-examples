@@ -9,7 +9,8 @@ import javax.inject.Named;
 
 import org.junit.Assert;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.oddjob.Oddjob;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.ParentState;
@@ -18,7 +19,7 @@ import org.oddjob.tools.OurDirs;
 
 public class ServicesJobExamplesTest extends Assert {
 	
-	private static final Logger logger = Logger.getLogger(
+	private static final Logger logger = LoggerFactory.getLogger(
 			ServicesJobExamplesTest.class);
 
 	// #Snack {

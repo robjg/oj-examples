@@ -6,7 +6,8 @@ import org.junit.rules.TestName;
 
 import java.io.File;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.oddjob.Oddjob;
 import org.oddjob.OddjobSessionFactory;
 import org.oddjob.arooa.ArooaSession;
@@ -20,7 +21,7 @@ import org.junit.Assert;
 public class AnnotationsTest extends Assert {
 
 	
-	private static final Logger logger = Logger.getLogger(AnnotationsTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(AnnotationsTest.class);
 
 	@Rule public TestName name = new TestName();
 

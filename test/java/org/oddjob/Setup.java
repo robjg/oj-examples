@@ -3,7 +3,8 @@ package org.oddjob;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.oddjob.arooa.deploy.ArooaDescriptorFactory;
 import org.oddjob.io.FilesType;
 import org.oddjob.oddballs.OddballsDirDescriptorFactory;
@@ -20,7 +21,7 @@ import org.oddjob.util.URLClassLoaderType;
  */
 public class Setup {
 
-	private static final Logger logger = Logger.getLogger(Setup.class);
+	private static final Logger logger = LoggerFactory.getLogger(Setup.class);
 	
 	private final ClassLoader classLoader;
 	

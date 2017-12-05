@@ -1,7 +1,8 @@
 package org.oddjob.blogs;
 import java.text.ParseException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -21,7 +22,7 @@ import org.oddjob.tools.ConsoleCapture;
 
 public class AnotherTakeOnSchedulingTest extends Assert {
 
-	private static final Logger logger = Logger.getLogger(
+	private static final Logger logger = LoggerFactory.getLogger(
 			AnotherTakeOnSchedulingTest.class);
 	
 	@Rule public TestName name = new TestName();

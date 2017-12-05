@@ -6,12 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.oddjob.io.FilesType;
 
 public class PostProcessDocs {
 	private static final Logger logger = 
-		Logger.getLogger(PostProcessDocs.class);
+		LoggerFactory.getLogger(PostProcessDocs.class);
 
 	OurDirs dirs;
 	

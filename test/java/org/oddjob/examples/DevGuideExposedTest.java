@@ -1,19 +1,16 @@
 package org.oddjob.examples;
-import org.junit.Before;
-
-import org.junit.Test;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-
+import org.junit.Before;
+import org.junit.Test;
 import org.oddjob.OddjobConsole;
+import org.oddjob.arooa.logging.LogLevel;
 import org.oddjob.devguide.StandardAPExample;
 import org.oddjob.logging.LogArchive;
 import org.oddjob.logging.LogEvent;
-import org.oddjob.logging.LogLevel;
 import org.oddjob.logging.LogListener;
 import org.oddjob.tools.OurDirs;
 

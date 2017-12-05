@@ -10,7 +10,8 @@ import java.util.HashSet;
 
 import org.junit.Assert;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.oddjob.jobs.ExecJob;
 import org.oddjob.state.JobState;
 import org.oddjob.state.ParentState;
@@ -21,12 +22,10 @@ import org.oddjob.tools.OddjobTestHelper;
 import org.oddjob.tools.OurDirs;
 
 public class OddjobCommandLineTest extends Assert {
-	private static final Logger logger = Logger.getLogger(
+	private static final Logger logger = LoggerFactory.getLogger(
 			OddjobCommandLineTest.class);
 	
 	final static String RUN_JAR = "run-oddjob.jar";
-	
-	final static String EOL = System.getProperty("line.separator");
 	
 	@Rule public TestName name = new TestName();
 
@@ -165,8 +164,8 @@ public class OddjobCommandLineTest extends Assert {
 		results.add(lines[0]);
 		results.add(lines[1]);
 		
-		assertTrue(results.contains("a" + EOL));
-		assertTrue(results.contains("b" + EOL));
+		assertTrue(results.contains("a"));
+		assertTrue(results.contains("b"));
 	}
 
 	/**
