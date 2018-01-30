@@ -1,12 +1,11 @@
 package org.oddjob.examples;
-import org.junit.Before;
-
-import org.junit.Test;
-
 import java.io.File;
 
 import org.junit.Assert;
-
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TestName;
 import org.oddjob.Oddjob;
 import org.oddjob.OddjobLookup;
 import org.oddjob.Setup;
@@ -16,9 +15,15 @@ import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.ParentState;
 import org.oddjob.tools.OddjobTestHelper;
 import org.oddjob.tools.OurDirs;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class ExamplesTest extends Assert {
+
+	private static final Logger logger = LoggerFactory.getLogger(ExamplesTest.class);
+	
+	@Rule public TestName name = new TestName();
 
 	ClassLoader classLoader;
 	
@@ -26,7 +31,9 @@ public class ExamplesTest extends Assert {
 	
     @Before
     public void setUp() throws Exception {
-		
+	
+    	logger.info("---------------------    " + name.getMethodName() + "   -----------------------");
+    	
 		Setup setup = new Setup();
 		this.oddballs = setup.getOddballs();
 		this.classLoader = setup.getClassLoader();

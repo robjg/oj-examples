@@ -62,7 +62,8 @@ public class OddjobCommandLineTest extends Assert {
 		
 		ExecJob exec = new ExecJob();
 		exec.setCommand("java -jar " + relative(RUN_JAR) + 
-				" -f " + fileName);
+				" -f " + fileName +
+				" -l " + relative("test/launch/logback.xml"));
 		
 		ConsoleCapture console = new ConsoleCapture();
 		try (ConsoleCapture.Close close = console.capture(exec.consoleLog())) {
@@ -90,7 +91,7 @@ public class OddjobCommandLineTest extends Assert {
 		ExecJob exec = new ExecJob();
 		exec.setCommand("java -jar " + relative(RUN_JAR) +  
 				" -f " + relative("server.xml") +
-				" -l " + dirs.relative("../arooa/test/java/log4j.properties"));
+				" -l " + dirs.relative("../arooa/test/java/logback-test.xml"));
 		
 		ConsoleCapture console = new ConsoleCapture();
 		try (ConsoleCapture.Close close = console.capture(exec.consoleLog())) {
@@ -142,7 +143,8 @@ public class OddjobCommandLineTest extends Assert {
 		
 		ExecJob exec = new ExecJob();
 		exec.setCommand("java -jar " + relative(RUN_JAR) + 
-				" -f " + new OurDirs().relative("test/config/testflow2.xml"));
+				" -f " + new OurDirs().relative("test/config/testflow2.xml") +
+				" -l " + relative("test/launch/logback.xml"));
 		
 		ConsoleCapture console = new ConsoleCapture();
 		try (ConsoleCapture.Close close = console.capture(exec.consoleLog())) {
@@ -180,7 +182,8 @@ public class OddjobCommandLineTest extends Assert {
 		
 		ExecJob exec = new ExecJob();
 		exec.setCommand("java -jar " + relative(RUN_JAR) + 
-				" -f " + new OurDirs().relative("test/config/sequential-with-mirror.xml"));
+				" -f " + new OurDirs().relative("test/config/sequential-with-mirror.xml") +
+				" -l " + relative("test/launch/logback.xml"));
 		
 		ConsoleCapture console = new ConsoleCapture();
 		try (ConsoleCapture.Close close = console.capture(exec.consoleLog())) {
@@ -211,7 +214,8 @@ public class OddjobCommandLineTest extends Assert {
 				"-Dcom.sun.management.jmxremote.ssl=false " +
 				"-Dcom.sun.management.jmxremote.authenticate=false " +
 				"-jar " + relative(RUN_JAR) +  
-				" -f " + new File(testDir, "PlatformMBeanServerExample.xml"));
+				" -f " + new File(testDir, "PlatformMBeanServerExample.xml") +
+				" -l " + relative("test/launch/logback.xml"));
 
 		ConsoleCapture serverConsole = new ConsoleCapture();
 		try (ConsoleCapture.Close close = serverConsole.capture(serverExec.consoleLog())) {
@@ -221,8 +225,8 @@ public class OddjobCommandLineTest extends Assert {
 
 			for (int i = 0; i < 10; ++i) {
 				serverConsole.dump();
-				if (serverConsole.size() == 1) {
-					continue;
+				if (serverConsole.size() > 0) {
+					break;
 				}
 				Thread.sleep(1000);
 			} 
@@ -234,7 +238,9 @@ public class OddjobCommandLineTest extends Assert {
 
 			ExecJob clientExec = new ExecJob();
 			clientExec.setCommand("java -jar " + relative(RUN_JAR) +  
-					" -f " + new File(testDir, "PlatformMBeanClientExample.xml localhost:13013"));
+							" -f " + new File(testDir, "PlatformMBeanClientExample.xml") + 
+							" -l " + relative("test/launch/logback.xml") +
+							" localhost:13013");
 
 			ConsoleCapture clientConsole = new ConsoleCapture();
 			try (ConsoleCapture.Close close2 = clientConsole.capture(clientExec.consoleLog())) {
@@ -250,8 +256,9 @@ public class OddjobCommandLineTest extends Assert {
 			assertEquals(1, lines.length);
 		
 		}
-		
-		serverExec.stop();
+		finally {
+			serverExec.stop();
+		}
 	}
 	
 }

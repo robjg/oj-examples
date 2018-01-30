@@ -16,8 +16,8 @@ public class SimpleService {
 			public void run() {
 				while (!stop) {
 					System.out.println("I could be useful.");
-					serviceStarted.countDown();
 					synchronized (SimpleService.this) {
+						serviceStarted.countDown();
 						try {
 							SimpleService.this.wait();
 						} catch (InterruptedException e) {

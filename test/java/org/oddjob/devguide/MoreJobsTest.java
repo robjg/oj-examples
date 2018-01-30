@@ -1,11 +1,10 @@
 package org.oddjob.devguide;
 
-import org.junit.Test;
-
 import org.junit.Assert;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TestName;
 import org.oddjob.FailedToStopException;
 import org.oddjob.Oddjob;
 import org.oddjob.Stateful;
@@ -17,10 +16,20 @@ import org.oddjob.tools.ConsoleCapture;
 import org.oddjob.tools.OddjobTestHelper;
 import org.oddjob.tools.OurDirs;
 import org.oddjob.tools.StateSteps;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MoreJobsTest extends Assert {
 	private static final Logger logger = LoggerFactory.getLogger(
 			MoreJobsTest.class);
+
+	@Rule public TestName name = new TestName();
+
+	@Before
+	public void setUp() {
+		logger.info("---------------------    " + name.getMethodName() + "   -----------------------");
+
+	}
 	
     @Test
 	public void testNaughtyJob() {
