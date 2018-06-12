@@ -1,6 +1,6 @@
 package org.oddjob.devguide;
 
-import org.oddjob.framework.SimpleJob;
+import org.oddjob.framework.extend.SimpleJob;
 
 public class ExtendedJob extends SimpleJob {
 

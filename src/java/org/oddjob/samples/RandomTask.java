@@ -1,7 +1,7 @@
 package org.oddjob.samples;
 
 import org.oddjob.Stoppable;
-import org.oddjob.framework.SimpleJob;
+import org.oddjob.framework.extend.SimpleJob;
 
 
 /**
