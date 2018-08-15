@@ -28,6 +28,9 @@
 	    <dependency org="uk.co.rgordon" name="oddjob" rev="latest.integration"
 	    	conf="tools->tools" />
 	    	
+        <dependency org="uk.co.rgordon" name="oj-doc" rev="latest.integration"
+            conf="tools->default" />
+
 	</dependencies>
   
 </ivy-module>
