@@ -10,6 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.oddjob.io.FilesType;
 
+/**
+ * Processes reference and user guide to load the examples from file.
+ * 
+ * @author rob
+ *
+ */
 public class PostProcessDocs {
 	private static final Logger logger = 
 		LoggerFactory.getLogger(PostProcessDocs.class);
