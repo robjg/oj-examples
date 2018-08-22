@@ -1,17 +1,15 @@
 package org.oddjob;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestName;
+import static org.hamcrest.CoreMatchers.is;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 
 import org.junit.Assert;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TestName;
 import org.oddjob.jobs.ExecJob;
 import org.oddjob.state.JobState;
 import org.oddjob.state.ParentState;
@@ -20,6 +18,8 @@ import org.oddjob.tools.ConsoleCapture;
 import org.oddjob.tools.OddjobSrc;
 import org.oddjob.tools.OddjobTestHelper;
 import org.oddjob.tools.OurDirs;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OddjobCommandLineTest extends Assert {
 	private static final Logger logger = LoggerFactory.getLogger(
@@ -45,13 +45,15 @@ public class OddjobCommandLineTest extends Assert {
 	
 	String relative(String fileName) {
 		try {
-			return new File(oddjobHome, fileName).getCanonicalPath();
+			File file = new File(oddjobHome, fileName);
+			assertThat("Exists " + file, 
+					file.exists(), is( true ));				
+			return file.getCanonicalPath();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	
+		
     @Test
 	public void testOddjobFailsNoFile() throws InterruptedException {
 		
@@ -91,7 +93,7 @@ public class OddjobCommandLineTest extends Assert {
 		ExecJob exec = new ExecJob();
 		exec.setCommand("java -jar " + relative(RUN_JAR) +  
 				" -f " + relative("server.xml") +
-				" -l " + dirs.relative("../arooa/test/java/logback-test.xml"));
+				" -l " + dirs.relative("../arooa/src/test/resources/logback-test.xml"));
 		
 		ConsoleCapture console = new ConsoleCapture();
 		try (ConsoleCapture.Close close = console.capture(exec.consoleLog())) {
@@ -206,7 +208,11 @@ public class OddjobCommandLineTest extends Assert {
 	public void testMBeanClientServer() 
 	throws FailedToStopException, InterruptedException {
 		
-		File testDir = new File(oddjobHome, "test/java/org/oddjob/jmx");
+		File testDir = new File(oddjobHome, "src/test/resources/org/oddjob/jmx");
+
+		File configFile = new File(testDir, "PlatformMBeanServerExample.xml");
+		assertThat( configFile.exists(), is( true ));
+		
 		
 		ExecJob serverExec = new ExecJob();
 		serverExec.setCommand("java " +
@@ -214,7 +220,7 @@ public class OddjobCommandLineTest extends Assert {
 				"-Dcom.sun.management.jmxremote.ssl=false " +
 				"-Dcom.sun.management.jmxremote.authenticate=false " +
 				"-jar " + relative(RUN_JAR) +  
-				" -f " + new File(testDir, "PlatformMBeanServerExample.xml") +
+				" -f " + configFile +
 				" -l " + relative("test/launch/logback.xml"));
 
 		ConsoleCapture serverConsole = new ConsoleCapture();
