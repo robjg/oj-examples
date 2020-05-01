@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<antlib>
-  <!-- Tasks -->
-  <taskdef name="hello" classname="org.oddjob.devguide.MyAntTask"/>
-</antlib>

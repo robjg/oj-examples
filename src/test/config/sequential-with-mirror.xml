@@ -1,0 +1,15 @@
+<oddjob xmlns:state='http://rgordon.co.uk/oddjob/state'>
+	<job>
+		<sequential>
+			<jobs>
+				<state:if name="Always Completes">
+					<jobs>
+						<state:flag id="main-job" state='INCOMPLETE'/>
+					</jobs>
+				</state:if>
+				<echo>This will always run.</echo>
+				<state:mirror job='${main-job}' name='Reflect state for sequential to pick up on.'/>
+			</jobs>
+		</sequential>
+	</job>
+</oddjob>

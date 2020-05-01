@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.oddjob.io.FilesType;
+import org.oddjob.OurDirs;
 
 /**
  * Processes reference and user guide to load the examples from file.

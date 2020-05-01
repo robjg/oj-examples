@@ -10,19 +10,19 @@
         
 	<dependencies>
 	
-	    <dependency org="uk.co.rgordon" name="oddjob" rev="latest.integration"
+	    <dependency org="uk.co.rgordon" name="oddjob" rev="${project.version}"
 	    	conf="provided->default" />
 	    	
 		<dependency org="org.apache.ant" name="ant" rev="${really.ant.version}"
 			conf="default->default" />
 
-	    <dependency org="uk.co.rgordon" name="arooa" rev="latest.integration"
-	    	conf="test->test" />
+	    <dependency org="uk.co.rgordon" name="arooa" rev="${project.version}"
+	    	conf="tools,test->test" />
 	    	
-	    <dependency org="uk.co.rgordon" name="oddjob" rev="latest.integration"
-	    	conf="test->launch" />
+	    <dependency org="uk.co.rgordon" name="run-oddjob" rev="${project.version}"
+	    	conf="test->default" />
 	    	
-        <dependency org="uk.co.rgordon" name="oj-doc" rev="latest.integration"
+        <dependency org="uk.co.rgordon" name="oj-doc" rev="${project.version}"
             conf="tools->default" />
 
 	</dependencies>
