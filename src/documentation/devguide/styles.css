@@ -2,20 +2,20 @@
 .code {
 	padding: 1em;
 	margin: 1em;
-	background-color: #CCFFFF;
+	background-color: #AAFFFF;
 	font-family: monospace;
 }
 
 .xml {
 	padding: 1em;
 	margin: 1em;
-	background-color: #FFFFAA;
+	background-color: #f9fadc;
 	font-family: monospace;
 }
 
 .command {
 	padding: 1em;
 	margin: 1em;
-	background-color: #FFAAFF;
+	background-color: #ffe8fe;
 	font-family: monospace;
 }

@@ -55,7 +55,7 @@
 	
 		<p>Here is a really simple component.</p>
 		
-{@oddjob.java.file src/java/org/oddjob/devguide/FirstComponent.java}
+{@oddjob.java.file src/main/java/org/oddjob/devguide/FirstComponent.java}
 
 		<p>You can fire this up with oddjob
 		using the following configuration:
@@ -81,7 +81,7 @@
 	<p>Properties of our Java Objects are injected using the standard
 	Java Bean setter methods.</p>
 	
-{@oddjob.java.file src/java/org/oddjob/devguide/SecondComponent.java}
+{@oddjob.java.file src/main/java/org/oddjob/devguide/SecondComponent.java}
 
 	<p>For the properties of primitive types, 
 	their Object counterparts, or String, the property is provided in
@@ -110,7 +110,7 @@
 	
 	<p>Here's an example which has all three property types:</p>
 	
-{@oddjob.java.file src/java/org/oddjob/devguide/DifferentPropertiesJob.java}
+{@oddjob.java.file src/main/java/org/oddjob/devguide/DifferentPropertiesJob.java}
 
 	<p>In the XML configuration, the index is taken from the element order
 	for indexed properties, and the key is taken from a special 'key'
@@ -136,7 +136,7 @@
 	indexed and mapped properties we have to write the setters quite
 	carefully. Here's an example:</p>
 	
-{@oddjob.java.file src/java/org/oddjob/devguide/IndexedAndMappedJob.java}
+{@oddjob.java.file src/main/java/org/oddjob/devguide/IndexedAndMappedJob.java}
 
 	<p>Now this does mean that we can't support a deliberate null in a list or a map
 	but as yet this hasn't been a problem.</p>
@@ -147,11 +147,11 @@
 	the idea of <i>values</i>. A value, like a component, is a Java Bean.
 	Here's one.</p>
 	
-{@oddjob.java.file src/java/org/oddjob/devguide/Person.java}
+{@oddjob.java.file src/main/java/org/oddjob/devguide/Person.java}
 
 	<p>And here's a component that uses it.</p>
 
-{@oddjob.java.file src/java/org/oddjob/devguide/ThirdComponent.java}
+{@oddjob.java.file src/main/java/org/oddjob/devguide/ThirdComponent.java}
 
 	<p>Because our value is not one of the primitives or a String,
 	the property is defined
@@ -175,7 +175,7 @@
 	change the style of greeting - because I was getting
 	bored (The main cause of feature creep!):</p>
 	
-{@oddjob.java.file src/java/org/oddjob/devguide/HelloPersonJob.java}
+{@oddjob.java.file src/main/java/org/oddjob/devguide/HelloPersonJob.java}
 
 	<p>The configuration is pretty much as is, except with formal set
 	to true.</p> 

@@ -60,20 +60,20 @@
  		
 	<p>Here's the hungry job. Note the use of <code>@inject</code></p>
 	
-{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#HungryJob}
+{@oddjob.java.file src/test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#HungryJob}
    
 	<p>The hungry job uses a <code>SnackProvider</code> to retrieve it's snack.
 	</p>
 
-{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#SnackProvider}
+{@oddjob.java.file src/test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#SnackProvider}
 
 	<p>A snack is just:</p>
 
-{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#Snack}
+{@oddjob.java.file src/test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#Snack}
 
 	<p>And here's our <code>SnackProvider</code>, A cafe.</p>
 	
-{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#Cafe}
+{@oddjob.java.file src/test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#Cafe}
 
 	<p>Here's the Oddjob configuration that ties it all together. Our cafe
 	is registered with the services job. When the hungry job is configured, 
@@ -90,12 +90,12 @@ Snack eaten: Green Eggs and Ham.
  	<p>For when a job requires a more specialised service there is the
  	<code>@Named</code> qualifier. Here our hungry Job is vegetarian.</p>
 
-{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#HungryVegetarianJob}
+{@oddjob.java.file src/test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#HungryVegetarianJob}
 
 	<p>But fortunately a vegetarian cafe is available.
 	</p>
 	 
-{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#VegetarianCafe}
+{@oddjob.java.file src/test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#VegetarianCafe}
  
  	<p>Here's the modified configuration with both types of hungry job, 
  	and the output.</p>
@@ -127,7 +127,7 @@ Snack eaten: Green Eggs and Ham.
   <p>The default cafe is not automatically injected. Our Hungry vegetarian must
   be prepared to not get a snack.</p>
   
-{@oddjob.java.file test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#ResilientVegetarianJob}
+{@oddjob.java.file src/test/java/org/oddjob/devguide/ServicesJobExamplesTest.java#ResilientVegetarianJob}
 
 	<p>Our resilient hungry job handles the lack of a snack provider with only 
 	minimal fuss!</p>

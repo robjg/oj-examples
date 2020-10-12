@@ -1,0 +1,102 @@
+<html>
+	<head>
+		<title>User Guide - Getting Started</title>
+		<style type="text/css">
+			@import url(styles.css);
+		</style>
+	</head>
+	<body>
+	
+		[<a href="../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="beginning.html">Next</a>]
+		
+		<h1>Getting Started</h1>
+
+		<p>Installing and Running Oddjob.</p>
+
+		<ul>
+			<li><a href="#requirements">Requirements</a></li>
+			<li><a href="#windows">Installing on Windows</a></li>
+			<li><a href="#linux">Installing on Linux</a></li>
+			<li><a href="#running">Running Oddjob</a></li>
+		</ul>
+
+
+		<h4 id="requirements">Requirements</h4>
+
+		<ul>
+			<li>Java 1.8.x or above.</li>
+		</ul>
+
+		<h4 id="windows">Installing on Windows</h4>
+
+		<p>Download the file oddjob-@version@.zip and unzip to a
+			directory of your choice. </p>
+
+		<h4 id="linux">Installing on Linux</h4>
+
+		<p>Download the .tar.gz move to a directory of your
+			choice, and then unpack the tarball</p>
+
+		<pre class="command">tar xzvf oddjob-@version@.tar.gz</pre>
+
+		<h4 id="running">Running Oddjob</h4>
+
+		<p>To quickly see Oddjob running something try:</p>
+
+		<pre class="command">java -jar run-oddjob.jar -f server-jobs.xml</pre>
+
+		<p>And you should see something like: </p>
+
+		<pre class="command">
+[Main] Oddjob Home has been provided and is [C:\Users\rob\java\oddjob]
+[Main] Starting Oddjob version 1.6-SNAPSHOT October 7 2020
+ [Oddjob server-jobs.xml] Executing.
+ [Oddjob server-jobs.xml] Scanning directory [C:\Users\rob\java\oddjob\oddballs] for Oddballs.
+ [Oddjob server-jobs.xml] Addding Oddall [C:\Users\rob\java\oddjob\oddballs\oj-ant]
+ [Oddjob server-jobs.xml] Addding Oddall [C:\Users\rob\java\oddjob\oddballs\oj-aws]
+ [Oddjob server-jobs.xml] Addding Oddall [C:\Users\rob\java\oddjob\oddballs\oj-hsql]
+ [Oddjob server-jobs.xml] Addding Oddall [C:\Users\rob\java\oddjob\oddballs\oj-mail]
+ [Oddjob server-jobs.xml] Addding Oddall [C:\Users\rob\java\oddjob\oddballs\oj-net]
+ [Oddjob server-jobs.xml] Addding Oddall [C:\Users\rob\java\oddjob\oddballs\oj-ssh]
+ [Oddjob server-jobs.xml] Addding Oddall [C:\Users\rob\java\oddjob\oddballs\oj-web]
+ [Oddjob server-jobs.xml] Loading from configuration server-jobs.xml
+  [5 Min Timer] Executing.
+  [5 Min Timer] Starting Scheduled Exector with 13 threads.
+  [5 Min Timer] Calculating schedule from current clock date time.
+  [5 Min Timer] Next due at Mon Oct 12 09:53:20 BST 2020 in 0 seconds.
+   [5 Min Timer] Executing [SequentialJob] due at Mon Oct 12 09:53:20 BST 2020
+ [Oddjob server-jobs.xml] Execution finished.
+     [Echo Hello] Hard Reset complete.
+     [Echo World] Hard Reset complete.
+    [SequentialJob] Hard Reset complete.
+    [SequentialJob] Executing.
+    [SequentialJob] Executing child [Echo Hello]
+     [Echo Hello] Executing.
+Hello
+     [Echo Hello] Finished.
+    [SequentialJob] Executing child [Echo World]
+     [Echo World] Executing.
+World
+     [Echo World] Finished.
+     [5 Min Timer] Next due at Mon Oct 12 09:58:20 BST 2020 in 4 minutes 59 seconds.
+    [SequentialJob] Execution finished.
+   [5 Min Timer] Finished executing [SequentialJob]
+		</pre>
+
+		<p>Which is Hello and World being echoed every 5 minutes. To stop it press
+		ctl-C.</p>
+
+		<p>Oddjob executes a file of xml configuration. By default that file
+			is <code>oddjob.xml</code> which launches Oddjob explorer. There is
+		more on this in the next section.</p>
+
+		<hr/>
+		
+		[<a href="../index.html">Home</a>]
+		[<a href="index.html">Index</a>]
+		[<a href="beginning.html">Next</a>]
+		
+	</body>
+</html>

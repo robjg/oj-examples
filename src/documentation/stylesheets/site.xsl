@@ -72,7 +72,7 @@
                 </div>
 
                 <div id="footer">
-                    (c) Rob Gordon Ltd 2002-2020
+                    (c) R Gordon Ltd 2005-Present
                 </div>
 
             </div>

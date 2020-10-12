@@ -1,0 +1,134 @@
+<html>
+<head>
+    <title>Dev Guide - Building Oddjob</title>
+    <style type="text/css">
+			@import url(styles.css);
+
+    </style>
+</head>
+<body>
+
+[<a href="../index.html">Home</a>]
+[<a href="index.html">Index</a>]
+[<a href="embedding.html">Next</a>]
+
+<h1>Building Oddjob</h1>
+
+<p>Oddjob from the source.</p>
+
+<ul>
+    <li><a href="#systems">Build Systems</a></li>
+    <li><a href="#source">Source Code</a></li>
+    <li><a href="#build">Full Build</a></li>
+</ul>
+
+<h4>Build Systems</h4>
+
+<p>
+    Oddjob started life being built with Ant and dependencies manually maintained. The natural
+    progression was then to move to Ivy for dependency management. Eclipse was being
+    used as the IDE and the combination worked pretty well for a few years.
+</p>
+<p>
+    Ivy development appeared to stall for a while and support became broken in Eclipse
+    so the decision was made to move to Maven. Oddjob has slowly been migrating
+    to Maven over the last few years, and all modules will now build with Maven.
+    The big final application build is still done with Ant and Ivy however, because
+    it does things that just don't fit Mavens pattern.
+</p>
+<p>
+    So we support two build systems! Which should you choose? If you're embedding or
+    extending Oddjob then just using Maven is simpler. if you want to build a bespoke
+    Oddjob then you will need the full Ant Ivy Build.
+</p>
+
+<h4 id="source">Source Code</h4>
+
+<p>
+    Oddjob source code is spread out in a number of repositories that must be
+    cloned so that they reside in parallel directories. This is historical - in
+    2002 when Oddjob was started, Eclipse didn't support hierarchical projects
+    so the different modules had to be created in parallel. This initial checkout
+    is a pain, but not so painful as to make it worth changing.
+</p>
+
+<p>
+    The minimum needed to build a runnable Oddjob using Maven is:
+</p>
+<dl>
+    <dt><a href="https://github.com/robjg/oj-parent">oj-parent</a></dt>
+    <dd>Oddjob Parent POM</dd>
+    <dt><a href="https://github.com/robjg/arooa">arooa</a></dt>
+    <dd>The component framework</dd>
+    <dt><a href="https://github.com/robjg/oddjob">oddjob</a></dt>
+    <dd>Oddjob and some basic jobs</dd>
+</dl>
+
+<p>
+    To build Oddjob as a multi module Maven Project use
+</p>
+<dl>
+    <dt><a href="https://github.com/robjg/oj-assembly">oj-assembly</a></dt>
+    <dd>The Maven multi module POM, and also the main configuration for the Ant build.</dd>
+</dl>
+<p>
+    And delete the modules you don't want.
+</p>
+
+<h4 id="build">Full Build</h4>
+
+<p>
+    For the full build you also need the different job modules (Oddballs)
+</p>
+
+<dl>
+    <dt><a href="https://github.com/robjg/oj-ant">oj-ant</a></dt>
+    <dd>Ant jobs</dd>
+    <dt><a href="https://github.com/robjg/oj-hsql">oj-hsql</a></dt>
+    <dd>Ant jobs</dd>
+    <dt><a href="https://github.com/robjg/oj-net">oj-net</a></dt>
+    <dd>FTP jobs</dd>
+    <dt><a href="https://github.com/robjg/oj-mail">oj-mail</a></dt>
+    <dd>Mail jobs</dd>
+    <dt><a href="https://github.com/robjg/oj-jsf">oj-web</a></dt>
+    <dd>The Web Front End</dd>
+</dl>
+
+<p>
+    And also:
+</p>
+
+<dl>
+    <dt><a href="https://github.com/robjg/oj-doc">oj-assembly</a></dt>
+    <dd>The bespoke Doclet to build the Reference.</dd>
+    <dt><a href="https://github.com/robjg/oj-examples">oj-examples</a></dt>
+    <dd>Lots of Examples, but also the source for the User Guide and this Developer Guide</dd>
+</dl>
+
+<h4 id="full">Full Build</h4>
+
+<p>To build a full distribution of Oddjob - you use Oddjob.</p>
+
+<p>Oddjob must be run with tools.jar on the classpath. On Windows
+    if JAVA_HOME points to a JDK this can be achieved from the command
+    prompt with:</p>
+
+<pre class="command">"%JAVA_HOME%"\bin\java -jar run-oddjob.jar -cp "%JAVA_HOME%"\lib\tools.jar</pre>
+
+<p>
+    Using Oddjob Explorer open the file <code>/oj-assembly/oddjob.xml.</code>
+    and Run the top level job.
+</p>
+
+<p>When the build completes you should find the build artifacts in
+    the <code>/oj-assembly/work/ojdist</code> directory.</p>
+
+
+<hr/>
+
+[<a href="../index.html">Home</a>]
+[<a href="index.html">Index</a>]
+[<a href="embedding.html">Next</a>]
+
+</body>
+</html>
