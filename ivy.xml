@@ -11,19 +11,19 @@
 	<dependencies>
 	
 	    <dependency org="uk.co.rgordon" name="oddjob" rev="${project.version}"
-	    	conf="provided->default" />
+	    	conf="provided->default" changing="true"/>
 	    	
 		<dependency org="org.apache.ant" name="ant" rev="${really.ant.version}"
-			conf="default->default" />
+			conf="default->default"/>
 
 	    <dependency org="uk.co.rgordon" name="arooa" rev="${project.version}"
-	    	conf="tools,test->test" />
+	    	conf="tools,test->test" changing="true"/>
 	    	
 	    <dependency org="uk.co.rgordon" name="run-oddjob" rev="${project.version}"
-	    	conf="test->default" />
+	    	conf="test->default" changing="true"/>
 	    	
         <dependency org="uk.co.rgordon" name="oj-doc" rev="${project.version}"
-            conf="tools->default" />
+            conf="tools->default" changing="true"/>
 
 	</dependencies>
   
