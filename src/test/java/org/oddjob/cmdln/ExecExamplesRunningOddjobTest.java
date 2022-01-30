@@ -1,5 +1,7 @@
 package org.oddjob.cmdln;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,8 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
 
 public class ExecExamplesRunningOddjobTest {
 
@@ -36,9 +39,9 @@ public class ExecExamplesRunningOddjobTest {
     @Rule
     public TestName name = new TestName();
 
-    private Path oddjobDir = OddjobSrc.oddjobSrc();
+    private final Path oddjobDir = OddjobSrc.oddjobSrc();
 
-    private Path runJar = OddjobSrc.appJar();
+    private final Path runJar = OddjobSrc.appJar();
 
     @Before
     public void setUp() {
@@ -54,7 +57,7 @@ public class ExecExamplesRunningOddjobTest {
 
         Properties properties = new Properties();
         properties.put(ODDJOB_RUN_JAR_PROPERTY, runJar.toString());
-        properties.put("logConfigArgs", "-l " + logConfig.toString());
+        properties.put("logConfigArgs", "-l " + logConfig);
 
         Oddjob oddjob = new Oddjob();
         oddjob.setFile(oddjobDir.resolve(
@@ -74,20 +77,18 @@ public class ExecExamplesRunningOddjobTest {
 
         console.dump(logger);
 
-        assertEquals(ParentState.COMPLETE,
-                oddjob.lastStateEvent().getState());
+        assertThat(oddjob.lastStateEvent().getState(), is(ParentState.COMPLETE));
 
         String[] lines = console.getLines();
 
-        assertEquals("apples", lines[0].trim());
-        assertEquals("oranges", lines[1].trim());
-        assertEquals("pears", lines[2].trim());
+        assertThat(lines[0].trim(), is("apples"));
+        assertThat(lines[1].trim(), is("oranges"));
+        assertThat(lines[2].trim(), is("pears"));
 
-        assertEquals(3, lines.length);
+        assertThat(lines.length, is(3));
 
         oddjob.destroy();
     }
-
 
     @Test
     public void testWithRedirectToFileExample() throws ArooaPropertyException, ArooaConversionException, IOException {
@@ -95,9 +96,11 @@ public class ExecExamplesRunningOddjobTest {
         Path workDir = OurDirs.workPathDir(getClass().getSimpleName(), true);
         Path output = workDir.resolve("ExecOutput.log");
 
+        logger.info("Setting {} to {}", ODDJOB_RUN_JAR_PROPERTY, runJar);
+
         Properties properties = new Properties();
-        properties.put(ODDJOB_RUN_JAR_PROPERTY, runJar);
-        properties.put("work.dir", workDir.toString());
+        properties.setProperty(ODDJOB_RUN_JAR_PROPERTY, runJar.toString());
+        properties.setProperty("work.dir", workDir.toString());
 
         Oddjob oddjob = new Oddjob();
         oddjob.setFile(oddjobDir.resolve(
@@ -107,6 +110,8 @@ public class ExecExamplesRunningOddjobTest {
         oddjob.load();
 
         ExecJob exec = new OddjobLookup(oddjob).lookup("exec", ExecJob.class);
+
+        assertThat(exec, CoreMatchers.notNullValue());
 
         ConsoleCapture console = new ConsoleCapture();
         console.setLeaveLogging(true);
@@ -118,8 +123,7 @@ public class ExecExamplesRunningOddjobTest {
 
         console.dump(logger);
 
-        assertEquals(ParentState.COMPLETE,
-                oddjob.lastStateEvent().getState());
+        assertThat(oddjob.lastStateEvent().getState(), is(ParentState.COMPLETE));
 
 		assertThat(Files.exists(output), is(true));
 
@@ -152,17 +156,16 @@ public class ExecExamplesRunningOddjobTest {
 
         appenderAdapter.removeAppender(results);
 
-        assertEquals(ParentState.INCOMPLETE,
-                oddjob.lastStateEvent().getState());
+        assertThat(oddjob.lastStateEvent().getState(), is(ParentState.INCOMPLETE));
 
-        assertEquals(0, results.info.size());
-        assertTrue(results.warn.size() > 0);
+        assertThat(results.info.size(), is(0));
+        assertThat(results.warn.size(), Matchers.greaterThan(0));
 
         long lines = results.warn.stream()
                 .filter(m -> m.contains("java.io.FileNotFoundException: Missing.xml"))
                 .count();
 
-        assertTrue(lines > 0);
+        assertThat(lines, greaterThan(0L));
 
         oddjob.destroy();
     }
