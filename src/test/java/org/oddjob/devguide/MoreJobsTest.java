@@ -5,16 +5,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
-import org.oddjob.FailedToStopException;
-import org.oddjob.Oddjob;
-import org.oddjob.Stateful;
-import org.oddjob.Stoppable;
+import org.oddjob.*;
 import org.oddjob.arooa.xml.XMLConfiguration;
 import org.oddjob.state.JobState;
 import org.oddjob.state.ParentState;
 import org.oddjob.tools.ConsoleCapture;
 import org.oddjob.tools.OddjobTestHelper;
-import org.oddjob.OurDirs;
 import org.oddjob.tools.StateSteps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,12 +91,13 @@ public class MoreJobsTest extends Assert {
 		states.checkWait();
 		
 		Thread.sleep(1000);
-		
+
+		states.startCheck(JobState.EXECUTING, JobState.COMPLETE);
+
 		((Stoppable) stopping).stop();
-		
-		assertEquals(ParentState.COMPLETE, 
-				oddjob.lastStateEvent().getState());
-		
+
+		states.checkWait();
+
 		oddjob.destroy();
 	}
 	
