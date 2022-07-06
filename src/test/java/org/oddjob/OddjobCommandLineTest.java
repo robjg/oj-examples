@@ -1,6 +1,6 @@
 package org.oddjob;
 
-import org.junit.Assert;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,11 +18,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashSet;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-public class OddjobCommandLineTest extends Assert {
+public class OddjobCommandLineTest {
     private static final Logger logger = LoggerFactory.getLogger(
             OddjobCommandLineTest.class);
 
@@ -44,7 +44,8 @@ public class OddjobCommandLineTest extends Assert {
 
         Path runJarPath = OddjobSrc.appJar();
 
-        assertTrue(Files.exists(runJarPath));
+        assertThat("File exists " + runJarPath,
+                Files.exists(runJarPath), is(true));
 
         this.runJar = runJarPath.toString();
     }
@@ -52,7 +53,7 @@ public class OddjobCommandLineTest extends Assert {
     String relative(String fileName) {
         try {
             File file = new File(oddjobHome, fileName);
-            assertThat("Exists " + file,
+            assertThat("File exists " + file,
                     file.exists(), is(true));
             return file.getCanonicalPath();
         } catch (IOException e) {
@@ -61,11 +62,12 @@ public class OddjobCommandLineTest extends Assert {
     }
 
     @Test
-    public void testOddjobFailsNoFile() throws InterruptedException {
+    public void testOddjobFailsNoFile() {
 
         String fileName = "Idontexist.xml";
 
         File file = new File(fileName);
+        //noinspection ResultOfMethodCallIgnored
         file.delete();
 
         ExecJob exec = new ExecJob();
@@ -83,10 +85,10 @@ public class OddjobCommandLineTest extends Assert {
 
         // File created but Oddjob ready, not complete so exit status
         // is incomplete.
-        assertEquals(JobState.INCOMPLETE, exec.lastStateEvent().getState());
+        assertThat(exec.lastStateEvent().getState(), is(JobState.INCOMPLETE));
 
         String[] lines = console.getLines();
-        assertTrue(lines[0].startsWith("Exception"));
+        assertThat(lines[0], Matchers.startsWith("Exception"));
 
         exec.destroy();
     }
@@ -125,16 +127,15 @@ public class OddjobCommandLineTest extends Assert {
                 }
             }
 
-            assertEquals(ParentState.STARTED,
-                    oddjob.lastStateEvent().getState());
+            assertThat(oddjob.lastStateEvent().getState(), is(ParentState.STARTED));
 
             Object client = new OddjobLookup(oddjob).lookup("client");
 
-            Object[] serverJobs = OddjobTestHelper.getChildren((Structural) client);
+            Object[] serverJobs = OddjobTestHelper.getChildren(client);
 
-            assertEquals(1, serverJobs.length);
+            assertThat(serverJobs.length, is(1));
 
-            assertEquals("Server Jobs", serverJobs[0].toString());
+            assertThat(serverJobs[0].toString(), is("Server Jobs"));
 
             oddjob.onDestroy();
 
@@ -146,7 +147,7 @@ public class OddjobCommandLineTest extends Assert {
 
 
     @Test
-    public void testVenkyParallel() throws InterruptedException {
+    public void testVenkyParallel() {
 
         ExecJob exec = new ExecJob();
         exec.setCommand("java -jar " + runJar +
@@ -159,33 +160,29 @@ public class OddjobCommandLineTest extends Assert {
             exec.run();
         }
 
-		console.dump();
+        console.dump();
 
-		assertEquals(0, exec.getExitValue());
+        assertThat(exec.getExitValue(), is(0));
 
         String[] lines = console.getLines();
 
-        assertEquals(2, lines.length);
+        assertThat(lines.length, is(2));
 
-        // Parallel could produce either order.
-        HashSet<String> results = new HashSet<String>();
+        // Parallel could produce either order and even interleave the two outputs so a and b are
+        // on the same line.
+        String results = lines[0] + lines[1];
 
-        results.add(lines[0]);
-        results.add(lines[1]);
-
-        assertTrue(results.contains("a"));
-        assertTrue(results.contains("b"));
+        assertThat(results, Matchers.containsString("a"));
+        assertThat(results, Matchers.containsString("b"));
     }
 
     /**
      * Because stop wasn't stopping mirror job, errors were logged. At the
      * moment we have no way of capturing listener exceptions except via the
      * log, and it's quite good to have a few complete tests anyway.
-     *
-     * @throws InterruptedException
      */
     @Test
-    public void testDestroyNoErrors() throws InterruptedException {
+    public void testDestroyNoErrors() {
 
         ExecJob exec = new ExecJob();
         exec.setCommand("java -jar " + runJar +
@@ -200,12 +197,12 @@ public class OddjobCommandLineTest extends Assert {
 
         console.dump();
 
-        assertEquals(1, exec.getExitValue());
+        assertThat(exec.getExitValue(), is(1));
 
         String[] lines = console.getLines();
-        assertEquals(1, lines.length);
+        assertThat(lines.length, is(1));
 
-        assertEquals("This will always run.", lines[0].trim());
+        assertThat(lines[0].trim(), is("This will always run."));
     }
 
     @Test
@@ -243,8 +240,8 @@ public class OddjobCommandLineTest extends Assert {
 
             String[] lines = serverConsole.getLines();
 
-            assertEquals("Hello from an Oddjob Server!", lines[0].trim());
-            assertEquals(1, lines.length);
+            assertThat(lines[0].trim(), is("Hello from an Oddjob Server!"));
+            assertThat(lines.length, is(1));
 
             ExecJob clientExec = new ExecJob();
             clientExec.setCommand("java -jar " + runJar +
@@ -262,12 +259,11 @@ public class OddjobCommandLineTest extends Assert {
 
             lines = clientConsole.getLines();
 
-            assertEquals("Hello from an Oddjob Server!", lines[0].trim());
-            assertEquals(1, lines.length);
+            assertThat(lines[0].trim(), is("Hello from an Oddjob Server!"));
+            assertThat(lines.length, is(1));
 
         } finally {
             serverExec.stop();
         }
     }
-
 }
