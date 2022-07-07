@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <sequential>
+            <jobs>
+                <properties environment="env">
+                    <values>
+                        <value key="work.dir" value="${oddjob.home}/work"/>
+                        <value key="oddjob.bin.dir" value="${oddjob.home}/bin"/>
+                        <value key="apache.daemon.version" value="1.3.1"/>
+                        <value key="apache.daemon.zip.file" value="commons-daemon-${apache.daemon.version}-bin-windows.zip"/>
+                        <value key="apache.daemon.host" value="dlcdn.apache.org"/>
+                    </values>
+                </properties>
+                <mkdir dir="${work.dir}" name="Create Work Dir"/>
+                <web:client name="Download Procrun" url="https://${apache.daemon.host}//commons/daemon/binaries/windows/${apache.daemon.zip.file}" xmlns:web="oddjob:web">
+                    <output>
+                        <file file="${work.dir}/${apache.daemon.zip.file}"/>
+                    </output>
+                    <ssl>
+                        <web:ssl/>
+                    </ssl>
+                </web:client>
+                <ant name="Ant Task to Unzip">
+                    <tasks>
+                        <xml>
+                            <tasks>
+                                <unzip dest="${work.dir}" src="${work.dir}/${apache.daemon.zip.file}"/>
+                            </tasks>
+                        </xml>
+                    </tasks>
+                </ant>
+                <copy name="Copy procurun service exe" to="${oddjob.bin.dir}/OddjobService.exe">
+                    <from>
+                        <file file="${work.dir}/amd64/prunsrv.exe"/>
+                    </from>
+                </copy>
+                <exec name="Install Service"><![CDATA[${oddjob.bin.dir}/OddjobService.exe //IS 
+"--DisplayName=Oddjob Server" 
+"--Description=Oddjob Server" 
+"--Jvm=${java.home}\bin\server\jvm.dll" 
+--Classpath=${oddjob.run.jar} 
+--StartMode=jvm --StopMode=jvm 
+--StartClass=org.oddjob.launch.Launcher
+--StartMethod=main --StartParams=-f;${oddjob.home}\server-web.xml 
+--StopClass=org.oddjob.launch.Launcher --StopMethod=stop 
+--LogPath=${oddjob.home}\logs --LogLevel=TRACE --LogJniMessages=1
+--StdOutput=auto --StdError=auto 
+--ServiceUser=${env.USERDOMAIN}\${env.USERNAME}
+--ServicePassword=${my.win.password}
+--Startup=auto
+]]></exec>
+                <exec name="Start Service"><![CDATA[${oddjob.bin.dir}/OddjobService.exe //ES
+]]></exec>
+                <folder>
+                    <jobs>
+                        <exec name="Delete Service"><![CDATA[${oddjob.bin.dir}/OddjobService.exe //DS
+]]></exec>
+                    </jobs>
+                </folder>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>
