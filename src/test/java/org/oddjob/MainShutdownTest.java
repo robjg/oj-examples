@@ -145,7 +145,8 @@ public class MainShutdownTest extends OjTestCase {
             StateSteps state = new StateSteps(exec);
             state.startCheck(JobState.READY, JobState.EXECUTING);
 
-            new Thread(exec).start();
+            Thread t = new Thread(exec);
+            t.start();
 
             state.checkWait();
 
@@ -171,6 +172,8 @@ public class MainShutdownTest extends OjTestCase {
             }
 
             exec.stop();
+
+            t.join(5000L);
         }
 
         console.dump(logger);

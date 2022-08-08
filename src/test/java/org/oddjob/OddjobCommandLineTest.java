@@ -18,6 +18,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -164,16 +167,11 @@ public class OddjobCommandLineTest {
 
         assertThat(exec.getExitValue(), is(0));
 
-        String[] lines = console.getLines();
+        Set<String> results = Arrays.stream(console.getLines())
+                .map(String::trim)
+                .collect(Collectors.toSet());
 
-        assertThat(lines.length, is(2));
-
-        // Parallel could produce either order and even interleave the two outputs so a and b are
-        // on the same line.
-        String results = lines[0] + lines[1];
-
-        assertThat(results, Matchers.containsString("a"));
-        assertThat(results, Matchers.containsString("b"));
+        assertThat(results, Matchers.containsInAnyOrder("a", "b"));
     }
 
     /**
