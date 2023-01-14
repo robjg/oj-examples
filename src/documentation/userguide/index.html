@@ -1,181 +1,181 @@
 <html>
-	<head>
-		<title>Oddjob - User Guide</title>
-	</head>
-	<body>
+<head>
+    <title>Oddjob - User Guide</title>
+    <style type="text/css">
+			@import url(styles.css);
 
-		[<a href="../index.html">Home</a>]
+    </style>
+</head>
+<body>
 
-		<h1>The Oddjob User Guide</h1>
+[<a href="../index.html">Home</a>]
 
-	<p>Version: @version@</p>
-		
-	<p>Author: Rob Gordon</p>
-	
-	<h2>Contents</h2>
-		<ul>
-			<li><a href="started.html">Getting Started</a>
-				<ul>
-					<li><a href="started.html#requirements">Requirements</a></li>
-					<li><a href="started.html#windows">Installing on Windows</a></li>
-					<li><a href="started.html#linux">Installing on Linux</a></li>
-					<li><a href="started.html#running">Running Oddjob</a></li>
-				</ul>
-			</li>
-			<li><a href="beginning.html">First Clicks</a>
-			<ul>
-				<li><a href="beginning.html#starting">Starting Oddjob</a></li>
-				<li><a href="beginning.html#examples">Loading The Examples</a></li>
-				<li><a href="beginning.html#state">Job State</a></li>
-				<li><a href="beginning.html#resetting">Resetting and Rerunning A Job</a></li>
-			</ul>
-			</li>
-			
-			<li><a href="explorer.html">Oddjob Explorer</a>
-			<ul>
-				<li><a href="explorer.html#panels">The Panels</a></li>
-				<li><a href="explorer.html#file">The File Menu</a></li>
-				<li><a href="explorer.html#edit">The Edit Menu</a></li>
-				<li><a href="explorer.html#job">The Job Menu</a></li>
-			</ul>
-			</li>
-			
-			<li><a href="examples.html">The Examples</a>
-			<ul>
-				<li><a href="examples.html#simple">Hello World</a></li>
-				<li><a href="examples.html#exec">Execute a Batch File</a></li>
-				<li><a href="examples.html#workflow">Conditional Paths</a></li>
-				<li><a href="examples.html#scheduling">A Scheduler Example</a></li>
-				<li><a href="examples.html#sharing">Sharing Jobs on A Network</a></li>
-			</ul>
-			</li>
-			
-			<li><a href="first.html">Your First Oddjob File</a>
-			<ul>
-				<li><a href="first.html#creating">Creating a Configuration File</a></li>
-				<li><a href="first.html#ajob">Adding a Job</a></li>
-				<li><a href="first.html#running">Running Your Job</a></li>
-			</ul>
-			</li>
-			
-			<li><a href="children.html">Children of Oddjob</a>
-			<ul>
-				<li><a href="children.html#hierarchies">Job Hierarchies</a></li>
-				<li><a href="children.html#sequential">A Sequential Example</a></li>
-				<li><a href="children.html#nesting">Nesting Oddjob</a></li>
-			</ul>
-			</li>
-			
-			<li><a href="runtime.html">Runtime Configuration</a>
-			<ul>
-				<li><a href="runtime.html#introduction">Introduction</a></li>
-				<li><a href="runtime.html#defining">Defining Properties</a></li>
-				<li><a href="runtime.html#id">Job Identity</a></li>
-				<li><a href="runtime.html#properties">Job Properties</a></li>
-				<li><a href="runtime.html#variables">Variables</a></li>
-				<li><a href="runtime.html#nested">Oddjobs Within Oddjobs</a></li>
-			</ul>		
-			</li>
-			
-			<li><a href="behindgui.html">Behind the GUI</a>
-			<ul>
-				<li><a href="behindgui.html#basics">The Basics</a></li>
-				<li><a href="behindgui.html#multiple">Jobs that Run Jobs</a></li>
-				<li><a href="behindgui.html#properties">Property Elements</a></li>
-				<li><a href="behindgui.html#runtime">Runtime Property Elements</a></li>
-				<li><a href="behindgui.html#advanced">Advanced Property Access</a></li>
-				<li><a href="behindgui.html#nested">Properties of Oddjob within Oddjobs</a></li>
-			</ul>
-			</li>
-			
-			<li><a href="scheduling.html">Scheduling In Oddjob</a>
-			<ul>
-				<li><a href="scheduling.html#introduction">Introduction</a></li>
-				<li><a href="scheduling.html#timer">The Timer Job</a></li>
-				<li><a href="scheduling.html#retry">Retries</a></li>
-				<li><a href="scheduling.html#holidays">Holidays</a></li>
-				<li><a href="scheduling.html#timezones">Time Zone Scheduling And Daylight Saving Time</a></li>
-				<li><a href="scheduling.html#trigger">The Trigger Schedule Instruction</a></li>
-				<li><a href="scheduling.html#dependencies">Scheduling with Dependencies</a></li>
-			</ul>	
-			</li>
-		
-			<li><a href="schedules.html">Oddjob Schedules</a>
-			<ul>
-			<li><a href="schedules.html#introduction">Introduction</a></li>
-			<li><a href="schedules.html#moving">Recurring Intervals</a></li>
-			<li><a href="schedules.html#constrained">Constraining Schedules</a></li>
-			<li><a href="schedules.html#refining">Refining Schedules</a></li>
-			<li><a href="schedules.html#fixed">Fixed Intervals</a></li>
-			<li><a href="schedules.html#lists">Schedule Lists</a></li>
-			<li><a href="schedules.html#broken">Holiday Schedules</a></li>
-			</ul>	
-			</li>
-						
-			<li><a href="stateflow.html">State and Flow</a>
-			<ul>
-			<li><a href="stateflow.html#overview">Overview</a></li>
-			<li><a href="stateflow.html#ifandtrigger">If and Trigger</a></li>
-			<li><a href="stateflow.html#waitandjoin">Wait and Join</a></li>
-			<li><a href="stateflow.html#statecondition">State Conditions</a></li>
-			</ul>
-			</li>
-			
-			<li><a href="grabbing.html">Distributing Work</a>
-			<ul>
-			<li><a href="grabbing.html#introduction">Introduction</a></li>
-			<li><a href="grabbing.html#simple">A Simple Example</a></li>
-			<li><a href="grabbing.html#scheduling">Distributed Scheduling</a></li>
-			</ul>	
-			</li>
-			
-			<li><a href="sharing.html">Sharing Jobs on a Network</a>
-			<ul>
-				<li><a href="sharing.html#introduction">Introduction</a></li>
-				<li><a href="sharing.html#working">Working With Remote Jobs</a></li>
-				<li><a href="sharing.html#configuring">Server Drag And Drop</a></li>
-				<li><a href="sharing.html#multiple">Connecting Multiple Servers</a></li>
-				<li><a href="sharing.html#server">The Server Side</a></li>
-			</ul>
-			</li>
-			
-            <li><a href="tasks.html">Tasks</a>
-            <ul>
-	            <li><a href="tasks.html#overview">Overview</a></li>
-	            <li><a href="tasks.html#limitations">Limitations</a></li>
-            </ul>   
-            </li>
-            
-			<li><a href="saving.html">Saving Oddjob</a>
-			<ul>
-				<li><a href="saving.html#introduction">Introduction</a></li>
-				<li><a href="saving.html#property">The Persister Property</a></li>
-				<li><a href="saving.html#ids">Persistence and Identity</a></li>
-				<li><a href="saving.html#deleting">Removing Persisted State</a></li>
-				<li><a href="saving.html#archiving">Archiving</a></li>
-			</ul>
-			</li>
-			
-			<li><a href="beyondgui.html">Beyond the GUI</a>
-			<ul>
-				<li><a href="beyondgui.html#cl">The Command Line</a></li>
-				<li><a href="beyondgui.html#bg">Stopping Oddjob</a></li>
-				<li><a href="beyondgui.html#bg">In the Linux background</a></li>
-				<li><a href="beyondgui.html#service">As a Windows Service</a></li>
-				<li><a href="beyondgui.html#wrong">When Things Go Wrong</a></li>
-			</ul>			
-			</li>
-			<li><a href="browser.html">Oddjob's Browser Interface</a>
-			<ul>
-				<li><a href="browser.html#installing">Installing</a></li>
-				<li><a href="browser.html#configuring">Configuring</a></li>
-				<li><a href="browser.html#limitations">Limitiations</a></li>
-			</ul>			
-			</li>
-		</ul>
+<h1>The Oddjob User Guide</h1>
 
-	<hr>
-	
-	<div style="font-size: smaller; text-align: center;">(c) R Gordon Ltd 2005 - Present</div>
-	</body>
+<p>Version: @version@</p>
+
+<p>Author: Rob Gordon</p>
+
+<h2>Contents</h2>
+<ul>
+    <li><a href="started.html">Getting Started</a>
+        <ul>
+            <li><a href="started.html#requirements">Requirements</a></li>
+            <li><a href="started.html#windows">Installing on Windows</a></li>
+            <li><a href="started.html#linux">Installing on Linux</a></li>
+            <li><a href="started.html#running">Running Oddjob</a></li>
+        </ul>
+    </li>
+    <li><a href="beginning.html">First Clicks</a>
+        <ul>
+            <li><a href="beginning.html#starting">Starting Oddjob</a></li>
+            <li><a href="beginning.html#examples">Loading The Examples</a></li>
+            <li><a href="beginning.html#state">Job State</a></li>
+            <li><a href="beginning.html#resetting">Resetting and Rerunning A Job</a></li>
+        </ul>
+    </li>
+
+    <li><a href="explorer.html">Oddjob Explorer</a>
+        <ul>
+            <li><a href="explorer.html#panels">The Panels</a></li>
+            <li><a href="explorer.html#file">The File Menu</a></li>
+            <li><a href="explorer.html#edit">The Edit Menu</a></li>
+            <li><a href="explorer.html#job">The Job Menu</a></li>
+        </ul>
+    </li>
+
+    <li><a href="examples.html">The Examples</a>
+        <ul>
+            <li><a href="examples.html#simple">Hello World</a></li>
+            <li><a href="examples.html#exec">Execute a Batch File</a></li>
+            <li><a href="examples.html#workflow">Conditional Paths</a></li>
+            <li><a href="examples.html#scheduling">A Scheduler Example</a></li>
+            <li><a href="examples.html#sharing">Sharing Jobs on A Network</a></li>
+        </ul>
+    </li>
+
+    <li><a href="first.html">Your First Oddjob File</a>
+        <ul>
+            <li><a href="first.html#creating">Creating a Configuration File</a></li>
+            <li><a href="first.html#ajob">Adding a Job</a></li>
+            <li><a href="first.html#running">Running Your Job</a></li>
+        </ul>
+    </li>
+
+    <li><a href="children.html">Children of Oddjob</a>
+        <ul>
+            <li><a href="children.html#hierarchies">Job Hierarchies</a></li>
+            <li><a href="children.html#sequential">A Sequential Example</a></li>
+            <li><a href="children.html#nesting">Nesting Oddjob</a></li>
+        </ul>
+    </li>
+
+    <li><a href="runtime.html">Runtime Configuration</a>
+        <ul>
+            <li><a href="runtime.html#introduction">Introduction</a></li>
+            <li><a href="runtime.html#defining">Defining Properties</a></li>
+            <li><a href="runtime.html#id">Job Identity</a></li>
+            <li><a href="runtime.html#properties">Job Properties</a></li>
+            <li><a href="runtime.html#variables">Variables</a></li>
+            <li><a href="runtime.html#nested">Oddjobs Within Oddjobs</a></li>
+        </ul>
+    </li>
+
+    <li><a href="behindgui.html">Behind the GUI</a>
+        <ul>
+            <li><a href="behindgui.html#basics">The Basics</a></li>
+            <li><a href="behindgui.html#multiple">Jobs that Run Jobs</a></li>
+            <li><a href="behindgui.html#properties">Property Elements</a></li>
+            <li><a href="behindgui.html#runtime">Runtime Property Elements</a></li>
+            <li><a href="behindgui.html#advanced">Advanced Property Access</a></li>
+            <li><a href="behindgui.html#nested">Properties of Oddjob within Oddjobs</a></li>
+        </ul>
+    </li>
+
+    <li><a href="scheduling.html">Scheduling In Oddjob</a>
+        <ul>
+            <li><a href="scheduling.html#introduction">Introduction</a></li>
+            <li><a href="scheduling.html#timer">The Timer Job</a></li>
+            <li><a href="scheduling.html#retry">Retries</a></li>
+            <li><a href="scheduling.html#holidays">Holidays</a></li>
+            <li><a href="scheduling.html#timezones">Time Zone Scheduling And Daylight Saving Time</a></li>
+            <li><a href="scheduling.html#trigger">The Trigger Schedule Instruction</a></li>
+            <li><a href="scheduling.html#dependencies">Scheduling with Dependencies</a></li>
+        </ul>
+    </li>
+
+    <li><a href="schedules.html">Oddjob Schedules</a>
+        <ul>
+            <li><a href="schedules.html#introduction">Introduction</a></li>
+            <li><a href="schedules.html#moving">Recurring Intervals</a></li>
+            <li><a href="schedules.html#constrained">Constraining Schedules</a></li>
+            <li><a href="schedules.html#refining">Refining Schedules</a></li>
+            <li><a href="schedules.html#fixed">Fixed Intervals</a></li>
+            <li><a href="schedules.html#lists">Schedule Lists</a></li>
+            <li><a href="schedules.html#broken">Holiday Schedules</a></li>
+        </ul>
+    </li>
+
+    <li><a href="stateflow.html">State and Flow</a>
+        <ul>
+            <li><a href="stateflow.html#overview">Overview</a></li>
+            <li><a href="stateflow.html#ifandtrigger">If and Trigger</a></li>
+            <li><a href="stateflow.html#waitandjoin">Wait and Join</a></li>
+            <li><a href="stateflow.html#statecondition">State Conditions</a></li>
+            <li><a href="stateflow.html#events">Events</a></li>
+        </ul>
+    </li>
+
+    <li><a href="grabbing.html">Distributing Work</a>
+        <ul>
+            <li><a href="grabbing.html#introduction">Introduction</a></li>
+            <li><a href="grabbing.html#simple">A Simple Example</a></li>
+            <li><a href="grabbing.html#scheduling">Distributed Scheduling</a></li>
+        </ul>
+    </li>
+
+    <li><a href="sharing.html">Sharing Jobs on a Network</a>
+        <ul>
+            <li><a href="sharing.html#introduction">Introduction</a></li>
+            <li><a href="sharing.html#working">Working With Remote Jobs</a></li>
+            <li><a href="sharing.html#configuring">Server Drag And Drop</a></li>
+            <li><a href="sharing.html#multiple">Connecting Multiple Servers</a></li>
+            <li><a href="sharing.html#server">The Server Side</a></li>
+        </ul>
+    </li>
+
+    <li><a href="saving.html">Saving Oddjob</a>
+        <ul>
+            <li><a href="saving.html#introduction">Introduction</a></li>
+            <li><a href="saving.html#property">The Persister Property</a></li>
+            <li><a href="saving.html#ids">Persistence and Identity</a></li>
+            <li><a href="saving.html#deleting">Removing Persisted State</a></li>
+            <li><a href="saving.html#archiving">Archiving</a></li>
+        </ul>
+    </li>
+
+    <li><a href="command.html">Command Line Oddjob</a>
+        <ul>
+            <li><a href="command.html#cl">Command Line Help</a></li>
+            <li><a href="command.html#bg">Stopping Oddjob</a></li>
+            <li><a href="command.html#bg">In the Linux background</a></li>
+            <li><a href="command.html#service">As a Windows Service</a></li>
+            <li><a href="command.html#wrong">When Things Go Wrong</a></li>
+        </ul>
+    </li>
+
+    <li><a href="oddments.html">Oddments</a>
+        <ul>
+            <li><a href="oddments.html#tasks">Tasks</a></li>
+            <li><a href="oddments.html#beanbus">Bean Bus</a></li>
+            <li><a href="oddments.html#web">Web</a></li>
+        </ul>
+    </li>
+
+</ul>
+
+<hr>
+
+<div style="font-size: smaller; text-align: center;">(c) R Gordon Ltd 2005 - Present</div>
+</body>
 </html>

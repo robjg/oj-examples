@@ -43,7 +43,7 @@
 
 		<h4 id="running">Running Oddjob</h4>
 
-		<p>To quickly see Oddjob running something try:</p>
+		<p>From the console, change directory to where you installed oddjob and run:</p>
 
 		<pre class="command">java -jar run-oddjob.jar -f server-jobs.xml</pre>
 
@@ -54,9 +54,36 @@ Hello
 World
 		</pre>
 
-		<p>Oddjob executes a file of xml configuration. By default that file
-			is <code>oddjob.xml</code> which launches Oddjob explorer. There is
-		more on this in the next section.</p>
+		<p>To add a browser, run:</p>
+
+		<pre class="command">java -jar run-oddjob.jar -f server-web.xml</pre>
+
+		<p>Point your browser at <code>localhost:8080</code> and you should see:</p>
+
+		<a href="images/browser1.jpg"><img src="images/browser1.jpg"
+											  height="320" width="500" alt="Oddjob In a Browser Startup"/></a>
+
+		<p>Navigate down the job tree in the left panel to get more detail:</p>
+
+		<a href="images/browser2.jpg"><img src="images/browser2.jpg"
+											  height="320" width="500" alt="Oddjob In a Browser More Detail"/></a>
+
+		<p>Type Ctrl-C to stop the server.</p>
+
+		<p>To edit jobs, run:</p>
+
+		<pre class="command">java -jar run-oddjob.jar server-web.xml</pre>
+
+		<p>Select the root job in the left of the panel and hit Ctrl-Alt-S to start the server. (The
+		jobs are now visible in the browser again)</p>
+
+		<p>Navigate down the job tree to one of the jobs, and hit ctrl-G to change the configuration:</p>
+
+		<a href="images/started1.jpg"><img src="images/started1.jpg"
+										   height="320" width="500" alt="Configuration in Oddjob Explorer"/></a>
+
+		<p>Oddjob Explorer is the main way of interacting with Oddjob and will be central in the next
+			few sections.</p>
 
 		<hr/>
 		

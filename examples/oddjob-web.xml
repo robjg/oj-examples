@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<oddjob id="this">
+<oddjob id="oddjob">
     <job>
         <sequential>
             <jobs>
-                <web:server id="server" port="8080" xmlns:web="oddjob:web">
-                    <handlers>
-                        <web:oddjob-web root="${jobs}"/>
-                    </handlers>
-                </web:server>
-                <oddjob file="${this.dir}/oddjob.xml" id="jobs" name="Load Examples"/>
+                <web:ui-server id="server" port="8080" xmlns:web="oddjob:web" root="${jobs}"/>
+                <oddjob file="${oddjob.dir}/oddjob.xml" id="jobs" name="Load Examples"/>
             </jobs>
         </sequential>
     </job>

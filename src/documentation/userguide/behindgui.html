@@ -27,20 +27,15 @@
 		<h4 id="basics">The Basics</h4>
 		
 		<p>Oddjob Designer provides a user interface onto an Oddjob configuration
-		file but it has its limitations. At the moment it doesn't even validate
-		the configuration. At some point you will have to understand the raw 
-		configuration files and in this guide that point is now.</p>
+		file, but it has its limitations. It's often easier and quick to work with the configuration
+			as XML.
 
-		<p>Oddjob configuration files are written in XML. If you don't know 
-		XML then Google for a tutorial - it will take about an
-		hour to pick up the basics.</p>
-		
 		<p>Each Oddjob file
 			contains an Oddjob and may contain 0 or 1 jobs for Oddjob to run.</p>
 
 		<p>A file with no job for oddjob to run is a complete waste
 			of time but perfectly legal. The document element must 
-			always be &lt;oddjob&gt;.</p>
+			always be <span class="tag">&lt;oddjob&gt;</span>.</p>
 			
 	{@oddjob.xml.file examples/userguide/behindgui1.xml}
 				
@@ -64,12 +59,12 @@
 		
 		<p>We are already seeing that sometimes attributes are used to define properties
 		of a job (like the text property of the echo job), and sometimes
-		elements are (like job and jobs). By default text and numbers are set using 
+		elements are (like job and jobs). By default, text and numbers are set using
 		attributes and more complicated properties are set using elements. This can
 		be changed on a job by job basis but should be documented in the reference 
 		guide when it is.</p>
 
-		<p>Here is a more complicated example - we see the &lt;scheduling:timer&gt; job
+		<p>Here is a more complicated example - we see the <span class="tag">&lt;scheduling:timer&gt;</span> job
 		(which we'll learn more about later) being configured with 
 		both elements that declare a job property and a schedule property. Note that schedules are 
 		in a different XML namespace.</p>
@@ -95,16 +90,16 @@
 &lt;/oddjob&gt;
 </i></pre>
 
-	<p>Do you See it? Elements Are either property elements,  which are the name of the property being set,
+	<p>Elements are either property elements,  which are the name of the property being set,
 	or type elements which are the type of property - be it a job property (copy, delete) or other 
 	value property (file, schedule).</p>
 
 	<h4 id="runtime">Runtime Property Elements</h4>
 	
 		<p>We saw in the last section that properties can be set from other job's
-		properties when the job runs. However we only saw how this worked in attribute
+		properties when the job runs. However, we only saw how this worked in attribute
 		properties using
-		the <i>${id.property}</i> construct. When the property is defined by
+		the <span class="expression"><i>${id.property}</i></span> construct. When the property is defined by
 		an element
 		use the 'value' element type to define a reference.</p>
 		
@@ -115,7 +110,7 @@
 	<h4 id="advanced">Advanced Property Access</h4>
 		
 		<p>In addition to accessing the simple properties of a job using the 
-		notation <i>${job-id.property}</i> Oddjob also supports setting and 
+			notation <span class="expression"><i>${job-id.property}</i></span> Oddjob also supports setting and
 		getting <i>indexed</i> properties <i>mapped</i> properties and <i>nested</i>
 		properties.</p>
 		
@@ -127,23 +122,24 @@
 		has the 'args' property which is a list of arguments that can be used
 		in the configuration file.</p>
 		
-		<p>The notation for an indexed property is <i>${job-id.property[index]}</i>.</p>
+		<p>The notation for an indexed property is <span class="expression"><i>${job-id.property[index]}</i></span>.</p>
 		
 		<p>A mapped property is when a job provides a property which is a map of
 		keys to values and a particular value can be extracted using the key. Where
 		they are available their exact use is documented in the reference.</p> 
 		
-		<p>The notation for an indexed property is <i>${job-id.property(key)}</i>.</p>
+		<p>The notation for an indexed property is <span class="expression"><i>${job-id.property(key)}</i></span>.</p>
 
 		<p>A nested property is where the job provides a property that itself
 		has properties. These are rare but the format should be noted.</p>
 		
-		<p>The notation for a mapped property is <i>${job-id.property.sub-property}</i>.</p>
+		<p>The notation for a mapped property is <span class="expression"><i>${job-id.property.sub-property}</i></span>.
+		</p>
 		
 	<h4 id="nested">Properties of Oddjobs within Oddjobs</h4>
 
 		<p>The jobs and properties of a nested Oddjob are available using the path
-		like notation <i>${nested-oddjob-id/job-id.property}</i></p>
+			like notation <span class="expression"><i>${nested-oddjob-id/job-id.property}</i></span></p>
 		
 		<p>Here is an Oddjob configuration that contains an Oddjob job. The nested
 		Oddjob runs the configuration nested.xml</p>.
@@ -158,16 +154,17 @@
 		twice.</p>
  
  		<p>One interesting point is that the nested Oddjob has two sides. On the
- 		outside it is is fred and on the inside it is jane. On the outside 
- 		${fred/jane.name} is exactly the same as ${fred.name} which is Fred. On 
+ 		outside it is is fred and on the inside it is jane. On the outside
+			<span class="expression">${fred/jane.name}</span> is exactly the same as
+			<span class="expression">${fred.name}</span> which is Fred. On
  		the inside it is only accessible as jane, it has no knowledge of being fred,
- 		although ${jane.name} is still 'Fred'</p>
+			although <span class="expression">${jane.name}</span> is still 'Fred'</p>
  
  		<p>There is theoretically no limit to the number of nested Oddjobs and the
- 		property access notation just expands in the style <i>${a/b/c.property}</i> 
+			property access notation just expands in the style <span class="expression"><i>${a/b/c.property}</i></span>
  		as might be expected.</p>
  
- 		<p>The nested oddjob configuration was defined using '${this.dir}/nested.xml'
+		<p>The nested oddjob configuration was defined using <span class="expression">${this.dir}/nested.xml</span>
  		- Oddjob exposes the directory of it's configuration file using a read-only 
  		property called 'dir', and the parent Oddjob has been given the id 'this' so
  		our configuration file expression expands to 'The file nested.xml in the same 

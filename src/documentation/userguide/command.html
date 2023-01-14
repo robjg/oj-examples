@@ -1,0 +1,116 @@
+<html>
+<head>
+    <title>User Guide - Command Line Oddjob</title>
+    <style type="text/css">
+			@import url(styles.css);
+
+    </style>
+</head>
+<body>
+
+[<a href="../index.html">Home</a>]
+[<a href="index.html">Index</a>]
+[<a href="saving.html">Previous</a>]
+[<a href="oddments.html">Next</a>]
+
+<h1>Command Line Oddjob</h1>
+
+<p>Using Oddjob without Oddjob Explorer.</p>
+
+<ul>
+    <li><a href="#cl">Command Line Help</a></li>
+    <li><a href="#stopping">Stopping Oddjob</a></li>
+    <li><a href="#bg">In the Linux background</a></li>
+    <li><a href="#service">As a Windows Service</a></li>
+    <li><a href="#wrong">When Things Go Wrong</a></li>
+</ul>
+
+<h4 id="cl">Command Line Help</h4>
+
+<p>As we saw at the beginning of this manual how to run Oddjob from the command line.
+    For further options use:</p>
+
+<pre class="command">
+java -jar run-oddjob.jar -h
+</pre>
+
+<p>Additional arguments are passed into Oddjob and are set as the args
+    property of the top Oddjob. If the command line is</p>
+
+<pre class="command">
+java -jar run-oddjob -f greeting.xml "Hello World!"
+</pre>
+
+<p>and greeting.xml contained:
+
+<pre class="xml">
+&lt;oddjob id="oddjob"&gt;
+ &lt;job&gt;
+  &lt;echo&gt;${oddjob.args[0]}&lt;/echo&gt;
+ &lt;/job&gt;
+&lt;/oddjob&gt;
+</pre>
+
+<p>Then the result would be:
+
+<pre>
+Hello World!
+</pre>
+
+<h4 id="stopping">Stopping Oddjob</h4>
+
+<p>Oddjob has a shutdown hook that attempts to stop Oddjob cleanly when the
+    virtual machine detects it is being asked to terminate. Usually this happens with
+    Ctr-C or the kill signal, but the exact implementation is machine dependent.</p>
+
+<p>If a job is hanging and refuses stop Oddjob will forcibly exit after 5 seconds.</p>
+
+<h4 id="bg">In the Linux Background</h4>
+
+<p>Oddjob comes with a server.xml that will start a server for use on a
+    remote machine.</p>
+
+<p>The following command will run Oddjob as a Linux background process.</p>
+
+<pre class="command">
+nohup java -jar run-oddjob.jar -f server.xml &amp;
+</pre>
+
+<p>Opening the corresponding client.xml file from Oddjob Explorer will
+    allow jobs to be deployed to the server from the desktop using
+    drag and drop or by changing the configuration directly on the server
+    using Designer.
+
+<h4 id="service">As a Windows Service</h4>
+
+<p>A quick 'Google' will reveal several projects for running a Java process as a service.
+    The one we use is <a href="https://commons.apache.org/proper/commons-daemon/procrun.html">Procrun</a>
+    which is part of the Apache Daemon Project.</p>
+
+<p>This script will download Procrun, install an Oddjob Service and start it:</p>
+
+{@oddjob.xml.file examples/userguide/ServiceInstall.xml}
+
+<p>Note that the double quotes are required to use the environment variables.</p>
+
+<p>Another option would be
+    <a href="http://wrapper.tanukisoftware.org/">Java Service Wrapper</a>.</p>
+
+<h4 id="wrong">When Things Go Wrong</h4>
+
+<p>By default Oddjob writes to a log file called oddjob.log which will be
+    in the same directory that Oddjob was started from.</p>
+
+<p>The logging configuration is in the log4j.properties file located in
+    <code><i>oddjob_dir</i>/opt/class</code>. Changing the logging level to
+    debug may provide additional information.</p>
+
+<hr/>
+
+[<a href="../index.html">Home</a>]
+[<a href="index.html">Index</a>]
+[<a href="saving.html">Previous</a>]
+[<a href="oddments.html">Next</a>]
+
+</body>
+</html>

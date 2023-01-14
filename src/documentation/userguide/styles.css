@@ -1,9 +1,15 @@
 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .code {
 	padding: 1em;
 	margin: 1em;
 	background-color: #AAFFFF;
 	font-family: monospace;
+	width: fit-content;
+	min-width: 800px;
 }
 
 .xml {
@@ -11,6 +17,8 @@
 	margin: 1em;
 	background-color: #f9fadc;
 	font-family: monospace;
+	width: fit-content;
+	min-width: 800px;
 }
 
 .command {
@@ -18,4 +26,19 @@
 	margin: 1em;
 	background-color: #ffe8fe;
 	font-family: monospace;
+	width: fit-content;
+	min-width: 800px;
 }
+
+.expression {
+    font-weight: bold;
+    color: #196F3D;
+	font-family: monospace;
+}
+
+.tag {
+    font-weight: bold;
+    color: #5B2C6F;
+	font-family: monospace;
+}
+

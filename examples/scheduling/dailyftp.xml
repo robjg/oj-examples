@@ -9,6 +9,14 @@
 	
 		<!-- =============================================
 		FTP get a span file from the CME website.
+
+		This was one of the original use cases for Oddjob, and would work way
+		back when the CME ftp site was open. You now need an account
+		(see https://www.cmegroup.com/ftp/span/) so this example has been
+		replaced with a made up example.
+
+		This is here for posterity.
+
 		============================================== -->
 		<sequential name="Scheduler Demo">		
 			<jobs>
