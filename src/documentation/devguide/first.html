@@ -1,114 +1,120 @@
 <html>
-	<head>
-		<title>Dev Guide - First Job</title>
-		<style type="text/css">
+<head>
+    <title>Dev Guide - First Job</title>
+    <style type="text/css">
 			@import url(styles.css);
-		</style>
-	</head>	
-	<body>
-	
-		[<a href="../index.html">Home</a>]
-		[<a href="index.html">Index</a>]
-		[<a href="embedding.html">Previous</a>]
-		[<a href="background.html">Next</a>]
-		
-		<h1>Custom Jobs</h1>
 
-		<p>Writing an Oddjob job.</p>
-		
-	<ul>
-		<li><a href="#hello">Hello World</a></li>
-		<li><a href="#people">Hello Rod, Jane and Freddy</a></li>
-		<li><a href="#summary">A Developers Dozen</a></li>
-	</ul>
+    </style>
+</head>
+<body>
 
-				
-	<h4 id="hello">Hello World</h4>
-	<p>Writing a job for Oddjob is really really easy. How easy?
-	This easy:</p>
+[<a href="../index.html">Home</a>]
+[<a href="index.html">Index</a>]
+[<a href="embedding.html">Previous</a>]
+[<a href="more.html">Next</a>]
+
+<h1>Custom Jobs</h1>
+
+<p>Writing an Oddjob job.</p>
+
+<ul>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#hello">Hello World</a></li>
+    <li><a href="#people">Hello Rod, Jane and Freddy</a></li>
+    <li><a href="#summary">Summary</a></li>
+</ul>
+
+
+<h4 id="background">Background</h4>
+
+<p>
+    Oddjob's philosophy is to be as unobtrusive as possible. A job in Oddjob is just an
+    <code>java.lang.Runnable</code> or a <code>java.util.concurrent.Callable</code>.
+    For all but the most advanced interaction with the framework, you don't need Oddjob on the classpath.
+</p>
+
+<h4 id="hello">Hello World</h4>
+<p>Here's how easy it is to write a job:</p>
 
 {@oddjob.java.file src/main/java/org/oddjob/devguide/HelloWorldJob.java}
- 
- 	<p>Oddjob will run any <code>java.lang.Runnable</code> or 
- 	<code>java.util.concurrent.Callable</code> as is. No need to learn a
- 	new API!
- 	</p>
- 
- 	<p>To get Oddjob to run our job we need to create a configuration file:</p>
- 	
+
+
+<p>To get Oddjob to run our job we need to create a configuration file:</p>
+
 {@oddjob.xml.file examples/devguide/hello1.xml}
- 	
-	<p>And run it:</p>
+
+<p>And run it:</p>
 
 <pre class="command">
 $ java -jar run-oddjob.jar -cp examples/classes -f examples/devguide/hello1.xml<br/>
 Hello World!
 </pre>
 
-	<p>Notice that the classpath option -cp is after the -jar. This is 
-	Oddjobs option, not Java's. This is because -jar ignores any existing classpath and
-	any classpath option.
-	</p>
+<p>Notice that the classpath option -cp is after the -jar. This is
+    Oddjobs option, not Java's. This is because -jar ignores any existing classpath and
+    any classpath option.
+</p>
 
-	<p>We can now also load it in Oddjob Explorer (but we need still need 
-	the classpath).</p>
-	
+<p>We can now also load it in Oddjob Explorer (but we need still need
+    the classpath).</p>
+
 <pre class="command">
-$ java -jar run-oddjob.jar -cp examples/classes <br/>
+$ java -jar run-oddjob.jar -cp examples/classes examples/devguide/hello1.xml<br/>
 </pre>
 
-	<p>Open the file and we get:</p>
-	
-	<a href="images/hello1.gif"><img src="images/hello1.gif"
-				height="320" width="500" alt="Hello in Oddjob"/></a>
-	
-	<h4 id="people">Hello Rod, Jane, and Freddy</h4>
-	
-	<p>A Job is not much use if it's not configurable, so moving
-	quickly on lets show you how to write a configurable job.</p>
+<p>We get:</p>
+
+<a href="images/hello1.gif"><img src="images/hello1.gif"
+                                 height="320" width="500" alt="Hello in Oddjob"/></a>
+
+<h4 id="people">Hello Rod, Jane, and Freddy</h4>
+
+<p>Here's a configurable job.</p>
 
 {@oddjob.java.file src/main/java/org/oddjob/devguide/HelloPeopleJob.java}
-	
-		<p>
-		A quick configuration:
-		</p>
-			
+
+<p>
+    With a configuration:
+</p>
+
 {@oddjob.xml.file examples/devguide/hello2.xml}
-						
-		<p>And fire it up as before:</p>
 
-	<a href="images/hello2.gif"><img src="images/hello2.gif"
-				height="320" width="500" alt="Hello People in Oddjob"/></a>
-	
-	<p>You might have noticed that this job also has a nice name. That's
-	because I've sneakily given our new job a <code>toString()</code> 
-	method, and that's what explorer uses to label the job.</p>
-	
-	<h4 id="summary">A Developers Dozen</h4>
+<p>And fire it up as before:</p>
 
-		<p>So lets take a moment to reflect on what we've got:</p>
-		
-		<ul>
-			<li>A job that can be configured.</li>
-			<li>A job that can be monitored and controlled in 
-			a user friendly way - good enough for technical users or support
-			staff.</li>
-			<li>A job that can be deployed on a server and monitored and
-			controlled remotely.</li>
-			<li>A job that can be deployed in a Servlet Container and monitored and
-			controlled via a browser.</li>
-			<li>A job that can be scheduled to run at any time, from anywhere.</li>
-			<li>A job that has no dependency on any framework.</li>
-		</ul>
-	
-		<p>Not bad for a dozen lines of code.</p>
-		
-		<hr/>
+<a href="images/hello2.gif"><img src="images/hello2.gif"
+                                 height="320" width="500" alt="Hello People in Oddjob"/></a>
 
-		[<a href="../index.html">Home</a>]
-		[<a href="index.html">Index</a>]
-		[<a href="embedding.html">Previous</a>]
-		[<a href="background.html">Next</a>]
-		
-	</body>
+<p>The job also has a nice name. We also gave our new job a <code>toString()</code>
+    method, and that's what explorer uses to label the job.</p>
+
+<h4 id="summary">Summary</h4>
+
+<p>So lets take a moment to reflect on what we've got:</p>
+
+<ul>
+    <li>A job that can be configured.</li>
+    <li>A job that can be monitored and controlled in
+        a user friendly way - good enough for technical users or support
+        staff.
+    </li>
+    <li>A job that can be deployed on a server and monitored and
+        controlled remotely.
+    </li>
+    <li>A job that can be deployed in a Servlet Container and monitored and
+        controlled via a browser.
+    </li>
+    <li>A job that can be scheduled to run at any time, from anywhere.</li>
+    <li>A job that has no dependency on any framework.</li>
+</ul>
+
+<p>Not bad for a dozen lines of code.</p>
+
+<hr/>
+
+[<a href="../index.html">Home</a>]
+[<a href="index.html">Index</a>]
+[<a href="embedding.html">Previous</a>]
+[<a href="more.html">Next</a>]
+
+</body>
 </html>

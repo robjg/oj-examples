@@ -1,0 +1,9 @@
+<oddjob id="oddjob">
+  <job>
+    <my-job file="${oddjob.file}">
+      <child>
+        <echo>I'm a child job</echo>
+      </child>
+    </my-job>
+  </job>
+</oddjob>

@@ -68,7 +68,7 @@ public class MoreJobsTest extends Assert {
 	}
 	
     @Test
-	public void testStopingJob() throws InterruptedException, FailedToStopException {
+	public void testStoppingJob() throws InterruptedException, FailedToStopException {
 		
 		OurDirs dirs = new OurDirs();
 		

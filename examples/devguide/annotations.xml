@@ -1,10 +1,9 @@
-<oddjob>
+<oddjob id="oddjob">
   <job>
-    <sequential>
-      <jobs>
-        <bean class="org.oddjob.devguide.DestroyByAnnotation" />
-        <bean class="org.oddjob.devguide.DestroyByMagic" />
-      </jobs>
-    </sequential>
+    <bean class="org.oddjob.devguide.AnnotationsInJob" file="${oddjob.file}">
+      <child>
+        <echo>I'm a child job</echo>
+      </child>
+    </bean>
   </job>
 </oddjob>

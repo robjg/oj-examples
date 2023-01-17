@@ -1,0 +1,114 @@
+<html>
+<head>
+    <title>Dev Guide - Annotations</title>
+    <style type="text/css">
+			@import url(styles.css);
+
+    </style>
+</head>
+<body>
+
+[<a href="../index.html">Home</a>]
+[<a href="index.html">Index</a>]
+[<a href="more.html">Previous</a>]
+[<a href="descriptor.html">Next</a>]
+
+<h1>Annotations</h1>
+
+<ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#supported">Supported Annotations</a></li>
+    <li><a href="#example">Example</a></li>
+</ul>
+
+<h4 id="overview">Overview</h4>
+
+<p>
+    Oddjob provides some Annotations for interaction with the Framework. Doesn't this introduce a dependency which
+    is against the principle of an unobtrusive framework? No - because annotations can be specified in a
+    <i><b>descriptor</b></i> that we will get to later.
+</p>
+
+<h4 id="supported">Supported Annotations</h4>
+
+<h5>Configuration:</h5>
+
+<dl>
+    <dt><a href="@javadoc@/org/oddjob/arooa/deploy/annotations/ArooaAttribute.html">@ArooaAttribute</a></dt>
+    <dd>A property that is normally configured as an element is to be configured as an attribute.</dd>
+    <dt><a href="@javadoc@/org/oddjob/arooa/deploy/annotations/ArooaComponent.html">@ArooaComponent</a></dt>
+    <dd>The property is a component, this is a child job in Oddjob.</dd>
+    <dt><a href="@javadoc@/org/oddjob/arooa/deploy/annotations/ArooaText.html">@ArooaText</a></dt>
+    <dd>The property is CDATA in the XML (such as Echo's text property).</dd>
+    <dt><a href="@javadoc@/org/oddjob/arooa/deploy/annotations/ArooaHidden.html">@ArooaHidden</a></dt>
+    <dd>Hide the property from the designer.</dd>
+
+</dl>
+
+<h5>Configuration Lifecycle:</h5>
+
+<dl>
+    <dt><a href="@javadoc@/org/oddjob/arooa/life/Initialised.html">@Initialised</a></dt>
+    <dd>Callback for when the bean has been initialised. All static properties have been set.</dd>
+    <dt><a href="@javadoc@/org/oddjob/arooa/life/Configured.html">@Configured</a></dt>
+    <dd>Callback for when the bean has been configured. All dynamic properties have been set.</dd>
+    <dt><a href="@javadoc@/org/oddjob/arooa/life/Destroy.html">@Destroy</a></dt>
+    <dd>Callback to clear up resources.</dd>
+</dl>
+
+<h5>Job Lifecycle:</h5>
+
+<dl>
+    <dt><a href="@javadoc@/org/oddjob/framework/adapt/Run.html">@Run</a></dt>
+    <dd>Method to run a job if the job isn't <code>Runnable</code> or <code>Callable</code></dd>
+    <dt><a href="@javadoc@/org/oddjob/framework/adapt/Stop.html">@Run</a></dt>
+    <dd>Method to run to stop a job.</dd>
+    <dt><a href="@javadoc@/org/oddjob/framework/adapt/SoftReset.html">@SoftReset</a></dt>
+    <dd>Callback to reset state in a job after an Exception or if it is Incomplete.</dd>
+    <dt><a href="@javadoc@/org/oddjob/framework/adapt/HardReset.html">@HardReset</a></dt>
+    <dd>Callback to reset a job if it is in any Finished stated.</dd>
+</dl>
+
+<h5>Other</h5>
+
+<dl>
+    <dt><a href="@javadoc@/org/oddjob/framework/adapt/Start.html">@Start</a></dt>
+    <dd>Like run, but for a Service.</dd>
+
+    <dt><a href="@javadoc@/org/oddjob/framework/adapt/AcceptExceptionListener.html">@AcceptExceptionListener</a></dt>
+    <dd>For a <code>FallibleComponent</code></dd>
+
+    <dt><a href="@javadoc@/org/oddjob/framework/adapt/AcceptCompletionHandle.html">@AcceptCompletionHandle</a></dt>
+    <dd>For an <code>AsyncJob</code></dd>
+
+    <dt><a href="@javadoc@/org/oddjob/describe/NoDescribe.html">@NoDescribe</a></dt>
+    <dd>Do not show the property in the properties tab of the UI.</dd>
+
+    <dt><a href="@javadoc@/org/oddjob/beanbus/Destination.html">@Destination</a></dt>
+    <dd>Property to set as a destination in a Bean Bus.</dd>
+
+    <dt>@Inject</dt>
+    <dd>The standard Java annotation for dependency injection is described later</dd>
+
+</dl>
+
+
+<h4 id="example">Example</h4>
+
+    <p>Here's a Job with lots of Annotations:</p>
+
+{@oddjob.java.file src/main/java/org/oddjob/devguide/AnnotationsInJob.java}
+
+    <p>And its configuration:</p>
+
+{@oddjob.xml.file examples/devguide/annotations.xml}
+
+<hr/>
+
+[<a href="../index.html">Home</a>]
+[<a href="index.html">Index</a>]
+[<a href="first.html">Previous</a>]
+[<a href="descriptor.html">Next</a>]
+
+</body>
+</html>

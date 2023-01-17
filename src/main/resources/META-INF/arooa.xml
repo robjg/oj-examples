@@ -1,11 +1,27 @@
 <arooa:descriptor xmlns:arooa="http://rgordon.co.uk/oddjob/arooa">
-  <components>
-    <arooa:bean-def element="my-component"
-      className="org.oddjob.devguide.DestroyByMagic">
-      <annotations>
-        <arooa:annotation name="org.oddjob.arooa.life.Destroy"
-          method="goodbye" />
-      </annotations>
-    </arooa:bean-def>
-  </components>
+    <components>
+        <arooa:bean-def element="my-job"
+                        className="org.oddjob.devguide.NoAnnotationsInJob">
+            <properties>
+                <arooa:property name="file" type="ATTRIBUTE"/>
+                <arooa:property name="child" type="COMPONENT"/>
+            </properties>
+            <annotations>
+                <arooa:annotation name="org.oddjob.arooa.life.Initialised"
+                                  method="init"/>
+                <arooa:annotation name="org.oddjob.arooa.life.Configured"
+                                  method="configure"/>
+                <arooa:annotation name="org.oddjob.arooa.life.Destroy"
+                                  method="destroy"/>
+                <arooa:annotation name="org.oddjob.framework.adapt.Run"
+                                  method="go"/>
+                <arooa:annotation name="org.oddjob.framework.adapt.Stop"
+                                  method="halt"/>
+                <arooa:annotation name="org.oddjob.framework.adapt.SoftReset"
+                                  method="reset"/>
+                <arooa:annotation name="org.oddjob.framework.adapt.HardReset"
+                                  method="reset"/>
+            </annotations>
+        </arooa:bean-def>
+    </components>
 </arooa:descriptor>

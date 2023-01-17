@@ -9,8 +9,8 @@
 	
 		[<a href="../index.html">Home</a>]
 		[<a href="index.html">Index</a>]
-		[<a href="background.html">Previous</a>]
-		[<a href="arooa.html">Next</a>]
+		[<a href="first.html">Previous</a>]
+		[<a href="annotations.html">Next</a>]
 	
 		<h1>More on Jobs</h1>
 
@@ -20,9 +20,10 @@
 			<li><a href="#logging">Logging</a></li>
 			<li><a href="#services">Services</a></li>
 			<li><a href="#serialization">Serialization</a></li>
+			<li><a href="#other">Other Not Documented</a></li>
 		</ul>
 
-		<h4 id="completion">Comletion States</h4>
+		<h4 id="completion">Completion States</h4>
 		
 		<p>So far we've written a nice job that run's without errors - but
 		what happens if something goes wrong?</p>
@@ -66,8 +67,9 @@
 		
 		<h4 id="logging">Logging</h4>
 
-		<p>Oddjob uses <a href="http://logging.apache.org/log4j">log4j</a>. If
-		you also use Log4j, any logging in your job's <code>run()</code> method
+		<p>Oddjob uses <a href="https://www.slf4j.org/">slf4j</a> via
+			<a href="https://logback.qos.ch/">logback</a>. If
+		you also use slf4j, any logging in your job's <code>run()</code> method
 		will be captured by Oddjob and displayed in the log panel of Oddjob 
 		Explorer.
 
@@ -153,13 +155,22 @@ Service Has Stopped.
 		<p>After your job is restored, Oddjob will continue to configure your
 		job from the configuration file. Thus any serialised properties that
 		appear in the configuration will be overwritten.</p>
-				
+
+		<h4 id="other">Other Not Yet Documented</h4>
+
+		<p>Asynchronous jobs complete on a different thread. They can be a <code>Callable</code> that
+			returns a <code>CompletableFuture&lt;Integer&gt;</code> or they can be an
+			<a href="@javadoc@/org/oddjob/framework/AsyncJob.html">AsyncJob</a></p>
+
+		<p>Services can also fail by being an
+			<a href="@javadoc@/org/oddjob/framework/FallibleComponent.html">FallibleComponent</a></p>
+
 		<hr/>
 	
 		[<a href="../index.html">Home</a>]
 		[<a href="index.html">Index</a>]
-		[<a href="background.html">Previous</a>]
-		[<a href="arooa.html">Next</a>]
+		[<a href="first.html">Previous</a>]
+		[<a href="annotations.html">Next</a>]
 	
 	</body>
 </html>

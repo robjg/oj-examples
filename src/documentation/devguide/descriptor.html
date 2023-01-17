@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title>Dev Guide - Annotations</title>
+    <style type="text/css">
+			@import url(styles.css);
+
+    </style>
+</head>
+<body>
+
+[<a href="../index.html">Home</a>]
+[<a href="index.html">Index</a>]
+[<a href="annotations.html">Previous</a>]
+[<a href="arooa.html">Next</a>]
+
+<h1>The Descriptor</h1>
+
+<ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#example">Example</a></li>
+</ul>
+
+<h4 id="overview">Overview</h4>
+
+<p>
+    Oddjob looks for a descriptor file on the classpath. A descriptor file isn't necessary
+    but if it finds one it will use it to when configuring jobs.
+    The descriptor file name is <code>META-INF/arooa.xml</code>.
+</p>
+
+<h4 id="example">Example</h4>
+
+<p>Here's a descriptor that allows the job we saw in the previous section
+    to be created without any dependency on Oddjob:</p>
+
+{@oddjob.xml.file src/main/resources/META-INF/arooa.xml}
+
+    <p>Here's the Job without Annotations:</p>
+
+{@oddjob.java.file src/main/java/org/oddjob/devguide/NoAnnotationsInJob.java}
+
+    <p>And its configuration:</p>
+
+{@oddjob.xml.file examples/devguide/annotations2.xml}
+
+<hr/>
+
+[<a href="../index.html">Home</a>]
+[<a href="index.html">Index</a>]
+[<a href="annotations.html">Previous</a>]
+[<a href="arooa.html">Next</a>]
+
+</body>
+</html>
