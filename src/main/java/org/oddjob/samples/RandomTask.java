@@ -30,7 +30,7 @@ implements Stoppable {
 	public int execute() throws Exception {
 
 		if (getDelay() == 0) {		
-			setDelay(new Double(Math.random() * 10000).longValue());
+			setDelay((long) (Math.random() * 10000));
 		}
 		synchronized (this) {
 			this.wait(delay);
