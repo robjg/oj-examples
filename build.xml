@@ -62,6 +62,8 @@
 		<property name="build.reference"      value="${build.docs}/reference"/>
 		<property name="build.xdocs"          value="${build.dir}/xdocs"/>
 
+		<property name="target.dir"            value="./target"/>
+
 		<property name="test.reports" value="${build.dir}/test-reports"/>
 		
 		<property name="jar.name"       value="${name}-${build.version}.jar"/>
@@ -380,10 +382,8 @@
 	<!-- =================================================================== -->
 	<!-- Prepares the binary distribution                                    -->
 	<!-- =================================================================== -->
-	<target name="dist-bin" depends="really-all-tests, really-dist-bin"
-				  description="Prepares the binary distribution"/>
-	
-	<target name="really-dist-bin" depends="compile" if="dist.bin.dir"
+	<target name="dist-bin" depends="docs"
+			if="dist.bin.dir"
 		  description="Prepares the binary distribution">
 
 		<property name="to.dir" value="${dist.bin.dir}"/>
@@ -402,27 +402,13 @@
 				
 	</target>
 	
-	<!-- =================================================================== -->
-	<!-- Maven Targets			                                     -->
-	<!-- =================================================================== -->
-		
-	<target name="maven-install"
-			description="Not yet implemented">
-	</target>
-	
-    <target name="maven-deploy" 
-    	description="Not yet implemented">
-    </target>
-	
-	<target name="maven-stage" 
-		description="Not yet implemented">
-	</target>
-	
+
 	<!-- =================================================================== -->
 	<!-- Clean targets                                                       -->
 	<!-- =================================================================== -->
 	
 	<target name="clean" depends="init" description="Cleans the build directories">
+		<delete dir="${target.dir}"/>
 		<delete dir="${build.dir}"/>
 		<delete dir="examples/scheduling/dailyftp"/>
 	</target>

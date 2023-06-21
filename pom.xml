@@ -35,6 +35,26 @@
         <connection>scm:git:git://github.com/robjg/oj-examples.git</connection>
     </scm>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <skip.integration.tests>true</skip.integration.tests>
+                <skipTests>false</skipTests>
+            </properties>
+        </profile>
+        <profile>
+            <id>integration-test</id>
+            <properties>
+                <skip.integration.tests>false</skip.integration.tests>
+                <skipTests>true</skipTests>
+            </properties>
+        </profile>
+    </profiles>
+
     <properties>
         <ant.version>1.10.7</ant.version>
     </properties>

@@ -1,19 +1,16 @@
 package org.oddjob.devguide;
 
+import org.junit.Assert;
 import org.junit.Before;
-
 import org.junit.Test;
+import org.oddjob.Oddjob;
+import org.oddjob.OurDirs;
+import org.oddjob.state.ParentState;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
-
-import org.junit.Assert;
-
-import org.oddjob.Oddjob;
-import org.oddjob.state.ParentState;
-import org.oddjob.OurDirs;
 
 public class ModularityAndOddballsTest extends Assert {
 
@@ -77,9 +74,7 @@ public class ModularityAndOddballsTest extends Assert {
     String antOddball() {
 
         Path antOddball =  OurDirs.basePath()
-				.resolve("../oj-ant")
-                .resolve(OurDirs.buildType().getBuildDir())
-                .resolve("oddball");
+				.resolve("../oj-ant/target/oddball");
 
         if (!Files.exists(antOddball)) {
 			throw new IllegalStateException("Can't find " + antOddball);
