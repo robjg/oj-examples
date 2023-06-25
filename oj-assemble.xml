@@ -1,9 +1,57 @@
-<oddjob>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="oddjob">
     <job>
         <sequential>
             <jobs>
                 <exists file="${oddjob.assemble.home}/run-maven.xml"/>
-                <oddjob file="${oddjob.assemble.home}/run-maven.xml"/>
+                <oddjob file="${oddjob.assemble.home}/run-maven.xml" name="Run Maven"/>
+                <ant name="Run Ant docs">
+                    <tasks>
+                        <xml>
+                            <tasks>
+                                <ant antfile="${oddjob.dir}/build.xml" inheritAll="false" target="docs"/>
+                            </tasks>
+                        </xml>
+                    </tasks>
+                    <output>
+                        <stdout/>
+                    </output>
+                </ant>
+                <oddjob name="Post Process Docs">
+                    <export>
+                        <value key="oddjob" value="${oddjob}"/>
+                    </export>
+                    <configuration>
+                        <inline>
+                            <oddjob>
+                                <job>
+                                    <bean class="org.oddjob.tools.PostProcessDocs">
+                                        <baseDir>
+                                            <file file="${oddjob.dir}"/>
+                                        </baseDir>
+                                        <files>
+                                            <files files="${build.dir}/**/*.html"/>
+                                        </files>
+                                    </bean>
+                                </job>
+                            </oddjob>
+                        </inline>
+                    </configuration>
+                    <properties>
+                        <properties>
+                            <values>
+                                <file file="${oddjob.dir}/build" key="build.dir"/>
+                            </values>
+                        </properties>
+                    </properties>
+                    <classLoader>
+                        <url-class-loader>
+                            <files>
+                                <files files="${oddjob.dir}/../oj-doc/target/classes"/>
+                            </files>
+                        </url-class-loader>
+                    </classLoader>
+                </oddjob>
             </jobs>
         </sequential>
     </job>
