@@ -3,55 +3,81 @@
     <job>
         <sequential>
             <jobs>
-                <exists file="${oddjob.assemble.home}/run-maven.xml"/>
-                <oddjob file="${oddjob.assemble.home}/run-maven.xml" name="Run Maven"/>
-                <ant name="Run Ant docs">
-                    <tasks>
-                        <xml>
-                            <tasks>
-                                <ant antfile="${oddjob.dir}/build.xml" inheritAll="false" target="docs"/>
-                            </tasks>
-                        </xml>
-                    </tasks>
-                    <output>
-                        <stdout/>
-                    </output>
-                </ant>
-                <oddjob name="Post Process Docs">
-                    <export>
-                        <value key="oddjob" value="${oddjob}"/>
-                    </export>
-                    <configuration>
-                        <inline>
-                            <oddjob>
-                                <job>
-                                    <bean class="org.oddjob.tools.PostProcessDocs">
-                                        <baseDir>
-                                            <file file="${oddjob.dir}"/>
-                                        </baseDir>
-                                        <files>
-                                            <files files="${build.dir}/**/*.html"/>
-                                        </files>
-                                    </bean>
-                                </job>
-                            </oddjob>
-                        </inline>
-                    </configuration>
-                    <properties>
-                        <properties>
+                <exists file="${oddjob.assemble.home}/run-maven.xml" name="Check run-maven.xml Exists"/>
+                <switch name="Switch on ${oddjob.assemble.target}">
+                    <value>
+                        <value value="${oddjob.assemble.target}"/>
+                    </value>
+                    <switches>
+                        <list>
                             <values>
-                                <file file="${oddjob.dir}/build" key="build.dir"/>
+                                <value value="clean"/>
+                                <value value="install"/>
                             </values>
-                        </properties>
-                    </properties>
-                    <classLoader>
-                        <url-class-loader>
-                            <files>
-                                <files files="${oddjob.dir}/../oj-doc/target/classes"/>
-                            </files>
-                        </url-class-loader>
-                    </classLoader>
-                </oddjob>
+                        </list>
+                    </switches>
+                    <jobs>
+                        <oddjob file="${oddjob.assemble.home}/run-maven.xml" name="Run Maven Clean"/>
+                        <sequential name="Produce Docs on Install">
+                            <jobs>
+                                <oddjob file="${oddjob.assemble.home}/run-maven.xml" name="Run Maven Install"/>
+                                <ant name="Run Ant docs">
+                                    <tasks>
+                                        <xml>
+                                            <tasks>
+                                                <ant antfile="${oddjob.dir}/build.xml" inheritAll="false" target="docs"/>
+                                            </tasks>
+                                        </xml>
+                                    </tasks>
+                                    <output>
+                                        <stdout/>
+                                    </output>
+                                </ant>
+                                <resolve:resolve id="resolveOjDocs" name="Resolve OjDocs" xmlns:resolve="oddjob:resolve">
+                                    <dependencies>
+                                        <resolve:dependency coords="uk.co.rgordon:oj-doc:${project.version}"/>
+                                    </dependencies>
+                                </resolve:resolve>
+                                <oddjob name="Post Process Docs">
+                                    <configuration>
+                                        <inline>
+                                            <oddjob>
+                                                <job>
+                                                    <bean class="org.oddjob.tools.PostProcessDocs">
+                                                        <baseDir>
+                                                            <file file="${oddjob.dir}"/>
+                                                        </baseDir>
+                                                        <files>
+                                                            <files files="${build.dir}/**/*.html"/>
+                                                        </files>
+                                                    </bean>
+                                                </job>
+                                            </oddjob>
+                                        </inline>
+                                    </configuration>
+                                    <properties>
+                                        <properties>
+                                            <values>
+                                                <file file="${oddjob.dir}/build" key="build.dir"/>
+                                            </values>
+                                        </properties>
+                                    </properties>
+                                    <export>
+                                        <value key="oddjob" value="${oddjob}"/>
+                                    </export>
+                                    <classLoader>
+                                        <url-class-loader>
+                                            <files>
+                                                <value value="${resolveOjDocs.resolvedFilesArray}"/>
+                                            </files>
+                                        </url-class-loader>
+                                    </classLoader>
+                                </oddjob>
+                            </jobs>
+                        </sequential>
+                        <state:flag name="Ignore ${oddjob.assemble.target}" xmlns:state="http://rgordon.co.uk/oddjob/state"/>
+                    </jobs>
+                </switch>
             </jobs>
         </sequential>
     </job>
