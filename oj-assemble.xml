@@ -43,7 +43,7 @@
                                         <inline>
                                             <oddjob>
                                                 <job>
-                                                    <bean class="org.oddjob.tools.PostProcessDocs">
+                                                    <bean class="org.oddjob.doc.processor.PostProcessDocs">
                                                         <baseDir>
                                                             <file file="${oddjob.dir}"/>
                                                         </baseDir>
