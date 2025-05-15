@@ -212,9 +212,9 @@ public class OddjobCommandLineTest {
         File configFile = new File(testDir, "PlatformMBeanServerExample.xml");
         assertThat(configFile.exists(), is(true));
 
-
         ExecJob serverExec = new ExecJob();
         serverExec.setCommand("java " +
+                "-Dcom.sun.management.jmxremote.serial.filter.pattern=org.oddjob.* " +
                 "-Dcom.sun.management.jmxremote.port=13013 " +
                 "-Dcom.sun.management.jmxremote.ssl=false " +
                 "-Dcom.sun.management.jmxremote.authenticate=false " +

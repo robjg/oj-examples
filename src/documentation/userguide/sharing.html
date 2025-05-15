@@ -29,7 +29,7 @@
 		<p>Oddjob makes working with jobs on a remote server virtually
 		transparent.</p> 
 		
-		<p>Here's a a world according to Oddjob:</p>
+		<p>Here's a world according to Oddjob:</p>
 		
 		<a href="images/sharing1.gif"><img src="images/sharing1.gif" 
 			height="320" width="500" alt="My Oddjob World"/></a>
@@ -59,7 +59,7 @@
  		to working with a local job except that the action takes place on the 
  		server.</p>
 
-		<p>Lets work through some examples, but as I'm not going to explain
+		<p>Let's work through some examples, but as I'm not going to explain
 		how to set up servers until you're completely persuaded by the magic of sharing
 		you might wish to work with one I created earlier. It's in the 
 		<code>examples/userguide</code> directory and it's called <code>sharingMain.xml</code>.
@@ -74,7 +74,7 @@
 		property in the variables. If you are not on windows, you will also have to
 		change the three ExecJob configurations.</p>				
 
-		<p>Lets run a job on Server 1. Run the client called
+		<p>Let's run a job on Server 1. Run the client called
 		Server 1 and expanded the job tree to see the jobs we've got on Server 1.
 		Ignore the Server 2 and Server 3 jobs (they are for later) but run 
 		the Job 'Echo To Console'.</p>
@@ -270,7 +270,17 @@ java -jar run-oddjob.jar -f server.xml
 		<p>One caveat about remote configuration. Oddjob can share any job and it's children, 
 		but configuration will only work from an Oddjob node down. That is why the first
 		node to be shared will often be an Oddjob job.</p>
-		
+
+		<h5>Serialisation Filters</h5>
+
+		<p>As of JDK 17, if you get <code>java.io.InvalidClassException: filter status: REJECTED</code>
+			you will need to add <code>-Dcom.sun.management.jmxremote.serial.filter.pattern=org.oddjob.*</code>
+			to the command line.</p>
+
+		<p>For more information see
+			<a href="https://docs.oracle.com/en/java/javase/17/core/serialization-filtering1.html">The Oracle Docs on Serialisation Filters</a>
+		</p>
+
 		<hr/>
 
 		[<a href="../index.html">Home</a>]
