@@ -150,7 +150,7 @@ public class ExecExamplesRunningOddjobTest {
 
         AppenderAdapter appenderAdapter = LoggerAdapter.appenderAdapterFor(LogoutType.class);
 
-        appenderAdapter.addAppender(results);
+        appenderAdapter.addAppender(results, LoggerAdapter.layoutFor("%m"));
 
         oddjob.run();
 
