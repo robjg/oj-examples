@@ -55,11 +55,6 @@
         </profile>
     </profiles>
 
-    <properties>
-        <ant.version>1.10.7</ant.version>
-    </properties>
-
-
     <dependencies>
 
         <dependency>
@@ -107,6 +102,5 @@
         </dependency>
 
     </dependencies>
-
 
 </project>
