@@ -24,9 +24,9 @@
 			<li><a href="#properties">Job Properties</a></li>
 			<li><a href="#variables">Variables</a></li>
 			<li><a href="#name">Name</a></li>
-			<li><a href="#script">Script Configuration</a></li>
 			<li><a href="#nested">Oddjobs Within Oddjobs</a></li>
-		</ul>		
+            <li><a href="#script">Script Configuration</a></li>
+		</ul>
 
 		<h4 id="introduction">Introduction</h4>
 
@@ -219,28 +219,24 @@
 			there to understand why.
 		</p>
 
-		<h4 id="script">Script Configuration</h4>
-
-		<p>
-			Expressions of the form <span class="expression">#{<i>expression</i>}</span> are passed to Java's
-			internal scripting engine. Not all versions of Java have one. Try setting the text of Echo job
-			to <span class="expression">2 + 2 is #{2 + 2}</span> and running it to see if you have one.
-		</p>
-
-		<p>
-			If the above fails, then you can download the Nashorn jar and drop it in Oddjob's <code>lib</code>
-			directory. Scripting is quite advanced, you probably won't need it, so more on this is beyond the
-			scope this manual.
-		</p>
-
 		<h4 id="nested">Oddjobs within Oddjobs</h4>
 
 		<p>As you saw in the examples, an Oddjob job can be <i>nested</i> within
 		another Oddjob job. It is possible to access a job within the 
 			using the notation <span class="expression"><i>${oddjob-id/job-id.property}</i></span> but more on this in the
 		next section.</p>
-				
-		<hr/>
+
+        <h4 id="script">Script Configuration</h4>
+
+        <p>
+            Expressions of the form <span class="expression">#{<i>expression</i>}</span> are passed to Java's
+            internal scripting engine. The default Oddjob distribution comes bundled with JavaScript
+            Try setting the text of Echo job
+            to <span class="expression">2 + 2 is #{2 + 2}</span> to see it in action.
+            More information on script expressions can be found in the next section.
+        </p>
+
+        <hr/>
 		
 		[<a href="../index.html">Home</a>]
 		[<a href="index.html">Index</a>]

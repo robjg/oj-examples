@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <echo><![CDATA[2 + 2 is #{2 + 2}
+Today's date is #{Java.type("java.time.LocalDate").now().format(Java.type("java.time.format.DateTimeFormatter").BASIC_ISO_DATE)}
+Memory used is #{(Java.type("java.lang.Runtime").getRuntime().totalMemory() - Java.type("java.lang.Runtime").getRuntime().freeMemory())/1048576} Meg
+]]></echo>
+    </job>
+</oddjob>

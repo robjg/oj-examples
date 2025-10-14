@@ -169,7 +169,43 @@
  		property called 'dir', and the parent Oddjob has been given the id 'this' so
  		our configuration file expression expands to 'The file nested.xml in the same 
  		directory as the configuration file of our parent Oddjob'.</p>
- 
+
+        <h4 id="script">Script Configuration</h4>
+
+        <p>In the last section we briefly mentioned Script Expressions of the form
+            <span class="expression">#{<i>expression</i>}</span>. Here are some more examples of
+            using expressions that can be used to configure jobs:
+        </p>
+        {@oddjob.xml.file examples/userguide/BehindGuiScript.xml}
+
+        <p>Script Expressions have access to Oddjob's Session. We can access the properties
+            of Jobs in oddjob. However, it's not always straightforward.
+        </p>
+        {@oddjob.xml.file examples/userguide/BehindGuiScriptSession.xml}
+
+        <p>Echo is a simple job so it gets wrapped by Oddjob as an <a href="https://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.4/apidocs/org/apache/commons/beanutils/DynaBean.html">BeanUtils DynaBean</a>
+            so we access properties with the <code>get()</code> method. Sequential is a
+            complete Oddjob job so isn't wrapped. The name property is accessible as
+            a standard Javascript property.
+        </p>
+
+        <p>Each expression runs in its own scope. Any variable set in an expression is
+            not visible outside the expression.
+        </p>
+        {@oddjob.xml.file examples/userguide/BehindGuiScriptVars.xml}
+
+        <p>Oddjob's Script Job can export variables, including functions into Oddjob's
+            session. They are then accessible in expressions.
+        </p>
+        {@oddjob.xml.file examples/userguide/BehindGuiScriptFuncs.xml}
+
+        <p>oddjob's bundled JavaScript engine is currently <a href="https://openjdk.org/projects/nashorn/">Nashorn</a>
+            In future this will probably be replaced with
+            <a href="https://www.graalvm.org/latest/reference-manual/js/">Graal</a>.
+            In the meantime, more information on Nashorn can
+            be found from <a href="https://github.com/openjdk/nashorn">Nashorn's GitHub repo</a>.
+        </p>
+
 		<hr/>
 
 		[<a href="../index.html">Home</a>]

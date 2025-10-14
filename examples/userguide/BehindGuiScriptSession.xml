@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential id="sequential" name="Two Tasks">
+            <jobs>
+                <echo id="echo" name="Echo Some Text">Hello, World!</echo>
+                <echo name="Echo It Again"><![CDATA[#{echo.get('text')}
+]]></echo>
+                <echo name="Echo Sequential's Name"><![CDATA[#{sequential.name}
+]]></echo>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <echo name="Echo Setting X"><![CDATA[Variable x is: #{var x = 2; x}]]></echo>
+                <echo name="Echo Getting x"><![CDATA[Variable x is: #{typeof x == 'undefined' ? 'undefined' : x}]]></echo>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>
