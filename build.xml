@@ -37,9 +37,6 @@
 		<property name="build.reference"      value="${build.docs}/reference"/>
 		<property name="build.xdocs"          value="${build.dir}/xdocs"/>
 
-		<property name="target.dir"            value="./target"/>
-
-
 		<filter token="Name"    value="${Name}"/>
 		<filter token="name"    value="${name}"/>
 		<filter token="version" value="${build.version}"/>
@@ -174,7 +171,6 @@
 	<!-- =================================================================== -->
 	
 	<target name="clean" depends="init" description="Cleans the build directories">
-		<delete dir="${target.dir}"/>
 		<delete dir="${build.dir}"/>
 		<delete dir="examples/scheduling/dailyftp"/>
 	</target>

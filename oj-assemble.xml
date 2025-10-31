@@ -17,7 +17,23 @@
                         </list>
                     </switches>
                     <jobs>
-                        <oddjob file="${oddjob.assemble.home}/run-maven.xml" name="Run Maven Clean"/>
+                        <sequential name="Run Cleans">
+                            <jobs>
+                                <oddjob file="${oddjob.assemble.home}/run-maven.xml" name="Run Maven Clean"/>
+                                <ant name="Run Ant clean">
+                                    <tasks>
+                                        <xml>
+                                            <tasks>
+                                                <ant antfile="${oddjob.dir}/build.xml" inheritAll="false" target="clean"/>
+                                            </tasks>
+                                        </xml>
+                                    </tasks>
+                                    <output>
+                                        <stdout/>
+                                    </output>
+                                </ant>
+                            </jobs>
+                        </sequential>
                         <sequential name="Produce Docs on Install">
                             <jobs>
                                 <oddjob file="${oddjob.assemble.home}/run-maven.xml" name="Run Maven Install"/>
